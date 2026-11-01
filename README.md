@@ -21,7 +21,7 @@ ships as a Claude Code plugin, and this research is kept out of both.
   order, concern grouping, held-back findings, and security prompts.
 - [Automated code review](research/automated-code-review/report.md)
   (2026-10-31). Findings and sources on automated defect-finding review, plus
-  a v1 design and backlog for a `bug-review` skill.
+  a v1 design and backlog for a `quality-review` skill.
 - [Code understanding](research/code-understanding/BACKLOG.md)
   (2026-11-01). First sweep on helping a person understand a repo, uncommitted
   changes, and PRs, building on `human-review`.
