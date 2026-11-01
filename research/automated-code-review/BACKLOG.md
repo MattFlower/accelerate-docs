@@ -73,7 +73,7 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
   rate (target ≤ production's).
 
 ### 5. Packaging: distinct name, explicit invocation, both runtimes — `proposed`, cost S
-- **Idea:** `skills/bug-review/` with `agents/openai.yaml`; not named `code-review`; runtime-neutral effort
+- **Idea:** `skills/quality-review/` with `agents/openai.yaml`; not named `code-review`; runtime-neutral effort
   and sampling text. **our own idea**, constrained by docs.
 - **Source:** Claude Code skills docs (same-name skill replaces bundled command); Codex build-skills docs.
 - **Test:** install via plugin in Claude Code and via `.agents/skills` in Codex; both invoke and produce
@@ -101,8 +101,17 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
   (Rubric Q5). SecPRBench (68% of missed security bugs = right file, wrong mechanism; union of 8 agents),
   Defending Code harness, AIxCC SoK, CyberGym (repeated attempts) — per Report.
 - **Test:** recall on security/redaction subset; must not filter other findings.
+- The security lens (item 10) is this pass inside `quality-review`, not a second copy of the evidence above.
 
-### 10. PR-specific brief + mutation check (oracle replica) — `proposed`, cost M–L
+### 10. Security lens inside quality-review — `proposed`, cost M
+- **Idea:** security review is a second lens of the one `quality-review` skill, built on the trust-boundary
+  attack pass (item 9). Not a separate skill, and not a restatement of item 9.
+- **Source:** Matt's decision 2026-10-31 + the existing trust-boundary/security evidence already cited in
+  this backlog.
+- **Test:** security-slice recall on the eval (SecBench.js-style cases already cited) without raising
+  clean-case false blocks.
+
+### 11. PR-specific brief + mutation check (oracle replica) — `proposed`, cost M–L
 - = Report **Option A** / Plan **T5**. "Gold comes from a procedure, not a better model" (Report; Notes).
   Mutation check alone is deterministic and cheap where the PR adds tests.
 - **Test:** recall vs core; time budget (<20 min typical, Plan answers).
@@ -123,8 +132,8 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
 | T2 / Option C | coverage prompt + per-file ledger | arm V2 "thorough": 33.8%, clean 7/32 (Notes e7); CRBugBench +5–6 top-5 recall for GPT family | `proposed` — clean cost similar to union |
 | V3 | caller + deleted-invariant tracing prompt | 30.6%, clean 7/32 (Notes e7) | `proposed`, low priority |
 | T4 / Option B | mixed-model union + two-tier block | two-tier blocked on dedupe (RESULTS 0c); Sol ∪ Opus +5–9 | split: two-tier = item A4; mixed union = item C2 |
-| T5 / Option A | oracle replica | Report | item A10 |
-| T6 / Option D | attack pass | Report | item A9 |
+| T5 / Option A | oracle replica | Report | item A11 |
+| T6 / Option D | attack pass | Report | item A9; security lens = item A10 |
 | T7 / Option E | acceptance tests | Report | item A8 |
 | T8 / Option F | impact pack | Report | item A7 |
 | G | deterministic severity, stop parking majors | Rubric; Notes e2/e8/e10 | item A3 |
