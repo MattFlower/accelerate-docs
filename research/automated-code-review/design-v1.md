@@ -10,6 +10,12 @@ notes (e6–e10, 10-31) update RESULTS.
 **Principle:** build the eval (§7) before tuning anything. v1 ships the one reviewer recipe that has
 replicated on fresh data; every other idea is a layer that's off by default until the eval measures it.
 
+### Scope: one skill, several lenses
+
+`quality-review` is the single entry point for review. v1 ships the bug-finding lens (the measured
+core, §3). Security is a planned second lens that builds on the trust-boundary attack pass already
+described as an unmeasured layer (§8). Security recall was 0/12 in Matt's limitless data (Plan D).
+
 ## 1. What the reviewer does
 
 Given a change (working tree, branch vs base, or a PR), find **real, introduced-by-the-change defects
@@ -23,17 +29,18 @@ It doesn't approve, edit code, or post anywhere by default.
 ## 2. Name and packaging (Claude Code + Codex)
 
 - **Name:** not `code-review`. A standalone copy of a skill named `code-review` replaces Claude Code's
-  bundled `/code-review` in terminal sessions (Claude Code skills docs). Working name `bug-review`
-  (`/accelerate:bug-review`). **our own idea** for the name.
+  bundled `/code-review` in terminal sessions (Claude Code skills docs). Working name `quality-review`
+  (`/accelerate:quality-review`). Avoiding `code-review` is **our own idea**; the name `quality-review`
+  is Matt's decision (2026-10-31).
 - **Layout** (one folder works in both runtimes; mirrors `human-review`):
   ```
-  skills/bug-review/
+  skills/quality-review/
     SKILL.md              # name + description (both runtimes); Claude-only keys are ignored by Codex
     agents/openai.yaml    # Codex: display name, allow_implicit_invocation: false
     references/prompt.md  # finder prompt (from limitless, see notes/adversarial-prompt.md)
     references/severity.md# consequence × trigger rule (§5)
     references/schema.json# finding fields (§6)
-    scripts/bug-review.mjs# zero-dep Bun/Node: collect diff + impact pack, dedupe, severity, render
+    scripts/quality-review.mjs# zero-dep Bun/Node: collect diff + impact pack, dedupe, severity, render
   ```
   Codex reads `name`/`description` and optional `agents/openai.yaml`; skills install to `.agents/skills`
   or ship via a plugin (Codex build-skills docs). Claude Code loads it from the plugin's `./skills/`.
@@ -92,7 +99,7 @@ It doesn't approve, edit code, or post anywhere by default.
 
 - Use the approved Rubric's consequence × trigger line. The finder fills two fields — `consequence`
   (one of the classes below, or `nuisance`/none) and `trigger` (realistic / contrived) — plus a plain-language
-  failure scenario; `bug-review.mjs` maps them to a severity deterministically. The model's free-text severity
+  failure scenario; `quality-review.mjs` maps them to a severity deterministically. The model's free-text severity
   is recorded but not used for tiering.
 - Why: LLM severity raters agreed 13/20 (65%) with Matt's blind validation until a tuned rubric with a
   "nuisance" class reached 18/20 (Notes e2); Opus and Codex split on severity for most pilot findings
@@ -173,7 +180,7 @@ report and audit flags; and the held-out splits (they belong to limitless's deci
    lower bound > 0 and point gain ≥ +10, with clean must-fix rise within Matt's case-by-case judgement
    (>50% relative rise needs a considerable gain). Pre-register before each run. [Matt, Plan; Report]
 8. **Runner** (`evals/` at accelerate repo root, outside `skills/` so it doesn't ship): for each case and runtime,
-   run the skill headless (`claude -p "/accelerate:bug-review <base>..<head>"`, `codex exec` with the skill), save
+   run the skill headless (`claude -p "/accelerate:quality-review <base>..<head>"`, `codex exec` with the skill), save
    findings JSON, judge, score. Run both runtimes: the skill must work in Claude Code and Codex, and their
    recall will differ. **our own idea** for the runner shape.
 
