@@ -32,7 +32,7 @@ repo has no Codex-specific file (`agents/openai.yaml`) yet. The code-review back
 
 **Gaps this sweep found** (each maps to a BACKLOG item):
 1. Nothing checks that the reader understood: no quiz, no comprehension metric (#1, #2).
-2. Diffs only. There's no way to learn an area or a repo *at head* without a change (#3, #10).
+2. Diffs only. There's no way to learn an area or a repo *at head* without a change (#3 `teach-code`, which now covers the old #3, #10 and #14).
 3. No concrete worked example or runtime values (#4).
 4. The agent's session reasoning and alternatives are thrown away, and the brief's "why" has no source tag (#5).
 5. The page can't answer the reader's own question (#6).
@@ -123,6 +123,7 @@ repo has no Codex-specific file (`agents/openai.yaml`) yet. The code-review back
   why each hunk changed" ([Reddit](https://www.reddit.com/r/Jetbrains/comments/1t78ocb/walkthrough_an_intellij_plugin_that_lets_any_ai/)).
 - **Matt Pocock `teach`**: a stateful teaching workspace (mission, lessons as HTML, learning records used to find the
   "zone of proximal development") ([skill](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)).
+  Full review in §7 below.
 - **Evidence on LLM onboarding:** small. Onboarding Buddy had 8 developers; helpfulness was 3.26/4
   ([arXiv 2503.23421](https://arxiv.org/abs/2503.23421)).
 - **Reading order for onboarding:** experts read code less linearly than novices, and in execution order more than
@@ -168,9 +169,109 @@ repo has no Codex-specific file (`agents/openai.yaml`) yet. The code-review back
   each line uses did better than showing full state ([SIGCSE TS 2027](https://2027.sigcse-ts.acm.org/details/sigcse-ts-2027-Papers-1/166/How-Much-Runtime-State-Should-We-Show-Learners-An-EEG-Study-of-Feedback-Granularity-)).
   These are education settings, and the results come from search summaries, not full-paper reads.
 
+### 7. Matt Pocock's `teach` (added 2026-11-01, second pass)
+
+**Source, verified.** Author Matt Pocock (X [@mattpocockuk](https://x.com/mattpocockuk)). Repo
+[mattpocock/skills](https://github.com/mattpocock/skills) ("Skills for Real Engineers. Straight from my .agents
+directory."), MIT. The GitHub API on 2026-11-01 showed 308,865 stars and 25,999 forks for the whole repo, not for this
+skill. Skill folder [`skills/productivity/teach/`](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach):
+`SKILL.md` (9.7 KB), `MISSION-FORMAT.md`, `RESOURCES-FORMAT.md`, `LEARNING-RECORD-FORMAT.md`, `GLOSSARY-FORMAT.md`, and
+`agents/openai.yaml` (Codex metadata: display name "Teach", `allow_implicit_invocation: false`). The user docs are at
+[`docs/productivity/teach.md`](https://github.com/mattpocock/skills/blob/main/docs/productivity/teach.md). Quickstart:
+[aihero.dev](https://www.aihero.dev/learn-anything-with-my-teach-skill). History: added 2026-05-27, moved out of
+`in-progress` on 2026-06-08, last changed 2026-10-07 (PR #1183: anchor workspace paths, vary quiz answer position).
+It's **general-purpose**, not repo-specific: "Teach the user a new skill or concept, within this workspace."
+
+**How it works** (from `SKILL.md` and the docs):
+- It's user-invoked only (`disable-model-invocation: true`). The directory you run it in becomes a **teaching
+  workspace** for one topic. The docs advise keeping that directory *out of* the project you're working in.
+- State lives in files: `MISSION.md` (why, success criteria, constraints, out of scope), `RESOURCES.md` (vetted
+  Knowledge sources and Wisdom communities), `lessons/NNNN-*.html`, `reference/*.html` (cheat sheets, glossary),
+  `learning-records/NNNN-*.md` (ADR-style), `assets/` (shared CSS, quiz widgets), and `NOTES.md` (preferences). A new
+  session continues from these files.
+- The mission comes first: if it's missing, the skill interviews you. "Never trust your parametric knowledge": it finds
+  high-trust resources before teaching and cites them in every lesson, with one recommended primary source per lesson.
+- Lessons are short, one tangible win each, "beautiful… Think Tufte", and aimed at the zone of proximal development
+  worked out from the learning records.
+- Learning science it uses: fluency vs. storage strength, desirable difficulty (retrieval, spacing, interleaving),
+  knowledge first with low difficulty, then skills drilled through a tight feedback loop. Quiz options must be the same
+  length, and the position of the correct answer must vary.
+- Learning records are written only on *evidence* of understanding, disclosed prior knowledge, a corrected
+  misconception, or a mission change. "Coverage is not learning." Old records are marked superseded, not deleted.
+- Glossary rules (`GLOSSARY-FORMAT.md`): add a term only once the user understands it, pick one word and list the
+  rest as *Avoid* aliases, and use glossary terms inside definitions. Questions that need judgment get an attempted
+  answer, then a pointer to a community.
+
+**Known gaps** (the docs' own "Common questions" section plus issues):
+- No assessment of starting level: "It never did grilling to establish my starting point"; the request is
+  [#725](https://github.com/mattpocock/skills/issues/725).
+- No scheduled spaced review, and no reliable stop rule: it's "good at making the next lesson, but not as good at
+  knowing when to stop".
+- Quiz answers kept landing in the first option: per the docs, slot A "33 times out of 33 across nine lessons" after a
+  prompt fix. The docs conclude a shuffling component is the real fix. The docs cite issue #335, which returned 404
+  when checked; see [#985](https://github.com/mattpocock/skills/issues/985) and
+  [#611](https://github.com/mattpocock/skills/issues/611).
+- Lessons ship with few citations ([#960](https://github.com/mattpocock/skills/issues/960)), aren't rendered and
+  checked before hand-off ([#1109](https://github.com/mattpocock/skills/issues/1109)), and forget their quiz script
+  ([#1058](https://github.com/mattpocock/skills/issues/1058)).
+- `GLOSSARY-FORMAT.md` is orphaned: `SKILL.md` doesn't link to it ([#559](https://github.com/mattpocock/skills/issues/559)).
+- A made-up procedure: a 2x2 Rubik's cube user got move sequences that don't solve it (docs).
+- Results vary a lot by model and harness. Per the docs, Copilot CLI with Codex produced "a single 30-line HTML card".
+- A community "teach pr" skill (teaching level 1–4, walks the checked-out PR like a senior onboarding a newcomer) was
+  declined for this repo: "Cool idea, but not for this repo IMO" ([#727](https://github.com/mattpocock/skills/issues/727)).
+  In-lesson annotation was also declined in favor of notes in chat ([#519](https://github.com/mattpocock/skills/issues/519)).
+
+**Reception on X** (engagement as returned by the X API on 2026-11-01):
+- Launch posts by @mattpocockuk: "I poured my 10 years of teaching experience into a skill… it can teach you anything"
+  ([X](https://x.com/mattpocockuk/status/2064023481398824993): 5,054 likes, 368 reposts, 7,777 bookmarks, 909,811
+  impressions); "/teach is live… Best skill I've ever built" ([X](https://x.com/mattpocockuk/status/2063988995692900439):
+  2,821 likes, 2,910 bookmarks); the first version "on the tube" ([X](https://x.com/mattpocockuk/status/2059616119388795367):
+  880 likes); the grilling → `/handoff` → `/teach` workflow ([X](https://x.com/mattpocockuk/status/2076373232295587865):
+  2,932 likes, 2,618 bookmarks); a reply, "/teach me about this codebase"
+  ([X](https://x.com/mattpocockuk/status/2062973868344524834): 282 likes, 137 bookmarks); "I can do it", Rubik's-cube
+  proof ([X](https://x.com/mattpocockuk/status/2066874357612151271): 427 likes).
+- Others: [@Jilles](https://x.com/Jilles/status/2064083851148730583) ("cooked", learning Astro from a template project;
+  67 likes, 66 bookmarks); [@MAXIMISEART](https://x.com/MAXIMISEART/status/2095519045210505335) (Polish how-to; 61
+  likes, 245 bookmarks); [@Voxyz_ai](https://x.com/Voxyz_ai/status/2070082137630384226) (59 likes);
+  [@crpier42](https://x.com/crpier42/status/2065849866211693057) (codebase lessons served locally with links that jump
+  Neovim to the code; 1 like); [@DrockStowe](https://x.com/DrockStowe/status/2083523350811341204) (`/handoff` → `/teach`
+  to understand an agent's solution, "then read the code"; 1 like);
+  [@itsmattchan](https://x.com/itsmattchan/status/2066903354362491377) (asks for codebase use; 0 likes). Teams building
+  their own: a `/teach-me` skill in a codebase ([@thealexkates](https://x.com/thealexkates/status/2060016615983350194),
+  1 like).
+- Web: a blog write-up of using it to learn a codebase mechanism
+  ([magutti.com](https://www.magutti.com/blog/mattpocock-teach-skill-learn-don-t-delegate); linked from
+  [X](https://x.com/marcoaxx/status/2063268562186207550)). Not read in full.
+
+**Other repo-onboarding skills found along the way:**
+- **ECC `codebase-onboarding`** ([SKILL.md](https://github.com/affaan-m/ECC/blob/main/skills/codebase-onboarding/SKILL.md);
+  `affaan-m/everything-claude-code` redirects to `affaan-m/ECC`, 294,392 stars per the API, for the whole repo). It
+  reconnoiters manifests, frameworks, entry points, and tests, then maps the architecture and conventions, and outputs
+  an onboarding guide plus a starter `CLAUDE.md`. Its focus is orienting the *agent* as much as the human.
+- **claudeskills.page `codebase-onboarding`** ([page](https://claudeskills.page/skills/workflow/codebase-onboarding/)):
+  "Breadth first, then one deep trace"; run the build and tests ("documentation is often stale"); every claim cites a
+  file path; "Stop exploring when the user's question is answered"; verify by opening two random claims. It bundles a
+  `repo_map.py`. Popularity unknown.
+- **codebase-to-course** (5,750 stars per the API) and **Understand-Anything** (89,517 stars per the API). See §3.
+- HermeticOrmus/code-comprehension-skills (2 stars) has the same four-step "entry points → map → trace one flow →
+  abstractions" protocol. It's low signal.
+
+**How it compares with human-review and the backlog:** `teach` and HR solve different halves. HR explains a *change*
+with git-true code, a fixed validated renderer, and a review loop, but it's stateless and diff-only. `teach` is
+stateful, mission-led, and grounded in retrieval practice, but it's generic, free-form HTML, and sourced from the web
+rather than the repo. It has no code-specific grounding and no render check, which are the failures its issue tracker
+shows. What to take: mission-first interview, learning records with evidence rules, separating lessons from durable
+reference, spaced re-quiz and a stop rule, quiz option rules (with a renderer-side shuffle), glossary *Avoid*
+aliases, "one primary source to read yourself", and wisdom → who to ask. These went into BACKLOG #1, #3 (now
+`teach-code`, merging the old #3, #10 and #14), #6, #8, and a new #10.
+
 ## What we didn't verify
+- `teach` issue #335 (cited by the teach docs for the 33/33 result) returned 404 on 2026-11-01.
+- Star counts are for whole repos (mattpocock/skills, ECC), not single skills.
 - Graphite "tour mode" (only Litt's post says it exists).
 - Graphify's repo and star count. Haystack as a product. The tool behind @prasenx's post.
 - The OpenAI Codex plugin for Claude Code (an X post only).
 - Full texts of AutoMCQ, the KTH question study, and the SIGCSE 2027 EEG study (we have search-summary claims only).
 - Who wrote the "How the Claude Code team does code review" article, beyond its being posted on @addyosmani's account.
+
+

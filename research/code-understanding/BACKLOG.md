@@ -1,6 +1,6 @@
 # Code understanding: backlog
 
-*Draft 1, 2026-11-01. Repo path: `agentic-dev-research/research/code-understanding/BACKLOG.md`.*
+*Draft 2, 2026-11-01 (draft 1 plus Matt Pocock's `teach` review; see "Changes in draft 2" below). Repo path: `agentic-dev-research/research/code-understanding/BACKLOG.md`.*
 *It follows the layout in that repo's README (`research/<topic>/report.md` + `notes/` + optional `BACKLOG.md`)
 and the style of `research/automated-code-review/BACKLOG.md`. Findings and sources are in
 [`research/code-understanding/notes/first-sweep-2026-11-01.md`](notes/first-sweep-2026-11-01.md)
@@ -54,6 +54,14 @@ factory's deliver/review stages.
   quiz and log time. Check the questions: are they answerable from the page, are any gotchas, and how many does the
   precision check reject? Then compare against canary defects (item 2): do people who fail a question miss the canary
   in that area?
+- **Quiz rules taken from `teach`** ([SKILL.md](https://github.com/mattpocock/skills/blob/main/skills/productivity/teach/SKILL.md)): every option has the same number of words,
+  the correct option's position varies, and nothing in formatting or order gives the answer away. **Don't rely on the
+  prompt for position.** `teach`'s docs report the correct answer landed in slot A "33 times out of 33 across nine
+  lessons" even after an instruction-level fix, and conclude "the real fix is a quiz component… that shuffles the
+  answers" ([docs](https://github.com/mattpocock/skills/blob/main/docs/productivity/teach.md); the docs cite issue #335, which returned 404 on 2026-11-01;
+  related open issue [#985](https://github.com/mattpocock/skills/issues/985), and [#611](https://github.com/mattpocock/skills/issues/611)). So HR's renderer should shuffle answers with a seed, and
+  `build --check` should warn on unequal option lengths. Matt Pocock's own claim: "The /teach tests knowledge retrieval as well as just teaching"
+  ([X](https://x.com/mattpocockuk/status/2076545046204071987), 3 likes).
 - **Risk:** questions can leak held-back findings. Keep them after the pass, and phrase them about behavior, not bugs.
 
 ### 2. Measure it: time per file and stop, reveal events, quiz score in the export — `proposed`, cost S, target HR
@@ -67,24 +75,57 @@ factory's deliver/review stages.
 - **Test:** 10 reviews with the export on. Check the timings add up to wall-clock time, and that viewed-but-skipped
   files show near-zero time.
 
-### 3. Slice explainer: "teach me this area before I change it" — `proposed`, cost M, target new skill (reuses HR renderer)
-- **Idea:** `/explain-area <path|symbol|question>`: a page about one slice of a repo **at head, with no diff**. It
-  covers what the slice does, how it fits with its neighbors, terms, a reading order of 3–6 stops into real code
-  (`code` blocks pulled from git), one diagram, and the quiz. It reuses HR's `background`/`terms`, `focus`, `code`,
-  `mermaid`/`diagram` blocks and its build validation.
-- **Sources:** the Claude Code team's review article (an X Article on @addyosmani's account): "when anyone wants to learn
-  about a piece of the codebase, they ask Claude to generate an explainer about that exact slice… Creating an explainer
-  about the module you're going to change teaches you a lot"
-  ([X](https://x.com/addyosmani/status/2114604912520921136): 13,390 likes, 34,649 bookmarks, 2,531,929 impressions).
-  Also Simon Willison's linear walkthroughs
-  ([guide](https://simonwillison.net/guides/agentic-engineering-patterns/linear-walkthroughs/);
-  [X](https://x.com/simonw/status/2026702972617633886): 63 likes, 64 bookmarks). Evidence: `practitioner` + `engagement`.
-- **Why it helps:** HR only explains *changes*. Onboarding to a repo, or orienting before an edit, has no tool today.
-  A bounded slice is cheap to generate, stays current because it's built on demand, and gets around the "200k LOC, where
-  do I start" problem without building a whole-repo index.
-- **Test:** pick three slices in limitless that Matt hasn't touched recently (for example the routing policy and the
-  review stage). Take the quiz, then make a small real change in each slice. Log time-to-first-correct-edit against
-  reading the code cold, and count the factual errors in the page.
+### 3. `teach-code`: stateful, mission-led lessons about a repo or one area of it — `proposed`, cost M (v1) / L (v2), target new skill in accelerate (reuses the HR renderer)
+*Merges the old #3 (slice explainer), #10 (repo onboarding course), and #14 (learner profile), 2026-11-01, after
+reading Matt Pocock's `teach`.*
+- **Idea:** a user-invoked skill, `/teach-code <area | question | "this repo">`. It keeps a small learning workspace
+  per repo **outside the repo's tree** (like HR's `.human-review/`, excluded from git), so state carries across sessions.
+  - **v1 (M): one lesson.** Interview first, with 2–3 questions: what change are you about to make (the *mission*), and
+    what do you already know here? Then a short lesson about one slice at head, built from HR blocks: background,
+    terms, a 3–6 stop reading order into real `code` blocks pulled from git, one diagram, a worked example (#4), and
+    the quiz (#1). Name one "read this yourself next" file or doc, and say who to ask (#10). Apply HR's `build --check`
+    and its "look at it" render step.
+  - **v2 (L): a course.** Numbered lessons in execution order (entry point → one traced flow → edges); durable
+    reference cards (glossary, module map, flow) kept apart from the lessons; `learning-records/` written only when
+    the quiz or your answers *show* understanding, a disclosed prior skill, or a fixed misconception; earlier quiz
+    items brought back for spaced review; and a stop rule ("you can make the change; go do it").
+- **Sources:**
+  - Matt Pocock's `teach` ([SKILL.md](https://github.com/mattpocock/skills/blob/main/skills/productivity/teach/SKILL.md), [docs page](https://github.com/mattpocock/skills/blob/main/docs/productivity/teach.md),
+    MIT, in [mattpocock/skills](https://github.com/mattpocock/skills)). Its docs say that within code, "users report the
+    most value from getting oriented in an unfamiliar codebase or a new team's stack". Launch posts on X:
+    [X](https://x.com/mattpocockuk/status/2064023481398824993) (5,054 likes, 7,777 bookmarks, 909,811 impressions) and
+    [X](https://x.com/mattpocockuk/status/2063988995692900439) (2,821 likes). His reply "/teach me about this codebase"
+    ([X](https://x.com/mattpocockuk/status/2062973868344524834): 282 likes, 137 bookmarks).
+  - A community "teach pr" skill (teach the checked-out PR "like a senior engineer onboarding them", with a chosen
+    teaching level 1–4) was proposed for that repo and declined: "Cool idea, but not for this repo IMO"
+    ([issue #727](https://github.com/mattpocock/skills/issues/727)). The space for a code-specific teacher is open.
+  - The slice explainer evidence from the old #3: the Claude Code team's article
+    ([X](https://x.com/addyosmani/status/2114604912520921136): 13,390 likes) and Simon Willison's
+    [linear walkthroughs](https://simonwillison.net/guides/agentic-engineering-patterns/linear-walkthroughs/).
+  - The course evidence from the old #10: codebase-to-course ([repo](https://github.com/zarazhangrui/codebase-to-course),
+    5,750 stars per the GitHub API on 2026-11-01), Understand-Anything (`tour[]`,
+    [repo](https://github.com/Egonex-AI/Understand-Anything/), 89,517 stars per the API), DeepWiki, Google Code Wiki,
+    CodeTour, and [Busjahn et al.](https://researchonline.gcu.ac.uk/ws/portalfiles/portal/24953094/ICPC2015_authors_version.pdf)
+    (execution-order reading).
+  - The onboarding-skill pattern "build and test first, then trace **one** real flow end to end with file:line, then
+    stop": ECC's `codebase-onboarding`
+    ([SKILL.md](https://github.com/affaan-m/ECC/blob/main/skills/codebase-onboarding/SKILL.md); ECC repo 294,392 stars
+    per the API) and [claudeskills.page codebase-onboarding](https://claudeskills.page/skills/workflow/codebase-onboarding/).
+  - Evidence: `practitioner` + `engagement`, plus `measured-RCT` for retrieval and spacing (see #1).
+- **Why a standalone skill, not part of HR:** different input (no diff), state across sessions, and invoked by the
+  user before work starts, not after. It shares HR's renderer, block schema, quiz component, and git-truth rules, so
+  it's cheap. HR, in turn, reads the learner records for #8.
+- **What `teach` does that we should *not* copy:** a free-form HTML lesson for each run (its issues show lessons that
+  missed their own script tags ([#1058](https://github.com/mattpocock/skills/issues/1058)), weren't rendered before
+  hand-off ([#1109](https://github.com/mattpocock/skills/issues/1109)), and carried few citations
+  ([#960](https://github.com/mattpocock/skills/issues/960))). HR's fixed renderer, build validation, and code pulled
+  from git already prevent all three. Also don't copy "knowledge from web resources": for a repo, the primary source is
+  the code at head, plus ADRs and docs in the repo.
+- **Test:** v1 on three limitless areas Matt hasn't touched recently (for example the routing policy and the review
+  stage). Run Pocock's `/teach` as-is on the same areas as the **baseline**. Measure quiz score, time to first correct
+  edit, factual errors per lesson, and citation count per lesson. v2 only if v1 beats both the baseline and reading
+  cold. For v2: onboard to an unfamiliar public repo (for example `ky`) with the course vs. DeepWiki vs. cold, then make
+  the same small change.
 
 ### 4. Worked example with real values ("intuition with toy data") — `proposed`, cost M, target HR + item 3
 - **Idea:** an `example` block that traces one concrete input through the changed path: input → each stop (file:line)
@@ -138,6 +179,10 @@ factory's deliver/review stages.
   understanding. The cost is small because the feedback loop already exists (`HR/SKILL.md` "When feedback comes back").
 - **Test:** count the questions per review and how many answers turned into page edits. Also check whether question
   areas match wrong quiz answers.
+- **Note from `teach`:** a request to let learners annotate a lesson in place was declined in favor of "just make notes
+  in the chat window" ([issue #519](https://github.com/mattpocock/skills/issues/519)). HR's export makes in-place notes
+  cheap without a server, so the cost argument against it doesn't apply here. The lesson to take is to keep it one
+  button, with no new UI mode.
 
 ### 7. Structural blast radius and "what it's wired into" map — `proposed`, cost M, target HR
 - **Idea:** replace or extend HR's `git grep -w` blast radius with a tree-sitter import/call graph that is 1 hop from
@@ -162,6 +207,12 @@ factory's deliver/review stages.
   ([gist](https://gist.github.com/geoffreylitt/a29df1b5f9865506e8952488eac3d524)). This is the earlier report's #10
   "familiarity-adaptive density", which hasn't shipped. HR always writes for a newcomer (`HR/SKILL.md` "Write for
   someone new to this code"). Evidence: `practitioner` + `measured-obs` (Bacchelli & Bird, via the earlier report).
+- **Add a level check, the gap `teach` users report most:** "There is no assessment step… It never did grilling to
+  establish my starting point" (`teach` docs, [common questions](https://github.com/mattpocock/skills/blob/main/docs/productivity/teach.md); request
+  [#725](https://github.com/mattpocock/skills/issues/725)). Collapse or open the deep background from (a) the git
+  signals, (b) the learner records from #3, or (c) when neither exists, one optional question at the top ("new to this
+  area?"). The community "teach pr" skill asks for a teaching level 1–4 up front
+  ([#727](https://github.com/mattpocock/skills/issues/727)).
 - **Test:** time on top-of-page for owned vs. unfamiliar areas, with quiz score held constant.
 
 ### 9. Split and size advisor — `proposed`, cost S–M, target HR
@@ -171,21 +222,17 @@ factory's deliver/review stages.
   `HR/scripts/human-review.mjs`. Evidence: `measured-RCT` / `measured-obs` via the earlier report.
 - **Test:** on 10 past limitless PRs, does the advisor's split match what Matt would split?
 
-### 10. Repo onboarding course (whole repo, persistent) — `proposed`, cost L, target new skill
-- **Idea:** item 3 grown into a multi-module course: modules in reading order (entry point → core flow → edges), a
-  map, terms, a quiz per module. Optionally keep a committed graph or tour so teammates skip generation, and update it
-  incrementally on commit.
-- **Sources:** codebase-to-course ([repo](https://github.com/zarazhangrui/codebase-to-course); 1,808 likes, above).
-  Understand-Anything guided `tour[]` and committed graph ([repo](https://github.com/Egonex-AI/Understand-Anything/)).
-  DeepWiki ([Cognition](https://cognition.com/blog/deepwiki)). Google Code Wiki
-  ([Google](https://developers.googleblog.com/introducing-code-wiki-accelerating-your-code-understanding/)). Microsoft
-  CodeTour's committed `.tours` files ([repo](https://github.com/microsoft/codetour/)). Expert code reading follows
-  execution order more than top-to-bottom order ([Busjahn et al., ICPC 2015](https://researchonline.gcu.ac.uk/ws/portalfiles/portal/24953094/ICPC2015_authors_version.pdf)),
-  so walk the course along the execution path. An LLM onboarding buddy got only modest ratings in an 8-developer study
-  ([arXiv 2503.23421](https://arxiv.org/abs/2503.23421)). Evidence: `vendor` + `engagement` + `measured-obs` (small).
-- **Why later:** large, and item 3 tests the core bet first.
-- **Test:** onboard to an unfamiliar public repo (for example `ky`) with the course vs. DeepWiki vs. cold, then make the
-  same small change. Compare time and errors.
+### 10. "Who to ask" for the area — `proposed`, cost S, target HR + #3
+- **Idea:** one visible line naming the two or three people with the most recent commits to the slice or changed files,
+  computed by `collect` from git (HR already computes ownership for its signals). It sits beside "What I need from
+  you" or at the end of a lesson. It's a fact, never a judgment.
+- **Sources:** `teach`'s "Acquiring Wisdom" section: answer, then "delegate to a **community**" where the learner can
+  test their skills ([SKILL.md](https://github.com/mattpocock/skills/blob/main/skills/productivity/teach/SKILL.md)). For a repo, the community is the code's owners. Onboarding
+  skills check the same thing (`git shortlog -sn --since="1 year ago"` "who knows the code",
+  [claudeskills.page](https://claudeskills.page/skills/workflow/codebase-onboarding/)). Evidence: `practitioner`.
+- **Note:** HR's privacy rules already say signals name contributors, so check before sharing (`HR/SKILL.md`
+  "Security and privacy").
+- **Test:** for 10 pages, ask Matt whether the named people are the ones he would ask.
 
 ### 11. Interactive or animated explainer for the algorithmic core — `proposed`, cost M, target HR (gated)
 - **Idea:** for a change whose core is an algorithm or state machine, allow one `interactive` block (a sandboxed
@@ -216,20 +263,13 @@ factory's deliver/review stages.
   diff".
 - **Test:** count re-read minutes on the second round across 5 feedback loops.
 
-### 14. Learner profile across sessions — `proposed`, cost M, target new skill
-- **Idea:** a small `learning-records/` file of what Matt already understands in each repo (from quiz results and
-  pages read). Items 3, 8, and 10 read it so they skip what he knows.
-- **Sources:** Matt Pocock's `teach` skill keeps learning records "to calculate the zone of proximal development"
-  ([SKILL.md](https://github.com/mattpocock/skills/tree/main/skills/productivity/teach)). Evidence: `practitioner`.
-- **Test:** compare page length and quiz score on a second visit to the same area.
-
 ---
 
 ## Shipped (in human-review today)
 
 | Idea | Where | Notes |
 |---|---|---|
-| Diff → one self-contained HTML page; branch, PR, range, **uncommitted** work | `HR/SKILL.md` "Decide the scope"; `HR/scripts/human-review.mjs` | Covers PRs and uncommitted changes. Not whole-repo onboarding (items 3, 10). |
+| Diff → one self-contained HTML page; branch, PR, range, **uncommitted** work | `HR/SKILL.md` "Decide the scope"; `HR/scripts/human-review.mjs` | Covers PRs and uncommitted changes. Not whole-repo onboarding (item 3). |
 | Code on the page comes from git; annotations checked against real lines | `HR/SKILL.md` "Honesty", build `--check` | Same idea as Showboat's exec-pulled snippets. |
 | Reading order (`focus`, 3–6 stops, riskiest first) | `HR/SKILL.md` "fields that carry the most weight" | Matches the "literate diff" and tour-mode ideas (Litt, Tembo Tour Mode, constellagent code tour). |
 | Group by concern, tests next to their code, callees first | `HR/SKILL.md` `concerns` | Earlier report #1. |
@@ -267,6 +307,23 @@ factory's deliver/review stages.
 - Practitioner loop: Claude writes the code, then "codex to review uncommitted changes"
   ([X @dejavucoder](https://x.com/dejavucoder/status/2035238484261445807): 573 likes, 88 bookmarks).
 
+## Merged
+
+- **Old #3 slice explainer, old #10 repo onboarding course, old #14 learner profile → #3 `teach-code`** (2026-11-01).
+  They are the same skill at three sizes: one lesson, a course, and the state that connects them. `teach` shows the
+  state layer is what makes a multi-session course work (mission, learning records, zone of proximal development).
+
+## Changes in draft 2 (2026-11-01)
+
+- #3 rewritten as `teach-code` (merges old #3, #10, #14). Ranked #3, unchanged position.
+- #1 quiz: added `teach`'s answer rules and the "shuffle in the renderer, not the prompt" fix.
+- #6 Ask: added `teach` issue #519 context.
+- #8 two-depth background: added the level check (`teach`'s most reported gap).
+- New #10 "Who to ask" (from `teach`'s "wisdom → community" idea).
+- Old #11–#13 keep their content as #11–#13. Old #10 and #14 removed (merged).
+
 ## Rejected
 
 _(none yet)_
+
+
