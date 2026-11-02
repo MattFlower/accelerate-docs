@@ -2,9 +2,12 @@
 
 *Draft 1, 2026-10-31.*
 
-Status: first draft, written to be revised once Matt's prior docs are folded in further. Every
-external source below was opened on 2026-10-31; anything that could not be opened is listed in
-"Not verified". Numbers from different benchmarks are not comparable.
+*Sweep 2026-11-02: added ultrareview, ORION, Macroscope Terra note.*
+
+Status: first draft, written to be revised once Matt's prior docs are folded in further. External
+sources below were opened on 2026-10-31, except the 2026-11-02 sweep items named above; anything
+that could not be opened is listed in "Not verified". Numbers from different benchmarks are not
+comparable.
 
 **Precedence for Matt's figures** (as instructed): the 2026-10-31 escapes-dev run beats Phase 0
 `RESULTS.md` (2026-10-29), which beats the working notes on overlapping figures; where the notes
@@ -104,6 +107,12 @@ because they were measured on real escaped defects in a TypeScript repo with the
 | specialist panel (Sol@medium verifier) | ~41.6% partial (Notes e7) | — | — | 13/32 dev |
 | luna@medium | 2.5% / 4.4% — not viable | — | — | — |
 | haiku-5.5@high | partial; 17/32 reviews over 20 min | — | — | — |
+
+⚠️ **[VB]** vendor benchmark. External corroboration of the Terra cost lever (terra-6.1 rows
+above) only: Macroscope posted on 2026-10-31 that GPT 6.1 Terra debuted #2 on their code review
+benchmark, 1.6 F1 points behind Opus 5.5 at max effort for 1/20th the cost per review, and at
+medium effort beat GPT 6.1 Sol at max for a third of the price
+([post](https://x.com/Macroscope/status/2116607601266049434)).
 
 Evals: escapes-dev main `eval-mvw0y6v31sec2vc1agx2t1`, cheap `eval-mvvv3pum0kriw040gi0x29`;
 clean-block arms in Notes e7–e10 (`eval-mvwk3pn5…`, `eval-mvwniug6…`, `eval-mvwnjdnp…`,
@@ -251,12 +260,35 @@ AnyPoC [2604.11950](https://arxiv.org/abs/2604.11950), Verify Before You Fix [26
 repair loops [2607.05197](https://arxiv.org/abs/2607.05197), defect-focused review (ICML 2025) [2505.17928](https://arxiv.org/abs/2505.17928),
 scaling agent systems [2512.08296](https://arxiv.org/abs/2512.08296).
 
+- **ORION** [arXiv 2610.35223](https://arxiv.org/abs/2610.35223) (submitted 2026-10-26), *Behavioral
+  Regression Detection for Pull Requests via Structured Oracles*. Abstract: extracts PR intent,
+  finds impacted functions via AST impact analysis, synthesizes function-level behavioral oracles
+  (preserved vs changed behaviour), generates executable tests and runs them differentially on
+  pre- and post-change code, then classifies with deterministic rules plus constrained LLM reasoning.
+  New benchmark RegBench-Py: 154 verified real-world Python PRs. F1 0.6125 (DeepSeek-Chat-V3.2)
+  and 0.5578 (Claude-4.5-haiku), outperforming baselines including Testora, Codex and Claude Code.
+  On 1,459 merged PRs it found 9 reproducible regression candidates, 8 confirmed by maintainers.
+  About 15 minutes per PR. Execution is used as a finder (generate pre/post differential tests).
+  That matches §1.2, where execution used as a filter cut recall, and it targets the 9/30
+  production misses that needed running code. ⚠️ Python-only, single paper, baselines'
+  configuration unknown.
+
 ### 2.6 Runtime facts for a Claude Code + Codex skill [doc]
 
 - Claude Code ships a bundled `/code-review` skill (alias `/review`) that runs as a forked
   subagent, reads `CLAUDE.md` (not `REVIEW.md`), widens scope (reuse, simplification, efficiency) depending
   on model and effort level, and caps findings (32 when reporting through
   the findings tool; `--max-findings`) ([local review docs](https://code.claude.com/docs/en/code-review-local.md)).
+- **Ultrareview** (research preview) [docs](https://code.claude.com/docs/en/ultrareview.md),
+  [Escalate to ultrareview](https://code.claude.com/docs/en/code-review-local.md): `/code-review ultra`
+  (alias `/ultrareview`) runs a fleet of reviewer agents in a cloud sandbox on Anthropic's
+  infrastructure; per the docs, "every reported finding is independently reproduced and verified".
+  Scriptable: `claude ultrareview [base]` blocks until done and prints findings to stdout; `--json`
+  prints the raw `bugs.json` payload; progress goes to stderr; `--trust-workspace` for CI. Duration
+  roughly 5–10 minutes (docs table). Cost: a few free runs per account, then roughly $5–$25 per
+  review in usage credits. Requires claude.ai login; not available on Bedrock/Vertex-equivalent/Foundry,
+  ZDR, HIPAA, CMEK. Behaviour and pricing may change. No published recall/precision numbers (vendor
+  claim only). See §3 for the tension with the rejected reproduce-or-drop filter.
 - **A local skill with the same name replaces a built-in command** in a terminal session
   ([skills docs](https://code.claude.com/docs/en/skills.md), "Same name in" table). A standalone copy
   of a skill named `code-review` would shadow the bundled one; the plugin namespace
@@ -288,6 +320,12 @@ Short list; most external evidence is already in Matt's docs.
    general-purpose skill (Matt's Report proposes the 60–80 TS/JS slice; the 25-task set is cheaper).
 6. **Codex `agents/openai.yaml` `allow_implicit_invocation: false`** to keep a heavy review skill
    from auto-triggering.
+7. **Claude Code ultrareview** (`claude ultrareview --json`; facts in §2.6) as a shipped vendor
+   reviewer built on reproduce-and-verify before reporting, and as a ready external baseline arm.
+   Tension with the rejected reproduce-or-drop filter: execution used as a filter was a recall loss
+   (probe+setup −9.2 judged, §1.2). Ultrareview is a vendor bet the other way. It is not evidence
+   against that rejection — no published recall/precision numbers. ⚠️ vendor docs only, research
+   preview.
 
 ## 4. Not verified / flagged
 
