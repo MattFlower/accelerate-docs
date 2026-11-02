@@ -1,0 +1,16 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1"
+   ],
+   "mechanism": "Clean-filter tests plant the malicious config before safe_git's key enumeration, so they cannot detect a clone-level safe_git call that skips the config-env neutralisation (test coverage gap)."
+  },
+  {
+   "members": [
+    "P2"
+   ],
+   "mechanism": "The in-progress state check omits rebase-merge/ and rebase-apply/, so a half-finished rebase with a clean tree is not refused."
+  }
+ ]
+}

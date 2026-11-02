@@ -1,0 +1,46 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "Runtime catalog rows that are now redundant with a built-in can't be removed, because remove rejects ids that resolve to read-only built-ins and nothing prunes them automatically."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "Collision tolerance is keyed to the literal id claude/haiku-5.5 instead of applying to any built-in that shadows a runtime entry."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": null,
+   "root_cause": "When the built-in replaces the runtime model, saved operator routing choices aren't checked against the built-in's supported efforts, so an effort it doesn't support makes startup fail."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "The pin test hard-codes the decision date and eval ids instead of reading them from overrides.json."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "The frozen routing identity test removes Haiku 5.5 from every role before comparing, so the widened-chain changes it causes are never checked."
+  },
+  {
+   "members": [
+    "C6"
+   ],
+   "same_as": null,
+   "root_cause": "The triage.default reason in overrides.json was replaced rather than extended, so the earlier decision history was lost."
+  }
+ ]
+}

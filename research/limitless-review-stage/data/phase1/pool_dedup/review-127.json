@@ -1,0 +1,25 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "The cached-evidence check doesn't handle a crash between saving passing gate results and marking the gate stage complete, so unchanged work gets wrongly sent for human intervention."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The amended-commit guard runs only after the initial pull-request lookup, so an earlier failure falls through to the draft fallback, which pushes the stale verified commit."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "The pending-merge exception checks only the merge's parents and not its tree or content, so an amended merge with unreviewed file changes is accepted and published."
+  }
+ ]
+}

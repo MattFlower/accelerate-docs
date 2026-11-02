@@ -1,0 +1,121 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P9",
+    "P11",
+    "P15",
+    "P20",
+    "P35",
+    "P43"
+   ],
+   "mechanism": "Digest seeds review candidates only from PR-opened, round-delivered and approval events, so unread PR activity (e.g. pr.ci_passed) that makes an approval stale is never reconciled against current state."
+  },
+  {
+   "members": [
+    "P3",
+    "P5",
+    "P8",
+    "P10",
+    "P13",
+    "P17",
+    "P19",
+    "P21",
+    "P23",
+    "P34",
+    "P36",
+    "P37",
+    "P38",
+    "P41",
+    "P42",
+    "P44"
+   ],
+   "mechanism": "Digest's awaiting-review predicate ignores review.rounds, so PRs with a running change round are still listed as awaiting review."
+  },
+  {
+   "members": [
+    "P2",
+    "P4",
+    "P6",
+    "P12",
+    "P14",
+    "P16",
+    "P18",
+    "P22",
+    "P33",
+    "P39",
+    "P40"
+   ],
+   "mechanism": "Status schema drops run.merged and explainStatus never checks it, so confirmed merged runs are reported as unknown, review needed or otherwise not landed."
+  },
+  {
+   "members": [
+    "P7",
+    "P45"
+   ],
+   "mechanism": "The blocked-land branch in explainStatus is evaluated before the closed-PR check, so a closed PR with a historical blocked land is told to retry landing."
+  },
+  {
+   "members": [
+    "P24",
+    "P28",
+    "P47",
+    "P50"
+   ],
+   "mechanism": "privateMatches in the publication gate now decodes repeatedly (including \\uXXXX) and returns a synthetic match after 5 rounds, blocking publication even with an empty denylist, which is an unrequested gate change."
+  },
+  {
+   "members": [
+    "P25",
+    "P48"
+   ],
+   "mechanism": "When the privacy policy cannot be read, the CallTool handler withholds all tool output, including results of mutations that already ran, so the agent loses the new ids."
+  },
+  {
+   "members": [
+    "P29",
+    "P49"
+   ],
+   "mechanism": "Applying the private-strings denylist to every MCP tool's output over-filters, wholesale replacing fields (including short-credential substring hits) in pre-existing tools."
+  },
+  {
+   "members": [
+    "P32",
+    "P51"
+   ],
+   "mechanism": "limitless_status omits the constant state and nextAction strings when the privacy policy is unreadable."
+  },
+  {
+   "members": [
+    "P26",
+    "P30"
+   ],
+   "mechanism": "Digest fetches run and land details sequentially per distinct run in the SessionStart hook, causing many serial requests."
+  },
+  {
+   "members": [
+    "P27"
+   ],
+   "mechanism": "Approved PRs with no saved prSnapshot are counted as awaiting review because approval.sha !== undefined head is true."
+  },
+  {
+   "members": [
+    "P31"
+   ],
+   "mechanism": "LandQueue.list throws a generic Error for an unknown run, so the HTTP route returns 500 instead of 404."
+  },
+  {
+   "members": [
+    "P46"
+   ],
+   "mechanism": "limitless_review omits the reviewer, so MCP approvals are recorded as reviewer \"human\" and the audit trail is misattributed."
+  },
+  {
+   "members": [
+    "P52"
+   ],
+   "mechanism": "Digest limits line count but not line length, so long titles, summaries or question text can inject large context."
+  }
+ ]
+}

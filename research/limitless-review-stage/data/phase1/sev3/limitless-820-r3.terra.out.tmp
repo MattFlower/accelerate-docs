@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F2","consequence":"test","trigger":"unusual","reason":"The reproduced production sandbox denied both commit and reset attempts and left HEAD unchanged, so the claimed runtime defect was not confirmed."}]}

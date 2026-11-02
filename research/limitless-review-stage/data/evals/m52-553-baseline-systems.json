@@ -1,0 +1,10 @@
+{
+  "systems": [
+    {
+      "name": "codex/sol-6.1@medium",
+      "mode": "single",
+      "finders": [{ "target": "codex/sol-6.1@medium", "prompt": "standard" }],
+      "implementerReport": "include"
+    }
+  ]
+}

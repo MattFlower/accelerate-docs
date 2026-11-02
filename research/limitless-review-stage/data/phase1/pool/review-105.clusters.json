@@ -1,0 +1,69 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P11",
+    "P12"
+   ],
+   "mechanism": "Runner redacts credentials without first stripping terminal/ANSI formatting, so a formatted credential isn't matched and the tail cut then discards its prefix, leaving an unredacted suffix."
+  },
+  {
+   "members": [
+    "P2"
+   ],
+   "mechanism": "Multiline credentials containing terminal formatting escape both the streaming redaction and the per-line excerpt redaction in failure excerpts, so they reach results and persistence."
+  },
+  {
+   "members": [
+    "P3"
+   ],
+   "mechanism": "Replacing complete matches before retaining the chunk overlap destroys the prefix of a longer overlapping credential, leaking its suffix across chunks."
+  },
+  {
+   "members": [
+    "P4",
+    "P9",
+    "P13",
+    "P18"
+   ],
+   "mechanism": "The privacy filter withholds any string containing the literal \"[redacted]\", hiding whole fields (MCP, digest, status) rather than just the secret."
+  },
+  {
+   "members": [
+    "P5",
+    "P8",
+    "P15",
+    "P17"
+   ],
+   "mechanism": "Unrequested scope creep: redactGateData is applied via JSON round-trip to every HTTP/SSE response, run state, prompts and reports, rewriting unrelated objects (adding confinementError) and adding cost."
+  },
+  {
+   "members": [
+    "P7",
+    "P14"
+   ],
+   "mechanism": "Artifact endpoint re-parses and compactly re-serializes JSON artifacts and VT-strips text artifacts, so served bytes differ from stored ones."
+  },
+  {
+   "members": [
+    "P6",
+    "P19"
+   ],
+   "mechanism": "Prompt builders pass whole inputs including the patch under review through VT stripping/redaction, so the reviewer sees a different diff than what will merge."
+  },
+  {
+   "members": [
+    "P10",
+    "P16"
+   ],
+   "mechanism": "New stdoutTruncated/stderrTruncated fields on ProcResult are added but never used in src."
+  },
+  {
+   "members": [
+    "P20"
+   ],
+   "mechanism": "confinementError is always written and output VT-stripped, so an older release reading the new rows misclassifies results on rollback."
+  }
+ ]
+}

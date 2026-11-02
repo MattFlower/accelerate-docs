@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"outage","trigger":"plausible","reason":"Interrupting a restart while its drain request is pending can leave scheduling paused indefinitely when the delayed drain arrives after cleanup resumes it."}]}

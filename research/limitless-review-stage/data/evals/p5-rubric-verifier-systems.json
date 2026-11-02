@@ -1,0 +1,52 @@
+{
+  "systems": [
+    {
+      "name": "terra-panel-rubric-sol",
+      "mode": "panel",
+      "finders": [
+        {
+          "target": "codex/terra-6.1@medium",
+          "prompt": "adversarial"
+        },
+        {
+          "target": "codex/terra-6.1@medium",
+          "prompt": "standard",
+          "lens": {
+            "name": "silent-failures",
+            "focus": "Error handling and fallbacks. List every catch, .catch, default-on-error, optional chaining or ?? fallback, retry, timeout and early return that the change adds or touches. For each, ask: which unexpected errors could it hide; did the request or spec ask for this fallback; should the failure propagate or fail closed instead; is a retry limited to transient failures, bounded by one deadline, and does it keep the original failure and its classification; does every pending or in-flight state end on every path. A failed security, isolation or inspection check that ends in silent success or an unchecked path is a blocker."
+          }
+        },
+        {
+          "target": "codex/terra-6.1@medium",
+          "prompt": "standard",
+          "lens": {
+            "name": "test-gaps",
+            "focus": "Tests. For each new or changed behaviour, find the test that would fail if that behaviour regressed, and say so when none exists. Flag tests that assert the defect they should catch, compare the code with itself, mock away the logic under test, pass for the wrong reason (invalid fixture, swallowed error, early return, wrong file), or were weakened, skipped or special-cased to pass. Name the missing or broken test case precisely. A test gap that hides a real defect in the change is at least major; report the underlying defect itself as its own finding."
+          }
+        },
+        {
+          "target": "codex/terra-6.1@medium",
+          "prompt": "standard",
+          "lens": {
+            "name": "trust-boundaries",
+            "focus": "Secrets, untrusted input and isolation. Trace every credential, token, private value and untrusted input (issue or PR text, gate or test output, model output, configuration or scripts from the change) from its source to every sink: logs, events, errors, PR comments, commit metadata, branch names, model prompts, files and network. Check that redaction happens after decoding and before truncation, on error and retry paths as well as the normal one. Check sandbox profiles, deny lists and allowlists for path aliases, symlinks, files versus directories, environment variables and child processes. Anything that steers the factory must come from the base commit, never the change. When isolation or a check cannot be confirmed, the code must refuse with a clear reason, never fall back silently."
+          }
+        },
+        {
+          "target": "codex/terra-6.1@medium",
+          "prompt": "standard",
+          "lens": {
+            "name": "requirements",
+            "focus": "Requirements. Restate each requirement, acceptance criterion and universal clause (every, all, never, only, ordering, on resume or restart) from the request and the specification. For each one, find the code that implements it on every entry point: resume paths, both harness backends, the daemon and scripts/, CLI and HTTP, cache-side calls. Mark it implemented, partly implemented or missing. Every missing or partly implemented clause that the request states is a finding that quotes the clause. A clause only the specification adds, which the request does not need, is at most minor."
+          }
+        }
+      ],
+      "verifier": {
+        "target": "codex/sol-6.1@medium"
+      },
+      "implementerReport": "include",
+      "replayFrom": "terra-specialist-panel",
+      "severityRubric": true
+    }
+  ]
+}

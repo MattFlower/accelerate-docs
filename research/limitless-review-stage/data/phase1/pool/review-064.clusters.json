@@ -1,0 +1,27 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P2",
+    "P4",
+    "P5",
+    "P6",
+    "P8"
+   ],
+   "mechanism": "Bun.serve's default 10-second HTTP idle timeout drops the connection while the buffered JSON response awaits a long-running command, which also aborts the subprocess via req.signal."
+  },
+  {
+   "members": [
+    "P3"
+   ],
+   "mechanism": "Replacing HOME with an empty scratch directory without preserving RUSTUP_HOME breaks Rust toolchain discovery for reader commands."
+  },
+  {
+   "members": [
+    "P7"
+   ],
+   "mechanism": "The sandbox's wildcard loopback network-bind rule allows binding any TCP port rather than only ephemeral ports, so binding alone can reserve ports."
+  }
+ ]
+}

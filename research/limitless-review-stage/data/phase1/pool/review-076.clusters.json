@@ -1,0 +1,68 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P2",
+    "P3",
+    "P6",
+    "P8",
+    "P9",
+    "P10",
+    "P16",
+    "P18",
+    "P19",
+    "P20"
+   ],
+   "mechanism": "Concierge chat routing discards RouteDecision.skipped and throws a generic 'No model available for chat' instead of the origin-exclusion reason when exclusions remove all candidates."
+  },
+  {
+   "members": [
+    "P1",
+    "P7"
+   ],
+   "mechanism": "Targets retained across waits (provider slots, admission, preparation) are dispatched without rechecking current origin eligibility after catalog/policy changes."
+  },
+  {
+   "members": [
+    "P4",
+    "P5",
+    "P17"
+   ],
+   "mechanism": "Panel verifier selection (pickVerifier) chooses a verifier without filtering excluded origins, so the router rejects the single chosen target and fails even though an allowed verifier exists."
+  },
+  {
+   "members": [
+    "P11",
+    "P23"
+   ],
+   "mechanism": "Eval resume validates stored switch-chain targets with resolveFor, which ignores origin exclusions, so excluded models are not refused up front and the trial errors later."
+  },
+  {
+   "members": [
+    "P12",
+    "P14"
+   ],
+   "mechanism": "Missing test coverage of the RunContext.invoke failure path (NoCapacityError with origin reason); tests only exercise Router.route()."
+  },
+  {
+   "members": [
+    "P15",
+    "P22",
+    "P24"
+   ],
+   "mechanism": "The privateOutput NoCapacityError message joins the raw origins array without deduplication, repeating identical origin-exclusion reasons."
+  },
+  {
+   "members": [
+    "P13"
+   ],
+   "mechanism": "Docs paragraph in EVALS.md has an awkward manual line wrap inconsistent with surrounding wrapping."
+  },
+  {
+   "members": [
+    "P21"
+   ],
+   "mechanism": "checkRosterTargets does not check origin exclusion for pinned review roster finders at startup, so misconfiguration is only discovered at review runtime."
+  }
+ ]
+}

@@ -1,0 +1,95 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P2",
+    "P3",
+    "P5",
+    "P7",
+    "P11",
+    "P15",
+    "P19",
+    "P20",
+    "P24",
+    "P25",
+    "P29",
+    "P31",
+    "P32"
+   ],
+   "mechanism": "RuntimeCatalog edit validation filters persisted references against the old catalog, so references that a model addition makes live are never validated and the next startup throws."
+  },
+  {
+   "members": [
+    "P4",
+    "P10",
+    "P12",
+    "P27"
+   ],
+   "mechanism": "RuntimePolicy filters retired operator references only at construction, so adding the missing model does not rebuild the policy and the stored override stays inactive until restart."
+  },
+  {
+   "members": [
+    "P6",
+    "P9",
+    "P13",
+    "P35",
+    "P38"
+   ],
+   "mechanism": "manageLocal builds new URL(`http://${remote_host}:8080`) without guarding it, so SSH destinations that are not valid URL hosts (IPv6, host:port, ssh://) throw an uncaught Invalid URL."
+  },
+  {
+   "members": [
+    "P14",
+    "P17",
+    "P39"
+   ],
+   "mechanism": "The remote provider is matched only by an exact origin of http://remote_host:8080, so providers on other ports, ssh_forward, or alias hosts are missed and the probe goes out unauthenticated with enablement skipped."
+  },
+  {
+   "members": [
+    "P8",
+    "P22",
+    "P28",
+    "P30",
+    "P34"
+   ],
+   "mechanism": "Eval resume and run retry pass stored requests through strict current-catalog validation, which rejects removed or retired model IDs and blocks resuming historical records."
+  },
+  {
+   "members": [
+    "P21",
+    "P23",
+    "P26"
+   ],
+   "mechanism": "The new removed-models tests depend on an absent evals/triage/cases.json and fail with ENOENT before exercising model validation."
+  },
+  {
+   "members": [
+    "P16",
+    "P33",
+    "P37"
+   ],
+   "mechanism": "Generic retired-reference filtering of stored prefer and operator cells replaces earlier explicit startup errors (model ID in prefer, REMOVED_MODELS explanations) with a misleading generic warning, and the covering test was deleted."
+  },
+  {
+   "members": [
+    "P18",
+    "P41"
+   ],
+   "mechanism": "The change exceeds the source line budget by adding unrequested UI and unavailable-reference reporting."
+  },
+  {
+   "members": [
+    "P36"
+   ],
+   "mechanism": "Catalog-edit validation was relaxed to ignore all references that were already invalid before the edit, not just retired ones, and the test was inverted."
+  },
+  {
+   "members": [
+    "P40"
+   ],
+   "mechanism": "The smoke test's fixed backend list no longer includes any LAN llama.cpp provider, so it gets no structured-output check."
+  }
+ ]
+}

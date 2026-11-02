@@ -1,0 +1,47 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1",
+    "C1b"
+   ],
+   "same_as": null,
+   "root_cause": "Eval resume rejects the whole request when the saved state mentions a retired model, when it should drop or skip that model and keep going with the supported targets and fallbacks."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": "G1",
+   "root_cause": "Loading persisted operator routing overrides at startup fails hard on retired IDs instead of filtering them out, so the daemon cannot start."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "Parsing the SSH destination in local management does not handle bare IPv6 addresses, so it throws before SSH is ever contacted."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "The configured provider is found by matching the SSH destination string against the provider's HTTP origin, which fails when an alias and an IP refer to the same host."
+  },
+  {
+   "members": [
+    "C7"
+   ],
+   "same_as": null,
+   "root_cause": "The anchor in the OPERATIONS.md link to the GUIDE's LAN provider example points to the wrong section."
+  },
+  {
+   "members": [
+    "C8"
+   ],
+   "same_as": null,
+   "root_cause": "OPERATIONS.md still gives the old llama-server binary location, which no longer matches the generated unit's new default path."
+  }
+ ]
+}

@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"boundary","trigger":"plausible","reason":"A pinned review model chain can route a local finder to a worker, violating its local-only execution boundary; pinning models is a plausible operator choice."}]}

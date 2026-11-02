@@ -1,0 +1,76 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P2",
+    "P3",
+    "P4",
+    "P5",
+    "P7",
+    "P8",
+    "P9",
+    "P15",
+    "P16",
+    "P18",
+    "P19"
+   ],
+   "mechanism": "Sticky-implementer invalidation relies on the in-memory changedCells set, which is empty after operator reset and daemon restart, so a removed saved implementer is appended and pinned again."
+  },
+  {
+   "members": [
+    "P6"
+   ],
+   "mechanism": "changedCells is never cleared, so after any historical edit, preferred implementers outside the edited cell (including escalated ones) are permanently discarded."
+  },
+  {
+   "members": [
+    "P10",
+    "P12",
+    "P20",
+    "P24"
+   ],
+   "mechanism": "RuntimePolicy constructor revalidates persisted operator cells and prefer rows against the current catalog and throws, so a stale row prevents daemon startup with no CLI/API recovery."
+  },
+  {
+   "members": [
+    "P11",
+    "P13",
+    "P21"
+   ],
+   "mechanism": "policyRevision is a single global abort signal triggered by every routing edit, so unrelated queued or pending invocations are aborted and rerouted, losing their queue positions."
+  },
+  {
+   "members": [
+    "P14"
+   ],
+   "mechanism": "Validation errors wrap String(error) from zod, producing raw JSON issue dumps that are hard to read."
+  },
+  {
+   "members": [
+    "P17"
+   ],
+   "mechanism": "A pre-existing config-cache test fails on both base and HEAD, unrelated to the change."
+  },
+  {
+   "members": [
+    "P22",
+    "P25"
+   ],
+   "mechanism": "Factory.policy now returns the effective policy including operator overrides, so the eval policy diff against the proposed overlay is misleading."
+  },
+  {
+   "members": [
+    "P23",
+    "P26"
+   ],
+   "mechanism": "Resetting a cell with no existing override still writes a null-to-null history row and publishes an SSE change."
+  },
+  {
+   "members": [
+    "P27"
+   ],
+   "mechanism": "Documentation claims provider cards appear only on the Providers page, but the Models page still renders them."
+  }
+ ]
+}

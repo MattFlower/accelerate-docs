@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"normal","reason":"A default profiling request returns truncated, unparseable stack-trace data that omits later samples and source mappings, potentially causing the operator to miss the cause of a stall."}]}

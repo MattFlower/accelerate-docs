@@ -1,0 +1,48 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": "G2",
+   "root_cause": "Failure excerpts are built from per-line callbacks, so pieces of a multiline credential are never matched and redacted."
+  },
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "Output is truncated before sanitization, so a cut inside an ANSI sequence leaves part of the credential unredacted."
+  },
+  {
+   "members": [
+    "C2",
+    "C2b"
+   ],
+   "same_as": null,
+   "root_cause": "Restoring run state runs redaction and sanitization over execution fields such as phase and command snapshot, which corrupts the trusted state."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "Coverage paths are redacted before alias canonicalization, so a resolved filename containing a credential is returned without redaction."
+  },
+  {
+   "members": [
+    "C5",
+    "C7"
+   ],
+   "same_as": null,
+   "root_cause": "The HTTP layer applies a sanitizing rewrite to every response, including artifact downloads, which changes the stored diagnostic content."
+  },
+  {
+   "members": [
+    "C6"
+   ],
+   "same_as": null,
+   "root_cause": "Prompt input redaction strips terminal escape sequences from the inline patch, so the patch under review no longer matches the real change."
+  }
+ ]
+}

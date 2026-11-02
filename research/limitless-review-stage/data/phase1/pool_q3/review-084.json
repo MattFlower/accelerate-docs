@@ -1,0 +1,19 @@
+{
+ "items": [
+  {
+   "id": "C1",
+   "verdict": "explicit",
+   "quote": "Apply one rule to every factory push: `scripts/land-pr.sh`'s final push, the land queue's push (src/land/), and the delivery push (src/git/): **repository-level config is untrusted for the push; global and system config are trusted.**"
+  },
+  {
+   "id": "C4",
+   "verdict": "explicit",
+   "quote": "for `core.sshCommand` use the global/system value if set, else `ssh`; never let a repository-scoped or included value apply."
+  },
+  {
+   "id": "C1b",
+   "verdict": "explicit",
+   "quote": "URL-scoped keys (`credential.<url>.helper`, `url.<base>.insteadOf`/`pushInsteadOf`) from repository config must not apply either"
+  }
+ ]
+}

@@ -1,0 +1,1060 @@
+{
+ "limitless-636-r1/F1": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "minor"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "test",
+    "trigger": "unusual",
+    "reason": "Only one assertion (signal-confinement:209, run under unconfined macOS Seatbelt) can race a launchd-reparented zombie, and the failure is a flaky test with no runtime effect."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "test",
+    "trigger": "plausible",
+    "reason": "On an unconfined macOS run, a killed grandchild can remain a zombie briefly and cause the assertion to fail even though cleanup succeeded."
+   }
+  },
+  "test_only": true,
+  "status": "agree",
+  "final": "minor"
+ },
+ "limitless-636-r1/F2": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "minor"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F2",
+    "consequence": "test",
+    "trigger": "unusual",
+    "reason": "The test helper treats a missing /proc stat file as proof the process is gone, which could mask a surviving process only where procfs is missing or unreadable, and it affects tests only."
+   },
+   "terra": {
+    "id": "F2",
+    "consequence": "test",
+    "trigger": "unusual",
+    "reason": "If Linux procfs is missing or unusually unavailable, the helper can accept a live process as stopped and mask a cleanup failure."
+   }
+  },
+  "test_only": true,
+  "status": "agree",
+  "final": "minor"
+ },
+ "limitless-536-r1/F1": {
+  "sev": {
+   "sonnet": "major",
+   "terra": "major"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "Setup that rewrites tracked files (lockfile refresh, codegen) leaves the reviewer reading modified files instead of the reviewed commit, which skews eval results, and a reproduction confirmed it."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "A setup command that rewrites tracked files can cause the reviewer to examine different content from the revision being evaluated and produce misleading findings."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "major"
+ },
+ "limitless-536-r1/F2": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "major"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F2",
+    "consequence": "wrong",
+    "trigger": "unusual",
+    "reason": "Generating routing policy from an eval that pits setup against non-setup arms on the same model makes the pass rate depend on trial order, but it needs that specific comparison design."
+   },
+   "terra": {
+    "id": "F2",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "When both setup and control arms are evaluated for the same model, trial order can change the generated routing policy's reported pass rate."
+   }
+  },
+  "test_only": false,
+  "status": "split",
+  "final": null
+ },
+ "limitless-536-r1/F3": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "major"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F3",
+    "consequence": "wrong",
+    "trigger": "unusual",
+    "reason": "Explicit finder replay from a stored panel with a different setup setting is accepted, so the setup arm reuses findings made in another environment and is mislabelled, but this needs an operator to deliberately pair mismatched panels."
+   },
+   "terra": {
+    "id": "F3",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "Replay accepts setup mismatches and silently labels reused finder results as if they came from the requested environment."
+   }
+  },
+  "test_only": false,
+  "status": "split",
+  "final": null
+ },
+ "limitless-630-r2/F1": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "blocker"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "test",
+    "trigger": "normal",
+    "reason": "The new test compares non-canonical /var/folders paths with Bun's /private-resolved paths, so it fails on macOS with the default TMPDIR; the product code is unaffected."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "outage",
+    "trigger": "normal",
+    "reason": "On macOS with the default temporary directory, the failing test can cause the deploy gate to refuse or roll back releases."
+   }
+  },
+  "test_only": false,
+  "status": "split",
+  "final": null
+ },
+ "limitless-630-r2/F2": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "minor"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F2",
+    "consequence": "test",
+    "trigger": "normal",
+    "reason": "The test fixture reopens a socket stderr through /proc/$$/fd/2, which fails with ENXIO on Linux, so the nested run exits 1 instead of 137; only the test fails, and it does so on every Linux CI run. This was not reproduced on Linux."
+   },
+   "terra": {
+    "id": "F2",
+    "consequence": "test",
+    "trigger": "normal",
+    "reason": "The Linux CI fixture fails before reaching the timeout, making the test and CI fail without an established runtime effect."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "minor"
+ },
+ "limitless-546-r3/F1": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "blocker"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "boundary",
+    "trigger": "unusual",
+    "reason": "A LAN relay must win a roughly 2^40 offline nonce search within the pairing window and the owner must approve the mismatched pairing, so the trust-boundary break needs an active on-path attacker and heavy compute that only a contrived scenario supplies."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "boundary",
+    "trigger": "plausible",
+    "reason": "A relay during initial pairing can attempt an offline code match and, if successful, obtain worker access and cause the worker to trust its certificate, although a full takeover was not reproduced."
+   }
+  },
+  "test_only": false,
+  "status": "split",
+  "final": null
+ },
+ "limitless-546-r3/F2": {
+  "sev": {
+   "sonnet": "blocker",
+   "terra": "major"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F2",
+    "consequence": "secret",
+    "trigger": "plausible",
+    "reason": "After a coordinator restart between approval and claim, the claim secret is not registered for redaction, which was reproduced, but no current path emits it, so it is a latent defense-in-depth gap."
+   },
+   "terra": {
+    "id": "F2",
+    "consequence": "bypass",
+    "trigger": "plausible",
+    "reason": "After a coordinator restart, a successful claim leaves the claim secret unregistered for redaction, allowing it to pass through the privacy filter if it appears in output."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "blocking"
+ },
+ "limitless-592-r1/F1": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "minor"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "bypass",
+    "trigger": "normal",
+    "reason": "The new smoke check the change adds for verifier mode runs a confined reader without wrappers, so it never exercises the unconfined slotted-command path production verifiers use and cannot catch a regression there."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "test",
+    "trigger": "normal",
+    "reason": "The smoke check routinely exercises a different configuration from production verifiers, leaving a regression in the wrapper path undetected without itself changing runtime behavior."
+   }
+  },
+  "test_only": true,
+  "status": "agree",
+  "final": "minor"
+ },
+ "limitless-592-r1/F2": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "major"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F2",
+    "consequence": "boundary",
+    "trigger": "unusual",
+    "reason": "A Bun executable path containing glob characters is turned into a read-allow pattern that matches a denied credential file (reproduced with a sandbox profile), but this needs a contrived install path."
+   },
+   "terra": {
+    "id": "F2",
+    "consequence": "secret",
+    "trigger": "unusual",
+    "reason": "A contrived Bun executable path containing glob characters can turn its read allowance into a pattern that permits a confined reader to access denied credentials."
+   }
+  },
+  "test_only": false,
+  "status": "split",
+  "final": null
+ },
+ "limitless-592-r1/F3": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "minor"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F3",
+    "consequence": "test",
+    "trigger": "normal",
+    "reason": "The new test deterministically fails on macOS with the default /var TMPDIR spelling (reproduced by both adjudicators), with no runtime effect."
+   },
+   "terra": {
+    "id": "F3",
+    "consequence": "test",
+    "trigger": "normal",
+    "reason": "The new test fails under the ordinary macOS /var temporary-directory spelling even though the executable allowance works."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "minor"
+ },
+ "limitless-776-r1/F1": {
+  "sev": {
+   "sonnet": "blocker",
+   "terra": "blocker"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "boundary",
+    "trigger": "plausible",
+    "reason": "With a pinned review model chain (an operator option), a finder marked local is routed to a worker instead of the coordinator, which breaks the local-only confinement. Adjudicator B reproduced the routing, and A's only claimed cost is the same model and findings running on a different machine."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "boundary",
+    "trigger": "plausible",
+    "reason": "A pinned review model can cause a local-only finder to run on a worker, violating the required execution boundary."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "blocker"
+ },
+ "limitless-984-r1/F1": {
+  "sev": {
+   "sonnet": "major",
+   "terra": "major"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "resume",
+    "trigger": "plausible",
+    "reason": "A restart between journaling an unchanged-field renewal and sending it makes recovery report the renewal as applied, so the interrupted work is wrongly treated as done; reproduced by both adjudicators."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "resume",
+    "trigger": "plausible",
+    "reason": "A restart before an unchanged renewal is sent causes recovery to falsely mark the interrupted work as applied."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "major"
+ },
+ "limitless-984-r1/F2": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "blocker"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F2",
+    "consequence": "state",
+    "trigger": "unusual",
+    "reason": "Replay of a final release treats any moved tip, including a malformed one or a same-owner write, as supersession, so recovery marks the lease lost and clears the release intent, losing the final status and checkpoint; reproduced by both, but it needs a concurrent same-owner or malformed write at the moment of replay."
+   },
+   "terra": {
+    "id": "F2",
+    "consequence": "state",
+    "trigger": "plausible",
+    "reason": "A moved tip from the same owner or a malformed record causes recovery to erase the persisted release intent and its final status and checkpoint."
+   }
+  },
+  "test_only": false,
+  "status": "split",
+  "final": null
+ },
+ "limitless-1014-r1/F1": {
+  "sev": {
+   "sonnet": "major",
+   "terra": "blocker"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "secret",
+    "trigger": "unusual",
+    "reason": "The worst reproduced effect is that a publication transport error containing a configured private string is written to the daemon log, which breaks the fixed-diagnostics requirement. The lost-response recovery gap only closes the checkpoint with commentId=null and never reposts, and both need a contrived error text or an unreadable private-strings file."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "secret",
+    "trigger": "plausible",
+    "reason": "A publication transport error can write configured private text to daemon logs, and the uncertain-post recovery failure requires an uncommon restart with privacy inspection unavailable."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "blocking"
+ },
+ "limitless-886-r2/F1": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "major"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "wrong",
+    "trigger": "unusual",
+    "reason": "Nothing at base ever applied the in-progress label, so a stale label on a pre-upgrade terminal run could only come from manual action, and the documented design says such runs receive no updates."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "A terminal run with an open pull request is permanently excluded from lifecycle reconciliation, so a preexisting in-progress label can remain after merge and block later queue eligibility."
+   }
+  },
+  "test_only": false,
+  "status": "split",
+  "final": null
+ },
+ "limitless-886-r2/F2": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "minor"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F2",
+    "consequence": "wrong",
+    "trigger": "unusual",
+    "reason": "A duplicate public comment needs a failed post, an identity configuration change plus restart, and a lost response on the retry to coincide, and the only effect is the duplicate comment."
+   },
+   "terra": {
+    "id": "F2",
+    "consequence": "wrong",
+    "trigger": "unusual",
+    "reason": "A posting identity change between a failed attempt and a retry whose response is lost causes recovery to miss the newly posted comment and publish a duplicate."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "minor"
+ },
+ "limitless-886-r2/F3": {
+  "sev": {
+   "sonnet": "major",
+   "terra": "major"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F3",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "A trusted re-approval within the same second as the run finish, or within clock skew, is rejected on every poll until the owner approves again, and both adjudicators reproduced it."
+   },
+   "terra": {
+    "id": "F3",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "A valid priority re-approval within the same timestamp second as a failed run can be rejected until the owner approves again."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "major"
+ },
+ "limitless-886-r2/F4": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "minor"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F4",
+    "consequence": "wrong",
+    "trigger": "unusual",
+    "reason": "Starvation needs a single run linking more than 25 inaccessible issues ahead of an accessible one, which is a contrived input, and the result is a silent failure to label or comment."
+   },
+   "terra": {
+    "id": "F4",
+    "consequence": "wrong",
+    "trigger": "unusual",
+    "reason": "A run linked to enough inaccessible issues can exhaust every poll's request budget before later accessible issues receive lifecycle updates."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "minor"
+ },
+ "limitless-886-r2/F5": {
+  "sev": {
+   "sonnet": "major",
+   "terra": "major"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F5",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "If a person restores the in-progress label between a partial label transition failure and its retry, the retry leaves both labels and the in-progress label keeps the issue out of the queue, as both adjudicators reproduced."
+   },
+   "terra": {
+    "id": "F5",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "A label changed by a person between a failed transition and its retry can survive because recovery completes its saved plan using stale labels, leaving the issue blocked from the queue."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "major"
+ },
+ "limitless-886-r3/F1": {
+  "sev": {
+   "sonnet": "major",
+   "terra": "major"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "A retry that fails within one poll interval while the failed label remains makes later owner re-approvals get rejected silently, or in the same-second case lets an old approval authorize another retry; reproduced by both adjudicators."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "A retry that fails before the next poll can leave later approvals permanently rejected, while failures in the same second can reuse an earlier approval."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "major"
+ },
+ "limitless-886-r3/F2": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "major"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F2",
+    "consequence": "wrong",
+    "trigger": "unusual",
+    "reason": "A healthy issue's label or comment is silently never delivered only when persistent failures consume exactly 49 of the 50 calls per poll, which is a contrived alignment, though both adjudicators reproduced it."
+   },
+   "terra": {
+    "id": "F2",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "Persistent failures can repeatedly exhaust the call budget at the same healthy task, silently preventing its lifecycle update from being delivered."
+   }
+  },
+  "test_only": false,
+  "status": "split",
+  "final": null
+ },
+ "limitless-886-r3/F3": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "minor"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F3",
+    "consequence": "test",
+    "trigger": "normal",
+    "reason": "The finding only asks for missing regression tests for F1 and F2, so it has no runtime effect of its own."
+   },
+   "terra": {
+    "id": "F3",
+    "consequence": "test",
+    "trigger": "normal",
+    "reason": "The existing suite lacks regression coverage for the reproduced F1 and F2 scenarios, with no independent runtime effect."
+   }
+  },
+  "test_only": true,
+  "status": "agree",
+  "final": "minor"
+ },
+ "limitless-485-r2/F1": {
+  "sev": {
+   "sonnet": "major",
+   "terra": "blocker"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "secret",
+    "trigger": "unusual",
+    "reason": "Both adjudicators reproduced that the second line of a multiline holdout leaks when it appears in a JSON-escaped string with a literal \\n, but this needs a short multiline holdout embedded in that escaped form."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "secret",
+    "trigger": "plausible",
+    "reason": "A JSON-escaped multiline holdout can expose its short later lines to a reviewing agent."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "blocking"
+ },
+ "limitless-485-r2/F2": {
+  "sev": {
+   "sonnet": "major",
+   "terra": "major"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F2",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "Per-line patterns with no minimum length blank common lines like 'return true;' and '}' in unrelated diffs, which both adjudicators reproduced, though a withheld count is shown and it fails on the closed side."
+   },
+   "terra": {
+    "id": "F2",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "Generic lines from a multiline holdout can redact unrelated code and deprive the reviewer of material needed to assess the change."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "major"
+ },
+ "limitless-485-r2/F3": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "minor"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F3",
+    "consequence": "wrong",
+    "trigger": "unusual",
+    "reason": "The catalogue rebuild on every page was reproduced as about 400ms of synchronous blocking only with 5,000 diagnostics and 10 MB, and output stays correct, so the effect is slowdown rather than failure."
+   },
+   "terra": {
+    "id": "F3",
+    "consequence": "diag",
+    "trigger": "unusual",
+    "reason": "A reproduced large diagnostic history causes repeated event-loop blocking and slower browsing, with no demonstrated incorrect output or outage."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "minor"
+ },
+ "limitless-567-r1/F1": {
+  "sev": {
+   "sonnet": "major",
+   "terra": "blocker"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "bypass",
+    "trigger": "plausible",
+    "reason": "After a daemon restart forgets the reservation, the command runs unslotted beside factory gates (defeating the slot guarantee the change claims) or, with a zero wait budget, polls the dead reservation forever; both reproduced, and a restart mid-wait is realistic but uncommon."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "boundary",
+    "trigger": "plausible",
+    "reason": "A daemon restart can cause a waiting deploy to run checks outside slot coordination or, with an unlimited wait, poll a forgotten reservation indefinitely."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "blocking"
+ },
+ "limitless-567-r1/F2": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "minor"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F2",
+    "consequence": "diag",
+    "trigger": "normal",
+    "reason": "The daemon route never returns a holder, so every progress line says 'unknown holder', which affects only the diagnostic text and happens on every wait."
+   },
+   "terra": {
+    "id": "F2",
+    "consequence": "diag",
+    "trigger": "plausible",
+    "reason": "During a long wait, progress messages cannot identify the slot holder because ordinary daemon replies omit that information."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "minor"
+ },
+ "limitless-549-r1/F1": {
+  "sev": {
+   "sonnet": "blocker",
+   "terra": "blocker"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "secret",
+    "trigger": "plausible",
+    "reason": "Gate evidence containing a credential or escape is now stored unredacted in the verification artifact (reproduced by both adjudicators), though HTTP reads still redact, so it stays in local storage and does not leave the process."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "secret",
+    "trigger": "plausible",
+    "reason": "A gate name or command containing a credential can place that credential unredacted in a persisted verification artifact."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "blocker"
+ },
+ "limitless-549-r1/F2": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "blocker"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F2",
+    "consequence": "wrong",
+    "trigger": "unusual",
+    "reason": "A repo with package scripts named both \"ok\" and \"output\" has its saved script map rewritten on resume, causing false blocking audit findings (reproduced), but that script-name combination is rare."
+   },
+   "terra": {
+    "id": "F2",
+    "consequence": "state",
+    "trigger": "plausible",
+    "reason": "On resume, a script map with both \"ok\" and \"output\" is corrupted and persisted, causing false blocking audit findings."
+   }
+  },
+  "test_only": false,
+  "status": "split",
+  "final": null
+ },
+ "limitless-549-r1/F3": {
+  "sev": {
+   "sonnet": "major",
+   "terra": "blocker"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F3",
+    "consequence": "secret",
+    "trigger": "unusual",
+    "reason": "A restored shadow-review error containing a credential is written raw to the diagnostic artifact (reproduced by A), but this needs a resume plus a credential inside that specific error text, and HTTP reads still redact."
+   },
+   "terra": {
+    "id": "F3",
+    "consequence": "secret",
+    "trigger": "plausible",
+    "reason": "A resumed shadow-review error containing a credential is copied unredacted into a stored artifact."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "blocking"
+ },
+ "limitless-549-r1/F4": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "minor"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F4",
+    "consequence": "diag",
+    "trigger": "unusual",
+    "reason": "A terminal escape in resumed verifier evidence reaches the owner's terminal unfiltered, which only affects display, and it needs escape bytes in the evidence plus a resume."
+   },
+   "terra": {
+    "id": "F4",
+    "consequence": "diag",
+    "trigger": "plausible",
+    "reason": "Restored evidence containing terminal escapes can alter the presentation of owner diagnostics when printed."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "minor"
+ },
+ "limitless-549-r1/F5": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "minor"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F5",
+    "consequence": "wrong",
+    "trigger": "unusual",
+    "reason": "A spec requirement containing a credential or escape makes the verifier's quoted citation fail validation against the literal spec, producing misleading feedback but not changing the verdict, and it needs such content in the spec."
+   },
+   "terra": {
+    "id": "F5",
+    "consequence": "diag",
+    "trigger": "plausible",
+    "reason": "A citation copied from a redacted requirement can produce misleading validation feedback, although the verification verdict is unchanged."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "minor"
+ },
+ "limitless-617-r1/F1": {
+  "sev": {
+   "sonnet": "major",
+   "terra": "major"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "compat",
+    "trigger": "plausible",
+    "reason": "Adjudicator B reproduced that a rollback mid-resolution makes the previous release push the merge alone and report success without implementing the findings, which is a rollback-compat failure that needs a deploy rollback at the wrong moment."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "compat",
+    "trigger": "plausible",
+    "reason": "A rollback during conflict resolution can make the previous release report success after pushing only the resolution, leaving the review findings unimplemented."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "major"
+ },
+ "limitless-617-r1/F2": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "minor"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F2",
+    "consequence": "test",
+    "trigger": "normal",
+    "reason": "Both adjudicators agree that the restart tests skip the pending and mid-resolution checkpoints, and that this is only a coverage gap with no runtime defect at head."
+   },
+   "terra": {
+    "id": "F2",
+    "consequence": "test",
+    "trigger": "plausible",
+    "reason": "The committed restart tests omit pending and intermediate resolution checkpoints, although independent probes found no runtime failure at those checkpoints."
+   }
+  },
+  "test_only": true,
+  "status": "agree",
+  "final": "minor"
+ },
+ "limitless-489-r2/F1": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "blocker"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "boundary",
+    "trigger": "unusual",
+    "reason": "A failed startup (e.g. tool-version probe failure or bind error) can drop the token-file read-deny before land workers finish stopping, but the window is tiny and the process then exits."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "boundary",
+    "trigger": "plausible",
+    "reason": "A startup failure can remove the token-file read denial while integration workers are still stopping, leaving sandbox policies created during that interval without the intended protection."
+   }
+  },
+  "test_only": false,
+  "status": "split",
+  "final": null
+ },
+ "limitless-489-r2/F2": {
+  "sev": {
+   "sonnet": "blocker",
+   "terra": "blocker"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F2",
+    "consequence": "outage",
+    "trigger": "plausible",
+    "reason": "An owner who enables token enforcement with proxy auth over a plain-HTTP public origin gets a config that is accepted but whose browser UI can never sign in (Secure cookie dropped, redirect loop and 401s), a reproduced but opt-in misconfiguration."
+   },
+   "terra": {
+    "id": "F2",
+    "consequence": "outage",
+    "trigger": "plausible",
+    "reason": "Enabling token enforcement with an accepted plain-HTTP proxy configuration leaves the browser unable to maintain a session, making the remote UI inaccessible."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "blocker"
+ },
+ "limitless-811-r2/F1": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "major"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "bypass",
+    "trigger": "unusual",
+    "reason": "A protected-path pattern ending in `**/` no longer matches files, so the audit's blocking finding disappears, but such trailing-slash globs are an uncommon way to write protected paths."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "A previously working trailing-slash glob can silently fail to flag edits to protected files."
+   }
+  },
+  "test_only": false,
+  "status": "split",
+  "final": null
+ },
+ "limitless-811-r2/F2": {
+  "sev": {
+   "sonnet": "major",
+   "terra": "major"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F2",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "A compound test command that starts with `bun test` passes the prefix check, so a docs-only change silently drops or replaces the other commands in it, such as `npm test`, and they never run in the gates."
+   },
+   "terra": {
+    "id": "F2",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "A docs-only change can cause a compound test gate to skip an additional required test command."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "major"
+ },
+ "limitless-811-r2/F3": {
+  "sev": {
+   "sonnet": "major",
+   "terra": "major"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F3",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "A docs-only run that fails slowly after the base merge gets `targeted_failure` instead of `regressed`, so it loses the slow-run retry and goes to a human, which is a spurious stop but not a corruption."
+   },
+   "terra": {
+    "id": "F3",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "A slow transient post-merge failure in targeted tests can stop the run for human intervention instead of receiving the retry that would pass."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "major"
+ },
+ "limitless-817-r1/F1": {
+  "sev": {
+   "sonnet": "major",
+   "terra": "blocker"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "wrong",
+    "trigger": "plausible",
+    "reason": "After a failed shutdown scan the same daemon's recovery silently skips its own abandoned invocation, so the orphan keeps running while the next command proceeds, and both adjudicators reproduced this, but it needs a prior shutdown failure and a same-process resume."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "boundary",
+    "trigger": "plausible",
+    "reason": "A failed shutdown can leave an abandoned descendant running, and same-daemon recovery skips it, allowing subsequent work to proceed alongside a process that should have been stopped."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "blocking"
+ },
+ "limitless-799-r1/F1": {
+  "sev": {
+   "sonnet": "minor",
+   "terra": "blocker"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "outage",
+    "trigger": "unusual",
+    "reason": "Both adjudicators reproduced that a late-arriving drain after an interrupted restart leaves the daemon drained and starting no new runs until a manual resume, but it needs Ctrl-C to land in the millisecond window while a localhost drain request is in flight and then arrive after the resume."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "outage",
+    "trigger": "plausible",
+    "reason": "Interrupting a restart while its drain request is pending can leave scheduling paused indefinitely when the delayed drain arrives after cleanup resumes it."
+   }
+  },
+  "test_only": false,
+  "status": "split",
+  "final": null
+ },
+ "limitless-769-r1/F1": {
+  "sev": {
+   "sonnet": "major",
+   "terra": "blocker"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "secret",
+    "trigger": "unusual",
+    "reason": "The coordinator accepts and stores/exposes arbitrary version strings that the worker-side probe was meant to filter, but only a buggy, modified or compromised authenticated worker can send one, since the shipped client nulls non-matching lines."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "secret",
+    "trigger": "plausible",
+    "reason": "A buggy or modified authenticated worker can send account details as a version, which the coordinator stores and exposes in worker listings."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "blocking"
+ },
+ "limitless-891-r2/F1": {
+  "sev": {
+   "sonnet": "major",
+   "terra": "blocker"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F1",
+    "consequence": "secret",
+    "trigger": "unusual",
+    "reason": "Both adjudicators reproduced the unredacted retry command being persisted in the checkpoint, but it requires a registered credential to appear in a gate retry command, which is a contrived config, and base already stored such commands raw."
+   },
+   "terra": {
+    "id": "F1",
+    "consequence": "secret",
+    "trigger": "plausible",
+    "reason": "A retry command containing a registered credential can be saved unredacted in the confirmation checkpoint, as reproduced for both passing and failing retries."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "blocking"
+ },
+ "limitless-891-r2/F2": {
+  "sev": {
+   "sonnet": "major",
+   "terra": "major"
+  },
+  "ratings": {
+   "sonnet": {
+    "id": "F2",
+    "consequence": "secret",
+    "trigger": "unusual",
+    "reason": "Both reproduced the worker map keeping a credential in a gate-name key that redaction skips, but it needs a registered credential embedded in a gate name, which is contrived."
+   },
+   "terra": {
+    "id": "F2",
+    "consequence": "secret",
+    "trigger": "unusual",
+    "reason": "A gate name containing a registered credential is persisted unredacted as a worker-map key, although placing a credential in a gate name is contrived."
+   }
+  },
+  "test_only": false,
+  "status": "agree",
+  "final": "major"
+ }
+}

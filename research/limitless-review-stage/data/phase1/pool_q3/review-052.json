@@ -1,0 +1,9 @@
+{
+ "items": [
+  {
+   "id": "C16",
+   "verdict": "explicit",
+   "quote": "Classify each `pr.ci_failed` on a factory PR."
+  }
+ ]
+}

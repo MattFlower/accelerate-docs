@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"nuisance","trigger":"plausible","reason":"A large failing log and accumulated credentials can reproducibly block the event loop for hundreds of milliseconds per inspection, delaying other work without evidence of lost work or incorrect results."}]}

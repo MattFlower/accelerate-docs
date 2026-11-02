@@ -1,0 +1,23 @@
+{
+  "systems": [
+    {
+      "name": "terra-adversarial-calibrated",
+      "mode": "single",
+      "finders": [{ "target": "codex/terra-6.1@medium", "prompt": "adversarial-calibrated" }],
+      "implementerReport": "include"
+    },
+    {
+      "name": "terra-thorough-calibrated",
+      "mode": "single",
+      "finders": [{ "target": "codex/terra-6.1@medium", "prompt": "adversarial-thorough-calibrated" }],
+      "implementerReport": "include"
+    },
+    {
+      "name": "terra-calibrated-union2",
+      "mode": "single",
+      "samples": 2,
+      "finders": [{ "target": "codex/terra-6.1@medium", "prompt": "adversarial-calibrated" }],
+      "implementerReport": "include"
+    }
+  ]
+}

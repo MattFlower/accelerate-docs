@@ -1,0 +1,3 @@
+{"key": "eval-mv7igcxy1tl7bg203warej|codex/sol-6.1@high|review-044|0", "matches": [{"gold": "G1", "finding": "F1", "confidence": 1.0, "reason": "Both describe a past policy edit continuing to invalidate an implementer selected after the edit."}]}
+{"key": "eval-mv7igcxy1tl7bg203warej|codex/sol-6.1@medium|review-044|0", "matches": [{"gold": "G1", "finding": null, "confidence": 0.98, "reason": "F1 describes a missed invalidation after restart, whereas G1 describes repeated invalidation by an old policy edit."}]}
+{"key": "eval-mv7igcxy1tl7bg203warej|codex/sol-6.1@high|review-044|1", "matches": [{"gold": "G1", "finding": "F1", "confidence": 1.0, "reason": "Both describe a past policy edit continually invalidating implementer selections made afterward."}]}

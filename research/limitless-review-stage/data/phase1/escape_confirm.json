@@ -1,0 +1,2522 @@
+{
+ "MattFlower/limitless#386/round-1/0": {
+  "classification": "defect",
+  "severity": "nit",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#443/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#443/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#458/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#458/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#458/round-1/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "compatibility",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#458/round-1/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#458/round-1/4": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#458/round-1/5": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#458/round-1/6": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#458/round-1/7": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#469/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#469/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#469/round-1/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#469/round-1/3": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#469/round-1/4": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#471/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#471/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#471/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#479/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#479/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#485/round-1/0": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#485/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#485/round-1/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#485/round-1/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#486/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#486/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#486/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#486/round-1/3": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#486/round-1/4": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#486/round-1/5": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#486/round-1/6": {
+  "classification": "defect",
+  "severity": "nit",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#483/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#483/round-2/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#483/round-2/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#489/round-1/0": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#489/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#489/round-1/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#489/round-1/3": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#489/round-1/4": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "availability",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#489/round-1/5": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#489/round-1/6": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#485/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#485/round-2/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#485/round-2/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#490/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#490/round-1/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#486/round-2/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#486/round-2/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#485/round-3/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#485/round-3/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#485/round-3/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#485/round-3/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#489/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#489/round-2/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#492/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#492/round-2/1": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#492/round-2/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#492/round-2/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#492/round-2/4": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#492/round-2/5": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#489/round-3/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#486/round-3/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#492/round-3/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#492/round-3/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#492/round-3/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#499/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#499/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "compatibility",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#499/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#499/round-3/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#499/round-3/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#503/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#504/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "availability",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#504/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#514/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#514/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#520/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#520/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#520/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#520/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#520/round-2/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#520/round-2/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#528/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#536/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#536/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#536/round-1/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#538/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#528/round-3/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#539/round-1/0": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#539/round-1/1": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#536/round-2/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#539/round-2/0": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#539/round-2/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#539/round-2/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#539/round-4/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#539/round-4/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#539/round-4/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#548/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#548/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#548/round-1/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#548/round-1/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#548/round-1/4": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#546/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#546/round-2/1": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#546/round-2/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#546/round-2/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#546/round-2/4": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#549/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#549/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#549/round-1/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#549/round-1/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#549/round-1/4": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#546/round-3/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#546/round-3/1": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#545/round-2/1": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#545/round-2/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#545/round-2/3": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#545/round-2/4": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#545/round-2/5": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#545/round-2/6": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#545/round-2/7": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#545/round-2/8": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#561/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#561/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#567/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#567/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#561/round-2/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#561/round-2/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#570/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#570/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#570/round-1/2": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "availability",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#570/round-1/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#570/round-1/4": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#570/round-1/5": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#573/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#573/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#573/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#573/round-1/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#573/round-1/4": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#578/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#578/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#584/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#590/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#590/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#592/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#592/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#592/round-1/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#592/round-2/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#592/round-2/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#596/round-2/0": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#596/round-2/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#596/round-2/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#596/round-2/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#596/round-2/4": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#609/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#613/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#613/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#616/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#616/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#616/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#616/round-1/3": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#617/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#617/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#616/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#616/round-2/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#621/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#622/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#624/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#624/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#624/round-1/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#624/round-1/3": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#624/round-1/4": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#627/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#627/round-2/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#628/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#629/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#633/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#633/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#633/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#633/round-1/3": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "compatibility",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#636/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#636/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#630/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#630/round-2/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#640/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#640/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#640/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#641/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#641/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#644/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#644/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#645/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#645/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#647/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#647/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#647/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#647/round-1/4": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#647/round-1/5": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#650/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#647/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#647/round-2/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#651/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#651/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#651/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#651/round-1/3": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#651/round-1/4": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#651/round-1/5": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#651/round-2/0": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#651/round-2/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#651/round-2/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#659/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#659/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#659/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#662/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#685/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#685/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#685/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#685/round-1/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#687/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#687/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#687/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#687/round-1/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#687/round-1/4": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#687/round-1/5": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#688/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#688/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#691/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#693/round-1/0": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#693/round-1/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#693/round-1/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#693/round-1/4": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#693/round-1/5": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#693/round-1/6": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#704/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#704/round-3/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#704/round-3/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#687/round-3/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#687/round-3/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#687/round-3/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#687/round-3/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#687/round-3/4": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#693/round-2/0": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#693/round-2/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#693/round-2/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#687/round-4/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#687/round-4/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#687/round-4/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#687/round-4/3": {
+  "classification": "defect",
+  "severity": "nit",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#711/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#693/round-3/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#693/round-3/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#693/round-3/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#712/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#721/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#730/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#730/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#730/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#732/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#734/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#734/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#737/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#737/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#737/round-3/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#741/round-1/0": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#741/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#741/round-1/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#741/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#746/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#746/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#747/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#747/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#753/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#753/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#752/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#753/round-3/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#753/round-3/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#769/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#768/round-1/0": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#768/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#772/round-2/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#773/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#773/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#776/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#781/round-1/0": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "availability",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#781/round-2/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#781/round-2/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#799/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#800/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#800/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#800/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#806/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#807/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#807/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#807/round-1/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#810/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#810/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#811/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#811/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#811/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#813/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#813/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#810/round-2/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#810/round-2/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#811/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#811/round-2/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#811/round-2/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#817/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#820/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#820/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#833/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#833/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#833/round-1/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#835/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#835/round-2/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#835/round-2/2": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#835/round-2/3": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#835/round-2/4": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#835/round-2/5": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#835/round-2/6": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#833/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#842/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#842/round-2/1": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#842/round-2/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#842/round-2/3": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#842/round-2/4": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#844/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#846/round-1/0": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#846/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#846/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#865/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#863/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#870/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#870/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#886/round-1/0": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#886/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#886/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#886/round-1/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#886/round-1/4": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#886/round-1/5": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#886/round-2/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#886/round-2/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#886/round-2/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#886/round-2/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#886/round-2/4": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#886/round-3/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#886/round-3/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#891/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "state",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#891/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#891/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#891/round-2/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#897/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#897/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#899/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#899/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#908/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#912/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#913/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#913/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#912/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#913/round-2/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#922/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#922/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#922/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#922/round-1/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#922/round-1/4": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#922/round-1/5": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#923/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#924/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#925/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#926/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#925/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#925/round-2/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#925/round-2/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#927/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#927/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#927/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#927/round-1/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#926/round-2/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#926/round-2/1": {
+  "classification": "defect",
+  "severity": "nit",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#925/round-3/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#942/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#943/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#943/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#944/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#944/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#944/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#927/round-2/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#927/round-2/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "state",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#927/round-2/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#927/round-2/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#942/round-2/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#926/round-3/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#942/round-3/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#942/round-3/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#971/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#971/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#972/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#972/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#972/round-1/2": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#980/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#980/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#981/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#981/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#981/round-1/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#981/round-1/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#981/round-1/4": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#984/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#984/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "state",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#988/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#988/round-1/1": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#988/round-1/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#992/round-1/0": {
+  "classification": "defect",
+  "severity": "blocker",
+  "category": "security",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#992/round-1/1": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#992/round-1/2": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#992/round-1/3": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#1003/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#1005/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#1012/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#1014/round-1/0": {
+  "classification": "defect",
+  "severity": "major",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication (Sol@high, Opus@high) + v3 severity raters, RUBRIC 2026-10-30"
+ },
+ "MattFlower/limitless#1042/round-1/0": {
+  "classification": "defect",
+  "severity": "minor",
+  "category": "correctness",
+  "confirmedBy": "orchestrator: blind two-vendor adjudication + v3 severity raters, RUBRIC 2026-10-30"
+ }
+}

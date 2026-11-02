@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"boundary","trigger":"unusual","reason":"A keychain directory symlinked to another credential store removes that store's existing sandbox read restriction, allowing the editor to access credentials."}]}

@@ -1,0 +1,67 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "The cache of rejected models is keyed so that it outlives a fix to the backend name, or deleting and recreating the model, for up to 24 hours."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The PATCH update logic gives no way to unset default effort, so the field can't be cleared."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "Probe responses that arrive after a provider is disabled and re-enabled are not checked against the current generation, so an older response can overwrite newer discovery results."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "At boot, loading runtime catalog entries throws a fatal error when an entry's name collides with a config model or its provider no longer exists, instead of skipping or reconciling the entry."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": null,
+   "root_cause": "Smoke filters out providers that are disabled or missing without logging a skip or failing, so their checks silently disappear."
+  },
+  {
+   "members": [
+    "C5b"
+   ],
+   "same_as": null,
+   "root_cause": "Smoke opens the live production database and applies the checkout's unshipped migrations before the release is accepted."
+  },
+  {
+   "members": [
+    "C6"
+   ],
+   "same_as": null,
+   "root_cause": "The test client decodes the :id parameter itself, so the tests never check that the server decodes encoded model names."
+  },
+  {
+   "members": [
+    "C7"
+   ],
+   "same_as": null,
+   "root_cause": "The escaped-process fixture depends on the child starting before the timeout fires, so a slow start triggers a retry and the test fails."
+  },
+  {
+   "members": [
+    "C8"
+   ],
+   "same_as": null,
+   "root_cause": "Eval eligibility doesn't apply the served-model guard, so models that discovery has confirmed are absent still get run."
+  }
+ ]
+}

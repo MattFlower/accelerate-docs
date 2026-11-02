@@ -1,0 +1,1 @@
+{"ratings":[{"id":"C2","consequence":"outage","trigger":"plausible","reason":"When a verifier cannot run a required test in its sandbox, the new command prevents substitution of an already passing gate result, blocking the factory run."}]}

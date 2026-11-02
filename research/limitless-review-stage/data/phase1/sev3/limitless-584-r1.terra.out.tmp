@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"diag","trigger":"plausible","reason":"A closed PR encountered during queue recovery is safely blocked but receives a misleading diagnostic, and that recovery scenario is realistic but uncommon."}]}

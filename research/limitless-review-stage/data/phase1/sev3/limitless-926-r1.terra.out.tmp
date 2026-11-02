@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"A cross-repository issue-number collision can suppress an approval alert or falsely report readiness for acceptance, leading the owner to act on an incorrect queue result."}]}

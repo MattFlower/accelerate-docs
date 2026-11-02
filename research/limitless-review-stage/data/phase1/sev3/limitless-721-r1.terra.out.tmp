@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"nuisance","trigger":"normal","reason":"Normal streams with unique literals repeatedly compile the full pattern, causing reproduced event-loop delays while preserving redaction results."}]}

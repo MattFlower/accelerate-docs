@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F2","consequence":"wrong","trigger":"normal","reason":"The milestone status omits unfinished per-repository gates and review lenses, so someone planning from the roadmap could wrongly conclude that packaging is the only remaining work."}]}

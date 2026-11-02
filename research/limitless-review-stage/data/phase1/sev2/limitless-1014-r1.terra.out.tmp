@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"secret","trigger":"plausible","reason":"A publication transport error can write configured private text to daemon logs, and the uncertain-post recovery failure requires an uncommon restart with privacy inspection unavailable."}]}

@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"A crash leaving a completed merge marked in progress can cause the factory to push the verified commit and open a draft PR when it should refuse publication."}]}

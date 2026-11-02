@@ -1,0 +1,44 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P4",
+    "P6"
+   ],
+   "mechanism": "Runtime catalog removal goes through editable(), which finds the shadowing built-in and throws read-only, so the redundant runtime_models row can never be removed and the startup warning repeats forever."
+  },
+  {
+   "members": [
+    "P2",
+    "P5",
+    "P7"
+   ],
+   "mechanism": "Collision handling is hardcoded to the single id 'claude/haiku-5.5' rather than a general rule, so any other runtime/built-in id collision still throws 'catalog collision' at startup."
+  },
+  {
+   "members": [
+    "P3"
+   ],
+   "mechanism": "Pin test hardcodes the decision date and eval ids instead of reading them from overrides.json, so each new owner decision requires a test edit."
+  },
+  {
+   "members": [
+    "P8"
+   ],
+   "mechanism": "As a built-in, Haiku 5.5 now joins widened candidate chains in every role, a behaviour change the frozen identity snapshot test hides by stripping it from the snapshot."
+  },
+  {
+   "members": [
+    "P9"
+   ],
+   "mechanism": "Replacing the runtime entry with the built-in makes RuntimePolicy validation reject stored operator routing cells using efforts the built-in doesn't support, so startup can still fail."
+  },
+  {
+   "members": [
+    "P10"
+   ],
+   "mechanism": "The triage.default reason text overwrites earlier decision history rather than appending to it, so the pin message loses rationale for the rest of the chain."
+  }
+ ]
+}

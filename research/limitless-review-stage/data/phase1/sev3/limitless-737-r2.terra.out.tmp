@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"A temporary inspection failure can permanently prevent the worker from starting, requiring manual database repair, while a crash at the wrong moment can leave a child running after its directories are deleted."}]}

@@ -1,0 +1,1 @@
+{"ratings":[{"id":"C2","consequence":"wrong","trigger":"plausible","reason":"When a verifier cannot run a required test in its sandbox, the changed command prevents substitution of passing gate evidence, leaving the run blocked despite a successful test."}]}

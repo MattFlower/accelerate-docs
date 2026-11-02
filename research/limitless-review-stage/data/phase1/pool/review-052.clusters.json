@@ -1,0 +1,152 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P4",
+    "P6",
+    "P12",
+    "P17",
+    "P21",
+    "P24",
+    "P30",
+    "P32",
+    "P36"
+   ],
+   "mechanism": "An exception thrown by classifyCi escapes record() unhandled, so it aborts the repository's observation loop and starves every later PR."
+  },
+  {
+   "members": [
+    "P2",
+    "P20"
+   ],
+   "mechanism": "The main-red branch records the failure and continues before fetching the job and logs, so the ledger signature has no log line or runner image."
+  },
+  {
+   "members": [
+    "P3",
+    "P23",
+    "P25",
+    "P26",
+    "P27"
+   ],
+   "mechanism": "The check_run_url comparison against the stored repository slug is case-sensitive, so valid canonical casing throws 'Incomplete failing job' and blocks the rerun."
+  },
+  {
+   "members": [
+    "P5"
+   ],
+   "mechanism": "A completed rerun with a skipped (or other non-success/bad) conclusion is never resolved, so the row stays rerunning and CI stays pending."
+  },
+  {
+   "members": [
+    "P7",
+    "P11"
+   ],
+   "mechanism": "A rerun_requested row whose POST response was lost is not reconciled, so a later pass or fail is mislabelled or never recorded as a flake."
+  },
+  {
+   "members": [
+    "P8"
+   ],
+   "mechanism": "Rerun-job reconciliation searches only the workflow's latest attempt, so a job rerun in an earlier attempt has no match and classification throws."
+  },
+  {
+   "members": [
+    "P9",
+    "P31"
+   ],
+   "mechanism": "The ci.main_red notification key includes the check name, so it is not deduplicated at repository scope."
+  },
+  {
+   "members": [
+    "P10"
+   ],
+   "mechanism": "PR failures suppressed by a red main are not resumed when main recovers, because classification is skipped while the PR's GraphQL state is unchanged."
+  },
+  {
+   "members": [
+    "P13",
+    "P39"
+   ],
+   "mechanism": "Fail-fast matrix cancellations are treated as transient failures, rerun, and recorded as false flake evidence."
+  },
+  {
+   "members": [
+    "P14",
+    "P38"
+   ],
+   "mechanism": "A rerun is requested while the workflow run is still in progress and GitHub rejects it, but the rerun cap is already spent."
+  },
+  {
+   "members": [
+    "P15",
+    "P18"
+   ],
+   "mechanism": "The change is about twice the requested source-line budget, with dense defensive classifier code."
+  },
+  {
+   "members": [
+    "P16",
+    "P35",
+    "P43"
+   ],
+   "mechanism": "A column is added by a second migration to a table created in the same unreleased change, instead of being part of the CREATE TABLE."
+  },
+  {
+   "members": [
+    "P19"
+   ],
+   "mechanism": "Fetching job logs may forward the bearer token across a cross-host redirect (unverified)."
+  },
+  {
+   "members": [
+    "P22"
+   ],
+   "mechanism": "Outstanding reruns beyond the 100-context GraphQL page are not reconciled, because ciKey does not change."
+  },
+  {
+   "members": [
+    "P28"
+   ],
+   "mechanism": "An existing, unchanged restart-repair test fails because its polling window expires before the pause callback is observed."
+  },
+  {
+   "members": [
+    "P29"
+   ],
+   "mechanism": "The OPEN-only guard skips classification of pr.ci_failed events on closed tracked PRs."
+  },
+  {
+   "members": [
+    "P33",
+    "P41"
+   ],
+   "mechanism": "The feed excerpt is the first 2000 characters of the job log (runner preamble), not the failure."
+  },
+  {
+   "members": [
+    "P34"
+   ],
+   "mechanism": "The new [github] ci_reruns config switch is not documented in the GUIDE."
+  },
+  {
+   "members": [
+    "P37"
+   ],
+   "mechanism": "The failure signature takes the first log line matching fail/error, which is often an echoed action input rather than the real failure."
+  },
+  {
+   "members": [
+    "P40"
+   ],
+   "mechanism": "The main-red state resets while main's newest commit is still running checks, so a duplicate ci.main_red item is emitted when it finishes red again."
+  },
+  {
+   "members": [
+    "P42"
+   ],
+   "mechanism": "record() now returns early when the head epoch refuses an observation, so merges, closes and comments are dropped instead of the snapshot still being saved."
+  }
+ ]
+}

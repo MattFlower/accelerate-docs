@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"unusual","reason":"A malformed or multi-entry MERGE_HEAD can cause the factory to publish a draft PR when it should refuse delivery, and the reproduced trigger requires an uncommon inconsistent merge state."}]}

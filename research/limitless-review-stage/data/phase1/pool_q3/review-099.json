@@ -1,0 +1,9 @@
+{
+ "items": [
+  {
+   "id": "C5",
+   "verdict": "explicit",
+   "quote": "Records written before the change still render and resume. Runs, invocations, eval results and runtime provider state can reference the removed provider or model id."
+  }
+ ]
+}

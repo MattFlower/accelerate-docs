@@ -1,0 +1,156 @@
+{
+ "production sol@medium (E1)": {
+  "old": [
+   31,
+   98
+  ],
+  "pool": [
+   24,
+   138
+  ],
+  "combined": [
+   55,
+   236
+  ]
+ },
+ "production + setup": {
+  "old": [
+   30,
+   98
+  ],
+  "pool": [
+   31,
+   138
+  ],
+  "combined": [
+   61,
+   236
+  ]
+ },
+ "sol@high (same run as E1)": {
+  "old": [
+   41,
+   98
+  ],
+  "pool": [
+   39,
+   138
+  ],
+  "combined": [
+   80,
+   236
+  ]
+ },
+ "adversarial prompt (E3)": {
+  "old": [
+   48,
+   98
+  ],
+  "pool": [
+   34,
+   138
+  ],
+  "combined": [
+   82,
+   236
+  ]
+ },
+ "union of 2 adversarial (D)": {
+  "old": [
+   46,
+   97
+  ],
+  "pool": [
+   44,
+   134
+  ],
+  "combined": [
+   90,
+   231
+  ]
+ },
+ "checklist F (own cohort)": {
+  "old": [
+   19,
+   48
+  ],
+  "pool": [
+   6,
+   38
+  ],
+  "combined": [
+   25,
+   86
+  ]
+ },
+ "production on F added cases": {
+  "old": [
+   0,
+   4
+  ],
+  "pool": [
+   2,
+   2
+  ],
+  "combined": [
+   2,
+   6
+  ]
+ },
+ "trace finder (E)": {
+  "old": [
+   32,
+   98
+  ],
+  "pool": [
+   31,
+   138
+  ],
+  "combined": [
+   63,
+   236
+  ]
+ },
+ "probe + setup": {
+  "old": [
+   22,
+   98
+  ],
+  "pool": [
+   18,
+   138
+  ],
+  "combined": [
+   40,
+   236
+  ]
+ },
+ "opus": {
+  "old": [
+   10,
+   98
+  ],
+  "pool": [
+   23,
+   138
+  ],
+  "combined": [
+   33,
+   236
+  ]
+ },
+ "opus@high": {
+  "old": [
+   14,
+   95
+  ],
+  "pool": [
+   24,
+   137
+  ],
+  "combined": [
+   38,
+   232
+  ]
+ }
+}

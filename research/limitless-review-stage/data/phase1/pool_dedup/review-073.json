@@ -1,0 +1,90 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "Digest review-work detection ignores PR observation events, so new pushes after an acknowledged approval are missed."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "Awaiting-review count doesn't exclude PRs with an in-progress change round."
+  },
+  {
+   "members": [
+    "C10"
+   ],
+   "same_as": null,
+   "root_cause": "Awaiting-review logic requires a saved head observation to honor an approval, so approvals recorded before any snapshot are treated as missing."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "Status derivation ignores the run's confirmed merge flag."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "Status precedence checks a historical blocked land before the PR's closed state."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": null,
+   "root_cause": "Unrequested publication-gate change treats text needing exactly the max decode rounds as private, even with an empty denylist."
+  },
+  {
+   "members": [
+    "C6",
+    "C6b",
+    "C8"
+   ],
+   "same_as": null,
+   "root_cause": "When the privacy policy can't be read, output is fail-closed too broadly, so MCP tool responses (including status state/next action and mutation results) are withheld."
+  },
+  {
+   "members": [
+    "C7"
+   ],
+   "same_as": null,
+   "root_cause": "Private-output filtering does substring matching on any registered credential with no minimum length, so whole fields and keys get withheld."
+  },
+  {
+   "members": [
+    "C9"
+   ],
+   "same_as": null,
+   "root_cause": "Digest fetches run detail and land state one run at a time with no limit, for every distinct run in the unread feed, inside the SessionStart hook."
+  },
+  {
+   "members": [
+    "C11"
+   ],
+   "same_as": null,
+   "root_cause": "Land queue lookup for an unknown run throws a generic error and doesn't map to a 404."
+  },
+  {
+   "members": [
+    "C12"
+   ],
+   "same_as": null,
+   "root_cause": "The MCP review-approval path hardcodes the reviewer as \"human\" instead of identifying the agent."
+  },
+  {
+   "members": [
+    "C13"
+   ],
+   "same_as": null,
+   "root_cause": "Digest caps how many lines it prints but not how long each line is, so long untrusted text goes out in full."
+  }
+ ]
+}

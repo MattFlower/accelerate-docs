@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"bypass","trigger":"plausible","reason":"A gate can set Git index flags and rewrite a tracked file while the new provenance check reports the checkout clean, allowing evidence from different bytes to be reused."}]}

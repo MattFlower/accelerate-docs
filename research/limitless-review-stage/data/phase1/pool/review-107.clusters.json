@@ -1,0 +1,23 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P2",
+    "P3",
+    "P5",
+    "P6",
+    "P8",
+    "P9"
+   ],
+   "mechanism": "The change picks four parallel workers but supplies none of the requested benchmark and repeat-run evidence (4/6/8 comparison, serial vs parallel timings, post-split top ten files, three successful parallel runs)."
+  },
+  {
+   "members": [
+    "P4",
+    "P7"
+   ],
+   "mechanism": "The new shell-expression/--parallel test command is not recognized by gateTestCommand(), so factory gate evidence substitution is disabled and the gate returns blocked."
+  }
+ ]
+}

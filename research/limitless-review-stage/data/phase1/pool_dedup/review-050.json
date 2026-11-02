@@ -1,0 +1,19 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1",
+    "C2"
+   ],
+   "same_as": "G2",
+   "root_cause": "The legacy-worktree path is registered too late (after the needs_human throw and after preparation reuse), so resumed delivery and interrupted-preparation runs use the checkout before it is registered."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "The regression tests only cover a resume in the loop phase and miss the draft-delivery restart path."
+  }
+ ]
+}

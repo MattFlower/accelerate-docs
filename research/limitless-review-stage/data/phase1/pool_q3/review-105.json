@@ -1,0 +1,14 @@
+{
+ "items": [
+  {
+   "id": "C2",
+   "verdict": "explicit",
+   "quote": "Redact gate output once, where `runGates` builds a check's result (before the tail is cut and before failure excerpts from #408 are extracted, so a secret split by the cut is still caught: decode/redact first, truncate after)."
+  },
+  {
+   "id": "C3",
+   "verdict": "explicit",
+   "quote": "Redact gate output once, where `runGates` builds a check's result (before the tail is cut and before failure excerpts from #408 are extracted, so a secret split by the cut is still caught: decode/redact first, truncate after). Every consumer then receives redacted text from that single place."
+  }
+ ]
+}

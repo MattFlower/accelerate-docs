@@ -1,0 +1,25 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": "G1",
+   "root_cause": "A parallel call that completes out of order is judged repetitive using predecessor calls that haven't resolved yet, so the agent can be stopped before those calls show progress."
+  },
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "Loop detection now runs only when a call's result arrives, so a repeated call that never resolves is never checked and the agent is not stopped."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "When a call is evicted from the window, the previous result hash is discarded too, so a later change in output is not recognised as progress and the agent is stopped one repetition early."
+  }
+ ]
+}

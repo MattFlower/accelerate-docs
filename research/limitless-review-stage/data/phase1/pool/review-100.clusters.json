@@ -1,0 +1,94 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P2",
+    "P3",
+    "P4",
+    "P7",
+    "P8",
+    "P16",
+    "P17",
+    "P19",
+    "P20",
+    "P22",
+    "P24",
+    "P27"
+   ],
+   "mechanism": "Catalog add validates only references valid in the old catalog and reads the filtered operator snapshot, so saved references to a re-added model ID are never checked against its new definition, and the next RuntimePolicy startup throws."
+  },
+  {
+   "members": [
+    "P5",
+    "P10",
+    "P28",
+    "P34"
+   ],
+   "mechanism": "manageLocal builds new URL(`http://${host}:8080`) from remote_host without validation or bracketing, so IPv6 or otherwise unparseable hosts throw a raw TypeError and abort the command."
+  },
+  {
+   "members": [
+    "P6",
+    "P11",
+    "P23",
+    "P25"
+   ],
+   "mechanism": "Eval resume passes the stored request and switch chains to strict validators that reject removed model IDs, so legacy evals cannot resume."
+  },
+  {
+   "members": [
+    "P26",
+    "P32"
+   ],
+   "mechanism": "retryRun passes the inherited run.models chain through strict validateRunModels, which rejects retired IDs, so historical runs cannot be retried."
+  },
+  {
+   "members": [
+    "P12",
+    "P14",
+    "P30",
+    "P33",
+    "P35"
+   ],
+   "mechanism": "Unrequested scope creep beyond the budget, including relaxed catalog-removal rules for terminal runs, a removed remove() guard, and new diagnostics/UI."
+  },
+  {
+   "members": [
+    "P18",
+    "P21"
+   ],
+   "mechanism": "The new removed-model tests depend on a missing evals/triage/cases.json fixture, so they fail with ENOENT before exercising model validation."
+  },
+  {
+   "members": [
+    "P9"
+   ],
+   "mechanism": "Old machine-prefixed [local] config keys are silently ignored with no warning."
+  },
+  {
+   "members": [
+    "P31"
+   ],
+   "mechanism": "No end-to-end test covers the CLI mapping of [local].remote_* config keys to manageLocal options."
+  },
+  {
+   "members": [
+    "P13"
+   ],
+   "mechanism": "Runtime models with an undefined provider are loaded and the strict validators do not check provider existence, so new writes can name unroutable models."
+  },
+  {
+   "members": [
+    "P15"
+   ],
+   "mechanism": "Remote host to provider matching requires the base URL to be exactly http://<remote_host>:8080, so enablement is silently not toggled for other setups."
+  },
+  {
+   "members": [
+    "P29"
+   ],
+   "mechanism": "Persisted routing cells naming removed models or model IDs in prefer are now silently dropped with a generic warning, losing the specific startup error, and the guarding test was removed."
+  }
+ ]
+}

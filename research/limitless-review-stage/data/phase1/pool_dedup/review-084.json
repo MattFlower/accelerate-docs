@@ -1,0 +1,40 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": "G1",
+   "root_cause": "The push re-reads mutable repository config after the final snapshot check, so changes made after validation take effect."
+  },
+  {
+   "members": [
+    "C1",
+    "C1b"
+   ],
+   "same_as": null,
+   "root_cause": "The delivery and land-queue push paths in repos.ts run git push with untrusted repository config (sshCommand, URL rewrites) that has not been isolated or sanitized."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The config validation is too strict and rejects harmless local settings such as user identity."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "The integration tests use a default 5-second timeout that is too short for their subprocess-heavy work."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": null,
+   "root_cause": "Rejection messages print the full config key names, which can expose credentials embedded in URL-scoped keys."
+  }
+ ]
+}

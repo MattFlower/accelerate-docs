@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"secret","trigger":"plausible","reason":"After an operator reloads a new App key path outside the protected config directory, an agent can read the unregistered private key until the daemon restarts."}]}

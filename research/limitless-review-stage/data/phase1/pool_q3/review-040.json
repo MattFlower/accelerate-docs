@@ -1,0 +1,9 @@
+{
+ "items": [
+  {
+   "id": "C4",
+   "verdict": "explicit",
+   "quote": "It writes or updates `[[providers]]` and asks a few questions with defaults: the repositories to enable, the merge policy, and discreet mode."
+  }
+ ]
+}

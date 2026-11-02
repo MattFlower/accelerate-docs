@@ -1,0 +1,794 @@
+[
+ {
+  "tid": "T29",
+  "case": "review-060",
+  "repo": "MattFlower/limitless",
+  "base": "09c6abe6683139c14f2de69ea033c9cf66b23f27",
+  "head": "133e274c8e0471f016e179b44ab9a064db6d4b8b",
+  "gold": {
+   "id": "G2",
+   "file": "src/util/proc.ts",
+   "lines": [
+    146,
+    151
+   ],
+   "summary": "Process cleanup returns while owned descendants are still alive.",
+   "category": "resource"
+  },
+  "candidates": [
+   {
+    "id": "F3",
+    "severity": "major",
+    "file": "src/util/proc.ts",
+    "line": 129,
+    "title": "Process-group cleanup still leaves detached descendants alive",
+    "detail": "The new cleanup only signals and checks the original process group. Descendants that create another session or process group survive invocation completion. This existing limitation leaves the requested whole-tree guarantee unmet. Command: `TMPDIR=/private/tmp/lr-nUbs7Q/claude-501 bun /private/tmp/lr-nUbs7Q/claude-501/review-377/detached.ts`. The fixture launches a Python child with start_new_session=True and redirected stdio. Output: `Invocation exit: 0 ; detached child alive after return: true`, followed by `AssertionError: background descendant must not outlive invocation`. The fixture killed its surviving child afterward.",
+    "failure_scenario": "An implementer's tool launches a detached background writer. The agent exits or is stopped, but the writer survives and continues changing worktree files during cleanup."
+   }
+  ]
+ },
+ {
+  "tid": "T30",
+  "case": "review-062",
+  "repo": "MattFlower/limitless",
+  "base": "09c6abe6683139c14f2de69ea033c9cf66b23f27",
+  "head": "77fa7a08013b817815e656f2a88584b5e16184be",
+  "gold": {
+   "id": "G1",
+   "file": "src/harness/scratch.ts",
+   "lines": [
+    184,
+    187
+   ],
+   "summary": "Run-wide scratch roots let one invocation cleanup kill another invocation writer.",
+   "category": "concurrency"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "blocker",
+    "file": "src/util/processes-darwin.ts",
+    "line": 66,
+    "title": "Working-directory matching kills unrelated orphan processes",
+    "detail": "A recent birth time, orphan status, and matching cwd do not establish invocation ownership. This fallback selects unrelated processes and sends them termination signals. A probe launched an independent orphaned /bin/sleep from the caller during another invocation; finishing that invocation killed the sleep. Command: `bun /private/tmp/lr-p4xl5T/claude-501/review-unrelated-process.ts`. Output: `AssertionError: unrelated orphan started by the caller must survive another invocation` followed by `false !== true`.",
+    "failure_scenario": "Two activities share a working directory. While one invocation runs, the other starts an orphaned platform process with a hidden environment. The first invocation finishes and kills the second activity's process solely because its cwd and birth time match."
+   }
+  ]
+ },
+ {
+  "tid": "T31",
+  "case": "review-066",
+  "repo": "MattFlower/limitless",
+  "base": "baa230a68b480684523d7066b298ff1039a62b2c",
+  "head": "9206127b9d1b407a885ae97ec7be25f0cfb55126",
+  "gold": {
+   "id": "G1",
+   "file": "src/pipeline/gate-evidence.ts",
+   "lines": [
+    43,
+    50
+   ],
+   "summary": "Free-text claim detection still lets model wording steer gate-evidence substitution.",
+   "category": "security"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "major",
+    "file": "src/pipeline/gate-evidence.ts",
+    "line": 45,
+    "title": "Gate-word filtering invalidates independently observed evidence",
+    "detail": "Any standalone occurrence of 'gate' triggers blocking, and a match in verify.notes blocks every met row. Thus independently observed application behavior such as 'the permission gate rejects the unauthenticated request with HTTP 403' loses its evidence and becomes blocked. Even the note 'Did not rerun gates.' invalidates unrelated rows containing successful targeted-test observations. Command `bun test --preload \"$TMPDIR/review-zod-v4.ts\" \"$TMPDIR/review-gate-boundaries.test.ts\"` confirmed both cases: each failed with `Expected: \"met\"; Received: \"blocked\"` (overall: `0 pass, 3 fail`, including the separate coverage defect). This can recreate needs_human failures despite successful verificati",
+    "failure_scenario": "A verifier successfully checks an authentication gate, or reports successful targeted tests while noting that it did not rerun gates. The criterion uses manual or prose verification instructions that cannot receive automatic gate substitution. Both verification attempts are downgraded to blocked and"
+   }
+  ]
+ },
+ {
+  "tid": "T32",
+  "case": "review-067",
+  "repo": "MattFlower/limitless",
+  "base": "7cc4e1864e395db91a57cd88c0bfc77c9cd6c067",
+  "head": "73b9a9cc7906bc2d67757b195eb4d1db966664ff",
+  "gold": {
+   "id": "G2",
+   "file": "src/pipeline/gate-evidence.ts",
+   "lines": [
+    60,
+    65
+   ],
+   "summary": "Targeted Bun evidence can satisfy a criterion without proof that any tests ran.",
+   "category": "logic"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "major",
+    "file": "src/pipeline/gate-evidence.ts",
+    "line": 65,
+    "title": "Exact command equality does not prove the requested file ran",
+    "detail": "This shortcut ignores passedFiles when the gate command matches the requested command. Bun treats these arguments as substring filters. In a temporary fixture containing only test/loopback.test.ts.other.test.ts, the exact command `bun test test/loopback.test.ts` exited 0 and printed `test/loopback.test.ts.other.test.ts:\\n(pass) unrelated\\n 1 pass\\n 0 fail`. Feeding that result and its actual passedFiles into applyGateEvidence incorrectly returned status \"met\" for test/loopback.test.ts, which did not exist or run.",
+    "failure_scenario": "A requested test file is removed or renamed while another passing test's path contains the original filename. The gate succeeds by running the other file, and a sandbox-blocked criterion receives a false passing citation."
+   }
+  ]
+ },
+ {
+  "tid": "T33",
+  "case": "review-067",
+  "repo": "MattFlower/limitless",
+  "base": "7cc4e1864e395db91a57cd88c0bfc77c9cd6c067",
+  "head": "73b9a9cc7906bc2d67757b195eb4d1db966664ff",
+  "gold": {
+   "id": "G2",
+   "file": "src/pipeline/gate-evidence.ts",
+   "lines": [
+    60,
+    65
+   ],
+   "summary": "Targeted Bun evidence can satisfy a criterion without proof that any tests ran.",
+   "category": "logic"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "major",
+    "file": "src/pipeline/gate-evidence.ts",
+    "line": 65,
+    "title": "Exact command text does not prove Bun ran the requested file",
+    "detail": "The targeted-command shortcut returns true without checking passedFiles, even when retained coverage explicitly identifies a different file. Bun treats these arguments as substring filters. In a temporary fixture containing only test/loopback.test.tsx, the exact command 'bun test test/loopback.test.ts' exited 0 and printed 'test/loopback.test.tsx:\\n(pass) unrelated test', followed by '1 pass' and '0 fail'. A direct applyGateEvidence probe with that coverage marked the missing .ts criterion 'met' and attached factory provenance.",
+    "failure_scenario": "The requested test/loopback.test.ts is absent, but test/loopback.test.tsx exists and passes. A targeted gate succeeds by matching the latter; a sandbox-blocked verifier criterion for the missing file is incorrectly converted to met."
+   }
+  ]
+ },
+ {
+  "tid": "T34",
+  "case": "review-052",
+  "repo": "MattFlower/limitless",
+  "base": "5338e21015168ffd3cfc1f657ddbe4dcc7306eaf",
+  "head": "3fd1377de7e4e0126636a663c1034ca238ae9795",
+  "gold": {
+   "id": "G3",
+   "file": "src/integrations/github-poller.ts",
+   "lines": [
+    314,
+    325
+   ],
+   "summary": "A paused PR is not inspected again when main recovers without another PR change.",
+   "category": "logic"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "major",
+    "file": "src/integrations/github-poller.ts",
+    "line": 315,
+    "title": "Resume paused PR failures when main recovers",
+    "detail": "Main-red suppression completes the inspection and clears `ciPending`. With unchanged PR checks, the classifier never runs again, so recovery on main cannot resume the suspended reaction. Reproduced with `bun test \"$TMPDIR/ci-review-regressions.test.ts\"`: after main recovered, the rerun assertion reported `Expected length: 1` and `Received length: 0`.",
+    "failure_scenario": "A timed-out PR check is suppressed because the same check fails on main. Main subsequently passes, while the PR SHA and failed check remain unchanged."
+   }
+  ]
+ },
+ {
+  "tid": "T35",
+  "case": "review-052",
+  "repo": "MattFlower/limitless",
+  "base": "5338e21015168ffd3cfc1f657ddbe4dcc7306eaf",
+  "head": "3fd1377de7e4e0126636a663c1034ca238ae9795",
+  "gold": {
+   "id": "G3",
+   "file": "src/integrations/github-poller.ts",
+   "lines": [
+    314,
+    325
+   ],
+   "summary": "A paused PR is not inspected again when main recovers without another PR change.",
+   "category": "logic"
+  },
+  "candidates": [
+   {
+    "id": "F3",
+    "severity": "major",
+    "file": "src/integrations/github-poller.ts",
+    "line": 315,
+    "title": "Main-red suppression never resumes when only main recovers",
+    "detail": "Main-red classification clears ciPending. Subsequent polls inspect main only when the PR's own CI observation changes, so main recovery alone leaves the PR indefinitely suppressed. Interpreting 'pause' as requiring eventual resumption, this strands transient failures. Reproduction command: TMPDIR=/private/tmp/lr-xVIWSX/claude-501 TMP=/private/tmp/lr-xVIWSX/claude-501 TEMP=/private/tmp/lr-xVIWSX/claude-501 bun /private/tmp/lr-xVIWSX/claude-501/review-ci-353.ts main-recovery. Output: {\"reruns\":0,\"mainState\":{\"test\":{\"red\":true,\"episode\":1}}}, followed by AssertionError: Resume paused PR reaction when main recovers; 0 !== 1.",
+    "failure_scenario": "A PR job times out while main fails the same check. Main subsequently passes, but the PR remains failed at its unchanged SHA with unchanged check contexts. No rerun or needs-fix classification follows."
+   }
+  ]
+ },
+ {
+  "tid": "T36",
+  "case": "review-087",
+  "repo": "MattFlower/limitless",
+  "base": "9f2baeb0a05d34745c40e8273908756a948ed400",
+  "head": "927486c53fa797f7ceb363c2b7622dcd0b3f739c",
+  "gold": {
+   "id": "G1",
+   "file": "scripts/land-pr.sh",
+   "lines": [
+    74,
+    76
+   ],
+   "summary": "Post-check publication scanning executes Git against mutable clone configuration.",
+   "category": "security"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "scripts/land-pr.sh",
+    "line": 98,
+    "title": "Submodule status can execute the clone\u2019s configured filters",
+    "detail": "The isolated status command recursively inspects initialized submodules, following their gitfiles and reading their repository configuration. A submodule gitfile can point back to the land clone\u2019s recorded admin directory. Because safe_git now enumerates filters only from the isolated repository, the clone\u2019s filter is not disabled for that child process and executes before dirty-tree refusal. A scratch copy of the existing fresh-clone test reproduced this with `bun test \"$TMPDIR/review-land-submodule.test.ts\" -t 'isolated push repository: fresh-clone'`: the marker assertion failed with `Expected: false; Received: true`. The same fixture against the base script passed with `BASE MARKER false`",
+    "failure_scenario": "A committed tree contains an initialized submodule. During checks, code plants filter.attack.clean in the land clone\u2019s config, redirects the submodule\u2019s .git file to the clone\u2019s admin directory, and supplies matching attributes and file content. The post-check status executes that filter despite usi"
+   }
+  ]
+ },
+ {
+  "tid": "T37",
+  "case": "review-105",
+  "repo": "MattFlower/limitless",
+  "base": "7797973b5f348d7beda4542e5669a46256215cde",
+  "head": "d00d50db3049eca56964af7e8514c3f1ec3306eb",
+  "gold": {
+   "id": "G1",
+   "file": "src/util/proc.ts",
+   "lines": [
+    453,
+    458
+   ],
+   "summary": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+   "category": "privacy"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "blocker",
+    "file": "src/util/proc.ts",
+    "line": 453,
+    "title": "Defer replacements that could be prefixes of longer credentials",
+    "detail": "Each chunk is redacted before the overlap buffer is retained. If a chunk completes a shorter registered credential but only begins a longer one, replacement destroys the longer credential's prefix. Later chunks then expose its remaining sensitive text. Command: TMP=\"$TMPDIR\" TEMP=\"$TMPDIR\" bun test \"$TMPDIR/gate-redaction-review.test.ts\". The overlapping-credentials assertion failed: Expected \"[redacted]\", Received \"[redacted]-long-sensitive-suffix\".",
+    "failure_scenario": "Register synthetic-overlap-short and synthetic-overlap-short-long-sensitive-suffix. Deliver the longer credential in two chunks: synthetic-overlap-short followed by -long-sensitive-suffix. With redactOutput enabled, runProcess exposes the latter chunk unchanged."
+   }
+  ]
+ },
+ {
+  "tid": "T38",
+  "case": "review-044",
+  "repo": "MattFlower/limitless",
+  "base": "329ed414e8223285ed54a18b994e7e94313a8ff0",
+  "head": "73b2feae3779c5ccf769da946aaf89a3814baf72",
+  "gold": {
+   "id": "G1",
+   "file": "src/router/router.ts",
+   "lines": [
+    256,
+    262
+   ],
+   "summary": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+   "category": "logic"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "major",
+    "file": "src/router/router.ts",
+    "line": 261,
+    "title": "Historical edits break stickiness for subsequently escalated models",
+    "detail": "changedCells never clears, so every future preference outside an edited cell is discarded\u2014even when that model was selected by escalation after the edit. The next feedback round falls back to the weaker cell model without another operator change. Targeted command: TMPDIR=/private/tmp/lr-dFTlLS/claude-501 TMP=/private/tmp/lr-dFTlLS/claude-501 TEMP=/private/tmp/lr-dFTlLS/claude-501 bun test /private/tmp/lr-dFTlLS/claude-501/routing-review.test.ts. The escalation-stickiness assertion failed: Expected: \"claude/opus\"; Received: \"codex/luna\".",
+    "failure_scenario": "Set implement.small to codex/luna, then escalate the run with minTier: 5 to claude/opus. On its next ordinary implementation round, the saved Opus preference is discarded and routing returns to tier-3 Luna."
+   }
+  ]
+ },
+ {
+  "tid": "T39",
+  "case": "review-104",
+  "repo": "MattFlower/limitless",
+  "base": "7797973b5f348d7beda4542e5669a46256215cde",
+  "head": "b3f762160d10f56e122e5c5a05e292794577079c",
+  "gold": {
+   "id": "G1",
+   "file": "src/gates/failures.ts",
+   "lines": [
+    49,
+    53
+   ],
+   "summary": "Lossy excerpt line framing prevents matching multiline credentials before storage.",
+   "category": "privacy"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/gates/failures.ts",
+    "line": 21,
+    "title": "Per-line redaction prevents complete multiline credential matching",
+    "detail": "Redacting each line before assembling diagnostics can replace a registered component of a longer multiline credential. The assembled text then no longer matches the longer credential, leaving its other lines exposed. runOne also redacts lines before passing them here. A targeted bun -e check using registerCredential, extractFailures and redactGateOutput returned a fully redacted output but failures containing 'synthetic-second-line-456'; the check exited 1.",
+    "failure_scenario": "Register 'synthetic-first-line-123\\nsynthetic-second-line-456' and separately register 'synthetic-first-line-123'. Print the multiline credential followed by '(fail) assertion'. The failure excerpt contains the second credential line and propagates it to storage, logs and prompts."
+   }
+  ]
+ },
+ {
+  "tid": "T40",
+  "case": "review-105",
+  "repo": "MattFlower/limitless",
+  "base": "7797973b5f348d7beda4542e5669a46256215cde",
+  "head": "d00d50db3049eca56964af7e8514c3f1ec3306eb",
+  "gold": {
+   "id": "G1",
+   "file": "src/util/proc.ts",
+   "lines": [
+    453,
+    458
+   ],
+   "summary": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+   "category": "privacy"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "blocker",
+    "file": "src/util/proc.ts",
+    "line": 453,
+    "title": "Defer replacement when a match could belong to a longer credential",
+    "detail": "Each chunk is redacted immediately, before the retained overlap can complete a longer credential. A shorter registered credential matching an incomplete longer credential's prefix is irreversibly replaced, leaving the longer credential's remainder exposed. Command: TMP=\"$TMPDIR\" TEMP=\"$TMPDIR\" bun test \"$TMPDIR/redaction-boundaries.test.ts\". The overlapping-credential probe failed with Expected: \"[redacted]\"; Received: \"[redacted]-private-long-token-suffix\". Subsequent gate helpers cannot recover the original match.",
+    "failure_scenario": "Register both \"prefix-token\" and \"prefix-token-private-long-token-suffix\". Emit the longer credential in two chunks split immediately after \"prefix-token\". The first chunk becomes the redaction marker, and the remaining sensitive suffix passes through unchanged."
+   }
+  ]
+ },
+ {
+  "tid": "T41",
+  "case": "review-044",
+  "repo": "MattFlower/limitless",
+  "base": "329ed414e8223285ed54a18b994e7e94313a8ff0",
+  "head": "73b2feae3779c5ccf769da946aaf89a3814baf72",
+  "gold": {
+   "id": "G1",
+   "file": "src/router/router.ts",
+   "lines": [
+    256,
+    262
+   ],
+   "summary": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+   "category": "logic"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "major",
+    "file": "src/router/router.ts",
+    "line": 261,
+    "title": "A past edit permanently defeats later sticky escalation",
+    "detail": "changedCells is never cleared or associated with the revision that selected an implementer. Once a cell changes, every subsequent out-of-cell implementer loses its preference, including stronger models legitimately selected by escalation after that edit. The next feedback round falls back to the weaker policy model without another operator change. Reproduction: `bun test \"$TMPDIR/routing-review.test.ts\"` failed with `Expected: \"claude/opus\"; Received: \"codex/sol\"` on the round following tier-5 escalation.",
+    "failure_scenario": "Edit implement.default to codex/sol. A run later escalates with minTier 5 and selects claude/opus from the catalog. Its next ordinary implement round supplies prefer=claude/opus, but the permanent changedCells flag discards it and selects codex/sol."
+   }
+  ]
+ },
+ {
+  "tid": "T42",
+  "case": "review-044",
+  "repo": "MattFlower/limitless",
+  "base": "329ed414e8223285ed54a18b994e7e94313a8ff0",
+  "head": "73b2feae3779c5ccf769da946aaf89a3814baf72",
+  "gold": {
+   "id": "G1",
+   "file": "src/router/router.ts",
+   "lines": [
+    256,
+    262
+   ],
+   "summary": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+   "category": "logic"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "major",
+    "file": "src/router/router.ts",
+    "line": 261,
+    "title": "Live edits permanently break stickiness for subsequent escalations",
+    "detail": "Once a cell enters changedCells, every future preferred target outside that cell is discarded, including implementers selected by escalation after the edit. The next feedback round therefore returns to a weaker policy model that already failed. Command: `bun test /private/tmp/lr-uMcueA/claude-501/routing-review.test.ts`. Output: `(fail) an implementer escalated after a live edit must remain sticky next round`; `Expected: \"claude/opus\"`; `Received: \"claude/sonnet-5.5\"`.",
+    "failure_scenario": "Set implement.small to claude/sonnet-5.5. After repeated failures, escalate with minTier 5 to claude/opus. On its next feedback round, the saved Opus preference is suppressed and routing returns to Sonnet."
+   },
+   {
+    "id": "F4",
+    "severity": "major",
+    "file": "src/router/router.ts",
+    "line": 261,
+    "title": "A cell edit permanently breaks stickiness for later escalations",
+    "detail": "changedCells never expires, so this check rejects every future preferred implementer outside the edited chain, including models selected by escalation after the edit. The following round can downgrade to the model that escalation just left. Reproduction command: `TMPDIR=/private/tmp/lr-lICV8l/claude-501 TMP=/private/tmp/lr-lICV8l/claude-501 TEMP=/private/tmp/lr-lICV8l/claude-501 bun /private/tmp/lr-lICV8l/claude-501/routing-escalation.ts`. Output: `{\"escalated\":\"claude/opus\",\"nextRound\":\"codex/luna@medium\"}`, followed by `AssertionError: a newly escalated implementer must remain sticky until a subsequent edit removes it`.",
+    "failure_scenario": "Set implement.small to codex/luna, then escalate a run to tier-5 claude/opus. On its next ordinary implement round, prefer=claude/opus is discarded despite no intervening edit, and routing returns to codex/luna."
+   }
+  ]
+ },
+ {
+  "tid": "T43",
+  "case": "review-105",
+  "repo": "MattFlower/limitless",
+  "base": "7797973b5f348d7beda4542e5669a46256215cde",
+  "head": "d00d50db3049eca56964af7e8514c3f1ec3306eb",
+  "gold": {
+   "id": "G1",
+   "file": "src/util/proc.ts",
+   "lines": [
+    453,
+    458
+   ],
+   "summary": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+   "category": "privacy"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "blocker",
+    "file": "src/util/proc.ts",
+    "line": 453,
+    "title": "Preserve unresolved credential prefixes before replacing shorter matches",
+    "detail": "Each chunk permanently replaces complete shorter credentials inside `pending`, even when those bytes belong to an incomplete longer credential. This destroys the longer match before its remaining bytes arrive. Registering `synthetic-shared-secret` and `private-prefix-synthetic-shared-secret-private-suffix`, then splitting the longer value immediately after the shorter value, produces `private-prefix-[redacted]-private-suffix`. Both outer portions remain exposed. Command: `bun test \"$TMPDIR/review-gate-boundaries.test.ts\"`. Output: `Expected: \"[redacted]\"; Received: \"private-prefix-[redacted]-private-suffix\"`.",
+    "failure_scenario": "Two registered credentials overlap, and a pipe chunk ends after the shorter credential embedded within the longer one. The runner leaks the longer credential's prefix and suffix into gate output and failure excerpts."
+   },
+   {
+    "id": "F3",
+    "severity": "blocker",
+    "file": "src/util/proc.ts",
+    "line": 453,
+    "title": "Delay replacements until longer credential matches are resolved",
+    "detail": "Redacting each incoming chunk before retaining the overlap can replace a shorter credential that prefixes a longer registered credential. This destroys the longer match before its remaining bytes arrive, exposing its suffix in the final gate result and downstream storage and prompts. Command: bun test \"$TMPDIR/redaction-review.test.ts\" --test-name-pattern 'overlapping registrations'. Assertion failed: Expected to not contain \"private-suffix-123456\"; received gate output \"[redacted]-private-suffix-123456\".",
+    "failure_scenario": "Register both \"synthetic-prefix-token\" and \"synthetic-prefix-token-private-suffix-123456\", then emit the longer credential in two stdout chunks split immediately after the shorter credential."
+   }
+  ]
+ },
+ {
+  "tid": "T44",
+  "case": "review-077",
+  "repo": "MattFlower/limitless",
+  "base": "7cc4e1864e395db91a57cd88c0bfc77c9cd6c067",
+  "head": "207d7b4a921c0851b5bb1080c81065ad63de73ae",
+  "gold": {
+   "id": "G1",
+   "file": "src/concierge.ts",
+   "lines": [
+    282,
+    295
+   ],
+   "summary": "Queued chat dispatch uses a target whose origin became excluded after selection.",
+   "category": "spec-mismatch"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/concierge.ts",
+    "line": 249,
+    "title": "Recheck exclusions after waiting for a chat provider slot",
+    "detail": "Chat retains the target selected here across tracker.acquire() and tracker.preflight(), without checking the routing revision or current catalog metadata. RuntimeCatalog.patch() can change that model to an excluded origin during either await. Although subsequent routes reject it, the waiting chat still sends its prompt to the saved target. Reproduced with a fake harness using `bun test --preload \"$TMPDIR/review-zod-preload.ts\" \"$TMPDIR/review-origin-race.test.ts\"`: output was `Calls after catalog excluded target: [\"fake/chat\"]`, followed by `expect(received).toEqual(expected)` with expected `[]` and received `[\"fake/chat\"]`. The temporary preload selects the installed Zod v4 entry point beca",
+    "failure_scenario": "Configure exclude_origins=[\"CN\"], route chat to an allowed runtime model, occupy its only provider slot, and submit a chat. While it waits, patch the model's origin and baseOrigin to CN. Release the slot: the excluded model receives the chat prompt."
+   }
+  ]
+ },
+ {
+  "tid": "T45",
+  "case": "review-077",
+  "repo": "MattFlower/limitless",
+  "base": "7cc4e1864e395db91a57cd88c0bfc77c9cd6c067",
+  "head": "207d7b4a921c0851b5bb1080c81065ad63de73ae",
+  "gold": {
+   "id": "G1",
+   "file": "src/concierge.ts",
+   "lines": [
+    282,
+    295
+   ],
+   "summary": "Queued chat dispatch uses a target whose origin became excluded after selection.",
+   "category": "spec-mismatch"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/concierge.ts",
+    "line": 249,
+    "title": "Recheck origin eligibility after waiting for capacity",
+    "detail": "The concierge retains the routed target across tracker.acquire() and preflight() without checking routing invalidation or current catalog eligibility. A runtime catalog patch can therefore exclude that model while it waits, yet the harness still receives the conversation. Reproduced using the real Concierge, Router, ProviderTracker and RuntimeCatalog with a fake harness; only unrelated schema serialization was stubbed to accommodate the installed Zod. Command: TMP=\"$TMPDIR\" TEMP=\"$TMPDIR\" bun \"$TMPDIR/origin-race.mjs\". Output: `Preview after catalog patch: [{\"modelId\":\"fake/chat\",\"eligible\":false,\"reason\":\"origin excluded (CN; baseOrigin=CN)\"}]`, `DISPATCH current catalog origin: CN`, `Harne",
+    "failure_scenario": "Configure exclude_origins=[\"CN\"], occupy a provider's only slot, and submit chat using an eligible US runtime model. While chat waits, patch that model's origin and baseOrigin to CN, then release the slot. The excluded model is still invoked."
+   }
+  ]
+ },
+ {
+  "tid": "T46",
+  "case": "review-093",
+  "repo": "MattFlower/limitless",
+  "base": "9f2baeb0a05d34745c40e8273908756a948ed400",
+  "head": "59e2f5e674688de24fa82e2af7e5d0ab58ad920c",
+  "gold": {
+   "id": "G1",
+   "file": "src/gates/failures.ts",
+   "lines": [
+    15,
+    17
+   ],
+   "summary": "Forced-color Bun result markers are not recognized by failure extraction.",
+   "category": "correctness"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/gates/failures.ts",
+    "line": 22,
+    "title": "Redact credentials before clipping failure excerpts",
+    "detail": "The extractor retains raw credentials and slices them before redaction. runOne forwards these excerpts into events/artifacts, land writes them to its log, and deploy includes them in errors without redacting them. This newly exposes early diagnostics previously excluded by the output tail. Clipping also leaves credential fragments that later literal redaction cannot recognize. Reproduction command: bun -e 'import {strict as assert} from \"node:assert\"; import {extractFailures} from \"./src/gates/failures.ts\"; import {registerCredential,redactCredentials} from \"./src/util/proc.ts\"; const secret=\"review-secret-0123456789\"; registerCredential(\"REVIEW_FAKE_SECRET\",secret); const result=redactCrede",
+    "failure_scenario": "A failed test prints a registered credential early in its diagnostics, followed by enough output to exclude it from the old tail. The new excerpt exposes it in stored results and logs. A credential starting at character 7935 is partially retained by the excerpt cap and survives subsequent redactCred"
+   }
+  ]
+ },
+ {
+  "tid": "T47",
+  "case": "review-098",
+  "repo": "MattFlower/limitless",
+  "base": "4c50ba4a4abff33458b84ad6f42f6761247b1211",
+  "head": "5a57b035e284b98bd84a2483519bed208135cecb",
+  "gold": {
+   "id": "G1",
+   "file": "src/router/runtime-policy.ts",
+   "lines": [
+    25,
+    31
+   ],
+   "summary": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+   "category": "data-migration"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/router/catalog.ts",
+    "line": 94,
+    "title": "Handle persisted routing references before removing the provider",
+    "detail": "Removing the provider makes previously valid persisted routing preferences fatal at startup. Factory constructs RuntimePolicy, whose constructor passes store.routingPrefer() to validatePrefer(); that rejects the removed ID and aborts initialization. Persisted operator routing cells likewise undergo strict catalog validation. Reproducer command: TMP=\"$TMPDIR\" TEMP=\"$TMPDIR\" bun -e 'import {Store} from \"./src/db/store.ts\"; import {RuntimePolicy} from \"./src/router/runtime-policy.ts\"; import {MODELS,PROVIDERS} from \"./src/router/catalog.ts\"; const f=await Bun.file(\"test/fixtures/routing-identity.json\").json(); const id=f.snapshot.providers.find((id:string)=>!PROVIDERS.some(p=>p.id===id)); const",
+    "failure_scenario": "Before upgrading, an operator saves a routing preference containing the machine-named provider. After upgrading, daemon initialization throws before serving requests, preventing existing runs from resuming."
+   }
+  ]
+ },
+ {
+  "tid": "T48",
+  "case": "review-098",
+  "repo": "MattFlower/limitless",
+  "base": "4c50ba4a4abff33458b84ad6f42f6761247b1211",
+  "head": "5a57b035e284b98bd84a2483519bed208135cecb",
+  "gold": {
+   "id": "G1",
+   "file": "src/router/runtime-policy.ts",
+   "lines": [
+    25,
+    31
+   ],
+   "summary": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+   "category": "data-migration"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/router/catalog.ts",
+    "line": 94,
+    "title": "Handle persisted routing references before removing the provider",
+    "detail": "Removing the catalog entries makes previously valid operator routing cells fatal during startup. RuntimePolicy's constructor validates every persisted chain through groups(), which rejects unknown models; Factory constructs RuntimePolicy without recovering from that rejection. A valid fallback in the same chain does not help. Reproduction command: bun -e 'import { Store } from \"./src/db/store.ts\"; import { RuntimePolicy } from \"./src/router/runtime-policy.ts\"; import { MODELS, PROVIDERS } from \"./src/router/catalog.ts\"; const fixture = await Bun.file(\"test/fixtures/routing-identity.json\").json(); const removed = fixture.snapshot.models.find(m => !PROVIDERS.some(p => p.id === m.provider)); co",
+    "failure_scenario": "Before upgrading, an operator saves a triage routing chain containing the machine-named model followed by codex/sol. After upgrading, daemon construction throws instead of starting and routing to the valid alternative."
+   }
+  ]
+ },
+ {
+  "tid": "T49",
+  "case": "review-103",
+  "repo": "MattFlower/limitless",
+  "base": "7797973b5f348d7beda4542e5669a46256215cde",
+  "head": "ec94c2027c618b813fef3ed27183c5dbd0caaf14",
+  "gold": {
+   "id": "G2",
+   "file": "src/gates/failures.ts",
+   "lines": [
+    17,
+    18
+   ],
+   "summary": "Line callbacks store pieces of multiline credentials in failure excerpts.",
+   "category": "privacy"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/gates/run.ts",
+    "line": 74,
+    "title": "Multiline credentials survive failure-excerpt redaction",
+    "detail": "The observer redacts individual lines, so a registered credential containing a newline never matches. The complete stream tail is redacted, but `failures` retains the credential and is subsequently persisted in artifacts, state and caches. A real runGates probe returned output=\"error: [redacted]\\n(fail) assertion\" alongside failures=\"error: synthetic-first-line\\nsynthetic-second-line\\n(fail) assertion\", then failed with `AssertionError: stored gate failure excerpts leak registered credential`. A minimal independently executed reproduction was: bun -e 'import {strict as assert} from \"node:assert\"; import {registerCredential} from \"./src/util/proc.ts\"; import {extractFailures} from \"./src/gate",
+    "failure_scenario": "Register the credential \"synthetic-first-line\\nsynthetic-second-line\", then run a failing check that prints \"error: \" followed by that credential and a subsequent `(fail) assertion` line. The gate result's failures field contains the complete credential despite its output field being redacted."
+   }
+  ]
+ },
+ {
+  "tid": "T50",
+  "case": "review-104",
+  "repo": "MattFlower/limitless",
+  "base": "7797973b5f348d7beda4542e5669a46256215cde",
+  "head": "b3f762160d10f56e122e5c5a05e292794577079c",
+  "gold": {
+   "id": "G1",
+   "file": "src/gates/failures.ts",
+   "lines": [
+    49,
+    53
+   ],
+   "summary": "Lossy excerpt line framing prevents matching multiline credentials before storage.",
+   "category": "privacy"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "blocker",
+    "file": "src/gates/failures.ts",
+    "line": 32,
+    "title": "Redact multiline credentials before discarding diagnostic lines",
+    "detail": "Multiline credentials are redacted only after diagnostic lines are assembled, but pass rows and file headers discard earlier lines first. The remaining credential suffix can no longer match the registered value and enters failures, storage and model feedback. Command: bun -e 'import {FailureExcerpts} from \"./src/gates/failures.ts\"; import {registerCredential} from \"./src/util/proc.ts\"; const secret=\"synthetic-first-credential-part\\n(pass) synthetic-middle-credential-part\\nsynthetic-final-credential-part\"; registerCredential(\"REVIEW_TOKEN\",secret); const x=new FailureExcerpts(); for(const line of `${secret}\\n(fail) assertion\\n`.split(\"\\n\"))x.observe(line); const output=x.result(); console.log",
+    "failure_scenario": "A registered multiline credential contains a line recognized as a pass row or test-file header, and a failure follows the printed credential. The output tail is redacted, but the failure excerpt exposes the final credential lines."
+   }
+  ]
+ },
+ {
+  "tid": "T51",
+  "case": "review-105",
+  "repo": "MattFlower/limitless",
+  "base": "7797973b5f348d7beda4542e5669a46256215cde",
+  "head": "d00d50db3049eca56964af7e8514c3f1ec3306eb",
+  "gold": {
+   "id": "G2",
+   "file": "src/gates/run.ts",
+   "lines": [
+    71,
+    74
+   ],
+   "summary": "ANSI stripping after framing and tail cuts leaves accidental credential fragments visible.",
+   "category": "privacy"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/util/proc.ts",
+    "line": 453,
+    "title": "Normalize terminal formatting before the runner truncates output",
+    "detail": "Runner redaction does not remove terminal formatting. A credential interrupted by ANSI formatting therefore reaches appendTail unchanged. If the 64,000-character cut removes its beginning, the later redactGateStreams call cannot recognize the remaining credential. The resulting GateResult leaks the suffix to storage and downstream consumers. Command: bun test \"$TMPDIR/gate-redaction-review.test.ts\". Assertion output: Expected to not contain: \"unner-cap-secret-421\"; Received: \"unner-cap-secret-421\".",
+    "failure_scenario": "Register \"synthetic-colored-runner-cap-secret-421\". Print its first 12 characters, ESC[31m, its remaining characters, then ESC[0m repeated 15,995 times. A real runGates invocation returns output \"unner-cap-secret-421\" without a redaction marker."
+   }
+  ]
+ },
+ {
+  "tid": "T52",
+  "case": "review-105",
+  "repo": "MattFlower/limitless",
+  "base": "7797973b5f348d7beda4542e5669a46256215cde",
+  "head": "d00d50db3049eca56964af7e8514c3f1ec3306eb",
+  "gold": {
+   "id": "G2",
+   "file": "src/gates/run.ts",
+   "lines": [
+    71,
+    74
+   ],
+   "summary": "ANSI stripping after framing and tail cuts leaves accidental credential fragments visible.",
+   "category": "privacy"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/util/proc.ts",
+    "line": 453,
+    "title": "Normalize terminal formatting before the runner truncates output",
+    "detail": "The runner redacts literal credentials before appendTail, but terminal normalization happens later in redactGateStreams. Formatting inserted inside a credential prevents the runner from matching it. If the 64,000-character tail cuts off its prefix, subsequent normalization and redaction cannot recognize the remaining credential suffix. That suffix enters GateResult.output and its storage, log and prompt consumers. Reproduction command: bun \"$TMPDIR/review-gate-boundaries.ts\". Output: {\"truncated\":true,\"sanitized\":\"d-credential-421\"}, followed by AssertionError: credential suffix survives the runner tail cut.",
+    "failure_scenario": "Register synthetic-colored-credential-421, then emit its first 10 characters, ESC[31m, its remaining characters, and ESC[0m repeated 15,996 times. Runner truncation removes the credential prefix and the final sanitized output exposes d-credential-421."
+   }
+  ]
+ },
+ {
+  "tid": "T53",
+  "case": "review-119",
+  "repo": "MattFlower/limitless",
+  "base": "c9c004c1e538c60333202a2f50bbadfef715f87f",
+  "head": "c7e65bbd0e203aaaf23a0690b4337f448dbafd6f",
+  "gold": {
+   "id": "G1",
+   "file": "src/db/migrations/20261009T223115-owner-diagnostics.sql",
+   "lines": [
+    4,
+    9
+   ],
+   "summary": "The owner_diagnostics foreign keys cascade on delete without an index on event_id or invocation_id, so the daemon's synchronous debug-event cleanup scans the whole table for every deleted event and slows as owner rows grow.",
+   "category": "performance"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/db/store.ts",
+    "line": 411,
+    "title": "Raw diagnostics become agent-readable after rollback",
+    "detail": "Raw text persists in the shared SQLite database, but its read protection exists only in the new harness code. After rollback, the base release's editor profiles permit database reads: its Seatbelt profile has `(allow default)` and no read denial. The additive migration deliberately preserves these rows. Running `bun \"$TMPDIR/owner-review-probes.ts\"` produced `{\"probe\":\"rollback database boundary\",\"raw\":{\"text\":\"RAW_OWNER_HOLDOUT_MARKER\"},\"allowsDefault\":true,\"hasReadDenial\":false}`. Real Seatbelt execution was unavailable inside this sandbox; the persisted row and base profile were checked directly.",
+    "failure_scenario": "The new release records verifier diagnostics, deployment rolls back to the base release, and an implementing agent reads owner_diagnostics directly from the database using its permitted filesystem access."
+   },
+   {
+    "id": "F2",
+    "severity": "major",
+    "file": "src/pipeline/context.ts",
+    "line": 1022,
+    "title": "Capture original thinking events before clipping",
+    "detail": "The owner copy is assembled from the normalized `message`. For thinking events, that message has already been clipped to 2,000 characters, so the new owner record cannot recover the full original diagnostic. A focused probe executed the actual onAgentEvent method with private text near the beginning and a diagnostic tail beyond the limit. `bun \"$TMPDIR/owner-review-probes.ts\"` produced `{\"probe\":\"raw thinking event\",\"inputLength\":2136,\"storedLength\":2000,\"tailPreserved\":false}`.",
+    "failure_scenario": "A verifier emits a thinking event longer than 2,000 characters containing holdout text and useful diagnostic information near its end. show/logs display only the clipped owner copy."
+   },
+   {
+    "id": "F3",
+    "severity": "major",
+    "file": "src/db/migrations/20261009T223115-owner-diagnostics.sql",
+    "line": 2,
+    "title": "Prevent diagnostic ID reuse behind follow cursors",
+    "detail": "INTEGER PRIMARY KEY permits SQLite to reuse deleted maximum IDs. Debug-event cleanup cascades into this table, while logs -f advances using `id > diagnosticsAfter`. A new diagnostic can therefore receive an already-consumed ID and never print. `bun \"$TMPDIR/owner-review-probes.ts\"` reproduced cursor 1, deletion through deleteOldDebugEvents, a new run-error row with id 1, and `followRows:[]`.",
+    "failure_scenario": "logs -f consumes the latest diagnostic, associated with a debug event. GC removes that event and diagnostic (readily reproducible with debug_event_days = 0), then a new error diagnostic reuses its ID and is skipped by subsequent polling."
+   }
+  ]
+ },
+ {
+  "tid": "T54",
+  "case": "review-127",
+  "repo": "MattFlower/limitless",
+  "base": "1aa4f2b6440be92feed70794c485779c20f56f09",
+  "head": "261559da0ec2376d0c2614ce30205f81e43e94bd",
+  "gold": {
+   "id": "G1",
+   "file": "src/pipeline/engine.ts",
+   "lines": [
+    1790,
+    1795
+   ],
+   "summary": "A resumed delivery whose base advanced again after a completed factory merge is refused, because the check requires the second merge's first parent to be the reviewed commit instead of the earlier factory merge.",
+   "category": "delivery"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/pipeline/engine.ts",
+    "line": 1793,
+    "title": "Pending-merge exception accepts unreviewed amendments",
+    "detail": "validateMerge checks only the two parent SHAs, so amending a pending factory merge with arbitrary file changes still satisfies this exception. On resume, mergeForDelivery accepts that amended merge, runs post-merge gates, and records it as the delivery head without auditing or reviewing the amendment. The requested refusal therefore remains bypassable. An isolated probe executing the actual helper and validator against real git failed: `bun \"$TMPDIR/delivery-head-probe.ts\"` printed `refused: false` and `AssertionError: An amended pending merge must be refused before delivery`.",
+    "failure_scenario": "Interrupt delivery during post-merge gates while pendingRebaseSha and preRebaseHead remain persisted. Amend the merge commit to change application code, preserving both parents, then resume with passing gates. The helper accepts and delivery pushes the unreviewed amendment instead of ending needs_hu"
+   }
+  ]
+ },
+ {
+  "tid": "T55",
+  "case": "review-127",
+  "repo": "MattFlower/limitless",
+  "base": "1aa4f2b6440be92feed70794c485779c20f56f09",
+  "head": "261559da0ec2376d0c2614ce30205f81e43e94bd",
+  "gold": {
+   "id": "G1",
+   "file": "src/pipeline/engine.ts",
+   "lines": [
+    1790,
+    1795
+   ],
+   "summary": "A resumed delivery whose base advanced again after a completed factory merge is refused, because the check requires the second merge's first parent to be the reviewed commit instead of the earlier factory merge.",
+   "category": "delivery"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/pipeline/engine.ts",
+    "line": 1793,
+    "title": "Do not authorize a changed merge commit from its parents alone",
+    "detail": "When pendingRebaseSha is set, this exception accepts any HEAD with the expected two parents. validateMerge checks ancestry, not the commit's tree or an exact recorded SHA. Amending a pending clean merge preserves those parents, so resume accepts the unreviewed amendment, reruns post-merge gates, and pushes it without review or audit. A temporary Git fixture invoking validateMerge after such an amendment printed: `validateMerge accepted amended, unreviewed HEAD: ce8e0282e9e7af6360d1efdead30a1c22a0656d6`.",
+    "failure_scenario": "Interrupt new-PR delivery during post-merge gates while pendingRebaseSha is persisted. Amend the merge commit to change a file without changing its parents, then resume. If the gates pass, the amended commit is pushed instead of ending needs_human."
+   }
+  ]
+ }
+]

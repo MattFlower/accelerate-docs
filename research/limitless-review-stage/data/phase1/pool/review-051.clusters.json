@@ -1,0 +1,59 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P3",
+    "P5",
+    "P6",
+    "P8",
+    "P9",
+    "P11",
+    "P13",
+    "P19",
+    "P20",
+    "P21",
+    "P22",
+    "P24",
+    "P30"
+   ],
+   "mechanism": "Resume always registers legacy worktrees against the bare factory cache (cachePath) and legacy.ts requires a bare owner, so legacy local worktrees attached to the source repository are rejected with 'Unsafe worktree Git administration'."
+  },
+  {
+   "members": [
+    "P2",
+    "P4",
+    "P7",
+    "P23"
+   ],
+   "mechanism": "The migration's eligibility criteria (succeeded prepare or a gate event) exclude a run interrupted after worktree creation but before the first gate event, so its legacy worktree is never marked and registration is skipped."
+  },
+  {
+   "members": [
+    "P10",
+    "P12",
+    "P14",
+    "P25",
+    "P26"
+   ],
+   "mechanism": "The migration uses a hard-coded sidecar-introduction timestamp cutoff as a proxy for upgrade time, so legacy worktrees created or prepared after the cutoff (including runs that re-entered prepare) are excluded, and the tests use timestamps just before the cutoff and miss this."
+  },
+  {
+   "members": [
+    "P15",
+    "P18",
+    "P28"
+   ],
+   "mechanism": "The unconditional headSha git call on resume runs before the needsHumanReason check, so a broken or unrecorded worktree turns a needs_human run into a git/trust failure."
+  },
+  {
+   "members": [
+    "P16",
+    "P17",
+    "P27",
+    "P29"
+   ],
+   "mechanism": "The change greatly exceeds the roughly 20-line budget and duplicates trustedEnv/recordWorktree validation in a separate 71-line module, creating two diverging sources of truth."
+  }
+ ]
+}

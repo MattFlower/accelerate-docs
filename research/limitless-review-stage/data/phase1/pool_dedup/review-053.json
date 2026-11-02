@@ -1,0 +1,103 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C9"
+   ],
+   "same_as": "G1",
+   "root_cause": "A definitively rejected rerun request is never resolved, so the classification stays pending forever and never yields a fix result."
+  },
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "A CI inspection error on one PR stops the whole repository poll loop, so later PRs are never processed."
+  },
+  {
+   "members": [
+    "C14"
+   ],
+   "same_as": null,
+   "root_cause": "Persisted CI pauses skip the GraphQL-change guard, so every unchanged poll repeats REST inspection of each paused PR."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "Repository URLs are compared case-sensitively, so valid jobs whose capitalization differs from the registered URL are rejected."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "Failures classified as main-red are never written to the flake ledger."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "Only the latest workflow attempt is examined, so a later sibling-job rerun hides the attempt the factory started."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": null,
+   "root_cause": "Completed reruns with skipped or neutral conclusions are not treated as terminal, so they never resolve."
+  },
+  {
+   "members": [
+    "C6"
+   ],
+   "same_as": null,
+   "root_cause": "Main's legacy commit statuses are only checked when the PR also has legacy statuses, so a red main is missed."
+  },
+  {
+   "members": [
+    "C7"
+   ],
+   "same_as": null,
+   "root_cause": "Rerunning a job also reruns its downstream dependent security jobs, which ignores the security-test exclusion."
+  },
+  {
+   "members": [
+    "C7b"
+   ],
+   "same_as": null,
+   "root_cause": "The decision to rerun a whole job doesn't check whether the job contains security-test steps, so those steps get rerun."
+  },
+  {
+   "members": [
+    "C8"
+   ],
+   "same_as": null,
+   "root_cause": "Timeout detection only recognizes Bun and Playwright diagnostics, so other test-runner timeouts are not treated as transient."
+  },
+  {
+   "members": [
+    "C10",
+    "C11b"
+   ],
+   "same_as": null,
+   "root_cause": "The feed excerpt takes the first 2000 characters of the raw log, which is runner-setup boilerplate rather than the failure context."
+  },
+  {
+   "members": [
+    "C11"
+   ],
+   "same_as": null,
+   "root_cause": "The failure signature uses the first line loosely matching error/fail, so distinct failures collide on the same signature."
+  },
+  {
+   "members": [
+    "C12b"
+   ],
+   "same_as": null,
+   "root_cause": "The change is far larger than the requested source budget, including a redundant second migration for the same new table."
+  }
+ ]
+}

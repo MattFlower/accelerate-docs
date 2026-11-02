@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"secret","trigger":"plausible","reason":"Resuming legacy state containing a registered credential can expose it in persisted errors and diagnostic events when implementation rounds are exhausted."}]}

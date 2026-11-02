@@ -1,0 +1,10 @@
+{
+  "systems": [
+    {
+      "name": "F-adversarial-checklist",
+      "mode": "single",
+      "finders": [{ "target": "codex/sol-6.1@medium", "prompt": "adversarial-checklist" }],
+      "implementerReport": "include"
+    }
+  ]
+}

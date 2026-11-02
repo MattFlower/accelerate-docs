@@ -1,0 +1,673 @@
+[
+ {
+  "system": "rubric-d-failure-paths",
+  "caseId": "review-166",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "One attempt can stay leased forever while its requests retry",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Do not retry certificate pin failures indefinitely",
+   "severity": "major",
+   "category": "security",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/workers/tls.ts:114-115 rejects a mismatched pin with `new Error(\"Coordinator certificate fingerprint changed\")`. src/workers/client.ts:146-148 catches every request rejection and returns `undefined`; :139 loops `for (;;)`, while :157-158 sleeps and caps the retry delay at 10 seconds.",
+    "trigger": "A coordinator presents a certificate differing from the stored pin. The worker silently retries until externally aborted, discarding the fingerprint mismatch error.",
+    "severity": "medium",
+    "category": "reliability"
+   }
+  }
+ },
+ {
+  "system": "rubric-d-failure-paths",
+  "caseId": "review-166",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "A gate that leaves an unreadable directory stops the worker loop",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "rubric-d-failure-paths",
+  "caseId": "review-166",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "One attempt can stay leased forever while its requests retry",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Bound retries for job requests and propagate permanent failures",
+   "severity": "major",
+   "category": "reliability",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/workers/client.ts:139–158: `for (;;)`, `if (reply?.status === 200) return reply`, and `if (reply && reply.status < 500) ... throw error`; other responses sleep and retry with only the delay capped. src/workers/client.ts:233: `await call(`/worker/jobs/${id}/result`, redactGateData({ run, sha }), jobSignal)`. The job stays reported until finally (238–239), while the independent heartbeat loop (250–254) sends `jobs: heldJobs()` (173). src/db/workers.ts:187–189 renews those jobs with `lease_expires_at = this.now() + this.times.lease`. Its sweep (273–277) checks revocation, lease expiry and heartbeat freshness, with no overall job deadline.",
+    "trigger": "The result endpoint repeatedly returns HTTP 500 while heartbeats succeed. Result submission retries indefinitely and heartbeats continually renew the lease, leaving the gate pending without triggering another-worker retry or local fallback.",
+    "severity": "high",
+    "category": "reliability"
+   }
+  }
+ },
+ {
+  "system": "rubric-d-failure-paths",
+  "caseId": "review-166",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "A gate that leaves an unreadable directory stops the worker loop",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "rubric-d-failure-paths",
+  "caseId": "review-173",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The digest drops blocked lands of PRs that no run owns",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Blocked unowned lands disappear from the CLI digest",
+   "severity": "minor",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/land/queue.ts:260 creates unowned entries with `runId: null`. src/db/store.ts:2854 preserves `runId: entry.runId` in feed items. src/cli/digest.ts:62-63 includes `label: \"Blocked lands\", kinds: [\"land.blocked\"]`, but src/cli/digest.ts:89-91 then executes `if (!item.runId) { group.items.delete(key); continue; }`.",
+    "trigger": "An unowned land becomes blocked after a confined check failure -> its feed item has a null runId and the digest deletes it, omitting the blocked land.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "rubric-d-failure-paths",
+  "caseId": "review-173",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The digest drops blocked lands of PRs that no run owns",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Blocked unowned lands disappear from the digest",
+   "severity": "minor",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/land/queue.ts:971 emits `this.store.landFeed(\"land.blocked\", entry, reason, ...)`. src/db/store.ts:2854 sets the feed item's `runId: entry.runId`. src/cli/digest.ts:89–91 executes `if (!item.runId) { group.items.delete(key); continue; }`, including for the `\"Blocked lands\"` group defined at lines 62–63.",
+    "trigger": "An unowned land fails confined checks and emits a blocked feed item with null runId; the digest deletes it and omits the blocked land.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "rubric-d-failure-paths",
+  "caseId": "review-200",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Cancel the open job when reconciliation fails",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "rubric-d-failure-paths",
+  "caseId": "review-200",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Cancel the open job when reconciliation fails",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Cancel the open job when reconciliation fails",
+   "severity": "major",
+   "category": "reliability",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/pipeline/engine.ts:1143-1144: `catch (error) { throw new NeedsHumanError(...) }`. src/pipeline/lan-agent.ts:76-79: `if (spec.signal.aborted) return cancelled(id); if (workers.agentJob(id)?.state === \"done\") continue; throw error;` rethrows without cancelling the open job. src/pipeline/engine.ts:448-449 records the run as `needs_human` without cancelling it.",
+    "trigger": "During restart reconciliation, git status or the private-strings read throws while the stored job remains leased. The run ends NeedsHuman, but the worker remains active and can subsequently push.",
+    "severity": "high",
+    "category": "reliability"
+   }
+  }
+ },
+ {
+  "system": "rubric-d-failure-paths",
+  "caseId": "review-218",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Publish only fixed lifecycle text, never run.error, and check the exact body that is posted",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Encoded credentials can reach public issue comments",
+   "severity": "major",
+   "category": "security",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/integrations/issue-lifecycle.ts:134-148 applies `redactCredentials(...)` directly to the encoded body, then checks only `loadPrivateStrings(...)`; line 163 posts that body. src/util/proc.ts:1234-1236 registers literal and JSON-escaped credential variants, without percent decoding. src/gates/publication.ts:76 checks `publicationMatches(text, entries)[0]`, whose entries here come exclusively from private-strings.txt.",
+    "trigger": "A failure reason contains a percent-encoded registered token whose literal form is absent from private-strings.txt. Literal credential redaction misses it, the private-string check passes, and the public comment exposes the recoverable token.",
+    "severity": "high",
+    "category": "security"
+   }
+  }
+ },
+ {
+  "system": "rubric-d-failure-paths",
+  "caseId": "review-218",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Re-approval after failure: a currently present priority label, applied after the failure, in timeline order",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Re-approval in the same timestamp second is rejected",
+   "severity": "minor",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/integrations/issue-queue.ts:64–68 computes `failedAt` from failure-event timestamps. Lines 97–101 reject the issue when `!events.some((e) => trusts(e.actor?.login) && Date.parse(e.createdAt) > failedAt)`, setting reason `\"factory status requires priority re-approval after failure\"`. The strict timestamp comparison ignores timeline order when timestamps match.",
+    "trigger": "A failure-label event precedes a trusted priority-label event in the timeline, but both have the same second-resolution createdAt. The valid re-approval is rejected, leaving the issue ineligible on subsequent polls until another approval occurs.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "rubric-d-failure-paths",
+  "caseId": "review-218",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Publish only fixed lifecycle text, never run.error, and check the exact body that is posted",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": {
+   "title": "An unrelated comment can impersonate a completed lifecycle write",
+   "severity": "major",
+   "category": "security",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/integrations/issue-lifecycle.ts:123 parses comments as `z.object({ body: z.string() })`; lines 128–130 accept `comments.some((c) => c.body.includes(marker))`, then `save(effect, \"done\")`. No author or complete-body verification occurs.",
+    "trigger": "After a failed POST leaves a pending checkpoint, another participant posts the predictable lifecycle marker. Reconciliation treats that unrelated comment as successful delivery and permanently skips the intended comment.",
+    "severity": "high",
+    "category": "security"
+   }
+  }
+ },
+ {
+  "system": "rubric-d-failure-paths",
+  "caseId": "review-218",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Re-approval after failure: a currently present priority label, applied after the failure, in timeline order",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "A removed priority label can satisfy re-approval",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/integrations/issue-queue.ts:61–63 collects historical priority `LabeledEvent`s. :99 accepts any trusted event newer than failure, independently of the current-label approval at :74–81. :129 excludes unlabeled events from the query.",
+    "trigger": "Trusted priority:2 predates failure and remains applied. A trusted account briefly applies priority:3 after failure and completion, then removes it. Its historical application still clears re-approval, making the issue eligible with priority:2.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "rubric-d-failure-paths",
+  "caseId": "review-237",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Recovery: check that the tip is still `before` before accepting an equivalent record",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "rubric-d-failure-paths",
+  "caseId": "review-237",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Replay: classify a `moved` tip before calling the lease lost",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "A moved replay is marked lost without classifying the new tip",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/integrations/claim-ref.ts:229 returns `{ kind: \"moved\", tip: confirmed.tip }` even for a malformed record. src/integrations/lease-store.ts:132-134 unconditionally calls `store.markLeaseLost(repo, ref)` for moved results. At src/integrations/lease-store.ts:85-86, markLeaseLost sets confirmed state to lost and clears the intent.",
+    "trigger": "The ref becomes malformed between the recovery read and release CAS. Recovery incorrectly reports superseded and deletes the pending release.",
+    "severity": "high",
+    "category": "concurrency"
+   }
+  }
+ },
+ {
+  "system": "rubric-d-failure-paths",
+  "caseId": "review-237",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Recovery: check that the tip is still `before` before accepting an equivalent record",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "rubric-d-failure-paths",
+  "caseId": "review-237",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Replay: classify a `moved` tip before calling the lease lost",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Classify the tip returned by a moved replay before marking ownership lost",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/integrations/claim-ref.ts:227-229 returns moved for any changed tip whose record does not equal the requested message. src/integrations/lease-store.ts:132-134 marks every moved result lost, without the generation/holder/run checks used at :139-149 or the malformed guard at :113.",
+    "trigger": "During release replay, the ref changes to a malformed record or a differing checkpoint with the same generation, holder and run. Recovery clears the release intent and marks ownership lost despite lacking evidence of supersession.",
+    "severity": "high",
+    "category": "concurrency"
+   }
+  }
+ },
+ {
+  "system": "rubric-d-failure-paths",
+  "caseId": "review-241",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Recover before closing uncertain posts; fixed codes on transport errors; test the recovery selector",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Inspection failure closes an uncertain POST before marker recovery",
+   "severity": "minor",
+   "category": "reliability",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/integrations/issue-lifecycle.ts:426–427 checkpoints `page: 1` immediately before POST. On retry, :365 calls `checkBody(...)`, whose default inspection at :85 invokes `inspection(run)` and loads private strings at :81. If inspection throws, :366–369 executes `save(effect, \"done\")` and `continue`. Marker recovery occurs only afterward, at :371–389.",
+    "trigger": "GitHub accepts a question POST but its response is lost. After restart, private-string inspection fails. The pending uncertain effect is permanently marked done before any marker lookup, losing recovery and the accepted comment's acknowledgement.",
+    "severity": "high",
+    "category": "reliability"
+   }
+  }
+ },
+ {
+  "system": "rubric-d-failure-paths",
+  "caseId": "review-241",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Recover before closing uncertain posts; fixed codes on transport errors; test the recovery selector",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Inspection failure closes an uncertain POST before recovery",
+   "severity": "major",
+   "category": "reliability",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/integrations/issue-lifecycle.ts:365 validates the stored body before recovery. Inspection failure reaches :367–369: `save(effect, \"done\"); ... continue;`. The `if (pending.page)` recovery branch is at :371, after this early exit.",
+    "trigger": "An accepted POST loses its response, then private-string inspection becomes unavailable. The next reconciliation marks the effect done without querying GitHub or recording the accepted comment ID.",
+    "severity": "high",
+    "category": "reliability"
+   }
+  }
+ },
+ {
+  "system": "rubric-e-narrow-override",
+  "caseId": "review-166",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "One attempt can stay leased forever while its requests retry",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Do not retry certificate pin failures indefinitely",
+   "severity": "major",
+   "category": "security",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/workers/tls.ts:114–115 rejects a mismatched pin with `new Error(\"Coordinator certificate fingerprint changed\")`. src/workers/client.ts:146–148 catches every request exception and returns `undefined`; lines 157–158 then sleep and retry, with delay capped at 10 seconds.",
+    "trigger": "A coordinator certificate differs from the stored fingerprint while the worker remains running. Every mismatch is silently swallowed and retried indefinitely, hiding the reason the worker cannot connect.",
+    "severity": "medium",
+    "category": "reliability"
+   }
+  }
+ },
+ {
+  "system": "rubric-e-narrow-override",
+  "caseId": "review-166",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "A gate that leaves an unreadable directory stops the worker loop",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "rubric-e-narrow-override",
+  "caseId": "review-166",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "One attempt can stay leased forever while its requests retry",
+  "trial": 1,
+  "caught": false,
+  "matched": true,
+  "finding": {
+   "title": "Bound retries for job requests and propagate permanent failures",
+   "severity": "major",
+   "category": "reliability",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/workers/client.ts:137–159: `for (;;)`, returning only for status 200 and throwing for status <500; otherwise `delay = Math.min(delay * 2, 10_000)` caps delay, not retries. Line 233 awaits this loop for `/result`. Lines 173 and 250–254 independently keep reporting held jobs through heartbeats. src/db/workers.ts:187–189 renews each reported lease with `this.now() + this.times.lease`; lines 273–277 impose no total job deadline.",
+    "trigger": "Persistent HTTP 500 responses from the result endpoint while heartbeats succeed cause unlimited result retries and continued lease renewal. The job remains leased indefinitely, preventing retry on another worker or local fallback until externally cancelled.",
+    "severity": "medium",
+    "category": "reliability"
+   }
+  }
+ },
+ {
+  "system": "rubric-e-narrow-override",
+  "caseId": "review-166",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "A gate that leaves an unreadable directory stops the worker loop",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "rubric-e-narrow-override",
+  "caseId": "review-173",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The digest drops blocked lands of PRs that no run owns",
+  "trial": 0,
+  "caught": false,
+  "matched": true,
+  "finding": {
+   "title": "Blocked unowned lands disappear from the CLI digest",
+   "severity": "minor",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/land/queue.ts:260 creates unowned entries with `runId: null`. src/db/store.ts:2854 copies `runId: entry.runId` into land feed items. src/cli/digest.ts:89-92: `if (!item.runId) { group.items.delete(key); continue; }`, including the `Blocked lands` group defined at lines 62-63.",
+    "trigger": "An unowned land becomes blocked after a confined check fails; its feed item has no run ID, so the digest deletes it from the blocked-land group.",
+    "severity": "medium",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "rubric-e-narrow-override",
+  "caseId": "review-173",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The digest drops blocked lands of PRs that no run owns",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Blocked unowned lands disappear from the digest",
+   "severity": "minor",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/land/queue.ts:971 emits `this.store.landFeed(\"land.blocked\", entry, reason, ...)`; src/db/store.ts:2854 assigns `runId: entry.runId`. src/cli/digest.ts:89-92 then executes `if (!item.runId) { group.items.delete(key); continue; }`, including for the \"Blocked lands\" group defined at lines 61-64.",
+    "trigger": "An unowned PR fails confined checks and emits a land.blocked item with runId null; the digest deletes it and omits the blocked land.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "rubric-e-narrow-override",
+  "caseId": "review-200",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Cancel the open job when reconciliation fails",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "rubric-e-narrow-override",
+  "caseId": "review-200",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Cancel the open job when reconciliation fails",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Cancel the open job when reconciliation fails",
+   "severity": "major",
+   "category": "reliability",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/pipeline/lan-agent.ts:75-79 awaits `publication.resume(request)` but its catch only checks cancellation and completion before `throw error`; it never cancels the still-open job. src/pipeline/engine.ts:1143-1144 converts reconciliation errors into `NeedsHumanError`. The cancellation at lan-agent.ts:89 is bypassed.",
+    "trigger": "A stored leased job remains open when git inspection or private-string loading throws during resume. The run ends NeedsHuman while the worker remains authorized to continue and push.",
+    "severity": "high",
+    "category": "reliability"
+   }
+  }
+ },
+ {
+  "system": "rubric-e-narrow-override",
+  "caseId": "review-218",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Publish only fixed lifecycle text, never run.error, and check the exact body that is posted",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Encoded credentials can reach public issue comments",
+   "severity": "major",
+   "category": "security",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/integrations/issue-lifecycle.ts:134-137 passes the raw reason to `redactCredentials`, then line 163 posts the resulting body. src/util/proc.ts:1234-1236 registers only literal, newline-normalized and JSON-escaped variants; lines 1241-1244 invoke the matcher without decoding. src/gates/publication.ts:75-77 checks only the supplied private-string entries.",
+    "trigger": "A failure reason contains a percent-encoded registered credential whose literal value is absent from private-strings.txt. Literal credential matching misses it, and the encoded credential is posted publicly.",
+    "severity": "high",
+    "category": "security"
+   }
+  }
+ },
+ {
+  "system": "rubric-e-narrow-override",
+  "caseId": "review-218",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Re-approval after failure: a currently present priority label, applied after the failure, in timeline order",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Re-approval in the same timestamp second is rejected",
+   "severity": "minor",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/integrations/issue-queue.ts:64–68 derives `failedAt` solely from `Date.parse(e.createdAt)`. At :97–101, a failed issue is rejected unless `events.some((e) => trusts(e.actor?.login) && Date.parse(e.createdAt) > failedAt)`. Timeline order is never considered for equal timestamps.",
+    "trigger": "An otherwise eligible issue has a failure-label event followed by a trusted priority-label event with the same second-resolution createdAt. Both parse to the same timestamp, so the queue rejects the valid re-approval and continues rejecting it on subsequent polls.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "rubric-e-narrow-override",
+  "caseId": "review-218",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Publish only fixed lifecycle text, never run.error, and check the exact body that is posted",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": {
+   "title": "An unrelated comment can impersonate a completed lifecycle write",
+   "severity": "major",
+   "category": "security",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/integrations/issue-lifecycle.ts:123 parses comments as `z.object({ body: z.string() })`; :128–130 uses only `comments.some((c) => c.body.includes(marker))` to `save(effect, \"done\")` and skip posting.",
+    "trigger": "A comment POST fails before acceptance. Another participant posts the predictable marker. The retry accepts that unrelated comment as completion without checking its author or intended body, permanently suppressing the factory comment.",
+    "severity": "high",
+    "category": "security"
+   }
+  }
+ },
+ {
+  "system": "rubric-e-narrow-override",
+  "caseId": "review-218",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Re-approval after failure: a currently present priority label, applied after the failure, in timeline order",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "rubric-e-narrow-override",
+  "caseId": "review-237",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Recovery: check that the tip is still `before` before accepting an equivalent record",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "rubric-e-narrow-override",
+  "caseId": "review-237",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Replay: classify a `moved` tip before calling the lease lost",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "A moved replay is marked lost without classifying the new tip",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/integrations/claim-ref.ts:229 returns `return { kind: \"moved\", tip: confirmed.tip };` even for a malformed record. src/integrations/lease-store.ts:132-134 checks only `result.kind !== \"moved\"` before calling `store.markLeaseLost(repo, ref)` and returning `\"superseded\"`; it never classifies result.tip.",
+    "trigger": "A malformed commit replaces the confirmed tip during release replay. CAS fails, but reconciliation discards the journal instead of retaining it as pending.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "rubric-e-narrow-override",
+  "caseId": "review-237",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Recovery: check that the tip is still `before` before accepting an equivalent record",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "rubric-e-narrow-override",
+  "caseId": "review-237",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Replay: classify a `moved` tip before calling the lease lost",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Classify the tip returned by a moved replay before marking ownership lost",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/integrations/claim-ref.ts:227–229 returns `moved` for malformed or non-equivalent records. src/integrations/lease-store.ts:132–134 marks every moved replay lost without examining its tip. In contrast, :139–149 requires a higher generation or a different holder/run at the same generation to mark an ordinary read superseded; otherwise it returns `pending`. At :81, marking lost clears the intent.",
+    "trigger": "During replay, the tip changes to a malformed record or a same-generation record with the same holder/run but a different checkpoint. Both produce moved and incorrectly clear the release intent and mark ownership lost, bypassing the required classification.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "rubric-e-narrow-override",
+  "caseId": "review-241",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Recover before closing uncertain posts; fixed codes on transport errors; test the recovery selector",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Inspection failure closes an uncertain POST before marker recovery",
+   "severity": "minor",
+   "category": "reliability",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/integrations/issue-lifecycle.ts:426–427 checkpoints `page: 1` immediately before POST. On recovery, :365 executes `body = checkBody(...)`; its catch at :367–369 executes `save(effect, \"done\")` and `continue`. Marker recovery starts only afterward at :371. `checkBody` defaults to `inspection(run)` (:85), which calls `loadPrivateStrings` (:81).",
+    "trigger": "GitHub accepts a question POST but its response is lost, leaving a pending page-1 checkpoint. Before the next poll, private-string inspection becomes unavailable. Body inspection throws, and the checkpoint is permanently closed without searching for the accepted comment, violating required uncertain-POST recovery.",
+    "severity": "high",
+    "category": "reliability"
+   }
+  }
+ },
+ {
+  "system": "rubric-e-narrow-override",
+  "caseId": "review-241",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Recover before closing uncertain posts; fixed codes on transport errors; test the recovery selector",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Inspection failure closes an uncertain POST before recovery",
+   "severity": "major",
+   "category": "reliability",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/integrations/issue-lifecycle.ts:81 loads private strings during inspection. At :365–369, a failed `checkBody` causes `save(effect, \"done\")` followed by `continue`; the recovery query at :383 is therefore never reached, even when `pending.page` records an uncertain POST.",
+    "trigger": "After an accepted POST loses its response, private-string inspection becomes unavailable. The next reconciliation durably closes the effect without querying GitHub or acknowledging the accepted comment.",
+    "severity": "high",
+    "category": "reliability"
+   }
+  }
+ }
+]

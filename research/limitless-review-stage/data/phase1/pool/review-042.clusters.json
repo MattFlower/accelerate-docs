@@ -1,0 +1,38 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P4",
+    "P5",
+    "P7",
+    "P9",
+    "P12",
+    "P14"
+   ],
+   "mechanism": "signalCommand treats double-quoted tokens and non-interpreter (unquoted) heredoc bodies as inert literals, so command substitutions inside them that run kill/pkill are never detected or warned about."
+  },
+  {
+   "members": [
+    "P2"
+   ],
+   "mechanism": "jsSignal strips whole template literals, including executable ${...} interpolations, so process.kill inside an interpolation is missed."
+  },
+  {
+   "members": [
+    "P10"
+   ],
+   "mechanism": "Inline eval detection only recognizes separate --eval and code tokens, so the --eval=CODE form bypasses signal detection."
+  },
+  {
+   "members": [
+    "P3",
+    "P6",
+    "P8",
+    "P11",
+    "P13"
+   ],
+   "mechanism": "The new outer sandbox profile denies writes outside the checkout and scratch, but Codex still uses its default CODEX_HOME and persists sessions, so it cannot write its session/runtime state and fails to initialize."
+  }
+ ]
+}

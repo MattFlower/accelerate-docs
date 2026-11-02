@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"secret","trigger":"unusual","reason":"A branch name containing a worker-registered credential is pushed to the remote without being checked against those credentials, exposing the secret, but that branch name requires an unusual input."}]}

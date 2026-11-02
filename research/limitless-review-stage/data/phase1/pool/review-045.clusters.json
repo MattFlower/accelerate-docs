@@ -1,0 +1,50 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P2",
+    "P3",
+    "P4",
+    "P5",
+    "P6",
+    "P7",
+    "P8",
+    "P9",
+    "P10",
+    "P12",
+    "P14",
+    "P15",
+    "P16",
+    "P17",
+    "P18",
+    "P19",
+    "P21",
+    "P22",
+    "P23",
+    "P26"
+   ],
+   "mechanism": "Switching a provider to quota=\"unlimited\" suppresses new window alerts (early return in observeWindows) but never clears or filters previously persisted window alerts, so they stay active after restart/refreshAlerts, indefinitely when resetsAt is null."
+  },
+  {
+   "members": [
+    "P11",
+    "P13",
+    "P25"
+   ],
+   "mechanism": "The quota schema default of \"windows\" and resolveCatalog normalisation make `providers export` write `quota = \"windows\"` for every provider, adding churn with a default value."
+  },
+  {
+   "members": [
+    "P20"
+   ],
+   "mechanism": "Pre-existing, unrelated git-integrity config-cache test fails with an extra config scan."
+  },
+  {
+   "members": [
+    "P24"
+   ],
+   "mechanism": "The MCP providers tool output schema (non-passthrough zod object) lacks a quota key, so the new quota field is stripped from MCP output."
+  }
+ ]
+}

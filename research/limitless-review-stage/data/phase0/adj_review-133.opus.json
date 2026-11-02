@@ -1,0 +1,11 @@
+{
+ "verdicts": [
+  {
+   "claim": "C17",
+   "verdict": "LOW",
+   "severity": "low",
+   "evidence": "Head src/text.ts dedupe keys lines with line.toLowerCase(). Ran in head checkout: run([\"dedupe\",\"--ignore-case\",\"ΟΣ\\nοσ\"]) -> \"ΟΣ\\nοσ\"; run([\"dedupe\",\"--ignore-case\",\"Σ\\nς\"]) -> \"Σ\\nς\"; run([\"dedupe\",\"--ignore-case\",\"STRASSE\\nstraße\"]) -> both kept. Trailing newline: `bun src/cli.ts dedupe $'a\\na\\n' | od -An -tx1` -> 61 0a 0a, but `bun src/cli.ts uppercase $'a\\n'` -> 41 0a 0a too, and the change's own test asserts dedupe(\"a\\nb\\n\\n\") === \"a\\nb\\n\" with README saying an empty line is retained once.",
+   "reason": "Both behaviours reproduce. The --ignore-case gap is confined to special casing (final sigma, ß) while ordinary accented letters such as Café/CAFÉ do match, and the trailing blank line follows the CLI's existing argv+console.log convention (uppercase does the same) and the documented empty-line rule; real but below medium."
+  }
+ ]
+}

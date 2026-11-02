@@ -1,0 +1,16 @@
+{
+  "systems": [
+    {
+      "name": "terra-adversarial-thorough",
+      "mode": "single",
+      "finders": [{ "target": "codex/terra-6.1@medium", "prompt": "adversarial-thorough" }],
+      "implementerReport": "include"
+    },
+    {
+      "name": "terra-adversarial-callers",
+      "mode": "single",
+      "finders": [{ "target": "codex/terra-6.1@medium", "prompt": "adversarial-callers" }],
+      "implementerReport": "include"
+    }
+  ]
+}

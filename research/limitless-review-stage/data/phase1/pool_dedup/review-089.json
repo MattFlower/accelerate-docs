@@ -1,0 +1,18 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": "G2",
+   "root_cause": "Out-of-order tool completions overwrite the previous-result baseline, so stale output from an older call replaces a newer call's baseline."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": "G1",
+   "root_cause": "The loop detector aborts on the threshold call before that call's result can show progress."
+  }
+ ]
+}

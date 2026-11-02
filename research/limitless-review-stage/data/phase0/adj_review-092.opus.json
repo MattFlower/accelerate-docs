@@ -1,0 +1,32 @@
+{
+ "verdicts": [
+  {
+   "claim": "C5",
+   "verdict": "LOW",
+   "severity": "low",
+   "evidence": "Head: six observe('shell','poll',id0..5) with no results, then observe('Read','file','r') -> 'repeated the same shell call 6 times'; 5 'waiting' results + 6th pending poll + Read -> stuck, later observeResult('5','progress') -> null. Cause: observe() runs `this.reconcile(true)` before registering the new call. Control: sequential poll/result/Read pattern with changing outputs for 8 rounds -> never stuck. Base (git show 4c50ba4a:src/harness/types.ts, copied to $TMPDIR): six identical observe('shell','poll') -> stuck already at the 6th call.",
+   "reason": "The reproduction is accurate, but it only affects identical calls issued in parallel before their results arrive. The request says a call whose result has not arrived ('still running') counts as today, and head is never stricter than base, which stopped at the 6th call. It is a limitation for parallel batches, not a medium regression."
+  },
+  {
+   "claim": "C9",
+   "verdict": "LOW",
+   "severity": "low",
+   "evidence": "Head: poll->'waiting', 12 distinct Read calls, then six polls each ->'progress': stuck on the 6th 'progress' result. Control with only 5 intervening calls (baseline still in window): not stuck at the 6th, stuck at the 7th. Cause: on eviction `if (evicted && !this.recent.some(e => e.key === evicted.key)) this.results.delete(evicted.key)`, despite the reconcile comment saying the baseline is remembered after it leaves the window.",
+   "reason": "This deviates from the request's 'compare to the result of the previous identical call' once that call has left the window, so it is a real unmet detail. The impact is below medium: it fires only when six identical consecutive results follow, which is a genuine repeat loop anyway, so the stop comes at most one call early."
+  },
+  {
+   "claim": "C11",
+   "verdict": "REAL",
+   "severity": "medium",
+   "evidence": "Head: 5x observe('Read','file'), poll a->'A', poll b->'B', 5 distinct calls, then the 6th and 7th Read both return null. reconcile() only sets `same = 0` on a changed hash and never removes earlier same-key entries from `this.recent`. Head compared with a $TMPDIR copy patched to drop earlier same-key entries on a changed result (the requested behaviour), on the loop [poll->changing output, poll->changing output, `failing` cmd->identical 'same error'] x12: head 'never stuck after 12 failing calls, 36 total'; patched 'stuck after 6 failing calls, 18 total: repeated the same shell call 6 times'; base stuck after 8 calls on the polls themselves.",
+   "reason": "The request names 'earlier occurrences of the same key are dropped from the window' as required behaviour, and head doesn't implement it. Stale entries from a progressing poll keep taking window slots, so a genuinely stuck command repeated with identical output between polls is never detected and only the tool-call budget stops it. The requested behaviour catches it at the 6th repetition: an unmet requirement with an observable effect in a plausible poll-and-retry pattern."
+  },
+  {
+   "claim": "C12",
+   "verdict": "LOW",
+   "severity": "low",
+   "evidence": "Head: poll 'missing' (never gets a result), then poll results A, B x7: every observe/observeResult returns null, and the next unrelated observe('Read',...) returns 'repeated the same shell call 6 times'. Cause: the deferral check `this.recent.some(e => e.key === last.key && e.id !== undefined && e.hash === undefined)` includes the pre-reset pending entry.",
+   "reason": "Real, but the stop is only delayed until the next tool call or invocation finish (finish() reconciles with finished=true). The same deferral already applies by design to the threshold call itself, so the impact is at most one extra call in a rare case (a never-returning call within the window)."
+  }
+ ]
+}

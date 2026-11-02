@@ -1,0 +1,53 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": "G3",
+   "root_cause": "The tail-cut overlap is too small to cover the longest supported JSON-escaped credential variants, so a cut-through credential partly survives redaction."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": "G1",
+   "root_cause": "Excerpt line framing drops content such as blank lines, so multiline credentials no longer match before the excerpt is stored."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": "G2",
+   "root_cause": "Retained failure-excerpt lines have no byte limit, so very long diagnostic lines are kept without bound."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "Separately registered credential fragments are redacted before the full multiline credential, which stops the full credential from matching."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": null,
+   "root_cause": "The privacy filter treats any text containing the literal \"[redacted]\" as private and withholds the whole thing, even when it holds no secret."
+  },
+  {
+   "members": [
+    "C7"
+   ],
+   "same_as": null,
+   "root_cause": "redactGateData is applied to whole API, prompt, report and state payloads, not just gate output, so it changes and saves over data that is not gate output."
+  },
+  {
+   "members": [
+    "C8"
+   ],
+   "same_as": null,
+   "root_cause": "The artifact endpoint parses JSON artifacts and serializes them again in compact form instead of serving the stored file bytes as they are."
+  }
+ ]
+}

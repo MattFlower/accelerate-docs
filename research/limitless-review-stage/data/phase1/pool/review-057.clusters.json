@@ -1,0 +1,93 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P11",
+    "P23"
+   ],
+   "mechanism": "Runtime catalog mutations (PATCH/DELETE+re-add) leave ProviderTracker.modelBlocks keyed by the unchanged catalog ID, so the replacement backend inherits the old model's rejection block."
+  },
+  {
+   "members": [
+    "P2",
+    "P3",
+    "P6",
+    "P14",
+    "P20",
+    "P28"
+   ],
+   "mechanism": "PATCH merges with the old definition and modelSchema rejects effort:null, so a model's default effort can never be cleared."
+  },
+  {
+   "members": [
+    "P4",
+    "P7",
+    "P9",
+    "P17",
+    "P32"
+   ],
+   "mechanism": "RuntimeCatalog.remove checks only operator routing cells, not the file/eval policy overlay, so deleting a model named there leaves the policy invalid and breaks the next startup."
+  },
+  {
+   "members": [
+    "P5",
+    "P8",
+    "P10",
+    "P12"
+   ],
+   "mechanism": "Probe results are applied without a per-provider generation or ordering guard, so an older overlapping probe can overwrite newer discovery results."
+  },
+  {
+   "members": [
+    "P13",
+    "P16",
+    "P27",
+    "P31"
+   ],
+   "mechanism": "Factory startup throws on stored runtime models that collide with config/code models or whose provider is gone, leaving the daemon unable to boot and the API unusable for removal."
+  },
+  {
+   "members": [
+    "P15",
+    "P29",
+    "P33"
+   ],
+   "mechanism": "The smoke script now opens and migrates the production DB and filters checks by provider-enabled overrides, so disabled providers' checks are silently dropped."
+  },
+  {
+   "members": [
+    "P18",
+    "P30",
+    "P34"
+   ],
+   "mechanism": "Every probe publishes provider status unconditionally (even when unchanged), and status() now queries SQLite on each call, adding SSE and DB overhead."
+  },
+  {
+   "members": [
+    "P21",
+    "P22"
+   ],
+   "mechanism": "The existing smoke cleanup test (escaped-timeout) races with retries, appending extra PIDs before the assertion; this predates the change."
+  },
+  {
+   "members": [
+    "P24",
+    "P25"
+   ],
+   "mechanism": "Eval runner builds targets directly and its availability guard ignores discovery exclusions, so evals invoke models the provider doesn't serve."
+  },
+  {
+   "members": [
+    "P26"
+   ],
+   "mechanism": "Queued chat calls choose a target before waiting for a slot and do not reroute or recheck served status after discovery changes."
+  },
+  {
+   "members": [
+    "P19"
+   ],
+   "mechanism": "The change exceeds the requested source-line budget, including out-of-scope smoke refactoring."
+  }
+ ]
+}

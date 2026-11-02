@@ -1,0 +1,565 @@
+#1 limitless-458-r1/F4 | Marking delivery overwrites newer approvals and other land entries
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An operator approves the newly pushed head before delivery bookkeeping resumes. That bookkeeping invalidates the correct approval and can also relabel a newer blocked landing attempt as resolved.
+  O: The daemon crashes after pushing the resolved merge but before recording it, and the operator approves the new head in the meantime. On resume, that fresh approval is marked stale, and any other blocked land entry for the PR is relabeled 'conflict resolved', so the operator has to approve again and may be misled about which entr
+#2 limitless-458-r1/F8 | Digest leaves delivered conflict rounds out of 'PRs awaiting review'
+  adj: sol=REAL/minor/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/plausible', 'terra': 'wrong/normal'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A conflict resolution is delivered after the operator's earlier feed cursor. The session digest omits its request for approval of the new head.
+  O: An operator reads the session digest with a consumer cursor that has already passed the PR's earlier 'opened' or 'approved' items. The resolved conflict that needs approval of the new head is missing from 'PRs awaiting review', though the blocked land entry may still show under 'Blocked lands'.
+#3 limitless-469-r1/F2 | Delivery rewrites old land entries' recorded reasons
+  adj: sol=REAL/minor/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/plausible', 'terra': 'state/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: A pull request has an older blocked landing attempt with a recorded failure reason. Delivering a CI repair for a different head replaces that historical reason, obscuring why the earlier attempt failed.
+  O: A PR has an old land attempt that was blocked earlier with 'checks failed: x'. When a CI fix round delivers, that old record's reason and finish time are overwritten with 'CI fix at <sha>', so the history of why earlier attempts failed is lost.
+#4 limitless-469-r1/F3 | A pending CI trigger ignores a default branch that went red after it was recorded
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A CI failure queues a repair while the default branch is green. The same check subsequently fails on the default branch, but processing the pending trigger still starts a repair against the pull request.
+  O: A PR's check fails while main is still green, so a CI fix trigger is recorded. Main then goes red on the same check before the next trigger pass, and the factory still starts a paid fix round for a failure that is really main's.
+#5 limitless-471-r1/F1 | FAQ gives CI recovery steps for a failed local land check
+  adj: sol=REAL/minor/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A user encounters a flaky local landing check and follows the FAQ. They waste time looking for a failed GitHub job that may not exist before retrying the local checks.
+  O: An agent's land request is blocked because the landing queue's own local checks failed on a flaky test. The new FAQ tells it to rerun a GitHub CI job, but the queue stopped before it waited on CI, so there may be no matching job to rerun and the agent is sent the wrong way. Re-requesting the land would simply run the local check
+#6 limitless-471-r1/F3 | A repair round doesn't always update a blocked entry's reason
+  adj: sol=REAL/minor/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An agent checks a blocked landing entry after a repair finishes, expecting its reason to identify the repaired version. An older or unlinked entry retains its previous reason, leaving the agent with misleading recovery guidance.
+  O: After a CI fix or conflict round is delivered, an agent looks at a blocked land entry expecting the reason to name the new head to approve, as the guide promises. If the entry was not tied to the round's reviewed head or conflict trigger, its reason is unchanged, and the agent doesn't learn where to find the new head.
+#7 limitless-479-r1/F1 | A client-chosen consumer name lands in requestedBy, which the factory trusts
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An MCP worker submits an ordinary application change using the consumer name dependabot[bot]. The factory applies dependency-bot routing and adds dependency-update review instructions solely because of that caller-chosen label.
+  O: An MCP agent that calls itself "dependabot[bot]" when creating a run gets that name stored as the run's requester. The factory then treats the run as a Dependabot update: it routes it free-first when that setting is on and adds dependency-update instructions to its review. Nothing is bypassed, because the loopback HTTP API alrea
+#8 limitless-485-r1/F4 | Git config can hide changed submodules
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A repository has Git configured to ignore submodule differences, and a PR changes a submodule revision. The agent receives an available change view with that change omitted, leaving its code review incomplete.
+  O: On a machine whose git config sets diff.ignoreSubmodules=all (for example in a global gitconfig), a change that moves a submodule pointer disappears from the change view's file list, which still reports the view as complete. A reviewing agent could approve without seeing the submodule change, although the diff audit still flags 
+#9 limitless-486-r1/F1 | Cached gate results and stored handles are reused without checking the commit they ran on
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'bypass/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A checkout changes while the daemon is stopped during post-merge checks. After restarting, the factory can accept the newer commit using the previous commit's passing results.
+  O: If the checked-out commit changes between the moment a gate result is saved and the moment the daemon resumes (for example a gate script amends HEAD), the resumed rebase stage reuses the old commit's saved result and publishes the new commit without gating it. With today's local executor, an attached handle re-runs on the curren
+#10 limitless-486-r1/F5 | A failed execution leaves its handle stored for the next attempt
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An execution fails because of a temporary infrastructure problem. Retrying with the same executor can repeatedly retrieve the completed failure instead of starting another attempt after the problem is resolved.
+  O: A gate execution that ends in an error leaves its record marked as still in progress. When the same stage runs again, the factory attaches to that old execution instead of starting a fresh one. With the local executor this re-runs the saved (redacted) request and skips the baseline cache in prepare. A remote executor would hand 
+#11 limitless-483-r2/F1 | A slow but answering lease service is still treated as unreachable, so the command runs unslotted
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An agent requests permission to run tests while the daemon is responding slowly. The wrapper starts the tests without permission, allowing them to compete with suites that already hold the available slots.
+  O: When the daemon is slow rather than down, an agent's test command can skip the queue and run alongside a full gate suite. That happens if the HTTP reply takes over 1 s and the scratch socket can't be reached, or if every reply takes over 2 s for 30 s. The cost is CPU contention under load, which is the situation slotting exists 
+#12 limitless-483-r2/F2 | A delayed recovery reply stops heartbeats while the work keeps running
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A running test suite renews its expired reservation, but the renewal response is delayed. Retries stop maintaining the replacement reservation, allowing another suite to start while the first suite is still running.
+  O: Suppose an agent's test suite loses its lease because heartbeats stalled for 30 s, and the reply to the wrapper's recovery request is then slow. The service rejects the wrapper's retry, heartbeats stop for good, and the slot frees while the suite is still running, so a second suite can start beside it.
+#13 limitless-489-r1/F3 | Anonymous `logout-all` revokes the owner's sessions
+  adj: sol=REAL/blocker/requirement_gap opus=REAL/minor/requirement_gap dup=None,None
+  raters: {'sonnet': 'nuisance/normal', 'terra': 'boundary/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: An unauthenticated local process revokes every owner session. Repeating the request prevents the owner from maintaining a signed-in UI session.
+  O: Any local process, including a sandboxed implementer, can send an anonymous sign-out-everywhere request and revoke the owner's UI sessions, as often as it likes. The owner has to keep signing in again, but it gains no control over the factory.
+#14 limitless-490-r1/F3 | The evidence comment has no size bound
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An owner submits a substantial review that fits the accepted input limits. The factory pushes the fixes but sends an oversized comment, so GitHub rejects the evidence publication and delivery remains incomplete.
+  O: A review round with very long reviewer findings ends blocked by the environment. Its commit is pushed, but the evidence comment is larger than GitHub's 65,536-character limit, so GitHub rejects it and the PR never shows the blocked-criteria evidence. Every resume tries the same oversized comment and fails again.
+#15 limitless-486-r2/F2 | Local gate work can keep running after its execution is forgotten
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A landing log write fails while checks are running, or the engine replaces a stored execution belonging to another purpose or commit. The original check continues after its handle is forgotten, consuming a gate slot and running alongside replacement work.
+  O: If writing a check's result fails (for example the land queue's log append or an event-store write), the gate stage reports an error, but the remaining gate checks keep running in the background. They keep using the shared gate slot and CPU, and a retry can end up waiting behind them.
+#16 limitless-485-r3/F2 | A whitespace pattern built from holdout text scans quadratically
+  adj: sol=REAL/blocker/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'outage/unusual', 'terra': 'outage/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: An agent opens a change containing a long whitespace line while a private check contains a quoted tab followed by a letter. Redaction monopolizes the daemon's execution thread, delaying other requests and factory progress; larger inputs extend the stall quadratically.
+  O: Say a holdout scenario quotes a value that starts with a tab, and the PR's diff or report contains a very long run of whitespace. A change-view request then spends seconds of CPU in one regex scan (6 s at 128K characters, growing with the square of the length) and blocks the daemon's event loop.
+#17 limitless-492-r2/F4 | Loading another config replaces the running factory's read policy
+  adj: sol=REAL/blocker/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'boundary/unusual', 'terra': 'secret/unusual'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A process loads a factory configuration that explicitly protects a custom credential file, then loads another configuration. Subsequent editors belonging to the first factory lose that protection.
+  O: If code in the daemon process loads a second configuration, the sandbox read policy silently switches to that file's settings. The owner's extra deny_read paths and config-directory denial disappear for later gates and editors. Today no production daemon path does this; it happens only in tests or future callers.
+#18 limitless-504-r1/F1 | Unterminated serve output can exhaust daemon memory
+  adj: sol=REAL/blocker/newly_exposed opus=REAL/major/introduced dup=None,None
+  raters: {'sonnet': 'outage/unusual', 'terra': 'outage/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: A candidate preview continuously emits output without newlines. The shared daemon retains that output indefinitely and can exhaust its memory, stopping the factory.
+  O: A candidate's preview server prints output that never ends a line, such as a long progress spinner, a binary blob or a deliberate flood. The daemon then holds all of that output in memory for as long as the preview runs, so its memory grows without limit and can take down the daemon that every other run shares.
+#19 limitless-504-r1/F2 | Case-sensitive denial matcher fails on Bun's expected EPERM
+  adj: sol=REAL/minor/introduced opus=REAL/major/introduced dup=None,None
+  raters: {'sonnet': 'test/normal', 'terra': 'outage/normal'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: A developer runs the real preview confinement test on macOS. A correctly denied write causes the test to fail before it checks the remaining protected targets or port binding.
+  O: On an unconfined Mac, which covers development, the manual land-pr.sh check and the deploy's test run in the release checkout, the real-Seatbelt preview test always fails. Bun reports a correctly denied write in lowercase ('operation not permitted'), the test's case-sensitive pattern doesn't recognise it, and it rethrows, so the
+#20 limitless-514-r1/F2 | Short or malformed criterion IDs and generic evidence become global private patterns
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A verifier describes a hidden check as 'Passed'. The change-view tool then withholds unrelated public passing-check lines, removing report evidence the reviewer should receive.
+  O: A verifier gives a holdout criterion a very short id such as 'a' or '1', or writes one-word evidence such as 'Passed'. Every report line that contains that word is then withheld, for example 'Use a cache', '1 file changed' or 'All gates passed'. The reviewer loses ordinary report text, though each hidden line is marked as withhe
+#21 limitless-520-r2/F2 | A cancelled entry drops an already confirmed merge
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An operator cancels a landing while its pull-request lookup is pending, and the lookup subsequently confirms that the pull request merged. The entry remains cancelled, but the runs retain stale merge information until a separate reconciliation discovers the merge.
+  O: A user cancels a land entry at the moment GitHub reports the PR as merged (merged externally while the queue waited for CI, or the merge finished as the cancel arrived). The queue throws that confirmed merge away, so the runs show as unmerged until the GitHub notifier happens to reconcile them later.
+#22 limitless-520-r2/F3 | Landing through the owner run still supersedes the PR's own rounds
+  adj: sol=REAL/major/preexisting opus=REAL/minor/preexisting dup=None,None
+  raters: {'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An operator lands a pull request through its original run while a review round for the same issue awaits attention. The review round is recorded as superseded instead of merged, and subsequent merge reconciliation preserves that incorrect resolution.
+  O: When a PR is landed through its owner run while one of that PR's own review rounds sits in needs_human, the merge marks that round 'superseded' instead of merged. The feed and run list then show the PR's own round as replaced rather than merged.
+#23 limitless-538-r1/F1 | A config model that redefines a built-in id now hides a colliding runtime row
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An operator has a saved runtime model and configures an unrelated backend under the same built-in model name. Startup silently ignores the collision and uses the unrelated backend while incorrectly reporting that it uses the built-in definition.
+  O: An operator overrides the built-in claude/haiku-5.5 in config with a different backend while an old runtime row for the same id still exists. At base the daemon refused to start with a catalog-collision error. At head it starts, quietly drops the runtime row and logs that it is 'using built-in definition', even though it is actu
+#24 limitless-539-r1/F1 | git add -A in commitAll still runs a nested repository's filter
+  adj: sol=REAL/blocker/requirement_gap opus=REAL/blocker/requirement_gap dup=None,None
+  raters: {'sonnet': 'boundary/unusual', 'terra': 'boundary/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: An agent plants a command in a nested repository's filter configuration and edits an ordinary parent file. When the factory commits the edit, it executes that command outside the agent's sandbox.
+  O: An agent sets up a nested repository with a clean filter in its own git config and leaves it unchanged except for a file timestamp. When the factory commits the agent's work, the daemon runs that filter outside the agent's sandbox, so it executes a command the agent chose. This happens with or without a committed .gitmodules ent
+#25 limitless-539-r1/F2 | prepareMerge's internal stash still runs a nested repository's filter
+  adj: sol=REAL/blocker/requirement_gap opus=REAL/blocker/requirement_gap dup=None,None
+  raters: {'sonnet': 'boundary/unusual', 'terra': 'boundary/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: An agent leaves a nested repository configured to execute a filter command. When the factory prepares an otherwise conflict-free merge, Git's internal stash check executes the command outside the agent's sandbox.
+  O: A checkout's committed .gitmodules marks a populated nested repository ignore = none, and that nested repository has a clean filter in its own config. When the factory prepares an otherwise clean merge of the base, git's internal dirty check enters the nested repository and the daemon runs the filter outside the sandbox.
+#26 limitless-536-r2/F1 | An attributes file left by setup changes the bytes the reset restores
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A repository’s setup script modifies a tracked file and leaves an untracked attributes file that changes its encoding. Preparation succeeds, but the reviewer’s probes read different bytes from the commit being evaluated, potentially producing incorrect review results.
+  O: Suppose a case repository's base-commit setup commands leave an untracked .gitattributes behind (for example one that sets a working-tree encoding or line endings) and also change a tracked file. The reset that is supposed to restore the committed bytes then writes that file back in the converted form. The reviewer reads differe
+#27 limitless-539-r2/F1 | Merge still runs a nested repository's filter when .gitmodules no longer maps the gitlink
+  adj: sol=REAL/blocker/requirement_gap opus=REAL/blocker/requirement_gap dup=None,None
+  raters: {'sonnet': 'boundary/unusual', 'terra': 'boundary/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: An agent leaves a populated nested repository with a malicious filter and changes the parent’s submodule mapping. When the factory prepares a merge, it executes that filter outside the agent’s confinement.
+  O: An agent creates a nested repository inside its checkout. The repository is committed with a .gitmodules entry, and the nested repository's own config defines a clean filter. The agent then empties the .gitmodules file in the working tree. When the daemon next merges the base branch in, git's internal dirty check enters the nest
+#28 limitless-539-r2/F3 | A conflicted .gitmodules makes rebase cleanup throw before it can abort
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: Two branches change the same submodule configuration section and rebase encounters a conflict. The factory’s cleanup throws before aborting, leaving the checkout stuck in an unfinished rebase.
+  O: A rebase or merge conflicts inside .gitmodules itself, which happens when both sides edited it. The cleanup step then cannot parse the conflict-marked file and throws before it can abort, so the checkout is left mid-rebase (or mid-merge) and the user gets an unclear 'Cannot inspect submodule configuration' error instead of a cle
+#29 limitless-548-r1/F1 | Targeted retry arguments are Bun path filters, so the retry can run files that never failed
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A retry intended for one failing file also selects another file whose path contains the same text. A failure in that additional file can falsely confirm a regression and expand work beyond the slot-bypass file limit.
+  O: A failing test file's path happens to also appear inside a longer path, for example a.test.ts next to data.test.ts or test/a.test.ts. The targeted retry then also runs those other files, which passed the first time. Any failure among them can confirm a regression that isn't real, and more files run outside the gate slot than the
+#30 limitless-546-r2/F1 | Pairing can't detect a relay between worker and coordinator
+  adj: sol=REAL/blocker/introduced opus=REAL/major/introduced dup=None,None
+  raters: {'sonnet': 'boundary/unusual', 'terra': 'boundary/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: An attacker relays a worker's initial pairing connection. The owner sees matching codes and approves, allowing the attacker to obtain a valid worker token while the worker trusts the attacker's certificate.
+  O: Someone on the LAN relays the worker's pairing request to the real coordinator. The worker and the coordinator show the same code, so the owner approves. The worker then pins the relay as its coordinator, and the relay keeps a token that the real coordinator accepts.
+#31 limitless-546-r2/F4 | Expired pairing requests accumulate past the pending cap and still list as pending
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: Unapproved pairing requests expire, but the owner continues seeing them as pending. Repeated requests with different names keep growing the database and worker listing despite the pending-request cap.
+  O: Expired pairing requests are never deleted, and `workers ls` keeps showing them as pending with their codes. Someone on the LAN can keep making new requests, so the table and the owner's listing grow without limit, held back only by the per-IP rate limit.
+#32 limitless-549-r1/F4 | Owner diagnostics print restored terminal escapes to the terminal
+  adj: sol=REAL/minor/newly_exposed opus=REAL/minor/newly_exposed dup=None,None
+  raters: {'sonnet': 'nuisance/unusual', 'terra': 'boundary/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: An owner reads diagnostics from a resumed verification failure whose evidence contains terminal formatting. The diagnostic prints the escape sequence directly, allowing the evidence to alter terminal presentation.
+  O: Verifier evidence for a blocked criterion contains a terminal escape sequence and the run is resumed. The run-error owner diagnostic keeps the escape, and `limitless show` or `limitless logs` prints it raw to the owner's terminal, where it can recolor or otherwise manipulate the display.
+#33 limitless-570-r1/F2 | One attempt can stay leased forever while its requests retry
+  adj: sol=REAL/major/introduced opus=REAL/major/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A worker keeps heartbeating while bundle downloads continually fail. Its gate job remains pending indefinitely instead of moving to another worker and eventually running locally.
+  O: Suppose the bundle download keeps failing at the transport level, for example because the coordinator takes longer than the listener's 60-second idle timeout to build a large bundle. The worker then retries forever while its heartbeats keep renewing the lease. The job never moves to another worker or to local execution, so the r
+#34 limitless-573-r1/F1 | Raw HTML in docs keeps executable attributes and URLs on the public site
+  adj: sol=REAL/blocker/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/unusual', 'terra': 'boundary/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: A documentation change includes an image error handler or a JavaScript link. After publication, opening the page or clicking the link executes that documentation content as code on the public site's origin.
+  O: If a doc merged to main contains raw HTML such as an image with an onerror handler or a javascript: link, the site build publishes it unchanged, so the script runs for every visitor to the public Pages site. Getting it there takes a reviewed merge of hostile doc text, and the site is static with no cookies or state.
+#35 limitless-573-r1/F2 | Links to missing repository files are rewritten to GitHub URLs without validation
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/plausible', 'terra': 'bypass/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A documentation author mistypes a relative repository filename. The build and link tests succeed, but readers receive a GitHub link to a nonexistent file.
+  O: If someone mistypes a link to a repository file in one of the docs, the build turns it into a GitHub URL for a file that doesn't exist and reports success. The website ships a dead link that the link check was meant to catch. The same link would also be broken on GitHub itself.
+#36 limitless-590-r1/F1 | The strict eval GateComparisonSchema rejects the new baselineConfinementError field
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'test/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An eval author includes gate comparisons recorded against a baseline whose confinement failed. The eval loader rejects those otherwise valid comparisons, preventing the evaluation from running.
+  O: Someone writes a review eval case by copying a gate comparison from a run whose baseline had a confinement failure. Because the copy carries the new baseline flag, loading the case file fails with an 'unrecognized key' error. This is a loud failure in the eval tooling only. The production pipeline is not affected.
+#37 limitless-590-r1/F2 | The implementer prompt presents an unusable baseline as an established pre-existing failure
+  adj: sol=REAL/minor/preexisting opus=REAL/minor/newly_exposed dup=None,None
+  raters: {'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An implementer receives a baseline result that failed confinement and is told its failing check can be left alone unless in scope. A failing candidate is nevertheless blocked, so the initial guidance misstates what the implementer must satisfy.
+  O: The base branch's test check fails with a confinement failure. The implementer's first prompt says that check is 'already FAILING on the base branch (not your fault, fix only if in scope)'. If the implementer then leaves it failing, the round is blocked as a new failure, which can waste an implementation attempt.
+#38 limitless-616-r1/F1 | A worker that lost its claim can still merge
+  adj: sol=REAL/major/requirement_gap opus=REAL/major/requirement_gap dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: Another worker reclaims a landing while the original worker awaits a GitHub lookup. The original worker then merges the pull request despite having lost permission to continue.
+  O: A land worker checks it owns the entry, then waits on GitHub for the PR lookup that runs before the merge. Meanwhile another worker reclaims the entry. The first worker still sends the merge command, so a worker that lost its claim merges the PR, which is exactly what the issue says must not happen.
+#39 limitless-616-r1/F2 | A worker that lost its claim can still push
+  adj: sol=REAL/major/requirement_gap opus=REAL/major/requirement_gap dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: Another worker reclaims a landing during the original worker's final remote lookup. The original worker still changes the pull request branch, interfering with the replacement worker's checks.
+  O: A land worker records its push and confirms ownership. It then spends several git and network calls checking the remote branch before pushing. If another worker reclaims the entry during those calls, the first worker still force-pushes to the PR branch even though it no longer owns the land.
+#40 limitless-616-r1/F4 | Claim-loss cleanup can delete the replacement worker's checkout
+  adj: sol=REAL/major/requirement_gap opus=REAL/minor/preexisting dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A replacement worker starts checking a reclaimed landing while the original worker finishes an outstanding request. The original worker's cleanup deletes the replacement's active checkout and trusted Git record, disrupting its landing.
+  O: After a stale worker loses its claim, a replacement worker makes its own checkout at the same fixed path for that entry. When the stale worker unwinds, its cleanup deletes that directory, so the replacement's checks fail and the land is blocked until an operator retries it.
+#41 limitless-616-r2/F1 | The push guard still runs before the retried push, not at it
+  adj: sol=REAL/major/requirement_gap opus=REAL/major/requirement_gap dup=None,None
+  raters: {'sonnet': 'boundary/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A land worker's push fails temporarily, and another worker takes ownership while the first worker waits to retry. The old worker then pushes despite having lost ownership, potentially interfering with the replacement worker's work.
+  O: A land worker's push fails with a transient error, and while it waits 5 seconds to retry, a second worker takes over the entry. Its next heartbeat has not run yet, so the old worker sends the push again even though it no longer owns the entry, which the request says must not happen.
+#42 limitless-621-r1/F1 | A completed pending merge with MERGE_HEAD still present now passes the delivery guard
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'bypass/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A run resumes after a completed merge with a leftover merge-in-progress marker. Instead of refusing publication, it pushes previously verified work and opens a draft pull request after a later merge check fails.
+  O: A delivery merge gets committed, but the run is killed before git removes its 'merge in progress' marker. At base the factory refused that state outright and published nothing. At head the delivery guard accepts it, the merge step then fails with a generic error, and the failure handler pushes the reviewed commit to GitHub and o
+#43 limitless-624-r1/F1 | A cleanup error can now leave the live direct child running
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'boundary/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: An invocation is cancelled while its cleanup ownership record cannot be written. Cleanup reports failure, but the child continues writing to the checkout and has no recovery record.
+  O: If saving a cleanup record to the database fails (or the child's identity can't be read) while the directly started child is still running, the factory reports a termination failure but never kills that child. The child keeps running in the checkout indefinitely, where the old code always killed it.
+#44 limitless-624-r1/F5 | Startup recovery runs before the daemon reports healthy
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'outage/unusual', 'terra': 'outage/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: A deployment restarts the daemon with several stubborn cleanup records from earlier runs. Recovery delays the health endpoint beyond the deployment deadline, causing an unnecessary rollback.
+  O: After a deploy, the new daemon first tries to finish every leftover cleanup, one at a time, before it starts answering health checks. With a handful of processes that won't die, each taking 10 seconds, the deploy's 45-second health wait expires and the deploy rolls back, even though each affected run is already guarded on its ow
+#45 limitless-627-r2/F1 | A transient GitHub failure in the new preflight blocks the land
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An operator requests landing for an eligible, approved PR while GitHub briefly returns an error. That single failed lookup permanently blocks the entry, requiring another landing request even after GitHub recovers.
+  O: Someone asks the queue to land a PR, and GitHub returns a one-off 502 or times out on the new pre-check lookup. The land is blocked right away with 'cannot inspect current GitHub PR metadata' and stays blocked until someone requests it again, although one retry would have let it go ahead.
+#46 limitless-629-r1/F1 | The change misses the issue's remaining gap and adds an unrequested process mechanism
+  adj: sol=REAL/major/requirement_gap opus=REAL/major/requirement_gap dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: After an implementer stalls, the checks time out and the factory prepares to rerun them. If cleanup fails transiently at that point, the factory fails the run instead of retrying cleanup or giving the next implementation round feedback.
+  O: A stuck implementer leaves files changing in the checkout, and the next gate run times out. Before re-running the gates, the factory cleans the checkout without the one retry the first gate checkout gets. If that clean fails, the error is not turned into feedback for a new round, so the whole run fails, which is the exact outcom
+#47 limitless-647-r1/F2 | Duplicate skipped-test identities are merged, so a new duplicate skip counts as inherited
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'bypass/unusual', 'terra': 'bypass/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A developer adds another skipped test with the same name in the same file. The factory treats both skipped tests as the single inherited test and approves substitution despite the additional unexecuted test.
+  O: The base commit skips one test named x in a file, and the change adds a second skipped test with exactly the same name in that file. Both runs record one identity, so the new test that never ran is accepted as inherited and the criterion is marked met.
+#48 limitless-647-r1/F3 | The baseline may come from a different base commit than the one the candidate was merged with
+  adj: sol=REAL/major/newly_exposed opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'bypass/unusual', 'terra': 'bypass/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: The base branch advances and enables a previously skipped test. During conflict resolution, the candidate restores that skip, but the factory accepts it using the earlier baseline where the test was still skipped.
+  O: During a run the base branch moves and fixes a test that used to be skipped, and the change's merge or conflict resolution brings the skip back. Substitution compares against the baseline taken on the old base, which also skipped that test, so it counts the reintroduced skip as inherited.
+#49 limitless-647-r2/F2 | Identical duplicate titles can swap which one is skipped
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'bypass/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: Two different tests have the same title, and a changed helper swaps which test is skipped without changing the test file. The factory incorrectly treats the newly skipped test as inherited and marks verification satisfied.
+  O: Suppose a test file, unchanged by the PR, has two tests with the same name, each skipped under the opposite condition from a shared helper. A change to that helper alone can skip the test that used to run, and the factory still treats the skip as inherited from the base commit and substitutes its gate result.
+#50 limitless-651-r1/F3 | The deploy job loses the daemon's port override
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An operator runs the daemon on a port selected through the documented environment override. Automatic deployment contacts the default port instead, causing deployment to fail or interact with another daemon.
+  O: Suppose an operator starts the daemon by hand with a port override in its environment. The deploy job does not inherit that override, so it talks to the configured or default port rather than the daemon that launched it. The launchd-installed daemon never sets that variable, so the supported setup is not affected.
+#51 limitless-651-r2/F2 | Cleanup treats a failed launchctl inspection as the job being gone
+  adj: sol=REAL/major/introduced opus=REAL/major/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A slow system job inspection times out while a deployment is still registered. The daemon treats the job as absent and deletes its tracking markers, allowing a later relaunch to run deployment again.
+  O: On a heavily loaded machine, a `launchctl list` that times out is read as 'the deploy job is gone'. The daemon then records a running deploy as failed (blocking auto-deploys and posting a false failure), or deletes the marker that stops launchd from re-running the deploy while the job may still be registered.
+#52 limitless-659-r1/F2 | A retry recorded at an older SHA now consumes the current SHA's retry
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A user resumes at a new commit after verification exhausted its retry on an earlier commit. If the fresh check encounters an environment block, the factory stops for human help instead of trying the alternative model allowed for the new commit.
+  O: A run records a blocked-only verify and its retry at one commit, restarts, and resumes the same round at a different commit. There the fresh verify is blocked again, and the run stops without the alternative-model retry the old code gave each commit, so it ends needs_human one attempt earlier.
+#53 limitless-659-r1/F3 | A resumed retry can rerun the verifier that just blocked
+  adj: sol=REAL/major/newly_exposed opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: After a restart, a different verifier encounters an environment block. The retry can select that same verifier again, wasting the alternative-model attempt and potentially stopping work that another model could complete.
+  O: Model A blocks a verify and the daemon restarts before the retry. On resume a fresh verify routes to model B, which also blocks. The retry excludes only A, so it can pick B again: the run never tries a different model and ends as environment-blocked.
+#54 limitless-687-r1/F3 | A stale saved snapshot can release the gate
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'bypass/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A reviewer dismisses an approval, but the next GitHub poll fails. The factory accepts the retained approval and proceeds even though approval is no longer present.
+  O: A reviewer's approval is saved by the poller and then dismissed, and GitHub polls start failing. An entry that waits after that reads the old saved approval and goes on to merge.
+#55 limitless-688-r1/F2 | Interrupted eval trials are dropped instead of counted with unknown usage
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: The daemon restarts while an evaluation call is running, before its final usage is recorded. Subsequent workload reports omit that execution entirely, silently understating the provider's activity.
+  O: A daemon restart, for example during a deploy, interrupts an eval trial that was calling a provider. The trial is stored as skipped with zero usage, so the statistics leave it out completely, and its provider's invocation count and success share quietly miss that call.
+#56 limitless-693-r1/F4 | PR recovery by head SHA can override the recorded PR URL
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: Two pull requests share a branch and commit but target different bases. A resumed delivery can choose the other pull request, overwrite its body, and replace the run's recorded association.
+  O: Someone opens a second PR from the same branch, at the same commit, against a different base, and GitHub lists it first. A resumed discreet delivery then picks that other PR, records its URL and edits its body instead of the run's own PR.
+#57 limitless-693-r1/F6 | A valid prefix can still produce an invalid branch name
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An operator configures an accepted custom prefix and starts a run whose title completes a forbidden branch-name ending. Preparation fails instead of allocating a usable branch.
+  O: An operator sets an unusual branch prefix such as 'feature.l' (or one ending in a dot) and a run's title turns into a slug like 'ock'. The resulting branch 'feature.lock' is invalid, so creating the worktree fails and the run errors out.
+#58 limitless-704-r3/F2 | A pending fix trigger recorded under the previous signature is duplicated after the deploy
+  adj: sol=REAL/major/newly_exposed opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: After an upgrade, the factory inspects an unchanged failed check whose earlier fix request is pending or already started. It queues another fix request for the same PR, commit and check.
+  O: The previous release recorded a CI-fix trigger for a pull request's failing check. After the deploy, the same commit is inspected again (for example by the land queue). The new signature line gives the trigger a new name, so a second trigger and a second 'needs fix' feed item are created for the same failure. Usually the second 
+#59 limitless-687-r3/F1 | A merge retry reuses an approval that was revoked after the pre-merge check
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'bypass/unusual', 'terra': 'bypass/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A merge attempt fails temporarily, and a reviewer withdraws approval before the retry. The factory retries and merges without discovering that approval was withdrawn.
+  O: The factory checks the approval and then tries to merge. GitHub returns a temporary error, and during the 5–20 second wait before the retry someone dismisses the approval. The retry merges the same commit anyway, so the PR lands without a current approval.
+#60 limitless-687-r3/F2 | A truncated review list can hide an outstanding change request
+  adj: sol=REAL/major/newly_exposed opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'bypass/unusual', 'terra': 'bypass/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A pull request has more than twenty reviewers, including an approving reviewer and an outstanding changes request outside the fetched page. The factory overlooks the objection and allows merging.
+  O: On a PR with more than 20 reviewers, a push-access reviewer's change request falls past the first 20 reviews fetched. The factory sees only another person's approval and merges, even though a change request is outstanding.
+#61 limitless-687-r4/F2 | The final approval read can be overtaken by a newer observed change request
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'bypass/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A reviewer requests changes after the factory starts its final approval read, and a newer poll records that request before the older read returns. The factory accepts the older approval and merges despite its newer saved evidence.
+  O: While the factory runs its final approval read just before merging, a background poll records a change request that a reviewer has just made. The factory ignores that newer saved observation and merges based on its own slightly older read.
+#62 limitless-711-r1/F1 | Capping the raw stackTraces JSON keeps an arbitrary prefix and drops the source mapping
+  adj: sol=REAL/minor/introduced opus=REAL/major/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/normal', 'terra': 'wrong/normal'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An administrator profiles the daemon to locate a stall. The response retains only the earliest stack samples and drops the source map, making the diagnostic incomplete and potentially hiding the stacks responsible for the stall.
+  O: An operator runs the profile route with its 30-second default to find what stalls the daemon. The stackTraces field comes back as a cut-off, unparseable piece of JSON that covers only roughly the first half-second of samples and never includes the map from source IDs to files, so stalls later in the window are missing and anonym
+#63 limitless-693-r3/F1 | Attribution detection depends on the repository's trailer configuration
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'bypass/unusual', 'terra': 'bypass/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A repository uses equals signs or hashes in commit attribution trailers. Discreet delivery accepts a factory credit and publishes it, revealing the automation.
+  O: An agent writes a commit footer using '=' or '#' instead of ':', for example 'Co-authored-by= Limitless <limitless@localhost>', possibly because it set trailer.separators in the run's repository. The discreet check lets the commit through, so the factory's identity is published in a repository that was supposed to show no factor
+#64 limitless-712-r1/F1 | `sh` drops the timeout classification for allowFail callers, and its error text says "Command failed (0)"
+  adj: sol=REAL/major/newly_exposed opus=REAL/minor/newly_exposed dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A deployment check reaches its timeout but exits successfully while cleanup inspects processes. Deployment treats it as passing and restarts the daemon; callers that request exceptions instead receive the misleading message “Command failed (0)”.
+  O: A deploy gate command is still running when its deadline fires, then exits 0 by itself while the timeout cleanup is inspecting processes. The deploy treats the gate as passed and goes on to restart the daemon, and a caller that doesn't allow failure gets the error "Command failed (0)", which hides that the command timed out.
+#65 limitless-721-r1/F1 | Each call still compiles a combined regex over every detail, so the stall remains (1.06x faster)
+  adj: sol=REAL/major/requirement_gap opus=REAL/major/requirement_gap dup=None,None
+  raters: {'sonnet': 'wrong/normal', 'terra': 'nuisance/normal'} {'sonnet': 'major', 'terra': 'minor'}
+  S: An agent streams many messages containing unique event identifiers, paths or numbers. Redaction repeatedly compiles a large pattern on the daemon’s main thread, delaying other requests and timers for seconds during bursts.
+  O: During a verify session the agent streams thousands of output strings. Almost every string contains something new that counts as a private literal, such as an event ID, a line number or a path. For each one, the redactor still rebuilds and runs its full combined pattern over every holdout detail on the daemon's main thread. So t
+#66 limitless-730-r1/F2 | Invalid UTF-8 in a worker request body is silently replaced and stored
+  adj: sol=REAL/minor/newly_exposed opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A worker sends an invalid text byte inside an otherwise valid event or completion report. The coordinator acknowledges the report and saves replacement characters instead of rejecting the malformed input.
+  O: A paired worker sends an event batch with an invalid UTF-8 byte inside the text. The coordinator quietly turns that byte into a replacement character, stores the batch and answers success when it should refuse it. A normal worker builds its JSON from valid strings, so this needs a buggy or hostile worker.
+#67 limitless-730-r1/F3 | A result with a non-terminal status permanently completes the job
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A worker submits a report saying its session is still running. The coordinator permanently completes the job and rejects the later finished report, preventing the actual outcome from being recorded.
+  O: A worker reports a final result whose status says the session is still running. The coordinator accepts it, marks the job permanently done with that status, and refuses later reports. No real harness ever returns that status as a final result, and the code that will read these results does not exist yet.
+#68 limitless-734-r1/F2 | Fencing fires up to one heartbeat interval after the lease has expired
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A worker loses contact with the coordinator after a delayed successful heartbeat. Its agent keeps spending quota beyond the required lease deadline until the next periodic fence check.
+  O: A worker loses contact with the coordinator. The coordinator expires the lease after one lease period (60 s by default), but the worker only checks every heartbeat interval (10 s), so its agent session can keep spending model quota for up to about 10 s more. In that window the job may already be re-leased to another worker.
+#69 limitless-737-r1/F1 | Restart deletes retained directories when no process identity was recorded
+  adj: sol=REAL/major/requirement_gap opus=REAL/major/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An agent starts a detached descendant, and process discovery fails before recording any identity. Restarting the worker deletes the retained checkout, scratch and cleanup metadata while that descendant remains alive, allowing it to keep running alongside retried work.
+  O: A worker job's process cleanup fails before any process has been recorded, for example because the first process scan or the macOS process-leader capture fails. The worker correctly keeps the job's checkout and scratch, but on its next start it finds nothing to confirm and deletes those directories while a descendant of the job 
+#70 limitless-737-r2/F1 | Record a kept job as unconfirmed before its first process starts, and confirm it only from positive evidence
+  adj: sol=REAL/blocker/introduced opus=REAL/major/introduced dup=None,None
+  raters: {'sonnet': 'outage/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A worker crashes just after launching another command, and its next start deletes the job’s directories while that command remains alive. Alternatively, a temporary inspection failure leaves incomplete cleanup evidence that prevents the worker from starting again, even after a reboot.
+  O: If a worker job's process cleanup can't be confirmed before any discovery record was saved (boot-identity inspection fails, or a harness raises the termination error itself), the worker refuses to start on every later attempt until someone edits its database by hand. Separately, if the worker is killed just after it starts a new
+#71 limitless-737-r3/F1 | An empty scan without the invocation's discovery record must not confirm a kept job; wait for a changed boot instead
+  adj: sol=REAL/blocker/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'boundary/unusual', 'terra': 'state/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: A worker dies after launching a job process but before saving its discovery information. On restart, an empty scan incorrectly confirms termination, deletes the job’s directories and durable cleanup entry, and leaves the process running without recovery records.
+  O: A worker keeps a failed job's folders because it couldn't confirm the job's processes had stopped. But it never saved the discovery record for one of the processes it started, either because it crashed right after starting it or because saving the record failed. After a restart, recovery runs a weaker fallback scan that can't se
+#72 limitless-741-r1/F3 | Keep agentEnv()'s git config entries when adding the push's auth header
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'boundary/unusual', 'terra': 'boundary/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: When GitHub rejects the worker's chosen token, Git can consult the user's configured credential helper. The push can then use another stored credential instead of following the intended token-only authentication path.
+  O: If GitHub rejects the worker's token during a push (for example, the token has expired), git falls back to the owner's configured credential helper, such as the macOS keychain, and may push with a different stored credential. The push environment was meant to disable that helper.
+#73 limitless-746-r1/F1 | Record the intended delivery push before pushing, and reconcile it on resume
+  adj: sol=REAL/major/preexisting opus=REAL/minor/preexisting dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: The daemon restarts after pushing a delivery commit but before recording it, and the base branch advances before delivery resumes. The resumed run merges the new base but cannot publish that merge, ending needs_human; its fallback can still open a draft containing the earlier commit.
+  O: The daemon is restarted, for example by a deploy, in the short moment after the delivery push reaches GitHub but before the run records it. If the base branch also moves before the run resumes, the resumed delivery merges the new base and tries to push a different commit while still expecting the branch not to exist. GitHub refu
+#74 limitless-746-r1/F2 | Make adoption's only change a single reset, with the caller's signal
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: The coordinator adopts a valid worker change, but cleanup fails after the checkout has moved, so adoption reports failure despite changing the checkout. Cancellation during reset preparation is also ignored, allowing a cancelled adoption to complete.
+  O: After all checks pass, the adoption helper moves the worktree to the worker's commit and then runs a cleanup step it does not need. If that cleanup fails, the helper reports an error even though the worktree has already moved, which breaks its promise that a failure leaves the worktree where it was. A cancel that arrives during 
+#75 limitless-747-r1/F1 | Turn failures while preparing a worker job into needs-human, never a provider error
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: When the coordinator cannot read its private-strings policy while preparing a worker round, it incorrectly clears the provider’s previous failure history. The implementation attempt returns an ordinary error and can continue toward checks even though neither a worker nor a local session ran.
+  O: During an eligible implement round, the private-strings file can't be read, so preparing the worker job throws an ordinary error. The factory records that as an 'error' against the model provider, which clears a degraded provider's failure count and circuit. The implement stage is marked 'succeeded … no changes' with no session 
+#76 limitless-768-r1/F2 | The late result report must still stop on worker shutdown
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An operator stops a worker while it is trying to report a pushed commit to an unavailable coordinator. Shutdown keeps waiting and the worker keeps retrying until the job’s remaining attempt deadline expires.
+  O: A worker has pushed a commit while the coordinator is unreachable, and the owner (or launchd) stops the worker. The worker keeps retrying the result report until the job's attempt deadline, which can be many minutes, and shutdown waits for it, so the worker hangs instead of exiting.
+#77 limitless-772-r2/F2 | Keep M6's open items and earlier landed summary
+  adj: sol=REAL/minor/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/normal', 'terra': 'wrong/normal'} {'sonnet': 'minor', 'terra': 'major'}
+  S: Someone checking the milestone's status loses the summary of earlier completed work and cannot see that per-repository gates and review lenses remain unfinished. The roadmap becomes less useful for planning, although factory execution is unaffected.
+  O: Someone reading the plan's M6 row at head sees packaging as the only work left and no longer sees the earlier landed work. The still-open per-repo gates and lenses item has vanished, though it is unfinished and still in M6's scope.
+#78 limitless-807-r1/F1 | A land check can switch gate executors mid-check after a reload
+  adj: sol=REAL/major/introduced opus=REAL/major/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An operator removes a repository from worker eligibility while its landing checks are running remotely. The retry switches to the local checkout without running setup there, so an otherwise recoverable test failure blocks landing.
+  O: A land check for a pull request is running on a LAN gate worker, and the operator reloads the config to take that repository out of the worker list. A test then fails and gets a targeted retry, but the retry runs locally without the setup the worker did, fails on missing dependencies, and blocks a land that should have gone thro
+#79 limitless-807-r1/F2 | Replacing a live table with a non-table value still applies part of it
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An operator replaces the limits table with a scalar and reloads configuration. Although the response says that section requires a restart, the running scheduler and gate pool immediately adopt default limits and discard the active raw section.
+  O: An operator replaces the [limits] table with a plain value (for example `limits = 42`) and reloads. The reply says `limits` needs a restart, but the run and gate limits quietly drop to their defaults (7 and 5 become 3 and 4), which the issue says must not happen even partly.
+#80 limitless-811-r1/F1 | The shared glob matcher admits paths outside the pattern
+  adj: sol=REAL/major/newly_exposed opus=REAL/minor/newly_exposed dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A repository declares only guide.md files under docs as documentation. Changing docs/notguide.md incorrectly qualifies for reduced testing, so the factory can skip tests that should have run.
+  O: A repository declares its docs as `docs/**/guide.md`. A change to `docs/notguide.md` is wrongly treated as docs-only, so the test check is narrowed or skipped when the full suite should run. GitHub CI still runs the full suite.
+#81 limitless-811-r1/F3 | A targeted run is reported as a full-suite pass or fix
+  adj: sol=REAL/minor/newly_exposed opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A documentation change passes its selected tests while an unrelated baseline test remains broken. The report says the test check was fixed, although those baseline failures were never rerun.
+  O: The full suite fails on the base branch, and a docs-only change then runs and passes only the few test files that mention the doc. The run report and the reviewer and verifier prompts show the test check as '✅ fixed' (or a plain pass), as if the whole suite now passed. Verify's gate substitution still refuses this result, so the
+#82 limitless-813-r1/F1 | Declare reflect-metadata as a direct dependency
+  adj: sol=REAL/blocker/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'outage/unusual', 'terra': 'outage/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: An operator installs the source release with isolated production dependencies on a clean machine. The missing dependency prevents every CLI command, including daemon startup, from running.
+  O: Someone installs production dependencies with Bun's isolated linker instead of the default hoisted layout. The CLI entry point then imports a package that the project never declared, and every limitless command fails at startup with 'Cannot find package reflect-metadata'. The deploy, CI and gate setup all run a plain `bun instal
+#83 limitless-810-r2/F1 | Validate through the runner's own grading, including its reset and clean
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An operator generates a replay whose tests require a temporary file created during setup. Generation accepts it, but grading deletes that file and rejects a correct implementation, making the evaluation unreliable.
+  O: The repository's setup step creates a file that git does not ignore, and the PR's tests read that file. The generator accepts the case because the file is still there when it runs the tests. The eval runner deletes that file before running the hidden tests, so even the original merged solution fails, and the dataset silently gai
+#84 limitless-817-r1/F1 | Recover this process's own abandoned invocations; the live-owner skip is only for other processes
+  adj: sol=REAL/major/introduced opus=REAL/major/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'boundary/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: An invocation exits but a failed shutdown scan leaves its descendant running. When the same daemon resumes work in a fresh scope, recovery silently skips the abandoned invocation and allows another command to run alongside the surviving process.
+  O: A command's shutdown fails and leaves a background child running, so the run stops for a human. When the run is resumed in the same daemon, the pre-command recovery sees that the record belongs to the daemon itself, which is alive, and skips it. The orphan keeps running, its record stays, and the next command runs anyway. Before
+#85 limitless-820-r1/F1 | Gate mode must work with the LAN gate executor, which this installation uses
+  adj: sol=REAL/major/requirement_gap opus=REAL/major/requirement_gap dup=None,None
+  raters: {'sonnet': 'wrong/normal', 'terra': 'nuisance/normal'} {'sonnet': 'major', 'terra': 'minor'}
+  S: An implementer requests the full suite during a local session on a factory configured to execute gates through LAN workers. The request is refused, so the implementer receives no early gate feedback and the gates stage must execute the suite later.
+  O: An owner who sets the gate executor to "lan" (a documented, supported setting) and turns on agent_full_suite = "gate" gets the same refusals as "refuse" mode. No factory execution is recorded, so every round's gates stage still runs the full suite. The feature does nothing on that installation, and this applies even to repositor
+#86 limitless-833-r1/F1 | Select the default branch's historical commit along first-parent history
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An operator generates cases after a reviewed topic branch was merged into the default branch. The generator can select the reviewed commit itself as the historical base, producing an empty review diff with defects still attached.
+  O: Someone lands a reviewed PR on a repository with a real merge commit instead of the factory's squash merge, then runs the generator. The reviewed head itself is picked as the 'main as of the round' commit, so the case's base equals its head. The case is written with an empty diff and the reviewer is graded against a change that 
+#87 limitless-835-r2/F3 | An untrusted title rename must make the issue ineligible
+  adj: sol=REAL/blocker/introduced opus=REAL/major/introduced dup=None,None
+  raters: {'sonnet': 'boundary/unusual', 'terra': 'boundary/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: An untrusted collaborator renames an already approved, owner-authored issue to grant a binary-change allowance. The poller accepts the issue and grants that allowance without a trusted account approving the changed title.
+  O: A collaborator who isn't on the trusted list renames an owner-approved issue, for example to the title 'Allow: binary'. The queue still treats the issue as owner-approved, quotes the new title to the agent and even grants the binary audit allowance, which bypasses the guard against untrusted editors.
+#88 limitless-835-r2/F7 | Suppress notifier messages only for runs the queue started
+  adj: sol=REAL/minor/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/plausible', 'terra': 'nuisance/plausible'} {'sonnet': 'major', 'terra': 'minor'}
+  S: A normal GitHub issue run belongs to a repository listed in queue configuration. Its creation and failure notifications disappear even when an empty trust list disables the queue.
+  O: Someone creates an issue run with source 'github' through the HTTP API for a repository on the queue list. That run silently loses its 'run created' and 'finished' GitHub comments even though the queue didn't start it, and even when the queue is disabled because the trusted list is empty.
+#89 limitless-842-r2/F3 | Every wait for an in-place job to stop must end
+  adj: sol=REAL/major/introduced opus=REAL/major/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An executor becomes stuck, or fails to confirm cleanup while remaining alive. The run waits indefinitely for its worktree instead of reporting that operator recovery is required.
+  O: If the executor process stays alive but its cleanup of a gate's processes failed, or it is hung, the job stays marked not-stopped forever. The daemon then waits indefinitely before it can run any gate in that worktree. The run hangs silently instead of failing with a clear error that asks for a human.
+#90 limitless-842-r2/F5 | Restore committed bytes before an in-process fallback after an executor failure
+  adj: sol=REAL/major/newly_exposed opus=REAL/major/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An executor's check modifies a source file before losing its lease. After stopping that check, the daemon reruns the gate against the modified file and records a result for contents different from the committed change.
+  O: The executor crashes or loses its lease after a check has modified tracked files in the worktree. The daemon falls back to running the gates itself in that same worktree without restoring the committed files, so the fallback grades a dirty checkout and can report a wrong result.
+#91 limitless-863-r1/F1 | Inspect tracked files through a fresh temporary index, so gate-set index flags can't hide a change
+  adj: sol=REAL/major/requirement_gap opus=REAL/major/introduced dup=None,None
+  raters: {'sonnet': 'bypass/unusual', 'terra': 'bypass/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: If a tracked file is marked assume-unchanged or skip-worktree, a passing gate can rewrite it while the factory still treats the checkout as unchanged. The factory can then reuse passing evidence for a commit whose actual bytes were not tested.
+  O: A test command from the change under test marks a tracked file 'assume-unchanged' or 'skip-worktree' in the checkout's index, rewrites that file, and then passes. The new check still reports the checkout as clean, so the factory records gate evidence for the checked commit (and verify can reuse it) even though the tests ran agai
+#92 limitless-897-r1/F1 | Recognize the expanded retry command, and require {files} as an unquoted standalone argument
+  adj: sol=REAL/major/requirement_gap opus=REAL/minor/preexisting dup=None,None
+  raters: {'sonnet': 'bypass/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A repository uses a quoted retry placeholder and contains a failing test with shell punctuation in its filename. The retry executes an injected success command instead of rerunning that test, allowing the failed check to pass.
+  O: The trusted config wraps the retry placeholder in double quotes (`bun test "{files}"`), and a pull request adds a failing test file whose name contains `"; true #`. The targeted retry then runs a command whose exit status comes from `true`, so the failure counts as flaky and the change can land.
+#93 limitless-899-r1/F2 | Accept Unicode horizontal whitespace around the directive
+  adj: sol=REAL/major/introduced opus=REAL/minor/requirement_gap dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A user pastes a closing directive surrounded by nonbreaking spaces into a request. The factory silently omits its issue link and claim, allowing another run to start work on the same intended issue.
+  O: A user pastes a request whose Closes line has a no-break or em space around it, for example copied from a web page. The issue is silently not linked, so it is never labelled or claimed, and another run can pick up the same issue.
+#94 limitless-908-r2/F1 | Apply the workflow guard in scripts/land-pr.sh before it pushes
+  adj: sol=REAL/blocker/requirement_gap opus=REAL/minor/preexisting dup=None,None
+  raters: {'sonnet': 'bypass/unusual', 'terra': 'boundary/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: An operator manually lands an existing PR after a local repair adds a workflow, without granting workflow changes. The script pushes it anyway, allowing an executable workflow to run with repository token permissions before the required authorization.
+  O: Someone landing a PR by hand commits a new CI workflow file in the merge worktree and runs the manual landing script without any grant. The script pushes that commit to the PR branch, so the workflow runs on GitHub without the new workflow check ever looking at it.
+#95 limitless-912-r2/F1 | Don't let the rollback's final status writes overwrite a resolution recorded meanwhile
+  adj: sol=REAL/major/newly_exposed opus=REAL/major/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A person resolves a rejected run while its rollback is finishing. The factory accepts that decision, then changes the run back to needing human attention while retaining contradictory resolution metadata.
+  O: When post-merge gates regress, the run now shows as needing a human before the rollback and draft-PR reporting have finished. If a person resolves it in the UI or over MCP during that window, the resolution is accepted, but the engine then sets the run back to needs_human. The run ends up stuck as needs_human while its record al
+#96 limitless-922-r1/F6 | Exclude the factory's own comments by their leading marker, not a substring anywhere
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A trusted user asks the factory to fix handling of its lifecycle marker and includes that marker in the command. The factory silently skips the otherwise valid request.
+  O: A trusted user posts a real command that happens to quote the factory's comment marker, such as a request to fix marker handling. The poll skips it on every pass and never records it, so the command is silently ignored.
+#97 limitless-925-r1/F1 | Bind the criterion to the named testcase in the run's own JUnit report; drop the name-filter option parsing
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'bypass/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A verifier requests a test title that does not exist, while the repository's retry command contains another name filter. Unrelated passing tests satisfy the behavioural criterion, so the factory accepts behaviour it never verified.
+  O: If the repository's trusted retry template already contains its own test-name filter written as `-tunrelated` or `'-t' unrelated`, the factory's check for template filters misses it. Bun obeys the template's filter, which comes last, so an unrelated passing test in the same file runs. The blocked criterion is then marked met eve
+#98 limitless-926-r1/F1 | Match sub-issues and blockers by repository and number, not number alone
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An epic contains a child from another repository whose number matches an unrelated local issue. The queue can suppress the warning that approval is needed or incorrectly report that only acceptance remains, misleading the owner about what work is ready.
+  O: An epic in owner/repo has a sub-issue filed in another repository, and owner/repo happens to have an unrelated issue with the same number. The queue reads the unrelated local issue in place of the real sub-issue. That can hide a needed 'needs_approval' alert when the local issue is prioritized, or raise a false 'ready_for_accept
+#99 limitless-925-r2/F1 | Freshness: compare the report with a filesystem timestamp, not Date.now()
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A newly written test report receives a filesystem timestamp slightly behind the factory's wall clock. The factory rejects valid passing evidence as stale, leaving the criterion blocked and requiring human intervention.
+  O: On Linux, a file's modification time comes from a coarse kernel clock that can run a few milliseconds behind the wall clock. A report written just after the run starts can therefore look older than the start time and be rejected as stale. This mostly hits the new fast unit tests on Linux CI, which then fail and block the change 
+#100 limitless-925-r2/F2 | Put the factory's reporter arguments where a template's `--` can't make them positional
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A repository configures a valid targeted test command ending in an option terminator. Its named test passes, but the factory's reporter options become positional arguments, so the missing report prevents the criterion from being accepted.
+  O: Suppose a repository's targeted-retry command template ends with `--`. The factory adds its report-writing options after the template's arguments, so they land after the `--`. Bun then treats them as file names and writes no report, and every covering-test request in that repository stays blocked with a vague 'report missing' re
+#101 limitless-927-r1/F3 | Delete the trusted branches only after cancellation or completion is confirmed
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/plausible', 'terra': 'nuisance/plausible'} {'sonnet': 'major', 'terra': 'minor'}
+  S: GitHub temporarily hides an accepted workflow or rejects its cancellation. Cleanup deletes both branches while the workflow remains active; the invisible-run case even reports successful cleanup.
+  O: Cancelling a run can fail, or a dispatched run can still be invisible when the wait expires. In the invisible case, cleanup deletes both branches and reports success, so an accepted workflow run can keep using a GitHub runner with nobody tracking it. When cancellation fails, the branches are deleted anyway, although the handle i
+#102 limitless-926-r2/F1 | Don't let a Markdown link's text stand in for its destination
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An epic author links a planned slice to another repository using a number that also exists among the epic’s children. The queue mistakes the link for that local child, suppressing the missing-slice warning and potentially reporting that only acceptance remains.
+  O: A trusted maintainer writes a slice line as a Markdown link whose visible text says #3 but whose address points at issue 3 in a different repository. The queue reads only the visible text, treats the line as naming this epic's own sub-issue #3, and wrongly reports the epic as ready for acceptance, or fails to report an unfiled s
+#103 limitless-925-r3/F1 | Recognize factory citations by structure only; remove the prose scanner
+  adj: sol=REAL/major/introduced opus=REAL/major/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A verifier quotes a test title containing “Factory gate” while explaining its sandbox restriction. Even after the factory records that test passing, verification remains blocked and requires unnecessary human intervention.
+  O: A sandboxed verifier does as the prompt asks and quotes the command it tried, and that command names a test whose title contains "factory gate" (this repository has several, for example in test/agent-test.test.ts). The factory then refuses its own valid, passing record of that test, the criterion stays blocked, and the run costs
+#104 limitless-942-r1/F1 | Treat an inspection failure as unknown, never as unloaded
+  adj: sol=REAL/major/introduced opus=REAL/major/introduced dup=None,None
+  raters: {'sonnet': 'boundary/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An operator deploys a release that fails its checks, but launchd inspection returns a permission error while the executor remains running. Rollback or recovery treats that error as confirmed shutdown and changes the release checkout beneath the live executor.
+  O: During a deploy rollback or the recovery at the start of the next deploy, the call that asks launchd whether the executor is loaded fails for some reason other than 'service not found', for example a permission error. The code reads that failure as 'not loaded', skips stopping the executor, disables it (which does not stop a run
+#105 limitless-943-r1/F1 | Make budget parsing linear on untrusted request text
+  adj: sol=REAL/blocker/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/unusual', 'terra': 'outage/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: A request contains many repeated, unfinished details tags. When delivery parses it, the factory's shared event loop stalls, preventing other runs and server requests from progressing; larger inputs make the interruption quadratically longer.
+  O: Someone files an issue whose body repeats an unclosed `<details ` opening thousands of times. Delivery then stalls synchronously while it parses the budget, and the time grows with the square of the text length. GitHub caps issue and comment bodies at 65,536 characters, so the real worst case is about 56 ms per render; only a ve
+#106 limitless-942-r2/F1 | One strict executor inspection: absence only for a completed result with status 113 and the exact message
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An operator retries deployment after an interruption, but an incomplete service inspection is mistaken for confirmation that the executor stopped, allowing the checkout to change while it remains running. Similar inspection failures can cause installation to replace its plist or uninstallation to delete it without stopping the e
+  O: A deploy recovers from an interrupted rollback, and its 'is the executor loaded?' query to launchctl fails in an abnormal way: it is killed by a signal or exits with a status other than 'not found', yet its error text still reads 'Could not find service'. The deploy treats the executor as stopped, disables it and checks out the 
+#107 limitless-926-r3/F1 | Slice references: replace the Markdown link parser with the leading `#N` grammar #920 specifies
+  adj: sol=REAL/minor/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An epic author uses a reference-style link pointing to an unrelated issue, with a local child’s number as its label. The queue mistakes that label for the acceptance child and publishes a misleading attention notification.
+  O: A trusted owner writes a slice as a reference-style Markdown link, for example 'Acceptance: [#3][target]' where 'target' points to an issue in another repository. The queue reads the label '#3' as local child 3 and reports 'ready for acceptance', while an inline link or autolink to the real child 3 is reported as 'unfiled'. The 
+#108 limitless-942-r3/F1 | An unknown inspection after a drain must still resume the scheduler
+  adj: sol=REAL/blocker/introduced opus=REAL/major/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'outage/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: An operator installs services and the daemon successfully drains, but inspecting its service then returns a permission error. Installation exits while the existing daemon remains paused, preventing new work until someone manually resumes it.
+  O: During `service install`, the old daemon is drained, then a launchctl status check fails transiently (a timeout or permission error) while the daemon is being stopped. Install exits with the inspection error but never resumes the scheduler. The old daemon keeps running in the draining state and starts no new runs until someone r
+#109 limitless-942-r3/F2 | Install checks every destination for a collision before changing any unit
+  adj: sol=REAL/major/newly_exposed opus=REAL/minor/newly_exposed dup=None,None
+  raters: {'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: An operator installs the daemon and executor together when the executor destination is occupied or cannot be inspected reliably. Installation drains and replaces the working daemon before rejecting the executor destination, leaving an avoidable partial installation.
+  O: An operator runs `service install` with the executor enabled while an unrecognized agent is already loaded under the executor's label (or its launchctl check fails). Install first drains, replaces and restarts the daemon, and only then refuses because of the executor collision. The result is an unnecessary daemon restart and a h
+#110 limitless-972-r1/F1 | Create the member identity atomically and return the stored winner
+  adj: sol=REAL/blocker/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'state/plausible'} {'sonnet': 'minor', 'terra': 'blocker'}
+  S: Two processes first open the same database concurrently and return different member identities. One overwrites the other's persisted identity, so restarting the losing process changes its identity.
+  O: Two processes open the same fresh database and ask for the member identity at the same moment. Both see none and each generates one, so the first to write gets an identity that is replaced a moment later and changes after its next restart. That breaks the 'created once' promise, but it needs two processes starting on one databas
+#111 limitless-981-r1/F2 | Headings inside excluded <details> must not end the requested section
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A parent section contains a collapsed details block with a heading. Requirements appearing after that block disappear from acceptance, allowing success without checking them.
+  O: A parent epic has a collapsed <details> block containing a heading at the same level as the referenced section. The section is cut off at that hidden heading, so visible requirements after the </details> are left out of the manifest and can't block a pass.
+#112 limitless-988-r1/F1 | Post-merge: an execution that passes after a restart keeps the earlier failure's flaky class
+  adj: sol=REAL/major/introduced opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: A local post-merge check fails, then the factory restarts before saving its result. When the fresh execution passes, the original failure is incorrectly recorded as unclassified instead of flaky.
+  O: A local post-merge check fails and its failure is recorded. The daemon then restarts before that result is checkpointed, and the re-run passes. The recorded failure is filed as 'unclassified, no retry' when it should be 'flaky, retry passed', so later defect analysis gets the wrong class for this failure.
+#113 limitless-1042-r1/F1 | Keep the original failure over cleanup errors, reject contradictory records, bind replay to the repository
+  adj: sol=REAL/major/requirement_gap opus=REAL/minor/introduced dup=None,None
+  raters: {'sonnet': 'bypass/unusual', 'terra': 'wrong/plausible'} {'sonnet': 'minor', 'terra': 'major'}
+  S: Inconsistent remote execution records can become ordinary gate feedback, and a subsequent cleanup failure hides the original rejection. After restart, the factory can also accept a saved passing result despite a changed or missing execution binding, allowing verification without matching evidence.
+  O: When a GitHub Actions gate run returns a malformed record and the cleanup branch deletion then also fails, the factory saves only 'cleanup' as the reason and loses the original failure. Separately, a job log where setup failed but the check still reports a pass is treated as an ordinary setup failure and sent back as normal feed

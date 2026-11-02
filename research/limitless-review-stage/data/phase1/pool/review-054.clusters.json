@@ -1,0 +1,180 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P14",
+    "P20",
+    "P26",
+    "P31",
+    "P38",
+    "P40",
+    "P43",
+    "P47",
+    "P54"
+   ],
+   "mechanism": "A classifyCi exception for one PR escapes record() and aborts the repository's observation loop, and persisted ciPending repeats the failure every poll, so later PRs are starved."
+  },
+  {
+   "members": [
+    "P4",
+    "P5",
+    "P9",
+    "P13",
+    "P19",
+    "P25",
+    "P36"
+   ],
+   "mechanism": "The main-red branch continues before job inspection and recordCiFailure, so those failures never enter the ledger."
+  },
+  {
+   "members": [
+    "P15",
+    "P37",
+    "P39",
+    "P41"
+   ],
+   "mechanism": "The check_run_url and rerun prefix comparisons are case-sensitive, so canonical repository casing from GitHub is rejected."
+  },
+  {
+   "members": [
+    "P10",
+    "P18",
+    "P22",
+    "P42"
+   ],
+   "mechanism": "Rerun reconciliation reads only the latest workflow attempt, so a later partial rerun hides the tracked job's result and leaves it ambiguous."
+  },
+  {
+   "members": [
+    "P2",
+    "P23"
+   ],
+   "mechanism": "Rerun completion is inspected only when ciKey changes, but the GraphQL query sees only the first 100 contexts, so the outcome of a rerun outside that page is never observed."
+  },
+  {
+   "members": [
+    "P3",
+    "P7",
+    "P16"
+   ],
+   "mechanism": "The transient timeout regexes are too narrow or anchored too strictly, so genuine test timeout diagnostics are classified as needs_fix instead of rerun."
+  },
+  {
+   "members": [
+    "P6",
+    "P24"
+   ],
+   "mechanism": "Security-test detection misses common failure formats such as Playwright headings and Go FAIL lines, so security failures are rerun and recorded."
+  },
+  {
+   "members": [
+    "P28",
+    "P44",
+    "P46",
+    "P48",
+    "P55"
+   ],
+   "mechanism": "A main-red pause leaves ciPending true, so the full REST inspection repeats on every poll even though the GraphQL state is unchanged."
+  },
+  {
+   "members": [
+    "P27",
+    "P33",
+    "P58"
+   ],
+   "mechanism": "record() returns early when observePrHead refuses, dropping the whole observation, including merge, close and review events."
+  },
+  {
+   "members": [
+    "P11",
+    "P21"
+   ],
+   "mechanism": "A rerun request that GitHub never accepts (429 or network failure) stays rerun_requested forever, with no retry and no needs_fix."
+  },
+  {
+   "members": [
+    "P12"
+   ],
+   "mechanism": "After a successful rerun, lagging check-runs data still lists the original failed job, so a confirmed pass is reported as ci.needs_fix."
+  },
+  {
+   "members": [
+    "P8"
+   ],
+   "mechanism": "ci.main_red items are keyed per check name instead of once per repository."
+  },
+  {
+   "members": [
+    "P17"
+   ],
+   "mechanism": "Legacy commit statuses on main are fetched only when the PR snapshot has StatusContext entries or is truncated, so a failing main status can be missed."
+  },
+  {
+   "members": [
+    "P45"
+   ],
+   "mechanism": "Classification is limited to OPEN PRs, so a pr.ci_failed emitted when a PR closes with pending CI is never classified."
+  },
+  {
+   "members": [
+    "P34"
+   ],
+   "mechanism": "A rerun that ends in a conclusion that is neither success nor a bad one (neutral, skipped) stays rerunning forever and keeps the PR pending."
+  },
+  {
+   "members": [
+    "P32",
+    "P50",
+    "P59"
+   ],
+   "mechanism": "The feed excerpt is the first 2000 characters of the job log (runner setup output), not the failure."
+  },
+  {
+   "members": [
+    "P49",
+    "P56"
+   ],
+   "mechanism": "ciSignature picks the first loosely matching log line, including incidental setup lines and run timings, so signatures are wrong and vary between occurrences."
+  },
+  {
+   "members": [
+    "P51"
+   ],
+   "mechanism": "Untrusted GitHub text is quoted with an ad-hoc '> ' prefix instead of the codebase's quotedJson convention."
+  },
+  {
+   "members": [
+    "P30",
+    "P35",
+    "P52",
+    "P61"
+   ],
+   "mechanism": "The change is about twice the stated source-line budget and concentrated in a dense 340-411 line classifyCi closure."
+  },
+  {
+   "members": [
+    "P29"
+   ],
+   "mechanism": "A second migration alters a table created by an earlier migration in the same unshipped change."
+  },
+  {
+   "members": [
+    "P53"
+   ],
+   "mechanism": "The security regex has no word boundaries, so unrelated words such as 'disaster' count as security evidence."
+  },
+  {
+   "members": [
+    "P57"
+   ],
+   "mechanism": "Every cancelled job is treated as transient, including fail-fast matrix siblings, so they are rerun and recorded as flakes."
+  },
+  {
+   "members": [
+    "P60"
+   ],
+   "mechanism": "Each transient job is rerun with its own POST, and later POSTs may be rejected as 4xx and reported as needs_fix."
+  }
+ ]
+}

@@ -1,0 +1,26 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "On Darwin, processes are treated as owned by the invocation if they share its working directory and started after it, so unrelated processes get killed."
+  },
+  {
+   "members": [
+    "C2",
+    "C2b"
+   ],
+   "same_as": null,
+   "root_cause": "Descendant discovery depends on inherited environment markers and working-directory heuristics, so helpers with a replaced environment are missed even when they share the process group. Shutdown is then reported as complete while they are still alive."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "The rerun path after a gate timeout calls cleanup without the retry/recovery handling used elsewhere, so one cleanup failure ends the run."
+  }
+ ]
+}

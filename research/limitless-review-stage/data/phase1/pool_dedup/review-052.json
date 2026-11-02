@@ -1,0 +1,123 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "An error while inspecting one PR's CI aborts the whole repository poll loop instead of being caught for that PR alone."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The main-red branch returns early, before job logs are fetched, so the ledger signature uses a generic conclusion instead of the real error and runner image."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "Job URL validation compares the repository name case-sensitively against the operator-configured spelling."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "Rerun resolution doesn't treat a skipped conclusion as a terminal result, so the retry never resolves."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": "G4",
+   "root_cause": "When the rerun POST response is lost, nothing is persisted that would let the poller reconcile the accepted rerun with its later result."
+  },
+  {
+   "members": [
+    "C6"
+   ],
+   "same_as": null,
+   "root_cause": "Rerun lookup searches only the newest workflow attempt instead of searching across all attempts for the rerun job."
+  },
+  {
+   "members": [
+    "C7"
+   ],
+   "same_as": null,
+   "root_cause": "Main-red notifications are deduplicated per failing check instead of per repository."
+  },
+  {
+   "members": [
+    "C8"
+   ],
+   "same_as": "G3",
+   "root_cause": "Suppressed PRs are only re-inspected when the PR itself changes, not when main goes back to green."
+  },
+  {
+   "members": [
+    "C9"
+   ],
+   "same_as": null,
+   "root_cause": "Cancelled matrix legs are treated as rerunnable failures and recorded as flakes, even though fail-fast cancelled them and they never failed."
+  },
+  {
+   "members": [
+    "C10"
+   ],
+   "same_as": null,
+   "root_cause": "The rerun cap is used up before the rerun request succeeds, and GitHub's refusal for an in-progress workflow is mishandled as an access error instead of being deferred."
+  },
+  {
+   "members": [
+    "C12"
+   ],
+   "same_as": null,
+   "root_cause": "An unreleased new table is altered by a second migration in the same change instead of being defined once."
+  },
+  {
+   "members": [
+    "C14"
+   ],
+   "same_as": null,
+   "root_cause": "Rerun reconciliation depends on the single page of 100 GraphQL check contexts, so retried jobs past that page are never seen."
+  },
+  {
+   "members": [
+    "C16"
+   ],
+   "same_as": null,
+   "root_cause": "The poller emits failure notifications for closed tracked PRs without running them through the CI classifier."
+  },
+  {
+   "members": [
+    "C17"
+   ],
+   "same_as": null,
+   "root_cause": "The feed excerpt is taken from the start of the job log instead of the area around the failure."
+  },
+  {
+   "members": [
+    "C18"
+   ],
+   "same_as": null,
+   "root_cause": "The new `[github] ci_reruns` config switch and its enabled default are missing from GUIDE.md."
+  },
+  {
+   "members": [
+    "C19"
+   ],
+   "same_as": null,
+   "root_cause": "The signature extractor picks the first log line containing 'fail' or 'error', which is often an echoed input rather than the real failure."
+  },
+  {
+   "members": [
+    "C20"
+   ],
+   "same_as": null,
+   "root_cause": "Main-red state is cleared while main's newest commit still has pending checks, instead of being kept until the checks reach a final green result."
+  }
+ ]
+}

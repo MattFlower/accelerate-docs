@@ -1,0 +1,21 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P2",
+    "P3",
+    "P4",
+    "P5",
+    "P7"
+   ],
+   "mechanism": "The results map is updated in completion order rather than call order, so a late older result overwrites the newer call's baseline hash and a following unchanged result is wrongly treated as progress, clearing the repetition window."
+  },
+  {
+   "members": [
+    "P6"
+   ],
+   "mechanism": "observe() declares the sixth identical call stuck before its result arrives, so the abort cannot be retracted even if that result shows progress."
+  }
+ ]
+}

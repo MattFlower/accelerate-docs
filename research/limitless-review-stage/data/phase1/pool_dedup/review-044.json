@@ -1,0 +1,60 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": "G1",
+   "root_cause": "The sticky-implementer check treats any historical policy edit as invalidating, even for selections made after that edit, so later escalations are dropped."
+  },
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "The record of policy edits or invalidations is not persisted across daemon restarts, so a resumed run goes back to a saved implementer that a reset removed."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "A stored operator override naming a model that no longer exists makes runtime-policy construction throw instead of skipping or tolerating it, and the CLI reset needs a running daemon."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "A routing-change notification cancels every pending invocation across all roles instead of only those affected by the edited cell."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": null,
+   "root_cause": "Validation failures put the raw zod issue JSON into the error message instead of a readable summary."
+  },
+  {
+   "members": [
+    "C7"
+   ],
+   "same_as": null,
+   "root_cause": "`eval policy` compares the proposed overlay with the effective policy, which includes operator overrides, instead of with the base overlay policy."
+  },
+  {
+   "members": [
+    "C8"
+   ],
+   "same_as": null,
+   "root_cause": "Resetting a cell does not check whether an override exists, so a no-op reset still writes history and broadcasts an SSE update."
+  },
+  {
+   "members": [
+    "C9"
+   ],
+   "same_as": null,
+   "root_cause": "The GUIDE says provider cards appear only on the Providers page, which doesn't match the Models page, which still renders them."
+  }
+ ]
+}

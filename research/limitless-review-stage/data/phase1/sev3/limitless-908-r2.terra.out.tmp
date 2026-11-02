@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"boundary","trigger":"plausible","reason":"A manual landing after a local repair can push an unapproved workflow, crossing the workflow authorization boundary and potentially executing it with repository token permissions."}]}

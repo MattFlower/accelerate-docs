@@ -1,0 +1,8 @@
+{
+  "systems": [
+    { "name": "codex/sol-6.1@medium", "mode": "single", "finders": [{ "target": "codex/sol-6.1@medium", "prompt": "standard" }], "implementerReport": "include" },
+    { "name": "codex/sol-6.1@high", "mode": "single", "finders": [{ "target": "codex/sol-6.1@high", "prompt": "standard" }], "implementerReport": "include" },
+    { "name": "sol-6.1-medium-adversarial", "mode": "single", "finders": [{ "target": "codex/sol-6.1@medium", "prompt": "adversarial" }], "implementerReport": "include" },
+    { "name": "D-adversarial-union2", "mode": "single", "finders": [{ "target": "codex/sol-6.1@medium", "prompt": "adversarial" }], "implementerReport": "include", "samples": 2 }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P4",
+    "P7",
+    "P9",
+    "P11",
+    "P14",
+    "P18",
+    "P20"
+   ],
+   "mechanism": "pushBranch and pushExistingBranch in src/git/repos.ts (delivery and land-queue pushes) still honor repository-scoped config (command settings, URL rewrites, ext transport), so planted repo config executes commands."
+  },
+  {
+   "members": [
+    "P2",
+    "P5",
+    "P8",
+    "P10",
+    "P12",
+    "P16",
+    "P19",
+    "P22"
+   ],
+   "mechanism": "The land-pr.sh config allowlist rejects harmless local settings (user.name, user.email, extra remotes), so ordinary repositories are refused landing."
+  },
+  {
+   "members": [
+    "P3",
+    "P6",
+    "P13"
+   ],
+   "mechanism": "The expanded land-pr integration tests spawn extra subprocesses and exceed Bun's default 5000ms timeout, so they fail unless given a longer timeout."
+  },
+  {
+   "members": [
+    "P15",
+    "P21"
+   ],
+   "mechanism": "The config snapshot/comparison in land-pr.sh is taken before the push, leaving a race: a surviving process can change repo config after validation, and the push rereads it and executes the command."
+  },
+  {
+   "members": [
+    "P17"
+   ],
+   "mechanism": "The rejection message prints config key names verbatim, leaking credentials embedded in URL-scoped credential key subsections to stderr."
+  }
+ ]
+}

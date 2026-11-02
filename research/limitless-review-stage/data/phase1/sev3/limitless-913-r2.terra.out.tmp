@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"diag","trigger":"unusual","reason":"A legacy timeout checkpoint resumed across an upgrade is mislabeled as a regression, but the timeout remains blocking and the demonstrated effect is incorrect classification and diagnostics."}]}

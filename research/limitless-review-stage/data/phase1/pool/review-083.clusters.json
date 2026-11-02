@@ -1,0 +1,20 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P3",
+    "P4",
+    "P5",
+    "P6"
+   ],
+   "mechanism": "The isolated repository built by push-git.sh omits reftable storage and extensions.refStorage, so refs like HEAD cannot be resolved in reftable repositories and pushes fail with 'src refspec HEAD does not match any'."
+  },
+  {
+   "members": [
+    "P2"
+   ],
+   "mechanism": "Injecting core.sshCommand=ssh as a default overrides the trusted GIT_SSH environment setting, so pushes that relied on GIT_SSH fail."
+  }
+ ]
+}

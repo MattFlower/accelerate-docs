@@ -1,0 +1,786 @@
+[
+ {
+  "tid": "T1",
+  "case": "review-087",
+  "repo": "MattFlower/limitless",
+  "base": "9f2baeb0a05d34745c40e8273908756a948ed400",
+  "head": "927486c53fa797f7ceb363c2b7622dcd0b3f739c",
+  "gold": {
+   "id": "G1",
+   "file": "scripts/land-pr.sh",
+   "lines": [
+    74,
+    76
+   ],
+   "summary": "Post-check publication scanning executes Git against mutable clone configuration.",
+   "category": "security"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "scripts/land-pr.sh",
+    "line": 98,
+    "title": "Isolated status still executes clone configuration through submodules",
+    "detail": "Git status recursively inspects initialized submodules using their own repository configuration. Checks can redirect a tracked submodule's .git pointer to the land clone's admin directory and plant filter.attack.clean there. The isolated parent's filter enumeration never sees that key, so the child executes it. Refusing the dirty tree happens after execution. Command: python3 \"$TMPDIR/land-pr-review-submodule.py\". Output: \"land exit: 1\", \"clone-config clean filter executed: True\", and \"AssertionError: isolated status executed the clone's clean filter through a submodule\". The same probe against the base script reported the marker as False.",
+    "failure_scenario": "A committed tree contains a gitlink and attributes selecting filter=attack. During checks, code adds filter.attack.clean to the clone config and replaces the submodule's .git with a pointer to the clone admin directory. Post-check status executes the configured command."
+   }
+  ]
+ },
+ {
+  "tid": "T2",
+  "case": "review-087",
+  "repo": "MattFlower/limitless",
+  "base": "9f2baeb0a05d34745c40e8273908756a948ed400",
+  "head": "927486c53fa797f7ceb363c2b7622dcd0b3f739c",
+  "gold": {
+   "id": "G1",
+   "file": "scripts/land-pr.sh",
+   "lines": [
+    74,
+    76
+   ],
+   "summary": "Post-check publication scanning executes Git against mutable clone configuration.",
+   "category": "security"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "scripts/land-pr.sh",
+    "line": 98,
+    "title": "Isolated status still executes filters through tracked submodules",
+    "detail": "Status recurses into tracked submodules and reads their writable configuration. A submodule can include the land clone\u2019s config, exposing a planted clean filter. safe_git now enumerates filters only in the isolated repository, so it misses that filter; status executes it and returns empty output, allowing landing. The previous clone-level enumeration blanked this filter. Probe command: `TMPDIR=/private/tmp/lr-davpEH/claude-501 python3 /private/tmp/lr-davpEH/claude-501/land-submodule-probe.py`. Output: `With clone filter blanked: '' marker: False`; `New isolated status: '' marker: True`; `AssertionError: isolated status executed a clean filter from the land clone config`.",
+    "failure_scenario": "The pinned tree contains an initialized submodule with `file filter=attack` attributes. During checks, clone config receives `filter.attack.clean = touch <marker>; cat`, and submodule config receives an include pointing at clone config. The new isolated status executes the marker command while repor"
+   }
+  ]
+ },
+ {
+  "tid": "T3",
+  "case": "review-098",
+  "repo": "MattFlower/limitless",
+  "base": "4c50ba4a4abff33458b84ad6f42f6761247b1211",
+  "head": "5a57b035e284b98bd84a2483519bed208135cecb",
+  "gold": {
+   "id": "G1",
+   "file": "src/router/runtime-policy.ts",
+   "lines": [
+    25,
+    31
+   ],
+   "summary": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+   "category": "data-migration"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/router/catalog.ts",
+    "line": 94,
+    "title": "Persisted references to the removed provider can prevent daemon startup",
+    "detail": "Removing the provider leaves startup validators unchanged. RuntimePolicy revalidates persisted routing preferences and cells against the current catalog; Factory also throws for persisted runtime models whose provider is absent. Thus an otherwise valid pre-change database can prevent the daemon from starting. Reproduction command: bun -e 'import {RuntimePolicy} from \"./src/router/runtime-policy.ts\"; import {MODELS,PROVIDERS} from \"./src/router/catalog.ts\"; const f=await Bun.file(\"test/fixtures/routing-identity.json\").json(); const id=f.snapshot.providers.find(id=>!PROVIDERS.some(p=>p.id===id)); try {new RuntimePolicy({routingCells:()=>[],routingPrefer:()=>[id],routingHistory:()=>[]},{},MODEL",
+    "failure_scenario": "A database written before the change has an operator routing preference naming the removed provider, a routing cell naming its model, or a runtime model attached to that provider. Starting the new daemon throws before serving requests or resuming runs."
+   }
+  ]
+ },
+ {
+  "tid": "T4",
+  "case": "review-098",
+  "repo": "MattFlower/limitless",
+  "base": "4c50ba4a4abff33458b84ad6f42f6761247b1211",
+  "head": "5a57b035e284b98bd84a2483519bed208135cecb",
+  "gold": {
+   "id": "G2",
+   "file": "src/app.ts",
+   "lines": [
+    100,
+    104
+   ],
+   "summary": "A runtime model attached to a retired provider prevents factory construction.",
+   "category": "data-migration"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/router/catalog.ts",
+    "line": 94,
+    "title": "Persisted references to the removed provider can prevent daemon startup",
+    "detail": "Removing the provider leaves startup validators unchanged. RuntimePolicy revalidates persisted routing preferences and cells against the current catalog; Factory also throws for persisted runtime models whose provider is absent. Thus an otherwise valid pre-change database can prevent the daemon from starting. Reproduction command: bun -e 'import {RuntimePolicy} from \"./src/router/runtime-policy.ts\"; import {MODELS,PROVIDERS} from \"./src/router/catalog.ts\"; const f=await Bun.file(\"test/fixtures/routing-identity.json\").json(); const id=f.snapshot.providers.find(id=>!PROVIDERS.some(p=>p.id===id)); try {new RuntimePolicy({routingCells:()=>[],routingPrefer:()=>[id],routingHistory:()=>[]},{},MODEL",
+    "failure_scenario": "A database written before the change has an operator routing preference naming the removed provider, a routing cell naming its model, or a runtime model attached to that provider. Starting the new daemon throws before serving requests or resuming runs."
+   }
+  ]
+ },
+ {
+  "tid": "T5",
+  "case": "review-087",
+  "repo": "MattFlower/limitless",
+  "base": "9f2baeb0a05d34745c40e8273908756a948ed400",
+  "head": "927486c53fa797f7ceb363c2b7622dcd0b3f739c",
+  "gold": {
+   "id": "G1",
+   "file": "scripts/land-pr.sh",
+   "lines": [
+    74,
+    76
+   ],
+   "summary": "Post-check publication scanning executes Git against mutable clone configuration.",
+   "category": "security"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "scripts/land-pr.sh",
+    "line": 98,
+    "title": "Isolated status still executes submodule repository configuration",
+    "detail": "Status recursively inspects populated submodules using their own Git directories. The safe_git filter lookup now runs in the isolated repository, so it does not blank filter keys from clone/submodule configuration. A local fixture with filter.attack.clean configured in both repositories demonstrated a regression: the previous hardened clone status printed `old clone status: '' marker: False`, while the new isolated status printed `new isolated status: '' marker: True`. The probe used the private GIT_INDEX_FILE and the script's hardening flags. Thus status can execute a planted command and still report a clean tree, allowing delivery to continue.",
+    "failure_scenario": "The pinned commit contains a populated submodule whose tracked file uses filter=attack. Checks configure filter.attack.clean in the clone and submodule, then rewrite that file with identical contents to force reinspection. The isolated status invokes the submodule filter, creates its marker, and ret"
+   }
+  ]
+ },
+ {
+  "tid": "T6",
+  "case": "review-098",
+  "repo": "MattFlower/limitless",
+  "base": "4c50ba4a4abff33458b84ad6f42f6761247b1211",
+  "head": "5a57b035e284b98bd84a2483519bed208135cecb",
+  "gold": {
+   "id": "G1",
+   "file": "src/router/runtime-policy.ts",
+   "lines": [
+    25,
+    31
+   ],
+   "summary": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+   "category": "data-migration"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/router/catalog.ts",
+    "line": 94,
+    "title": "Persisted references to the removed provider can prevent daemon startup",
+    "detail": "Removing the catalog entry leaves startup validation unchanged. RuntimePolicy rejects a persisted routing preference naming the removed provider; persisted routing cells and runtime models have similar rejection paths. Consequently, an existing database can prevent the daemon from starting, making historical records inaccessible. Reproduction command: bun -e 'import { Store } from \"./src/db/store.ts\"; import { RuntimePolicy } from \"./src/router/runtime-policy.ts\"; import { MODELS, PROVIDERS } from \"./src/router/catalog.ts\"; const baseline = await Bun.file(\"test/fixtures/routing-identity.json\").json(); const retired = baseline.snapshot.providers.find((id) => !PROVIDERS.some((p) => p.id === id",
+    "failure_scenario": "Before upgrading, an operator saved a routing preference containing the machine-named provider. After upgrading, Factory construction reaches RuntimePolicy and throws instead of starting."
+   }
+  ]
+ },
+ {
+  "tid": "T7",
+  "case": "review-098",
+  "repo": "MattFlower/limitless",
+  "base": "4c50ba4a4abff33458b84ad6f42f6761247b1211",
+  "head": "5a57b035e284b98bd84a2483519bed208135cecb",
+  "gold": {
+   "id": "G2",
+   "file": "src/app.ts",
+   "lines": [
+    100,
+    104
+   ],
+   "summary": "A runtime model attached to a retired provider prevents factory construction.",
+   "category": "data-migration"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/router/catalog.ts",
+    "line": 94,
+    "title": "Persisted references to the removed provider can prevent daemon startup",
+    "detail": "Removing the catalog entry leaves startup validation unchanged. RuntimePolicy rejects a persisted routing preference naming the removed provider; persisted routing cells and runtime models have similar rejection paths. Consequently, an existing database can prevent the daemon from starting, making historical records inaccessible. Reproduction command: bun -e 'import { Store } from \"./src/db/store.ts\"; import { RuntimePolicy } from \"./src/router/runtime-policy.ts\"; import { MODELS, PROVIDERS } from \"./src/router/catalog.ts\"; const baseline = await Bun.file(\"test/fixtures/routing-identity.json\").json(); const retired = baseline.snapshot.providers.find((id) => !PROVIDERS.some((p) => p.id === id",
+    "failure_scenario": "Before upgrading, an operator saved a routing preference containing the machine-named provider. After upgrading, Factory construction reaches RuntimePolicy and throws instead of starting."
+   }
+  ]
+ },
+ {
+  "tid": "T8",
+  "case": "review-098",
+  "repo": "MattFlower/limitless",
+  "base": "4c50ba4a4abff33458b84ad6f42f6761247b1211",
+  "head": "5a57b035e284b98bd84a2483519bed208135cecb",
+  "gold": {
+   "id": "G1",
+   "file": "src/router/runtime-policy.ts",
+   "lines": [
+    25,
+    31
+   ],
+   "summary": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+   "category": "data-migration"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "major",
+    "file": "src/router/catalog.ts",
+    "line": 94,
+    "title": "Persisted provider preferences can prevent daemon startup",
+    "detail": "Removing the provider leaves RuntimePolicy's startup validation rejecting previously valid routing.prefer records. Factory constructs RuntimePolicy synchronously, so this prevents the daemon from starting. Temporary probe command `bun review-compat-probe.ts preference` produced: `Error: routing.prefer: \"<removed provider>\" is not a known provider ID`. The probe derives the removed ID from the captured fixture and persists it through Store.writeRouting.",
+    "failure_scenario": "Before upgrading, an operator saves a provider preference containing the machine-named provider. After upgrading, daemon startup throws instead of ignoring the unavailable preference."
+   }
+  ]
+ },
+ {
+  "tid": "T9",
+  "case": "review-087",
+  "repo": "MattFlower/limitless",
+  "base": "9f2baeb0a05d34745c40e8273908756a948ed400",
+  "head": "927486c53fa797f7ceb363c2b7622dcd0b3f739c",
+  "gold": {
+   "id": "G1",
+   "file": "scripts/land-pr.sh",
+   "lines": [
+    74,
+    76
+   ],
+   "summary": "Post-check publication scanning executes Git against mutable clone configuration.",
+   "category": "security"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "major",
+    "file": "scripts/land-pr.sh",
+    "line": 98,
+    "title": "Recursive status still executes submodule configuration",
+    "detail": "The isolated git directory protects only the top-level repository. Status recursively inspects initialized submodules using their own repository configuration, while safe_git blanks only filter keys discovered in the isolated repository. A submodule clean filter therefore executes after checks. A filter that normalizes changed bytes back to the indexed contents also makes this status return empty. Probe command: python3 \"$TMPDIR/review-submodule-status.py\". Output: \"status output: ''\" followed by \"AssertionError: isolated status executed the submodule clean filter\". This exposure also existed in the previous status path.",
+    "failure_scenario": "The landing commit contains an initialized submodule. Checks plant filter.attack.clean in that submodule's config and modify a same-length tracked file selected by its .gitattributes. The post-check isolated status executes the planted command and can report a clean tree."
+   }
+  ]
+ },
+ {
+  "tid": "T10",
+  "case": "review-044",
+  "repo": "MattFlower/limitless",
+  "base": "329ed414e8223285ed54a18b994e7e94313a8ff0",
+  "head": "73b2feae3779c5ccf769da946aaf89a3814baf72",
+  "gold": {
+   "id": "G1",
+   "file": "src/router/router.ts",
+   "lines": [
+    256,
+    262
+   ],
+   "summary": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+   "category": "logic"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "major",
+    "file": "src/router/router.ts",
+    "line": 258,
+    "title": "Live edit drops every `prefer` pin on the edited cell, not just the sticky implementer",
+    "detail": "decideRoute sets `preference = undefined` whenever the cell is in `changedCells` and the preferred target isn't in the cell's groups. It then skips `consider([c.prefer])` entirely (`if (c.prefer && preference)`). But `prefer` isn't used only for the sticky implementer. engine.ts also passes configured review finder targets (`finder?.target`) and verifier targets as `prefer`, and those are usually not in the review policy cell. An implementer that escalated beyond the policy list through `minTier` is also outside the cell. After any operator edit to review.* (or any operator review row at startup, because the constructor calls setPolicy and records the cells as changed), configured panel find",
+    "failure_scenario": "Probe (test in a TMPDIR copy, using the router.test.ts fixtures): router.route('review','small',{prefer:'claude/opus'}) puts claude/opus first. After router.setPolicy({...policy, review:{default:['claude/sonnet|codex/sol']}}), the same call returns ['claude/sonnet','codex/sol'], with no claude/opus "
+   }
+  ]
+ },
+ {
+  "tid": "T11",
+  "case": "review-057",
+  "repo": "MattFlower/limitless",
+  "base": "23752857992745a5d55b81a19208c88360ef6c85",
+  "head": "7fe757ade31e42bdcd0df1a9248f02f683ab3adb",
+  "gold": {
+   "id": "G1",
+   "file": "src/router/runtime-catalog.ts",
+   "lines": [
+    71,
+    76
+   ],
+   "summary": "Effort removal is persisted without checking policy cells hidden by operator overrides.",
+   "category": "data-migration"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "major",
+    "file": "src/router/runtime-catalog.ts",
+    "line": 81,
+    "title": "Deletion can leave the eval policy invalid and prevent restart",
+    "detail": "remove() checks only persisted operator cells. A runtime model can also be referenced by routing/policy.json, including through the existing eval-policy workflow. Deletion succeeds while leaving that policy unchanged. Factory startup subsequently calls readPolicy(), which rejects the missing model and aborts construction. Reproduced with this exact command: bun -e 'import { Store } from \"./src/db/store.ts\"; import { MODELS, PROVIDERS, DEFAULT_POLICY } from \"./src/router/catalog.ts\"; import { ProviderTracker } from \"./src/router/providers.ts\"; import { Router } from \"./src/router/router.ts\"; import { RuntimeCatalog } from \"./src/router/runtime-catalog.ts\"; import { parsePolicy, overlayPolicy ",
+    "failure_scenario": "Add codex/experiment, persist an eval policy naming it, restart to activate that policy, then remove the model without an operator-cell reference. DELETE succeeds, but the next daemon restart fails while validating routing/policy.json."
+   }
+  ]
+ },
+ {
+  "tid": "T12",
+  "case": "review-087",
+  "repo": "MattFlower/limitless",
+  "base": "9f2baeb0a05d34745c40e8273908756a948ed400",
+  "head": "927486c53fa797f7ceb363c2b7622dcd0b3f739c",
+  "gold": {
+   "id": "G1",
+   "file": "scripts/land-pr.sh",
+   "lines": [
+    74,
+    76
+   ],
+   "summary": "Post-check publication scanning executes Git against mutable clone configuration.",
+   "category": "security"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "scripts/land-pr.sh",
+    "line": 98,
+    "title": "Isolated status still executes filters through tracked submodules",
+    "detail": "Status recurses into tracked submodules and reads their writable configuration. A submodule can include the land clone\u2019s config, exposing a planted clean filter. safe_git now enumerates filters only in the isolated repository, so it misses that filter; status executes it and returns empty output, allowing landing. The previous clone-level enumeration blanked this filter. Probe command: `TMPDIR=/private/tmp/lr-davpEH/claude-501 python3 /private/tmp/lr-davpEH/claude-501/land-submodule-probe.py`. Output: `With clone filter blanked: '' marker: False`; `New isolated status: '' marker: True`; `AssertionError: isolated status executed a clean filter from the land clone config`.",
+    "failure_scenario": "The pinned tree contains an initialized submodule with `file filter=attack` attributes. During checks, clone config receives `filter.attack.clean = touch <marker>; cat`, and submodule config receives an include pointing at clone config. The new isolated status executes the marker command while repor"
+   }
+  ]
+ },
+ {
+  "tid": "T13",
+  "case": "review-049",
+  "repo": "MattFlower/limitless",
+  "base": "6315b955bf5e4751d93b7a07c717c3bd5d98203f",
+  "head": "4f61867361fea812adbc24261742756742072e75",
+  "gold": {
+   "id": "G1",
+   "file": "src/gates/media.ts",
+   "lines": [
+    43,
+    45
+   ],
+   "summary": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+   "category": "correctness"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "major",
+    "file": "src/gates/media.ts",
+    "line": 33,
+    "title": "Do not classify ordinary text by embedded signature substrings",
+    "detail": "isForbiddenFormat searches entire blobs for short signatures and ordinary strings, and repos.ts removes matching files from the text classification. Consequently, fully reviewable source and documentation require a binary allowance. This also explains the automated binary flags on this patch's text source files. Command: bun \"$TMPDIR/audit-review.ts\". Output: FAIL reviewable source is text actual=[{\"rule\":\"binary-content\",\"file\":\"README.md\"},{\"rule\":\"binary-content\",\"file\":\"country.ts\"},{\"rule\":\"binary-content\",\"file\":\"format.ts\"}] expected=[].",
+    "failure_scenario": "Commit README.md containing 'A recipe for custard.', country.ts containing export const country = \"MZ\";, or source containing the literal \"%PDF-\"."
+   }
+  ]
+ },
+ {
+  "tid": "T14",
+  "case": "review-049",
+  "repo": "MattFlower/limitless",
+  "base": "6315b955bf5e4751d93b7a07c717c3bd5d98203f",
+  "head": "4f61867361fea812adbc24261742756742072e75",
+  "gold": {
+   "id": "G1",
+   "file": "src/gates/media.ts",
+   "lines": [
+    43,
+    45
+   ],
+   "summary": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+   "category": "correctness"
+  },
+  "candidates": [
+   {
+    "id": "F3",
+    "severity": "major",
+    "file": "src/gates/media.ts",
+    "line": 33,
+    "title": "Do not treat arbitrary text substrings as binary formats",
+    "detail": "isForbiddenFormat searches entire blobs for signatures including the ordinary strings `MZ` and `ustar`. textAt then removes matching files from the text classification. The reproduction command above added example.ts containing only `export const archiveFormat = \"ustar\";` and returned a binary-content/block finding for example.ts. Fully visible source and documentation can therefore require binary allowances.",
+    "failure_scenario": "A TypeScript file mentions ustar, or documentation includes MZ, and the audit blocks it as hidden binary content despite a complete textual diff."
+   }
+  ]
+ },
+ {
+  "tid": "T15",
+  "case": "review-049",
+  "repo": "MattFlower/limitless",
+  "base": "6315b955bf5e4751d93b7a07c717c3bd5d98203f",
+  "head": "4f61867361fea812adbc24261742756742072e75",
+  "gold": {
+   "id": "G1",
+   "file": "src/gates/media.ts",
+   "lines": [
+    43,
+    45
+   ],
+   "summary": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+   "category": "correctness"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "major",
+    "file": "src/gates/media.ts",
+    "line": 33,
+    "title": "Do not classify arbitrary signature substrings as binary",
+    "detail": "isForbiddenFormat searches complete text blobs for short signatures and ordinary strings. The classification then removes matching files from the text set. Running `TMP=\"$TMPDIR\" TEMP=\"$TMPDIR\" bun \"$TMPDIR/review-check.ts\"` on ordinary.ts containing `const signature = \"MZ\";` produced a blocking binary-content finding, despite the file being fully readable text. Strings such as ustar and SQLite format 3 cause the same problem.",
+    "failure_scenario": "A normal source or documentation edit mentions MZ, ustar, or SQLite format 3 and unexpectedly requires Allow: binary."
+   }
+  ]
+ },
+ {
+  "tid": "T16",
+  "case": "review-062",
+  "repo": "MattFlower/limitless",
+  "base": "09c6abe6683139c14f2de69ea033c9cf66b23f27",
+  "head": "77fa7a08013b817815e656f2a88584b5e16184be",
+  "gold": {
+   "id": "G1",
+   "file": "src/harness/scratch.ts",
+   "lines": [
+    184,
+    187
+   ],
+   "summary": "Run-wide scratch roots let one invocation cleanup kill another invocation writer.",
+   "category": "concurrency"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/util/processes-darwin.ts",
+    "line": 66,
+    "title": "Directory membership can cause teardown to kill unrelated processes",
+    "detail": "An unmarked orphan born after invocation startup is treated as owned solely because its cwd matches an invocation directory. This does not establish ancestry. An isolated fixture launched an independent shell from the reviewer process while runProcess was running; teardown killed that shell. Exact check: `TMPDIR=/private/tmp/lr-6edcWS/claude-501 TMP=/private/tmp/lr-6edcWS/claude-501 TEMP=/private/tmp/lr-6edcWS/claude-501 bun /private/tmp/lr-6edcWS/claude-501/review-process-membership.ts unrelated`. Output: `{\"mode\":\"unrelated\",\"exitCode\":0,\"alive\":false}`, followed by `ASSERTION FAILED: independent unmarked process was killed`.",
+    "failure_scenario": "An independent background shell becomes orphaned in the same directory after a command starts. When that command ends, teardown signals the independent shell."
+   }
+  ]
+ },
+ {
+  "tid": "T17",
+  "case": "review-062",
+  "repo": "MattFlower/limitless",
+  "base": "09c6abe6683139c14f2de69ea033c9cf66b23f27",
+  "head": "77fa7a08013b817815e656f2a88584b5e16184be",
+  "gold": {
+   "id": "G1",
+   "file": "src/harness/scratch.ts",
+   "lines": [
+    184,
+    187
+   ],
+   "summary": "Run-wide scratch roots let one invocation cleanup kill another invocation writer.",
+   "category": "concurrency"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/util/processes-darwin.ts",
+    "line": 65,
+    "title": "Working directory and birth time do not prove process ownership",
+    "detail": "The orphan fallback claims unrelated processes merely because they started during the invocation and share its working directory. On this macOS host, the following command demonstrated that finishing runProcess killed a separately launched control process:\n\nbun -e 'import {runProcess} from \"./src/util/proc.ts\";const p=runProcess({cmd:[\"/bin/sleep\",\"0.5\"],cwd:process.cwd(),env:process.env});await Bun.sleep(100);const c=Bun.spawn([\"/bin/sh\",\"-c\",\"sleep 5 >/dev/null 2>&1 & echo $!\"],{cwd:process.cwd(),env:{PATH:\"/usr/bin:/bin\"},stdout:\"pipe\"});const pid=Number(await new Response(c.stdout).text());await c.exited;try{console.log(\"alive before\",process.kill(pid,0));await p;try{console.log(\"alive a",
+    "failure_scenario": "Another worker or the user starts a background platform tool in the same directory during an invocation. When that invocation finishes, Limitless kills the unrelated process."
+   }
+  ]
+ },
+ {
+  "tid": "T18",
+  "case": "review-066",
+  "repo": "MattFlower/limitless",
+  "base": "baa230a68b480684523d7066b298ff1039a62b2c",
+  "head": "9206127b9d1b407a885ae97ec7be25f0cfb55126",
+  "gold": {
+   "id": "G1",
+   "file": "src/pipeline/gate-evidence.ts",
+   "lines": [
+    43,
+    50
+   ],
+   "summary": "Free-text claim detection still lets model wording steer gate-evidence substitution.",
+   "category": "security"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "major",
+    "file": "src/pipeline/gate-evidence.ts",
+    "line": 45,
+    "title": "Ordinary mentions of gates invalidate independent verification",
+    "detail": "The sanitizer treats any standalone 'gate' as reliance on factory results, even in independently observed implementation evidence. It also applies a matching notes field to every criterion. Valid met results become blocked and their evidence is erased; inspection criteria cannot recover through command-based gate substitution. Reproduction: bun test --preload \"$TMPDIR/review-zod-preload.ts\" \"$TMPDIR/review-boundaries.test.ts\". The assertion 'independent code inspection mentioning a gate must remain met' failed with:\nExpected: \"met\"\nReceived: \"blocked\"",
+    "failure_scenario": "A verifier marks an authentication criterion met with evidence 'Inspected src/auth.ts:42: the authentication gate rejects a missing token before calling the handler.' The engine changes it to blocked despite no environmental failure, potentially exhausting verification retries and stopping delivery."
+   }
+  ]
+ },
+ {
+  "tid": "T19",
+  "case": "review-066",
+  "repo": "MattFlower/limitless",
+  "base": "baa230a68b480684523d7066b298ff1039a62b2c",
+  "head": "9206127b9d1b407a885ae97ec7be25f0cfb55126",
+  "gold": {
+   "id": "G1",
+   "file": "src/pipeline/gate-evidence.ts",
+   "lines": [
+    43,
+    50
+   ],
+   "summary": "Free-text claim detection still lets model wording steer gate-evidence substitution.",
+   "category": "security"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "major",
+    "file": "src/pipeline/gate-evidence.ts",
+    "line": 23,
+    "title": "Independent evidence mentioning a gate is discarded",
+    "detail": "gateClaim matches any standalone occurrence of 'gate', even when the verifier describes independently observed behavior. Sanitization then changes a met criterion to blocked and deletes its evidence. Reproduction command: bun test --preload \"$TMPDIR/review-zod.ts\" \"$TMPDIR/review-gate-repro.test.ts\". Output: '(fail) independent evidence mentioning gate', 'Expected: \"met\"', 'Received: \"blocked\"'. The evidence was 'bun test test/loopback.test.ts: 1 pass, 0 fail. This directly exercises the gate profile.'",
+    "failure_scenario": "A verifier successfully runs a targeted test and reports that it exercises the gate profile. With no substitutable gate record, the engine converts the successful observation into an environment block and can terminate the run as needs_human."
+   }
+  ]
+ },
+ {
+  "tid": "T20",
+  "case": "review-066",
+  "repo": "MattFlower/limitless",
+  "base": "baa230a68b480684523d7066b298ff1039a62b2c",
+  "head": "9206127b9d1b407a885ae97ec7be25f0cfb55126",
+  "gold": {
+   "id": "G1",
+   "file": "src/pipeline/gate-evidence.ts",
+   "lines": [
+    43,
+    50
+   ],
+   "summary": "Free-text claim detection still lets model wording steer gate-evidence substitution.",
+   "category": "security"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "major",
+    "file": "src/pipeline/gate-evidence.ts",
+    "line": 45,
+    "title": "Ordinary mentions of gates invalidate independent verification",
+    "detail": "The sanitizer treats any standalone 'gate' mention as a factory citation, and checks global notes for every criterion. Consequently, notes such as 'Independently tested gate timeout handling.' downgrade every met criterion to blocked, including rows containing independently observed passing commands. The isolated `bun run -` check returned status `blocked` while retaining evidence `bun test test/loopback.test.ts: 1 pass, 0 fail`.",
+    "failure_scenario": "A verifier successfully tests gate-related functionality and mentions that functionality in its notes. Criteria requiring inspection or commands unavailable in gate records become blocked and can terminate the run as needs_human."
+   }
+  ]
+ },
+ {
+  "tid": "T21",
+  "case": "review-067",
+  "repo": "MattFlower/limitless",
+  "base": "7cc4e1864e395db91a57cd88c0bfc77c9cd6c067",
+  "head": "73b9a9cc7906bc2d67757b195eb4d1db966664ff",
+  "gold": {
+   "id": "G1",
+   "file": "src/pipeline/gate-evidence.ts",
+   "lines": [
+    40,
+    41
+   ],
+   "summary": "Matching a successful command does not establish the observation required by the criterion.",
+   "category": "logic"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "major",
+    "file": "src/pipeline/gate-evidence.ts",
+    "line": 60,
+    "title": "Targeted-command shortcut certifies a file that never ran",
+    "detail": "The shortcut normalizes away './' and accepts matching command arguments without consulting passedFiles. Bun treats an unprefixed argument as a substring filter, while './' selects a path. With only other-loopback.test.ts present, `bun test loopback.test.ts` passes but `bun test ./loopback.test.ts` fails with no matches. The resolver nevertheless marks the latter criterion met, even with coverage explicitly naming only the unrelated file. Reproducer: `bun \"$TMPDIR/review-383.ts\" filter` outputs `gate exit=0; requested command exit=1`, `expected blocked; actual met`, and `AssertionError: 'met' !== 'blocked'`.",
+    "failure_scenario": "A gate runs the filter `bun test loopback.test.ts`, discovering only other-loopback.test.ts. A sandbox-blocked criterion requires `bun test ./loopback.test.ts`, whose file is absent. Verification incorrectly passes using the unrelated test."
+   }
+  ]
+ },
+ {
+  "tid": "T22",
+  "case": "review-067",
+  "repo": "MattFlower/limitless",
+  "base": "7cc4e1864e395db91a57cd88c0bfc77c9cd6c067",
+  "head": "73b9a9cc7906bc2d67757b195eb4d1db966664ff",
+  "gold": {
+   "id": "G2",
+   "file": "src/pipeline/gate-evidence.ts",
+   "lines": [
+    60,
+    65
+   ],
+   "summary": "Targeted Bun evidence can satisfy a criterion without proof that any tests ran.",
+   "category": "logic"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "major",
+    "file": "src/pipeline/gate-evidence.ts",
+    "line": 60,
+    "title": "Targeted-command shortcut certifies a file that never ran",
+    "detail": "The shortcut normalizes away './' and accepts matching command arguments without consulting passedFiles. Bun treats an unprefixed argument as a substring filter, while './' selects a path. With only other-loopback.test.ts present, `bun test loopback.test.ts` passes but `bun test ./loopback.test.ts` fails with no matches. The resolver nevertheless marks the latter criterion met, even with coverage explicitly naming only the unrelated file. Reproducer: `bun \"$TMPDIR/review-383.ts\" filter` outputs `gate exit=0; requested command exit=1`, `expected blocked; actual met`, and `AssertionError: 'met' !== 'blocked'`.",
+    "failure_scenario": "A gate runs the filter `bun test loopback.test.ts`, discovering only other-loopback.test.ts. A sandbox-blocked criterion requires `bun test ./loopback.test.ts`, whose file is absent. Verification incorrectly passes using the unrelated test."
+   }
+  ]
+ },
+ {
+  "tid": "T23",
+  "case": "review-067",
+  "repo": "MattFlower/limitless",
+  "base": "7cc4e1864e395db91a57cd88c0bfc77c9cd6c067",
+  "head": "73b9a9cc7906bc2d67757b195eb4d1db966664ff",
+  "gold": {
+   "id": "G2",
+   "file": "src/pipeline/gate-evidence.ts",
+   "lines": [
+    60,
+    65
+   ],
+   "summary": "Targeted Bun evidence can satisfy a criterion without proof that any tests ran.",
+   "category": "logic"
+  },
+  "candidates": [
+   {
+    "id": "F3",
+    "severity": "major",
+    "file": "src/pipeline/gate-evidence.ts",
+    "line": 63,
+    "title": "Preserve Bun's distinction between substring filters and exact paths",
+    "detail": "Removing leading `./` makes different Bun commands equivalent, and the matching-command shortcut then accepts them without checking discovered files. Bun treats `test/loopback.test.ts` as a substring filter but `./test/loopback.test.ts` as an exact path. Targeted command `bun test \"$TMPDIR/verifier-review.ucgpf7/repro.test.ts\"` confirmed `substring exit 0 exact-path exit 1`, then failed substitution validation with `Expected: \"blocked\"; Received: \"met\"`.",
+    "failure_scenario": "Only other/test/loopback.test.ts exists. The gate `bun test test/loopback.test.ts` passes that file, while the acceptance command `bun test ./test/loopback.test.ts` fails because its exact file is absent. The engine nevertheless marks the blocked acceptance command met."
+   }
+  ]
+ },
+ {
+  "tid": "T24",
+  "case": "review-091",
+  "repo": "MattFlower/limitless",
+  "base": "4c50ba4a4abff33458b84ad6f42f6761247b1211",
+  "head": "8221ed08729ee39d9c493c4cdcace5e0a144cf87",
+  "gold": {
+   "id": "G1",
+   "file": "src/harness/types.ts",
+   "lines": [
+    225,
+    228
+   ],
+   "summary": "A completed parallel call is classified as repetitive before unresolved predecessors establish progress.",
+   "category": "concurrency"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "blocker",
+    "file": "src/harness/types.ts",
+    "line": 175,
+    "title": "Do not finalize pending results when another tool starts",
+    "detail": "Every observe() calls reconcile(true), treating a pending threshold result as finished merely because another tool starts. Both harnesses then abort immediately, so a changed result cannot establish progress. The new 'pending threshold result' test explicitly expects this incorrect cutoff. Reproduction command: bun -e 'import {LoopDetector} from \"./src/harness/types.ts\"; import {strictEqual} from \"node:assert\"; const d=new LoopDetector(100); for(let i=0;i<5;i++){d.observe(\"shell\",\"poll\",`${i}`);d.observeResult(`${i}`,\"waiting\");} d.observe(\"shell\",\"poll\",\"sixth\"); strictEqual(d.observe(\"Read\",\"file\",\"other\"),null); d.observeResult(\"sixth\",\"progress\");' Output: AssertionError: Expected values",
+    "failure_scenario": "Five identical polls return 'waiting'. A sixth poll starts and will return 'progress', but an unrelated Read starts before that result arrives. The detector reports a loop and both harnesses cancel the progressing invocation."
+   }
+  ]
+ },
+ {
+  "tid": "T25",
+  "case": "review-057",
+  "repo": "MattFlower/limitless",
+  "base": "23752857992745a5d55b81a19208c88360ef6c85",
+  "head": "7fe757ade31e42bdcd0df1a9248f02f683ab3adb",
+  "gold": {
+   "id": "G1",
+   "file": "src/router/runtime-catalog.ts",
+   "lines": [
+    71,
+    76
+   ],
+   "summary": "Effort removal is persisted without checking policy cells hidden by operator overrides.",
+   "category": "data-migration"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "major",
+    "file": "src/router/runtime-catalog.ts",
+    "line": 81,
+    "title": "Prevent deletion of models referenced by the persisted eval policy",
+    "detail": "Deletion checks only operator cells stored in SQLite. A runtime model referenced by routing/policy.json can therefore be deleted successfully, leaving the active policy dangling. The next daemon startup fails because Factory loads that file through strict readPolicy validation. Reproduction command: bun -e 'import { Factory } from \"./src/app.ts\"; import { Store } from \"./src/db/store.ts\"; import { customModel, providerFixture } from \"./test/provider-config-support.ts\"; import { writeFileSync } from \"node:fs\"; import { join } from \"node:path\"; const fixture = providerFixture([]); const store = new Store(\":memory:\"); const cfg = fixture.load(); let factory = new Factory(cfg, {store}); factory.",
+    "failure_scenario": "Add codex/experiment, persist it in routing/policy.json under triage.default, restart, then delete it through the catalog API without any operator-cell reference. Deletion succeeds, but the next restart fails."
+   }
+  ]
+ },
+ {
+  "tid": "T26",
+  "case": "review-069",
+  "repo": "MattFlower/limitless",
+  "base": "09c6abe6683139c14f2de69ea033c9cf66b23f27",
+  "head": "1c8c307f260c517ea716f66a3adbb1f1e8739b6a",
+  "gold": {
+   "id": "G1",
+   "file": "src/cli/digest.ts",
+   "lines": [
+    19,
+    30
+   ],
+   "summary": "Digest actions are derived from stale records instead of current unanswered and review state.",
+   "category": "logic"
+  },
+  "candidates": [
+   {
+    "id": "F1",
+    "severity": "major",
+    "file": "src/cli/digest.ts",
+    "line": 35,
+    "title": "Clear blocked lands when their PR merges or closes",
+    "detail": "Blocked lands are cleared only by another queue attempt or queue-controlled landing. An external merge leaves a stale actionable item even after both pr.merged and run.merged arrive. Reproduction command: `bun test /private/tmp/lr-a0XkLV/claude-501/review-lifecycle.test.ts`. Output: Expected \"Needs you: 0; PRs awaiting review: 0; Blocked lands: 0\"; Received \"Needs you: 0; PRs awaiting review: 0; Blocked lands: 1\".",
+    "failure_scenario": "Landing blocks on CI; someone merges the PR externally; a session digest reads land.blocked followed by pr.merged and run.merged and still reports landing work requiring attention."
+   }
+  ]
+ },
+ {
+  "tid": "T27",
+  "case": "review-049",
+  "repo": "MattFlower/limitless",
+  "base": "6315b955bf5e4751d93b7a07c717c3bd5d98203f",
+  "head": "4f61867361fea812adbc24261742756742072e75",
+  "gold": {
+   "id": "G1",
+   "file": "src/gates/media.ts",
+   "lines": [
+    43,
+    45
+   ],
+   "summary": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+   "category": "correctness"
+  },
+  "candidates": [
+   {
+    "id": "F2",
+    "severity": "major",
+    "file": "src/gates/media.ts",
+    "line": 33,
+    "title": "Do not classify readable text by embedded signature substrings",
+    "detail": "isForbiddenFormat scans entire text blobs for short signatures and ordinary words. Every occurrence of ASCII MZ or ustar causes otherwise readable source or documentation to be removed from the text set and blocked as binary. Running `bun \"$TMPDIR/review-audit.ts\"` produced binary-content/block findings for constants.ts containing `export const name = \"MZ\";` and readme.md containing `Use ustar archives.`.",
+    "failure_scenario": "A source edit adds an MZ string constant, or documentation mentions ustar archives, without introducing any binary bytes."
+   }
+  ]
+ },
+ {
+  "tid": "T28",
+  "case": "review-060",
+  "repo": "MattFlower/limitless",
+  "base": "09c6abe6683139c14f2de69ea033c9cf66b23f27",
+  "head": "133e274c8e0471f016e179b44ab9a064db6d4b8b",
+  "gold": {
+   "id": "G2",
+   "file": "src/util/proc.ts",
+   "lines": [
+    146,
+    151
+   ],
+   "summary": "Process cleanup returns while owned descendants are still alive.",
+   "category": "resource"
+  },
+  "candidates": [
+   {
+    "id": "F4",
+    "severity": "blocker",
+    "file": "src/util/proc.ts",
+    "line": 129,
+    "title": "Process-group termination still leaves detached descendants alive",
+    "detail": "killTree only signals the invocation's original process group. A descendant that starts another session or detached process group survives, and the new wait returns immediately when the original group disappears. This preexisting limitation leaves the requested whole-process-tree fix incomplete. In `bun test \"$TMPDIR/review-377.test.ts\"`, a Python background writer calling os.setsid() survived runProcess returning: `expect(received).toThrow()` failed with `Received value: true` for process.kill(writerPid, 0).",
+    "failure_scenario": "An implementer launches a background writer through a tool that creates a separate session or detached process group. The invocation exits or is stopped, but the writer continues modifying the worktree during cleanup."
+   }
+  ]
+ }
+]

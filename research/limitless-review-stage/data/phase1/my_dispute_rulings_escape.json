@@ -1,0 +1,90 @@
+{
+ "limitless-386-r1/F1": {
+  "ruling": "nit",
+  "why": "both copies reject the same inputs; only wording differs"
+ },
+ "limitless-443-r1/F1": {
+  "ruling": "minor",
+  "why": "marker is fresh per invocation, so ancestors can't carry it; Sol's repro is synthetic"
+ },
+ "limitless-486-r1/F7": {
+  "ruling": "nit",
+  "why": "only 'local' exists; no effect"
+ },
+ "limitless-485-r3/F4": {
+  "ruling": "minor",
+  "why": "single replaceable cache entry; memory bounded by one run"
+ },
+ "limitless-570-r1/F1": {
+  "ruling": "minor",
+  "why": "the command must run with the value on the owner's own paired worker over pinned TLS; owner must put a credential in a gate command; not a leak to a third party"
+ },
+ "limitless-651-r1/F6": {
+  "ruling": "minor",
+  "why": "Linux is outside the documented deploy platform; fails loudly with a feed message"
+ },
+ "limitless-659-r1/F1": {
+  "ruling": "minor",
+  "why": "request explicitly says an error in either branch propagates after both settle; behaviour adopted by the request (precedent review-082)"
+ },
+ "limitless-685-r1/F3": {
+  "ruling": "minor",
+  "why": "no production path starts and attaches in different contexts"
+ },
+ "limitless-687-r1/F2": {
+  "ruling": "major",
+  "why": "in an approval repo one PR waiting days for review blocks every approved PR in that repo from landing; normal trigger, stuck work"
+ },
+ "limitless-687-r1/F4": {
+  "ruling": "minor",
+  "why": "request asks for an approval from an account other than the factory's, which holds; push-access/bot exclusion not explicit (Q3)"
+ },
+ "limitless-693-r1/F7": {
+  "ruling": "minor",
+  "why": "'[needs human]' is a generic draft label, not factory branding the request lists"
+ },
+ "limitless-687-r4/F4": {
+  "ruling": "nit",
+  "why": "documentation wording"
+ },
+ "limitless-730-r1/F1": {
+  "ruling": "minor",
+  "why": "test-only; CI flags it loudly, product unchanged"
+ },
+ "limitless-753-r1/F1": {
+  "ruling": "minor",
+  "why": "no production cancel can land inside one synchronous event-loop turn"
+ },
+ "limitless-800-r1/F1": {
+  "ruling": "minor",
+  "why": "20 s event-loop stall needed; expiry is what the request required"
+ },
+ "limitless-820-r3/F2": {
+  "ruling": "not_real",
+  "why": "real Seatbelt probe: gates cannot commit or reset the snapshot"
+ },
+ "limitless-912-r1/F1": {
+  "ruling": "minor",
+  "why": "needs a stop mid-rollback AND a downgrade to the previous release; old release behaves the same"
+ },
+ "limitless-924-r1/F1": {
+  "ruling": "minor",
+  "why": "documentation-only change; no runtime effect at this head"
+ },
+ "limitless-927-r1/F2": {
+  "ruling": "minor",
+  "why": "re-running work interrupted before its checkpoint is the allowed restart behaviour (AGENTS.md); preexisting"
+ },
+ "limitless-927-r1/F4": {
+  "ruling": "minor",
+  "why": "a rate-limited poll fails the gate as an infrastructure error, which is retried; work wasted, not lost"
+ },
+ "limitless-926-r2/F2": {
+  "ruling": "nit",
+  "why": "test-only, requirement covered by another test"
+ },
+ "limitless-981-r1/F5": {
+  "ruling": "minor",
+  "why": "the audit blocks loudly and the next round fixes the fixture; one round wasted"
+ }
+}

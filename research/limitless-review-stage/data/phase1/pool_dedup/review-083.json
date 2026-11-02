@@ -1,0 +1,18 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "The isolated repository the push wrapper builds does not keep the source repository's reftable ref storage format, so it cannot resolve the current branch."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The push wrapper always sets its own default SSH command, which takes precedence over a trusted GIT_SSH program set in the operator's environment."
+  }
+ ]
+}

@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"secret","trigger":"plausible","reason":"Replacing a directory with a file, symlink, or submodule can expose both lines of a registered credential from a deleted child in the change view."}]}

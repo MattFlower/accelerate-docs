@@ -1,0 +1,90 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P4",
+    "P11",
+    "P6",
+    "P7"
+   ],
+   "mechanism": "Blanket redactGateData over the whole RunState also rewrites operational strings such as gate commands and phase, so a restored run executes different commands or skips pipeline phases."
+  },
+  {
+   "members": [
+    "P2",
+    "P10",
+    "P13",
+    "P26"
+   ],
+   "mechanism": "Redacting stdout before onStdoutLine alters the trusted sandbox startup token, so runSandboxed fails to recognize it and throws a confinement error."
+  },
+  {
+   "members": [
+    "P5",
+    "P9",
+    "P12",
+    "P21",
+    "P23",
+    "P24",
+    "P25",
+    "P28"
+   ],
+   "mechanism": "The streaming redaction cut-adjustment loop retreats across overlapping credential matches back to zero, so the pending buffer is unbounded and is rescanned repeatedly, causing memory growth and CPU blocking."
+  },
+  {
+   "members": [
+    "P3",
+    "P20",
+    "P32"
+   ],
+   "mechanism": "redactGateData identifies gate results only by ok and output keys, so unrelated objects get a fabricated confinementError field (and have strings altered)."
+  },
+  {
+   "members": [
+    "P15",
+    "P16",
+    "P19",
+    "P30",
+    "P34",
+    "P35"
+   ],
+   "mechanism": "Redaction is applied in many places beyond the single gate-result point (HTTP, SSE, artifacts, prompts, state), which is out of scope, changes data and formatting, and exceeds the line budget."
+  },
+  {
+   "members": [
+    "P14",
+    "P18",
+    "P31",
+    "P33"
+   ],
+   "mechanism": "loadOutputPrivacy withholds any string containing the literal \"[redacted]\", hiding already-redacted MCP and digest text."
+  },
+  {
+   "members": [
+    "P8"
+   ],
+   "mechanism": "stdout and stderr are redacted separately before being joined, so a multiline credential spanning the join stays intact in the combined output."
+  },
+  {
+   "members": [
+    "P22",
+    "P27",
+    "P29"
+   ],
+   "mechanism": "The deploy CLI never calls loadConfig, so the credential registry is empty and deploy gate redaction does nothing."
+  },
+  {
+   "members": [
+    "P17"
+   ],
+   "mechanism": "The new stdoutTruncated and stderrTruncated ProcResult fields are unused by source, which is unrequested churn."
+  },
+  {
+   "members": [
+    "P36"
+   ],
+   "mechanism": "confinementError is now always written to GateResult rather than only when true, changing the persisted format."
+  }
+ ]
+}

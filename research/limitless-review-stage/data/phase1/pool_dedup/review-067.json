@@ -1,0 +1,25 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": "G2",
+   "root_cause": "Targeted Bun evidence is accepted because the command matches exactly, without checking recorded coverage that the requested test file actually ran."
+  },
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "Verification rejects the whole gate when any test is skipped, even an unrelated one, instead of only checking the tests tied to the criterion."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "Test-coverage parsing treats output the candidate controls as authoritative, so a fabricated passing line counts as real coverage."
+  }
+ ]
+}

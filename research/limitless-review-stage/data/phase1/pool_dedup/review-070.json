@@ -1,0 +1,81 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "MCP status ignores the run's confirmed-merged flag, so it still tells agents to review a PR that has already merged."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The digest's awaiting-review filter doesn't exclude runs that have an active changes round, so it asks for a review before that work is finished."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "The digest's acknowledgment filtering drops PRs whose approval was invalidated by a new push, even when they have unread CI results."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "The digest doesn't check the confirmed-merged flag before showing blocked-land alerts, so the old alert keeps appearing after an operator merges the PR."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": null,
+   "root_cause": "The session-start digest fetches run details and landing info one at a time across the whole unacked feed, instead of limiting or batching those lookups."
+  },
+  {
+   "members": [
+    "C7"
+   ],
+   "same_as": null,
+   "root_cause": "The quoting helper doesn't escape bidi-override or zero-width characters in untrusted PR text."
+  },
+  {
+   "members": [
+    "C8"
+   ],
+   "same_as": null,
+   "root_cause": "Digest lines have no length cap, so a long question or title is inserted into the agent's context in full."
+  },
+  {
+   "members": [
+    "C9"
+   ],
+   "same_as": null,
+   "root_cause": "When the saved PR snapshot has no headRefOid, status falls back to an old failed review round instead of saying the current head is unknown."
+  },
+  {
+   "members": [
+    "C10"
+   ],
+   "same_as": null,
+   "root_cause": "getRunDetail queries the latest approval row twice instead of reusing the first result."
+  },
+  {
+   "members": [
+    "C11"
+   ],
+   "same_as": null,
+   "root_cause": "MCP review verdicts hardcode the reviewer as \"human\" instead of recording the agent's identity."
+  },
+  {
+   "members": [
+    "C12"
+   ],
+   "same_as": null,
+   "root_cause": "The Codex skill doc tells Codex to use the 'claude' feed consumer instead of its own."
+  }
+ ]
+}

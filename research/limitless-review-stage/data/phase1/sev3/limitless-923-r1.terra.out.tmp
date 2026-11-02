@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"secret","trigger":"unusual","reason":"The reproduced regression publishes a protected private value when its literal backslash before a slash is percent-encoded, an uncommon combination of value and output encoding."}]}

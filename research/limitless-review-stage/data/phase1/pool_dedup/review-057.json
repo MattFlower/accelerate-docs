@@ -1,0 +1,68 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "When a backend is replaced or its catalog entry is deleted and recreated, the old model rejection block is not cleared, so the new backend inherits it."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The PATCH handler cannot unset a model's configured default effort, so the model can't fall back to the server default."
+  },
+  {
+   "members": [
+    "C3",
+    "C5b"
+   ],
+   "same_as": null,
+   "root_cause": "Deleting a runtime model doesn't check whether the file-backed routing policy still references it, so the next startup fails policy validation."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "Provider probe responses aren't sequenced, so an older health response that arrives late overwrites newer discovery results."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": null,
+   "root_cause": "Loading the persisted runtime catalog at startup throws when an entry clashes with a config model of the same name or its provider no longer exists, instead of handling that entry gracefully."
+  },
+  {
+   "members": [
+    "C8"
+   ],
+   "same_as": null,
+   "root_cause": "The cleanup test assumes only the first attempt's process IDs exist, but smoke retries can start before the test sees readiness and add a second pair."
+  },
+  {
+   "members": [
+    "C9"
+   ],
+   "same_as": null,
+   "root_cause": "The eval runner calls catalog models without the served-model availability guard, so models discovery marks unavailable still get invoked."
+  },
+  {
+   "members": [
+    "C10"
+   ],
+   "same_as": null,
+   "root_cause": "Queued chat requests keep the model they picked before waiting and don't check it again after acquiring the slot, so they can call a backend discovery has since removed."
+  },
+  {
+   "members": [
+    "C6b"
+   ],
+   "same_as": null,
+   "root_cause": "The smoke check now reads runtime provider state and silently drops checks for disabled providers, without reporting them as skipped."
+  }
+ ]
+}

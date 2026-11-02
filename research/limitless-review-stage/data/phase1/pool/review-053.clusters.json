@@ -1,0 +1,113 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P4",
+    "P7",
+    "P9",
+    "P14",
+    "P17",
+    "P23",
+    "P25",
+    "P26",
+    "P36"
+   ],
+   "mechanism": "Exceptions thrown by classifyCi escape record() in the poller and abort the repository's observation loop, starving later PRs on every poll."
+  },
+  {
+   "members": [
+    "P2",
+    "P27"
+   ],
+   "mechanism": "Repository slug/URL comparison is case-sensitive, so canonical-cased GitHub check_run_url values reject valid jobs and reruns."
+  },
+  {
+   "members": [
+    "P3",
+    "P13",
+    "P21"
+   ],
+   "mechanism": "The main-red branch continues before recording a CiFailure, so those failures never enter the flake ledger."
+  },
+  {
+   "members": [
+    "P5",
+    "P22"
+   ],
+   "mechanism": "Rerun reconciliation searches only the workflow's latest attempt, so a later sibling-only attempt hides the originating job's result and throws Ambiguous CI rerun job."
+  },
+  {
+   "members": [
+    "P6"
+   ],
+   "mechanism": "Completed rerun jobs with skipped/neutral conclusions are never resolved and remain rerunning forever."
+  },
+  {
+   "members": [
+    "P8"
+   ],
+   "mechanism": "Main's legacy commit statuses are fetched only when the PR has status contexts or is truncated, hiding a failing main status with the same name as the PR's check."
+  },
+  {
+   "members": [
+    "P10",
+    "P29",
+    "P30"
+   ],
+   "mechanism": "Security-test exclusion is incomplete: whole-job or dependent-job reruns re-execute security tests because only failed steps or the selected job are checked."
+  },
+  {
+   "members": [
+    "P11"
+   ],
+   "mechanism": "The anchored timeout regex misses test timeout messages like Node's 'test timed out', so transient timeouts are classified as needing a fix."
+  },
+  {
+   "members": [
+    "P12"
+   ],
+   "mechanism": "A rerun claimed before the POST is never resolved when GitHub definitively rejects the request, leaving rerun_requested indefinitely."
+  },
+  {
+   "members": [
+    "P15",
+    "P18"
+   ],
+   "mechanism": "The feed excerpt is the head of the raw job log (runner preamble) rather than the failing output."
+  },
+  {
+   "members": [
+    "P19",
+    "P33",
+    "P37"
+   ],
+   "mechanism": "The failure signature takes the first loosely matching error/fail line, which may be setup noise and includes volatile data such as durations, so signatures are unstable."
+  },
+  {
+   "members": [
+    "P16",
+    "P20",
+    "P34",
+    "P35",
+    "P39"
+   ],
+   "mechanism": "The change greatly exceeds the requested size budget and is overcomplicated, including a redundant second migration altering a table created in the same change."
+  },
+  {
+   "members": [
+    "P24",
+    "P28"
+   ],
+   "mechanism": "Pre-existing restart-repair test in pipeline.test.ts fails on both base and HEAD, unrelated to this change."
+  },
+  {
+   "members": [
+    "P31",
+    "P32",
+    "P38"
+   ],
+   "mechanism": "A main-red pause leaves ciPending true so the REST inspection is repeated every poll even when GraphQL state is unchanged, wasting REST budget."
+  }
+ ]
+}

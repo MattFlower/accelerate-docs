@@ -1,0 +1,63 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1",
+    "C4",
+    "C6",
+    "C10"
+   ],
+   "same_as": "G1",
+   "root_cause": "The digest builds its needs-input and needs-review actions from stale historical records instead of the current unanswered-question and review state."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The digest keeps listing blocked lands without checking whether the PR has since merged."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": "G2",
+   "root_cause": "MCP status gives an old failed review round priority over a later approval."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "MCP status ignores the run's saved merged flag, so it only detects a merge from PR observations or landed queue entries."
+  },
+  {
+   "members": [
+    "C9"
+   ],
+   "same_as": null,
+   "root_cause": "MCP status checks old landing blockers before closed-PR observations, so a closed PR still gets fix-and-requeue advice."
+  },
+  {
+   "members": [
+    "C7"
+   ],
+   "same_as": null,
+   "root_cause": "The land list endpoint now rejects an empty run query parameter instead of treating it as no filter."
+  },
+  {
+   "members": [
+    "C8"
+   ],
+   "same_as": null,
+   "root_cause": "MCP verdict handling hardcodes the reviewer as \"human\" instead of attributing the verdict to the MCP agent."
+  },
+  {
+   "members": [
+    "C11"
+   ],
+   "same_as": null,
+   "root_cause": "The Codex skill's digest command passes the consumer name 'claude' instead of a Codex-specific consumer."
+  }
+ ]
+}

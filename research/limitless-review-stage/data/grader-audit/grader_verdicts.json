@@ -1,0 +1,1922 @@
+[
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-046",
+  "trial": 0,
+  "gold": "A pinned candidate slot deadline exits without recording the chain-exhaustion question.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern verifier exclusions on retry, not the pinned slot-deadline exit that skips the exhaustion question."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-046",
+  "trial": 0,
+  "gold": "A pinned candidate slot deadline exits without recording the chain-exhaustion question.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern verifier exclusions on retry, not the pinned slot-deadline exit that skips the exhaustion question."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-046",
+  "trial": 1,
+  "gold": "A pinned candidate slot deadline exits without recording the chain-exhaustion question.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern verifier exclusions on retry, not the pinned slot-deadline exit that skips the exhaustion question."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-046",
+  "trial": 1,
+  "gold": "A pinned candidate slot deadline exits without recording the chain-exhaustion question.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern verifier exclusions on retry, not the pinned slot-deadline exit that skips the exhaustion question."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "Arbitrary assertion text mentioning a timeout is classified as a transient CI failure.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rerun reconciliation, ledger, URL casing or security-name detection, not timeout-text misclassification as transient."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "Retry eligibility ignores security failures outside the selected error line.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rerun reconciliation, main-red ledger, dedupe or URL casing, not security failures outside the selected error line."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "Arbitrary assertion text mentioning a timeout is classified as a transient CI failure.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rerun reconciliation, ledger, URL casing or security-name detection, not timeout-text misclassification as transient."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "Retry eligibility ignores security failures outside the selected error line.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rerun reconciliation, main-red ledger, dedupe or URL casing, not security failures outside the selected error line."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "An accepted rerun with a lost response is never reconciled to its later result.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Main-red ledger log bypass is a different defect from unreconciled lost-response reruns."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "Arbitrary assertion text mentioning a timeout is classified as a transient CI failure.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rerun reconciliation, ledger, URL casing or security-name detection, not timeout-text misclassification as transient."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "Retry eligibility ignores security failures outside the selected error line.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rerun reconciliation, main-red ledger, dedupe or URL casing, not security failures outside the selected error line."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "Arbitrary assertion text mentioning a timeout is classified as a transient CI failure.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rerun reconciliation, ledger, URL casing or security-name detection, not timeout-text misclassification as transient."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "Retry eligibility ignores security failures outside the selected error line.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rerun reconciliation, main-red ledger, dedupe or URL casing, not security failures outside the selected error line."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-053",
+  "trial": 0,
+  "gold": "Passing security-test output incorrectly prevents a transient CI rerun.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rejected reruns, timeouts, sibling attempts or downstream reruns, not passing security output blocking a rerun."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-053",
+  "trial": 0,
+  "gold": "Passing security-test output incorrectly prevents a transient CI rerun.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rejected reruns, timeouts, sibling attempts or downstream reruns, not passing security output blocking a rerun."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-053",
+  "trial": 1,
+  "gold": "Passing security-test output incorrectly prevents a transient CI rerun.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rejected reruns, timeouts, sibling attempts or downstream reruns, not passing security output blocking a rerun."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-053",
+  "trial": 1,
+  "gold": "Passing security-test output incorrectly prevents a transient CI rerun.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rejected reruns, timeouts, sibling attempts or downstream reruns, not passing security output blocking a rerun."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-054",
+  "trial": 0,
+  "gold": "Rate-limit refusals leave rerun claims unresolved across cooldowns and restarts.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern ANSI/Playwright matching, main-red ledger or pendingRerun computed before new requests, not rate-limit refusals left unresolved."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-054",
+  "trial": 0,
+  "gold": "ANSI-colored Bun failures and pytest security failures are missed by the retry exclusion.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern reconciliation, ledger or rate-limited reruns, not ANSI/pytest security-failure matching."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-054",
+  "trial": 1,
+  "gold": "ANSI-colored Bun failures and pytest security failures are missed by the retry exclusion.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern reconciliation, ledger or rate-limited reruns, not ANSI/pytest security-failure matching."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-056",
+  "trial": 1,
+  "gold": "Catalog mutation can invalidate a shadowed retained policy and prevent the daemon from restarting.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern stale rejection blocks or clearing default effort, not policy validation of shadowed retained cells."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-056",
+  "trial": 1,
+  "gold": "Catalog mutation can invalidate a shadowed retained policy and prevent the daemon from restarting.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern stale rejection blocks or clearing default effort, not policy validation of shadowed retained cells."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-057",
+  "trial": 0,
+  "gold": "Effort removal is persisted without checking policy cells hidden by operator overrides.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rejection blocks or the inability to clear effort, not missing validation of override-hidden policy cells."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-057",
+  "trial": 0,
+  "gold": "Effort removal is persisted without checking policy cells hidden by operator overrides.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rejection blocks or the inability to clear effort, not missing validation of override-hidden policy cells."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Routing previews remain stale after quota or cooldown expiry without an event.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern catalog history persistence, a separate gold defect."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Catalog history disappears on reload and does not include changes made by another client.",
+  "verdict": "SAME",
+  "matched_title": "Catalog history disappears when Setup is closed",
+  "reason": "Same defect (history kept only in mounted component state, lost on reload/navigation and missing other clients) reported at the state declaration (line 37) instead of the render site."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Routing previews remain stale after quota or cooldown expiry without an event.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern catalog history persistence, a separate gold defect."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Routing previews remain stale after quota or cooldown expiry without an event.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern catalog history persistence, a separate gold defect."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Catalog history disappears on reload and does not include changes made by another client.",
+  "verdict": "SAME",
+  "matched_title": "Catalog history disappears on navigation and excludes external changes",
+  "reason": "Same defect (history kept only in mounted component state, lost on reload/navigation and missing other clients) reported at the state declaration (line 37) instead of the render site."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Routing previews remain stale after quota or cooldown expiry without an event.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern catalog history persistence, a separate gold defect."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-070",
+  "trial": 0,
+  "gold": "Embedded short registered secrets remain visible in digest fields.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern review-queue selection logic, not secret redaction in digest fields."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-070",
+  "trial": 0,
+  "gold": "Embedded short registered secrets remain visible in digest fields.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern review-queue selection logic, not secret redaction in digest fields."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-070",
+  "trial": 1,
+  "gold": "Embedded short registered secrets remain visible in digest fields.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern review-queue selection logic, not secret redaction in digest fields."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-073",
+  "trial": 0,
+  "gold": "Digest title truncation occurs before filtering and discloses private prefixes.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern review-queue selection logic, not truncation-before-filtering disclosure."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-073",
+  "trial": 0,
+  "gold": "Digest title truncation occurs before filtering and discloses private prefixes.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern review-queue selection logic, not truncation-before-filtering disclosure."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-073",
+  "trial": 1,
+  "gold": "Digest title truncation occurs before filtering and discloses private prefixes.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern review-queue selection logic, not truncation-before-filtering disclosure."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-073",
+  "trial": 1,
+  "gold": "Digest title truncation occurs before filtering and discloses private prefixes.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern review-queue selection logic, not truncation-before-filtering disclosure."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-077",
+  "trial": 1,
+  "gold": "Queued chat dispatch uses a target whose origin became excluded after selection.",
+  "verdict": "SAME",
+  "matched_title": "Revalidate origin eligibility after waiting for chat capacity",
+  "reason": "Same defect: origin filtering before acquire/preflight, saved target invoked after an origin change; reported at line 249."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-077",
+  "trial": 1,
+  "gold": "Queued eval dispatch does not revalidate origin eligibility after catalog changes.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidate covers only chat dispatch in concierge.ts and does not mention the eval runner."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-087",
+  "trial": 0,
+  "gold": "Post-check publication scanning executes Git against mutable clone configuration.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern git status recursing into submodule config at line 98, not check_private running git against clone config at 74-76."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-087",
+  "trial": 1,
+  "gold": "Post-check publication scanning executes Git against mutable clone configuration.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern git status recursing into submodule config at line 98, not check_private running git against clone config at 74-76."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-087",
+  "trial": 1,
+  "gold": "Post-check publication scanning executes Git against mutable clone configuration.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern git status recursing into submodule config at line 98, not check_private running git against clone config at 74-76."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-098",
+  "trial": 0,
+  "gold": "A runtime model attached to a retired provider prevents factory construction.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidate concerns persisted routing cells/preferences, historical run pins or eval resume tests, not runtime-model rows of the removed provider."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "A runtime model attached to a retired provider prevents factory construction.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidate concerns persisted routing cells/preferences, historical run pins or eval resume tests, not runtime-model rows of the removed provider."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+  "verdict": "SAME",
+  "matched_title": "Persisted references to the removed provider can prevent daemon startup",
+  "reason": "Same defect: RuntimePolicy revalidates persisted routing preferences and cells against the reduced catalog at startup; reported at catalog.ts."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "A runtime model attached to a retired provider prevents factory construction.",
+  "verdict": "SAME",
+  "matched_title": "Persisted references to the removed provider can prevent daemon startup",
+  "reason": "Detail states Factory throws for persisted runtime models whose provider is absent, the gold app.ts startup failure, reported at the provider removal in catalog.ts."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "Historical run references prevent unrelated catalog mutations.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Persisted startup references are a different defect from historical run pins blocking catalog edits."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-099",
+  "trial": 1,
+  "gold": "Unavailable-target diagnostics expose registered credentials in routing API and Setup output.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern reconciling filtered routing, not credential exposure in diagnostics."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-100",
+  "trial": 0,
+  "gold": "Retired identifiers and catalog or routing history can publish registered credentials.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern revalidating references on restore, not credential publication."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-100",
+  "trial": 0,
+  "gold": "Retired identifiers and catalog or routing history can publish registered credentials.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern revalidating references on restore, not credential publication."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-100",
+  "trial": 1,
+  "gold": "Retired identifiers and catalog or routing history can publish registered credentials.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern revalidating references on restore, not credential publication."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-103",
+  "trial": 0,
+  "gold": "JSON escaping lets ordinary logged credentials evade literal gate-output redaction.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern ANSI sequences at truncation cuts, not JSON-escaped credential variants."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-103",
+  "trial": 0,
+  "gold": "JSON escaping lets ordinary logged credentials evade literal gate-output redaction.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern ANSI sequences at truncation cuts, not JSON-escaped credential variants."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-104",
+  "trial": 0,
+  "gold": "Lossy excerpt line framing prevents matching multiline credentials before storage.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern per-line pre-redaction of a shorter credential or the byte bound, not the line splitter dropping empty lines/result-line resets that alter the reconstructed text."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-105",
+  "trial": 0,
+  "gold": "ANSI stripping after framing and tail cuts leaves accidental credential fragments visible.",
+  "verdict": "SAME",
+  "matched_title": "Normalize terminal formatting before the process runner truncates output",
+  "reason": "Same defect: ANSI normalization runs after the process runner truncates/frames output, leaving credential fragments; reported at lines 87-90."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-106",
+  "trial": 1,
+  "gold": "An incomplete terminal escape consumes part of a credential before it can be matched.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern unbounded carry buffers from overlapping matches, not escape stripping consuming credential bytes."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-106",
+  "trial": 1,
+  "gold": "Terminal-control stripping changes with chunk boundaries and loses state at the hold limit.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern unbounded carry buffers from overlapping matches, not chunk-dependent escape stripping."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-046",
+  "trial": 0,
+  "gold": "A pinned candidate slot deadline exits without recording the chain-exhaustion question.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern verifier exclusions on retry, not the pinned slot-deadline exit that skips the exhaustion question."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "Arbitrary assertion text mentioning a timeout is classified as a transient CI failure.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rerun reconciliation, ledger, URL casing or security-name detection, not timeout-text misclassification as transient."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "Arbitrary assertion text mentioning a timeout is classified as a transient CI failure.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rerun reconciliation, ledger, URL casing or security-name detection, not timeout-text misclassification as transient."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "Retry eligibility ignores security failures outside the selected error line.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rerun reconciliation, main-red ledger, dedupe or URL casing, not security failures outside the selected error line."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-053",
+  "trial": 0,
+  "gold": "Passing security-test output incorrectly prevents a transient CI rerun.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rejected reruns, timeouts, sibling attempts or downstream reruns, not passing security output blocking a rerun."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-053",
+  "trial": 1,
+  "gold": "Passing security-test output incorrectly prevents a transient CI rerun.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rejected reruns, timeouts, sibling attempts or downstream reruns, not passing security output blocking a rerun."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-054",
+  "trial": 0,
+  "gold": "Rate-limit refusals leave rerun claims unresolved across cooldowns and restarts.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern ANSI/Playwright matching, main-red ledger or pendingRerun computed before new requests, not rate-limit refusals left unresolved."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-054",
+  "trial": 1,
+  "gold": "ANSI-colored Bun failures and pytest security failures are missed by the retry exclusion.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern reconciliation, ledger or rate-limited reruns, not ANSI/pytest security-failure matching."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Routing previews remain stale after quota or cooldown expiry without an event.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern catalog history persistence, a separate gold defect."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Routing previews remain stale after quota or cooldown expiry without an event.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern catalog history persistence, a separate gold defect."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-070",
+  "trial": 0,
+  "gold": "Embedded short registered secrets remain visible in digest fields.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern review-queue selection logic, not secret redaction in digest fields."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-070",
+  "trial": 1,
+  "gold": "Embedded short registered secrets remain visible in digest fields.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern review-queue selection logic, not secret redaction in digest fields."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-071",
+  "trial": 1,
+  "gold": "Unicode and URL encodings evade privacy protection in status and digest fields.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidate concerns the merge flag, not encoding-based privacy evasion."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-073",
+  "trial": 0,
+  "gold": "Digest title truncation occurs before filtering and discloses private prefixes.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern review-queue selection logic, not truncation-before-filtering disclosure."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-073",
+  "trial": 1,
+  "gold": "Digest title truncation occurs before filtering and discloses private prefixes.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern review-queue selection logic, not truncation-before-filtering disclosure."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-077",
+  "trial": 0,
+  "gold": "Queued chat dispatch uses a target whose origin became excluded after selection.",
+  "verdict": "SAME",
+  "matched_title": "Recheck origin eligibility after waiting for model capacity",
+  "reason": "Same defect: origin eligibility is not revalidated after the slot waits before chat dispatch; reported at line 249."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-077",
+  "trial": 0,
+  "gold": "Queued eval dispatch does not revalidate origin eligibility after catalog changes.",
+  "verdict": "SAME",
+  "matched_title": "Recheck origin eligibility after waiting for model capacity",
+  "reason": "Finding is filed on concierge.ts but its detail explicitly states EvalRunner likewise retains targets across preparation and slot waits, which is the gold eval-dispatch defect."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-077",
+  "trial": 1,
+  "gold": "Queued chat dispatch uses a target whose origin became excluded after selection.",
+  "verdict": "SAME",
+  "matched_title": "Recheck exclusions after waiting for chat capacity",
+  "reason": "Same defect: the chat target chosen before acquire/preflight waits is dispatched without rechecking origin exclusion; reported at the wait (line 249) rather than the dispatch."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-087",
+  "trial": 0,
+  "gold": "Post-check publication scanning executes Git against mutable clone configuration.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern git status recursing into submodule config at line 98, not check_private running git against clone config at 74-76."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-098",
+  "trial": 0,
+  "gold": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+  "verdict": "SAME",
+  "matched_title": "Persisted references to the removed provider can prevent daemon startup",
+  "reason": "Same defect: RuntimePolicy revalidates persisted routing preferences and cells against the reduced catalog at startup; reported at catalog.ts."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-098",
+  "trial": 0,
+  "gold": "Historical run references prevent unrelated catalog mutations.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Persisted startup references are a different defect from historical run pins blocking catalog edits."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+  "verdict": "SAME",
+  "matched_title": "Persisted provider preferences can prevent daemon startup",
+  "reason": "Same root: RuntimePolicy startup validation of persisted routing (gold lines 29-31 validatePrefer) rejects the removed ID; reported at catalog.ts."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "Historical run references prevent unrelated catalog mutations.",
+  "verdict": "SAME",
+  "matched_title": "Historical run pins block unrelated catalog mutations",
+  "reason": "Same defect (RuntimeCatalog.apply revalidates every stored run, so a run pinned to the removed model blocks unrelated edits), reported at the catalog entry."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-100",
+  "trial": 0,
+  "gold": "Retired identifiers and catalog or routing history can publish registered credentials.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern revalidating references on restore, not credential publication."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-103",
+  "trial": 1,
+  "gold": "Line callbacks store pieces of multiline credentials in failure excerpts.",
+  "verdict": "SAME",
+  "matched_title": "Multiline credentials survive in stored failure excerpts",
+  "reason": "Same defect: per-line callbacks redact each line separately so a multiline credential is never matched and is stored in failure excerpts; reported at the run.ts caller instead of failures.ts."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-104",
+  "trial": 0,
+  "gold": "Lossy excerpt line framing prevents matching multiline credentials before storage.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern per-line pre-redaction of a shorter credential or the byte bound, not the line splitter dropping empty lines/result-line resets that alter the reconstructed text."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-105",
+  "trial": 0,
+  "gold": "ANSI stripping after framing and tail cuts leaves accidental credential fragments visible.",
+  "verdict": "SAME",
+  "matched_title": "Terminal normalization happens after the runner truncates output",
+  "reason": "Same defect: terminal normalization happens only after the runner has framed lines and cut the tail, so formatted credential fragments survive; reported a few lines below the gold range."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-040",
+  "trial": 0,
+  "gold": "Configuration errors and encoded feed diagnostics can disclose registered secrets.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern repo access checks, daemon reload, smoke checks or discreet mode, not secret disclosure in errors."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-040",
+  "trial": 0,
+  "gold": "Configuration errors and encoded feed diagnostics can disclose registered secrets.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern repo access checks, daemon reload, smoke checks or discreet mode, not secret disclosure in errors."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-040",
+  "trial": 0,
+  "gold": "Doctor omits health probes for implicit providers and presets lacking an explicit health URL.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern init smoke checks or repo access, not doctor health probes for implicit providers."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-040",
+  "trial": 1,
+  "gold": "Configuration errors and encoded feed diagnostics can disclose registered secrets.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern repo access checks, daemon reload, smoke checks or discreet mode, not secret disclosure in errors."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-040",
+  "trial": 1,
+  "gold": "Doctor omits health probes for implicit providers and presets lacking an explicit health URL.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern init smoke checks or repo access, not doctor health probes for implicit providers."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-040",
+  "trial": 1,
+  "gold": "Configuration errors and encoded feed diagnostics can disclose registered secrets.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern repo access checks, daemon reload, smoke checks or discreet mode, not secret disclosure in errors."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-040",
+  "trial": 1,
+  "gold": "Doctor omits health probes for implicit providers and presets lacking an explicit health URL.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern init smoke checks or repo access, not doctor health probes for implicit providers."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-048",
+  "trial": 0,
+  "gold": "The WebP inspector rejects valid lossy VP8 images.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern incidental magic bytes, metadata or size limits, not lossy VP8 parsing."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-048",
+  "trial": 0,
+  "gold": "The WebP inspector rejects valid lossy VP8 images.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern incidental magic bytes, metadata or size limits, not lossy VP8 parsing."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-048",
+  "trial": 1,
+  "gold": "LFS exemptions permit missing payloads and pointer replacements containing archives.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern the 32 MiB exemption limit, not LFS pointer handling."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-048",
+  "trial": 1,
+  "gold": "The limited text sample exempts a TAR whose first binary byte lies beyond the sample.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern the 32 MiB exemption limit, not TAR detection beyond the sample."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-048",
+  "trial": 1,
+  "gold": "The WebP inspector rejects valid lossy VP8 images.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern incidental magic bytes, metadata or size limits, not lossy VP8 parsing."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-048",
+  "trial": 1,
+  "gold": "The WebP inspector rejects valid lossy VP8 images.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern incidental magic bytes, metadata or size limits, not lossy VP8 parsing."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-049",
+  "trial": 0,
+  "gold": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+  "verdict": "UNCLEAR",
+  "matched_title": "Do not classify ordinary text by embedded signature substrings",
+  "reason": "Same mechanism (unanchored PAYLOADS magic substring match such as MZ) but reported in sibling isForbiddenFormat for text files, not clean() rejecting valid image bytes."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-049",
+  "trial": 0,
+  "gold": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+  "verdict": "UNCLEAR",
+  "matched_title": "Do not treat arbitrary text substrings as binary formats",
+  "reason": "Same mechanism (unanchored PAYLOADS magic substring match such as MZ) but reported in sibling isForbiddenFormat for text files, not clean() rejecting valid image bytes."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-049",
+  "trial": 1,
+  "gold": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+  "verdict": "UNCLEAR",
+  "matched_title": "Do not classify arbitrary signature substrings as binary",
+  "reason": "Same mechanism (unanchored PAYLOADS magic substring match such as MZ) but reported in sibling isForbiddenFormat for text files, not clean() rejecting valid image bytes."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-049",
+  "trial": 1,
+  "gold": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+  "verdict": "UNCLEAR",
+  "matched_title": "Do not classify visible source strings as opaque binaries",
+  "reason": "Same mechanism (unanchored PAYLOADS magic substring match such as MZ) but reported in sibling isForbiddenFormat for text files, not clean() rejecting valid image bytes."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-060",
+  "trial": 0,
+  "gold": "Process cleanup returns while owned descendants are still alive.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern detached descendants in other process groups (the separate 112-124 gold), not cleanup giving up after the deadline while the group is alive."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-060",
+  "trial": 0,
+  "gold": "Discarding changes replaces the cleanup error that should trigger round recovery.",
+  "verdict": "SAME",
+  "matched_title": "Final cleanup can mask the recoverable cleanup error",
+  "reason": "Same defect: the finally-block discardChanges at 1106-1109 throws CommandError that replaces WorktreeCleanError, defeating round recovery; reported at the catch handler (line 1138)."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-060",
+  "trial": 0,
+  "gold": "Process cleanup returns while owned descendants are still alive.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern detached descendants in other process groups (the separate 112-124 gold), not cleanup giving up after the deadline while the group is alive."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-060",
+  "trial": 1,
+  "gold": "Process cleanup returns while owned descendants are still alive.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern detached descendants in other process groups (the separate 112-124 gold), not cleanup giving up after the deadline while the group is alive."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-060",
+  "trial": 1,
+  "gold": "Discarding changes replaces the cleanup error that should trigger round recovery.",
+  "verdict": "SAME",
+  "matched_title": "Final cleanup can mask the recoverable cleanup error",
+  "reason": "Same defect: the finally-block discardChanges at 1106-1109 throws CommandError that replaces WorktreeCleanError, defeating round recovery; reported at the catch handler (line 1138)."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-060",
+  "trial": 1,
+  "gold": "Process cleanup returns while owned descendants are still alive.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern detached descendants in other process groups (the separate 112-124 gold), not cleanup giving up after the deadline while the group is alive."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-060",
+  "trial": 1,
+  "gold": "Discarding changes replaces the cleanup error that should trigger round recovery.",
+  "verdict": "SAME",
+  "matched_title": "Finally cleanup can bypass round-failure recovery",
+  "reason": "Same defect: the finally-block discardChanges at 1106-1109 throws CommandError that replaces WorktreeCleanError, defeating round recovery; reported at the catch handler (line 1138)."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-061",
+  "trial": 0,
+  "gold": "Holdout snapshot deletion proceeds despite unconfirmed descendant termination.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Gate-timeout rerun cleanup retry is a different defect from holdout deletion despite unconfirmed termination."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-061",
+  "trial": 0,
+  "gold": "Shutdown drops an already claimed descendant when its parent exits.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern unregistered scratch directories, not dropping a claimed descendant when its parent exits."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-061",
+  "trial": 0,
+  "gold": "Production scratch directories are never registered as process ownership roots.",
+  "verdict": "SAME",
+  "matched_title": "Detached platform children outside the checkout survive invocation teardown",
+  "reason": "Detail states production scopes initialize scratchDirs empty and scratch creation never registers paths, the gold defect, reported at proc.ts."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-061",
+  "trial": 0,
+  "gold": "Replacing a descendant environment removes it from invocation discovery.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidate concerns cwd/birth-time false ownership, not env replacement escaping discovery."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-062",
+  "trial": 0,
+  "gold": "A recycled leader PID claims unrelated processes through reused group or session identifiers.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern cwd/birth-time ownership or replaced environments, not reused pgid/sid from a recycled leader PID."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-062",
+  "trial": 0,
+  "gold": "A recycled leader PID claims unrelated processes through reused group or session identifiers.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern cwd/birth-time ownership or replaced environments, not reused pgid/sid from a recycled leader PID."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-062",
+  "trial": 1,
+  "gold": "A recycled leader PID claims unrelated processes through reused group or session identifiers.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern cwd/birth-time ownership or replaced environments, not reused pgid/sid from a recycled leader PID."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-062",
+  "trial": 1,
+  "gold": "A recycled leader PID claims unrelated processes through reused group or session identifiers.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern cwd/birth-time ownership or replaced environments, not reused pgid/sid from a recycled leader PID."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-063",
+  "trial": 0,
+  "gold": "Pre-aborted shutdown with failed leader inspection references timer cleanup before initialization and never settles.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern surviving descendants, not the uninitialized timer on pre-aborted shutdown."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-064",
+  "trial": 0,
+  "gold": "The reader loopback policy cannot match the intended socket access.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern Rust toolchain HOME and HTTP idle timeouts, not the loopback socket policy."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-064",
+  "trial": 0,
+  "gold": "An allow-default reader policy weakens the established confinement boundary.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern Rust toolchain HOME and HTTP idle timeouts, not the allow-default sandbox policy."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-064",
+  "trial": 0,
+  "gold": "The reader loopback policy cannot match the intended socket access.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern Rust toolchain HOME and HTTP idle timeouts, not the loopback socket policy."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-064",
+  "trial": 0,
+  "gold": "An allow-default reader policy weakens the established confinement boundary.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern Rust toolchain HOME and HTTP idle timeouts, not the allow-default sandbox policy."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-064",
+  "trial": 1,
+  "gold": "The reader loopback policy cannot match the intended socket access.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern Rust toolchain HOME and HTTP idle timeouts, not the loopback socket policy."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-064",
+  "trial": 1,
+  "gold": "An allow-default reader policy weakens the established confinement boundary.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern Rust toolchain HOME and HTTP idle timeouts, not the allow-default sandbox policy."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-064",
+  "trial": 1,
+  "gold": "The reader loopback policy cannot match the intended socket access.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern Rust toolchain HOME and HTTP idle timeouts, not the loopback socket policy."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-064",
+  "trial": 1,
+  "gold": "An allow-default reader policy weakens the established confinement boundary.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern Rust toolchain HOME and HTTP idle timeouts, not the allow-default sandbox policy."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-066",
+  "trial": 0,
+  "gold": "Free-text claim detection still lets model wording steer gate-evidence substitution.",
+  "verdict": "UNCLEAR",
+  "matched_title": "Independent evidence mentioning a gate is discarded",
+  "reason": "Same free-text gateClaim detector, but the finding reports its fail-closed false positive (met flipped to blocked), whereas the gold is model wording steering or evading the substitution."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-067",
+  "trial": 0,
+  "gold": "Matching a successful command does not establish the observation required by the criterion.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern the Bun exact-target shortcut (separate gold at 60-65), filters or skipped tests, not non-Bun command equality ignoring the required outcome."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-067",
+  "trial": 0,
+  "gold": "Matching a successful command does not establish the observation required by the criterion.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern the Bun exact-target shortcut (separate gold at 60-65), filters or skipped tests, not non-Bun command equality ignoring the required outcome."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-067",
+  "trial": 0,
+  "gold": "Targeted Bun evidence can satisfy a criterion without proof that any tests ran.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern unrelated skipped tests, not exact-target evidence without proof tests ran."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-067",
+  "trial": 1,
+  "gold": "Matching a successful command does not establish the observation required by the criterion.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern the Bun exact-target shortcut (separate gold at 60-65), filters or skipped tests, not non-Bun command equality ignoring the required outcome."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-067",
+  "trial": 1,
+  "gold": "Matching a successful command does not establish the observation required by the criterion.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern the Bun exact-target shortcut (separate gold at 60-65), filters or skipped tests, not non-Bun command equality ignoring the required outcome."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-067",
+  "trial": 1,
+  "gold": "Targeted Bun evidence can satisfy a criterion without proof that any tests ran.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern unrelated skipped tests, not exact-target evidence without proof tests ran."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-083",
+  "trial": 1,
+  "gold": "Forcing HTTPS during manual push bypasses working SSH authentication.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidate concerns URL-conditional includes lost in push-git.sh (a separate gold), not forcing HTTPS."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-084",
+  "trial": 0,
+  "gold": "An exact upstream URL requirement rejects supported forks and alternate origin spellings.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern the config-key allowlist or config snapshot races, not the exact upstream URL check."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-084",
+  "trial": 0,
+  "gold": "An exact upstream URL requirement rejects supported forks and alternate origin spellings.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern the config-key allowlist or config snapshot races, not the exact upstream URL check."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-084",
+  "trial": 1,
+  "gold": "An exact upstream URL requirement rejects supported forks and alternate origin spellings.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern the config-key allowlist or config snapshot races, not the exact upstream URL check."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-084",
+  "trial": 1,
+  "gold": "An exact upstream URL requirement rejects supported forks and alternate origin spellings.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern the config-key allowlist or config snapshot races, not the exact upstream URL check."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-090",
+  "trial": 0,
+  "gold": "Unresolved tool calls accumulate without a bound during a live invocation.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidate concerns unresolved calls evicted uncounted (the opposite), not unbounded accumulation."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-091",
+  "trial": 1,
+  "gold": "A completed parallel call is classified as repetitive before unresolved predecessors establish progress.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern finalizing pending calls when another tool starts or baseline eviction, not a completed call judged before pending predecessors resolve."
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-091",
+  "trial": 1,
+  "gold": "A completed parallel call is classified as repetitive before unresolved predecessors establish progress.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern finalizing pending calls when another tool starts or baseline eviction, not a completed call judged before pending predecessors resolve."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-046",
+  "trial": 0,
+  "gold": "A pinned candidate slot deadline exits without recording the chain-exhaustion question.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern verifier exclusions on retry, not the pinned slot-deadline exit that skips the exhaustion question."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "Arbitrary assertion text mentioning a timeout is classified as a transient CI failure.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rerun reconciliation, ledger, URL casing or security-name detection, not timeout-text misclassification as transient."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "Retry eligibility ignores security failures outside the selected error line.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rerun reconciliation, main-red ledger, dedupe or URL casing, not security failures outside the selected error line."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "Arbitrary assertion text mentioning a timeout is classified as a transient CI failure.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rerun reconciliation, ledger, URL casing or security-name detection, not timeout-text misclassification as transient."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "Retry eligibility ignores security failures outside the selected error line.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rerun reconciliation, main-red ledger, dedupe or URL casing, not security failures outside the selected error line."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-053",
+  "trial": 0,
+  "gold": "Passing security-test output incorrectly prevents a transient CI rerun.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rejected reruns, timeouts, sibling attempts or downstream reruns, not passing security output blocking a rerun."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-053",
+  "trial": 1,
+  "gold": "Passing security-test output incorrectly prevents a transient CI rerun.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern rejected reruns, timeouts, sibling attempts or downstream reruns, not passing security output blocking a rerun."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-056",
+  "trial": 0,
+  "gold": "Catalog mutation can invalidate a shadowed retained policy and prevent the daemon from restarting.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern stale rejection blocks or clearing default effort, not policy validation of shadowed retained cells."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-056",
+  "trial": 1,
+  "gold": "Catalog mutation can invalidate a shadowed retained policy and prevent the daemon from restarting.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern stale rejection blocks or clearing default effort, not policy validation of shadowed retained cells."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Routing previews remain stale after quota or cooldown expiry without an event.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern catalog history persistence, a separate gold defect."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Routing previews remain stale after quota or cooldown expiry without an event.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern catalog history persistence, a separate gold defect."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-070",
+  "trial": 0,
+  "gold": "Embedded short registered secrets remain visible in digest fields.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern review-queue selection logic, not secret redaction in digest fields."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-070",
+  "trial": 1,
+  "gold": "Embedded short registered secrets remain visible in digest fields.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern review-queue selection logic, not secret redaction in digest fields."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-073",
+  "trial": 0,
+  "gold": "Digest title truncation occurs before filtering and discloses private prefixes.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern review-queue selection logic, not truncation-before-filtering disclosure."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-073",
+  "trial": 1,
+  "gold": "Digest title truncation occurs before filtering and discloses private prefixes.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern review-queue selection logic, not truncation-before-filtering disclosure."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-077",
+  "trial": 1,
+  "gold": "Queued chat dispatch uses a target whose origin became excluded after selection.",
+  "verdict": "SAME",
+  "matched_title": "Revalidate chat routing after asynchronous slot waits",
+  "reason": "Same defect: saved chat target invoked after slot waits without re-checking catalog origin; reported at line 249."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-087",
+  "trial": 0,
+  "gold": "Post-check publication scanning executes Git against mutable clone configuration.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern git status recursing into submodule config at line 98, not check_private running git against clone config at 74-76."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-098",
+  "trial": 0,
+  "gold": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+  "verdict": "SAME",
+  "matched_title": "Handle retired IDs in persisted routing overrides before removing the model",
+  "reason": "Same defect: saved routing override naming the removed model throws in RuntimePolicy at startup; reported at the removed catalog entry."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+  "verdict": "SAME",
+  "matched_title": "Handle persisted routing references before removing the provider",
+  "reason": "Same defect: RuntimePolicy constructor rejects persisted routing cells naming the removed model, preventing startup; reported at the catalog removal site."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "A runtime model attached to a retired provider prevents factory construction.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidate concerns persisted routing cells/preferences, historical run pins or eval resume tests, not runtime-model rows of the removed provider."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-099",
+  "trial": 1,
+  "gold": "Unavailable-target diagnostics expose registered credentials in routing API and Setup output.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern reconciling filtered routing, not credential exposure in diagnostics."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-100",
+  "trial": 0,
+  "gold": "Retired identifiers and catalog or routing history can publish registered credentials.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern revalidating references on restore, not credential publication."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-100",
+  "trial": 1,
+  "gold": "Retired identifiers and catalog or routing history can publish registered credentials.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern revalidating references on restore, not credential publication."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-103",
+  "trial": 0,
+  "gold": "Line callbacks store pieces of multiline credentials in failure excerpts.",
+  "verdict": "SAME",
+  "matched_title": "Multiline credentials survive in stored failure excerpts",
+  "reason": "Same defect: per-line callbacks redact each line separately so a multiline credential is never matched and is stored in failure excerpts; reported at the run.ts caller instead of failures.ts."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-105",
+  "trial": 0,
+  "gold": "ANSI stripping after framing and tail cuts leaves accidental credential fragments visible.",
+  "verdict": "SAME",
+  "matched_title": "Normalize terminal formatting before the process tail cut",
+  "reason": "Same defect: ANSI normalization runs after the process runner truncates/frames output, leaving credential fragments; reported at lines 87-90."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-105",
+  "trial": 1,
+  "gold": "ANSI stripping after framing and tail cuts leaves accidental credential fragments visible.",
+  "verdict": "SAME",
+  "matched_title": "Terminal normalization happens after irreversible framing and truncation",
+  "reason": "Same defect: terminal normalization happens only after the runner has framed lines and cut the tail, so formatted credential fragments survive; reported a few lines below the gold range."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-106",
+  "trial": 0,
+  "gold": "An incomplete terminal escape consumes part of a credential before it can be matched.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern unbounded carry buffers from overlapping matches, not escape stripping consuming credential bytes."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-106",
+  "trial": 0,
+  "gold": "Terminal-control stripping changes with chunk boundaries and loses state at the hold limit.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern unbounded carry buffers from overlapping matches, not chunk-dependent escape stripping."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-106",
+  "trial": 1,
+  "gold": "An incomplete terminal escape consumes part of a credential before it can be matched.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern unbounded carry buffers from overlapping matches, not escape stripping consuming credential bytes."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-106",
+  "trial": 1,
+  "gold": "Terminal-control stripping changes with chunk boundaries and loses state at the hold limit.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern unbounded carry buffers from overlapping matches, not chunk-dependent escape stripping."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-040",
+  "trial": 0,
+  "gold": "Configuration errors and encoded feed diagnostics can disclose registered secrets.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern repo access checks, daemon reload, smoke checks or discreet mode, not secret disclosure in errors."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-040",
+  "trial": 1,
+  "gold": "Configuration errors and encoded feed diagnostics can disclose registered secrets.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern repo access checks, daemon reload, smoke checks or discreet mode, not secret disclosure in errors."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-048",
+  "trial": 0,
+  "gold": "The WebP inspector rejects valid lossy VP8 images.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern incidental magic bytes, metadata or size limits, not lossy VP8 parsing."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-048",
+  "trial": 1,
+  "gold": "LFS exemptions permit missing payloads and pointer replacements containing archives.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern the 32 MiB exemption limit, not LFS pointer handling."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-048",
+  "trial": 1,
+  "gold": "The limited text sample exempts a TAR whose first binary byte lies beyond the sample.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern the 32 MiB exemption limit, not TAR detection beyond the sample."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-048",
+  "trial": 1,
+  "gold": "The WebP inspector rejects valid lossy VP8 images.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern incidental magic bytes, metadata or size limits, not lossy VP8 parsing."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-049",
+  "trial": 0,
+  "gold": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+  "verdict": "UNCLEAR",
+  "matched_title": "Do not classify ordinary text by embedded signature strings",
+  "reason": "Same mechanism (unanchored PAYLOADS magic substring match such as MZ) but reported in sibling isForbiddenFormat for text files, not clean() rejecting valid image bytes."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-049",
+  "trial": 1,
+  "gold": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+  "verdict": "UNCLEAR",
+  "matched_title": "Do not classify visible text from incidental signature substrings",
+  "reason": "Same mechanism (unanchored PAYLOADS magic substring match such as MZ) but reported in sibling isForbiddenFormat for text files, not clean() rejecting valid image bytes."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-060",
+  "trial": 0,
+  "gold": "Process cleanup returns while owned descendants are still alive.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern detached descendants in other process groups (the separate 112-124 gold), not cleanup giving up after the deadline while the group is alive."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-060",
+  "trial": 0,
+  "gold": "Discarding changes replaces the cleanup error that should trigger round recovery.",
+  "verdict": "SAME",
+  "matched_title": "Final cleanup can bypass the new round-failure recovery",
+  "reason": "Same defect: the finally-block discardChanges at 1106-1109 throws CommandError that replaces WorktreeCleanError, defeating round recovery; reported at the catch handler (line 1138)."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-060",
+  "trial": 1,
+  "gold": "Process cleanup returns while owned descendants are still alive.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern detached descendants in other process groups (the separate 112-124 gold), not cleanup giving up after the deadline while the group is alive."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-060",
+  "trial": 1,
+  "gold": "Discarding changes replaces the cleanup error that should trigger round recovery.",
+  "verdict": "SAME",
+  "matched_title": "Final cleanup can mask the recoverable cleanup error",
+  "reason": "Same defect: the finally-block discardChanges at 1106-1109 throws CommandError that replaces WorktreeCleanError, defeating round recovery; reported at the catch handler (line 1138)."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-061",
+  "trial": 1,
+  "gold": "Shutdown drops an already claimed descendant when its parent exits.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern unregistered scratch directories, not dropping a claimed descendant when its parent exits."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-061",
+  "trial": 1,
+  "gold": "Production scratch directories are never registered as process ownership roots.",
+  "verdict": "SAME",
+  "matched_title": "Production scratch directories are absent from process discovery",
+  "reason": "Same defect: production scopes never register invocation scratch directories, so discovery misses scratch-resident descendants; reported at the consumer in proc.ts."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-062",
+  "trial": 0,
+  "gold": "A recycled leader PID claims unrelated processes through reused group or session identifiers.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern cwd/birth-time ownership or replaced environments, not reused pgid/sid from a recycled leader PID."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-062",
+  "trial": 1,
+  "gold": "A recycled leader PID claims unrelated processes through reused group or session identifiers.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern cwd/birth-time ownership or replaced environments, not reused pgid/sid from a recycled leader PID."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-063",
+  "trial": 0,
+  "gold": "Pre-aborted shutdown with failed leader inspection references timer cleanup before initialization and never settles.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern surviving descendants, not the uninitialized timer on pre-aborted shutdown."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-064",
+  "trial": 0,
+  "gold": "The reader loopback policy cannot match the intended socket access.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern Rust toolchain HOME and HTTP idle timeouts, not the loopback socket policy."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-064",
+  "trial": 0,
+  "gold": "An allow-default reader policy weakens the established confinement boundary.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern Rust toolchain HOME and HTTP idle timeouts, not the allow-default sandbox policy."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-067",
+  "trial": 0,
+  "gold": "Matching a successful command does not establish the observation required by the criterion.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern the Bun exact-target shortcut (separate gold at 60-65), filters or skipped tests, not non-Bun command equality ignoring the required outcome."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-067",
+  "trial": 1,
+  "gold": "Matching a successful command does not establish the observation required by the criterion.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern the Bun exact-target shortcut (separate gold at 60-65), filters or skipped tests, not non-Bun command equality ignoring the required outcome."
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-084",
+  "trial": 1,
+  "gold": "An exact upstream URL requirement rejects supported forks and alternate origin spellings.",
+  "verdict": "DIFFERENT",
+  "matched_title": null,
+  "reason": "Candidates concern the config-key allowlist or config snapshot races, not the exact upstream URL check."
+ }
+]

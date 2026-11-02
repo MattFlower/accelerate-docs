@@ -1,0 +1,10 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1"
+   ],
+   "mechanism": "Only WorktreeCleanError from the initial checkout is handled, so the unconditional discardChanges in the finally block throws an unhandled CommandError that fails the run and can mask the original WorktreeCleanError."
+  }
+ ]
+}

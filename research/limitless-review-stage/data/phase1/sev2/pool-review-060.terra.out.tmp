@@ -1,0 +1,1 @@
+{"ratings":[{"id":"C1","consequence":"outage","trigger":"plausible","reason":"A cleanup failure in the finally block can replace the recoverable error and fail the run when a stuck implementer leaves a worktree that cannot be cleaned."}]}

@@ -1,0 +1,22 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1"
+   ],
+   "mechanism": "The stop condition is deferred until the last call's result is reconciled, so an unresolved (hanging) sixth identical call never triggers loop detection."
+  },
+  {
+   "members": [
+    "P2"
+   ],
+   "mechanism": "The previous-result-hash baseline is deleted when its call is evicted from the window, so a changed result is wrongly treated as a repeat of prior state."
+  },
+  {
+   "members": [
+    "P3"
+   ],
+   "mechanism": "The stop guard checks only the last call's result hash, so out-of-order completion of parallel calls triggers a loop stop before earlier results can show progress."
+  }
+ ]
+}

@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"A gate that exceeds its deadline can exit successfully during cleanup and be treated as passed, allowing deployment to proceed despite the timeout."}]}

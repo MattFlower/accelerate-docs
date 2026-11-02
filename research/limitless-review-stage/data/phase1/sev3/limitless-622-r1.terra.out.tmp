@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"A blocked manually opened PR is omitted from the digest, so an operator relying on it can miss stuck work, and the scenario requires an unowned PR to encounter a blocking condition."}]}

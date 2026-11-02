@@ -1,0 +1,18 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "The clean-filter tests plant the filter before the script scans the filter keys, so they never exercise the race where a filter is added after that scan (#402)."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The script's preflight checks don't detect an interactive rebase that is still in progress, so an intermediate snapshot can be published and merged."
+  }
+ ]
+}

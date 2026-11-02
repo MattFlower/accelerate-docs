@@ -1,0 +1,30 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P2",
+    "P4",
+    "P5"
+   ],
+   "mechanism": "The scripts/smoke.ts refactor is unrequested scope creep that exceeds the ~200-line budget and changes `--models` behavior."
+  },
+  {
+   "members": [
+    "P1"
+   ],
+   "mechanism": "When allowed verifiers remain but all of them raised the current candidate, pickVerifier() throws a generic independence error and drops the origin-exclusion reasons."
+  },
+  {
+   "members": [
+    "P3"
+   ],
+   "mechanism": "The fixed three-second readiness deadline in the existing smoke test is flaky when the child process starts slowly."
+  },
+  {
+   "members": [
+    "P6"
+   ],
+   "mechanism": "The private-output NoCapacityError message joins the raw origin reasons without deduplication, so identical reasons repeat."
+  }
+ ]
+}

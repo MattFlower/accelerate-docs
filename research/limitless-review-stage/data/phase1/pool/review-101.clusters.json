@@ -1,0 +1,44 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P2",
+    "P3",
+    "P4",
+    "P5",
+    "P6",
+    "P7",
+    "P10",
+    "P11",
+    "P12",
+    "P13",
+    "P14",
+    "P15",
+    "P16",
+    "P17",
+    "P18",
+    "P19"
+   ],
+   "mechanism": "Redaction is applied to each output line separately, so a registered credential containing a newline never matches and FailureExcerpts rejoins the full unredacted credential in failures."
+  },
+  {
+   "members": [
+    "P8"
+   ],
+   "mechanism": "Redaction runs after runProcess has truncated output, so a credential split across the truncation boundary loses its prefix and its remaining suffix escapes redaction."
+  },
+  {
+   "members": [
+    "P9"
+   ],
+   "mechanism": "The new verify-prompt tests assert that the credential is absent from a prompt that never renders output or failures, so they pass regardless of redaction."
+  },
+  {
+   "members": [
+    "P20"
+   ],
+   "mechanism": "GATE_ENV_VERSION was not bumped, so cached baseline gate results from before redaction, which hold unredacted text, are still reused."
+  }
+ ]
+}

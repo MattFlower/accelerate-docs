@@ -1,0 +1,2492 @@
+[
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-044",
+  "trial": 0,
+  "gold": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+  "gold_file": "src/router/router.ts",
+  "gold_lines": [
+   256,
+   262
+  ],
+  "finding_line": 261,
+  "finding_title": "Preserve implementers escalated after a policy edit",
+  "finding_detail": "changedCells permanently marks edited cells, so this check suppresses every subsequent sticky target outside their chains\u2014even targets selected by escalation after the edit. The engine supplies only the saved preference on ordinary feedback rounds, so routing returns to the weaker, previously failed model. Reproduction command: TMPDIR=/private/tmp/lr-CoMb3F/claude-501 TMP=/private/tmp/lr-CoMb3F/claude-501 TEMP=/private/tmp/lr-CoMb3F/claude-501 bun test /private/tmp/lr-CoMb3F/claude-501/routing-review.test.ts. Assertion output: Expected: \"claude/opus\"; Received: \"claude/sonnet-5.5\". Result: 0 p"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-044",
+  "trial": 0,
+  "gold": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+  "gold_file": "src/router/router.ts",
+  "gold_lines": [
+   256,
+   262
+  ],
+  "finding_line": 256,
+  "finding_title": "Removed sticky implementers return after a daemon restart",
+  "finding_detail": "Sticky-target removal depends on the process-local changedCells set. After resetting an operator override, startup constructs the Router with the restored base policy, so setPolicy sees no difference and changedCells stays empty. A resumed run's saved implementer is then appended and pinned even though the reset removed it from the effective cell. Reproduction command: TMPDIR=/private/tmp/lr-LYIf8g/claude-501 TMP=/private/tmp/lr-LYIf8g/claude-501 TEMP=/private/tmp/lr-LYIf8g/claude-501 bun -e 'import { Router } from \"./src/router/router.ts\"; import { ProviderTracker } from \"./src/router/provide"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-044",
+  "trial": 1,
+  "gold": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+  "gold_file": "src/router/router.ts",
+  "gold_lines": [
+   256,
+   262
+  ],
+  "finding_line": 261,
+  "finding_title": "Preserve stickiness for implementers escalated after an edit",
+  "finding_detail": "changedCells permanently marks edited cells, so this check suppresses every subsequent out-of-chain sticky implementer, including stronger models selected by escalation after the edit. The next feedback round supplies only prefer and therefore returns to the weaker chain instead of retaining the escalated model. Reproduced with `bun test \"$TMPDIR/routing-escalation-review.test.ts\"`: `Expected: \"claude/opus\"; Received: \"codex/luna\"`."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-044",
+  "trial": 1,
+  "gold": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+  "gold_file": "src/router/router.ts",
+  "gold_lines": [
+   256,
+   262
+  ],
+  "finding_line": 256,
+  "finding_title": "Removed sticky implementers become eligible again after restart",
+  "finding_detail": "Sticky-target removal depends on changedCells, which exists only in memory. After an operator reset and daemon restart, startup applies the unchanged base policy, leaving changedCells empty. A resumed run's persisted implementer is then appended and pinned even though the effective cell excludes it. Reproduction command: bun -e 'import { strict as assert } from \"node:assert\"; import { Store } from \"./src/db/store.ts\"; import { ProviderTracker } from \"./src/router/providers.ts\"; import { Router } from \"./src/router/router.ts\"; import { DEFAULT_POLICY, PROVIDERS } from \"./src/router/catalog.ts\";"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-045",
+  "trial": 0,
+  "gold": "Unlimited quota still applies utilization reserves to free and metered providers.",
+  "gold_file": "src/router/providers.ts",
+  "gold_lines": [
+   348,
+   353
+  ],
+  "finding_line": 349,
+  "finding_title": "Unlimited providers still hit reserves outside subscription billing",
+  "finding_detail": "The window bypass requires subscription billing, although configuration accepts unlimited for every billing type. Free and metered providers therefore report reduced headroom and become unavailable from informational windows. Reproduction command: bun -e 'import {Store} from \"./src/db/store.ts\"; import {ProviderTracker} from \"./src/router/providers.ts\"; const s=new Store(\":memory:\"); const t=new ProviderTracker([{id:\"work\",label:\"Work\",harness:\"claude\",billing:\"free\",quota:\"unlimited\",maxConcurrent:1}],s,{},{}); t.observeWindows(\"work\",{daily:{utilization:1,resetsAt:null}}); console.log({headr"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-045",
+  "trial": 0,
+  "gold": "Unlimited quota still applies utilization reserves to free and metered providers.",
+  "gold_file": "src/router/providers.ts",
+  "gold_lines": [
+   348,
+   353
+  ],
+  "finding_line": 349,
+  "finding_title": "Honor unlimited quota independently of billing",
+  "finding_detail": "Configuration accepts unlimited for every billing mode, but headroom ignores windows only for subscription providers. Free and metered providers can display 'No limit (configured)' while remaining blocked by informational windows. Reproduction command: bun -e 'import {Store} from \"./src/db/store.ts\"; import {ProviderTracker} from \"./src/router/providers.ts\"; const s=new Store(\":memory:\"); const p={id:\"work\",label:\"Work\",harness:\"claude\",billing:\"free\",quota:\"unlimited\",maxConcurrent:1}; const t=new ProviderTracker([p],s,{windows:{work:{five_hour:1}}},{},{},()=>1000); t.observeWindows(\"work\",{f"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-045",
+  "trial": 1,
+  "gold": "Unlimited quota still applies utilization reserves to free and metered providers.",
+  "gold_file": "src/router/providers.ts",
+  "gold_lines": [
+   348,
+   353
+  ],
+  "finding_line": 349,
+  "finding_title": "Honor unlimited quota independently of billing",
+  "finding_detail": "The window bypass requires subscription billing, although config accepts unlimited quota for every billing mode. A valid free enterprise provider still becomes unavailable at its reserve. Exact reproduction command: bun -e 'import { Store } from \"./src/db/store.ts\"; import { ProviderTracker } from \"./src/router/providers.ts\"; import { resolveCatalog } from \"./src/router/config-catalog.ts\"; import { strict as assert } from \"node:assert\"; const store = new Store(\":memory:\"); const { providers } = resolveCatalog([{id:\"work\",preset:\"claude\",billing:\"free\",quota:\"unlimited\"}]); const tracker = new "
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-045",
+  "trial": 1,
+  "gold": "Unlimited quota still applies utilization reserves to free and metered providers.",
+  "gold_file": "src/router/providers.ts",
+  "gold_lines": [
+   348,
+   353
+  ],
+  "finding_line": 349,
+  "finding_title": "Unlimited providers still gate on windows outside subscription billing",
+  "finding_detail": "Config accepts unlimited mode for every billing type, but headroom ignores windows only for subscription providers. Free and metered providers can display \u201cNo limit (configured)\u201d while being exhausted solely by informational windows. Reproduction command: TMPDIR=/private/tmp/lr-irFVKk/claude-501 TMP=/private/tmp/lr-irFVKk/claude-501 TEMP=/private/tmp/lr-irFVKk/claude-501 bun -e 'import {Store} from \"./src/db/store.ts\"; import {ProviderTracker} from \"./src/router/providers.ts\"; const s=new Store(\":memory:\"); const r={claudeFiveHour:0.8,claudeSevenDay:0.85,codexWeekly:0.9,codexFiveHour:0.9}; for"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-050",
+  "trial": 1,
+  "gold": "Legacy adoption trusts Git administration paths selected by an agent-controlled checkout.",
+  "gold_file": "src/pipeline/engine.ts",
+  "gold_lines": [
+   178,
+   184
+  ],
+  "finding_line": 178,
+  "finding_title": "Include worktrees created before their path was persisted",
+  "finding_detail": "The migration only checks state.worktreePath. Prepare creates the worktree before its first state checkpoint containing that path. If the previous daemon stopped during that interval, the linked worktree exists but persisted state still has phase \"prepare\" and no worktreePath. This guard skips recording it, then createWorktree's reuse branch immediately calls worktreeGit and fails with \"Missing trusted Git paths\". This legitimate upgrade-resume case remains broken."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-051",
+  "trial": 0,
+  "gold": "A fixed review-time cutoff excludes worktrees created before the sidecar-writing release actually started.",
+  "gold_file": "src/db/migrations/20261005T134145-worktree-provenance.sql",
+  "gold_lines": [
+   6,
+   13
+  ],
+  "finding_line": 9,
+  "finding_title": "Commit timestamp does not identify an installation's upgrade boundary",
+  "finding_detail": "An installation can continue running the pre-#323 release after the hardening commit was authored. Its legitimately missing records are excluded by this fixed timestamp, so resume skips registration and still fails with Missing trusted Git paths. Regression command: TMPDIR=/private/tmp/lr-l2jQlA/claude-501 TMP=/private/tmp/lr-l2jQlA/claude-501 TEMP=/private/tmp/lr-l2jQlA/claude-501 bun test /private/tmp/lr-l2jQlA/claude-501/review-legacy.test.ts. Output: '(fail) pre-sidecar release deployed after the hardening commit date'; 'Expected: true'; 'Received: false'."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-051",
+  "trial": 0,
+  "gold": "A fixed review-time cutoff excludes worktrees created before the sidecar-writing release actually started.",
+  "gold_file": "src/db/migrations/20261005T134145-worktree-provenance.sql",
+  "gold_lines": [
+   6,
+   13
+  ],
+  "finding_line": 9,
+  "finding_title": "Commit timestamp excludes legitimate pre-upgrade worktrees",
+  "finding_detail": "A commit timestamp does not establish when an installation upgraded. An old release can create worktrees after this cutoff, leaving them without sidecars, but this migration excludes them. Resume then skips registration and fails with Missing trusted Git paths. Reproduction: `bun /private/tmp/lr-qaLO3W/claude-501/review-migration.ts`. Output: `{ worktree_provenance: null }`, followed by `AssertionError: Old-release worktree must be resumable` and `null !== 'legacy'`."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-051",
+  "trial": 1,
+  "gold": "A fixed review-time cutoff excludes worktrees created before the sidecar-writing release actually started.",
+  "gold_file": "src/db/migrations/20261005T134145-worktree-provenance.sql",
+  "gold_lines": [
+   6,
+   13
+  ],
+  "finding_line": 9,
+  "finding_title": "Do not use the commit timestamp as the installation upgrade boundary",
+  "finding_detail": "An installation can continue running the release without sidecars after this timestamp. Its worktrees remain legacy, but this migration excludes them permanently, so resume still fails with Missing trusted Git paths. Targeted command: `bun /private/tmp/lr-dQbGth/claude-501/legacy-review.ts cutoff`. Output: `cutoff: hasLegacyWorktree = false`, followed by `AssertionError: Old-release worktree must be eligible for recovery` and `false !== true`."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-051",
+  "trial": 1,
+  "gold": "A fixed review-time cutoff excludes worktrees created before the sidecar-writing release actually started.",
+  "gold_file": "src/db/migrations/20261005T134145-worktree-provenance.sql",
+  "gold_lines": [
+   6,
+   13
+  ],
+  "finding_line": 9,
+  "finding_title": "Commit timestamp excludes legitimate old-release worktrees",
+  "finding_detail": "The migration treats the sidecar commit's timestamp as the deployment boundary. An installation still running an older release after that timestamp creates worktrees without records, but their runs are excluded from legacy registration. This defeats the requested next-install upgrade behavior. Reproduction command: TMPDIR=/private/tmp/lr-oc8PMP/claude-501 TMP=/private/tmp/lr-oc8PMP/claude-501 TEMP=/private/tmp/lr-oc8PMP/claude-501 bun test /private/tmp/lr-oc8PMP/claude-501/review-legacy.test.ts. Output: '(fail) older daemon prepare after commit timestamp remains eligible on upgrade'; 'Expected"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "A paused PR is not inspected again when main recovers without another PR change.",
+  "gold_file": "src/integrations/github-poller.ts",
+  "gold_lines": [
+   314,
+   325
+  ],
+  "finding_line": 323,
+  "finding_title": "Isolate CI inspection errors to the affected PR",
+  "finding_detail": "A classifier exception escapes `record` and aborts the repository's observation loop. Every subsequent poll encounters the same failing PR first, leaving later PR snapshots and merge reconciliation stale. Reproduced with `bun test \"$TMPDIR/ci-review-regressions.test.ts\"`: the second PR's saved head assertion reported `Expected: \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"` and `Received: undefined`."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "An accepted rerun with a lost response is never reconciled to its later result.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   185,
+   190
+  ],
+  "finding_line": 187,
+  "finding_title": "Reconcile reruns whose POST response was lost",
+  "finding_detail": "The rerun claim persists before POST, but reconciliation only examines `rerunning` rows. If GitHub accepts the POST and the response is lost, a passing rerun remains `rerun_requested`; GraphQL success then completes inspection without recording the flake. Reproduced with `bun test \"$TMPDIR/ci-review-regressions.test.ts\"`: `Expected: \"failed_then_passed\"` and `Received: \"rerun_requested\"`."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "A paused PR is not inspected again when main recovers without another PR change.",
+  "gold_file": "src/integrations/github-poller.ts",
+  "gold_lines": [
+   314,
+   325
+  ],
+  "finding_line": 315,
+  "finding_title": "Suppressed PR failures are never reconsidered when main recovers",
+  "finding_detail": "Main-red classification returns true and clears ciPending. Subsequent polls invoke classification only after the PR's CI changes. Main recovering does not change the PR's ciKey, so the suppressed failure receives neither a rerun nor ci.needs_fix. Even another PR detecting main's recovery does not reactivate this PR."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "A paused PR is not inspected again when main recovers without another PR change.",
+  "gold_file": "src/integrations/github-poller.ts",
+  "gold_lines": [
+   314,
+   325
+  ],
+  "finding_line": 315,
+  "finding_title": "Resume suppressed PR failures when main recovers",
+  "finding_detail": "Main-red suppression completes inspection and clears ciPending. Subsequent unchanged PR observations never inspect main again, so recovery on main cannot resume classification. The regression command reported `Expected length: 1; Received length: 0`, with `ciPending:false` and persisted main state still red after main recovered."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "An accepted rerun with a lost response is never reconciled to its later result.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   185,
+   190
+  ],
+  "finding_line": 187,
+  "finding_title": "Reconcile reruns whose POST response was lost",
+  "finding_detail": "A claimed rerun remains rerun_requested when the POST throws, but reconciliation only considers rerunning rows. Even a confirmed successful later attempt at the same SHA is ignored. The regression command reported `Expected: \"failed_then_passed\"; Received: \"rerun_requested\"`. If another failed observation arrives first, the original failure can instead be incorrectly reported as failed_again."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "A paused PR is not inspected again when main recovers without another PR change.",
+  "gold_file": "src/integrations/github-poller.ts",
+  "gold_lines": [
+   314,
+   325
+  ],
+  "finding_line": 323,
+  "finding_title": "A CI inspection error starves subsequent PR observations",
+  "finding_detail": "classifyCi errors escape record and abort the repository's observation loop. A persistent error for one PR therefore prevents every later PR from being recorded, including conflict and merge changes. Reproduction command: TMPDIR=/private/tmp/lr-xVIWSX/claude-501 TMP=/private/tmp/lr-xVIWSX/claude-501 TEMP=/private/tmp/lr-xVIWSX/claude-501 bun /private/tmp/lr-xVIWSX/claude-501/review-ci-353.ts starvation. Output: {\"secondPrObserved\":false,\"logs\":[\"GitHub poll of o/r failed: Error: Incomplete CI inspection: actions/jobs/21/logs (404)\",\"GitHub poll of o/r failed: Error: Incomplete CI inspection: a"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "An accepted rerun with a lost response is never reconciled to its later result.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   185,
+   190
+  ],
+  "finding_line": 187,
+  "finding_title": "Lost POST responses prevent confirmed reruns from entering the flake ledger",
+  "finding_detail": "The rerun claim persists rerun_requested before the POST, but reconciliation only examines rerunning rows. If GitHub accepts the rerun and the response is lost, a later successful attempt at the same SHA never resolves the ledger entry. Reproduction command: TMPDIR=/private/tmp/lr-xVIWSX/claude-501 TMP=/private/tmp/lr-xVIWSX/claude-501 TEMP=/private/tmp/lr-xVIWSX/claude-501 bun /private/tmp/lr-xVIWSX/claude-501/review-ci-353.ts ambiguous-success. Output: {\"outcome\":\"rerun_requested\"}, followed by AssertionError: Confirm same-SHA success even if POST response was lost; actual 'rerun_requested',"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-053",
+  "trial": 0,
+  "gold": "A definitively refused CI rerun remains pending indefinitely.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   387,
+   389
+  ],
+  "finding_line": 388,
+  "finding_title": "A definitively rejected rerun remains pending forever",
+  "finding_detail": "The ledger claim is persisted before POST, but every non-201 response throws without resolving the claim. If GitHub rejects the request with 422, no later run attempt exists. Subsequent inspections keep the entry pending and suppress ci.needs_fix indefinitely. Command: `TMP=\"$TMPDIR\" TEMP=\"$TMPDIR\" bun test \"$TMPDIR/ci-review.test.ts\"`. The fixture reported `{\"outcome\":\"rerun_requested\",\"needsFix\":0,\"pending\":true,...}` and failed with `Expected length: 1; Received length: 0`."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-053",
+  "trial": 0,
+  "gold": "A definitively refused CI rerun remains pending indefinitely.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   387,
+   389
+  ],
+  "finding_line": 388,
+  "finding_title": "A rejected rerun request leaves classification pending forever",
+  "finding_detail": "The claim persists rerun_requested before the POST, but an explicit rejection never resolves that claim. Subsequent polls wait for run_attempt to increase and suppress ci.needs_fix indefinitely. Command: TMPDIR=/private/tmp/lr-kw8EdQ/claude-501 TMP=/private/tmp/lr-kw8EdQ/claude-501 TEMP=/private/tmp/lr-kw8EdQ/claude-501 bun /private/tmp/lr-kw8EdQ/claude-501/ci-review-rejection.ts. Output: Error: CI job rerun was not confirmed; subsequent polls returned {\"done\":false,\"posts\":1,\"outcome\":\"rerun_requested\",\"needsFix\":0}."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-053",
+  "trial": 1,
+  "gold": "A definitively refused CI rerun remains pending indefinitely.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   387,
+   389
+  ],
+  "finding_line": 388,
+  "finding_title": "Rejected reruns remain pending forever",
+  "finding_detail": "The rerun is claimed before POST, but an explicit rejection leaves its outcome as rerun_requested. Subsequent inspections wait for a newer attempt and suppress ci.needs_fix indefinitely, although GitHub never started a rerun. Command: bun test \"$TMPDIR/ci-review.test.ts\". Output: \"rejection state: rerun_requested needs_fix: 0 pending: true\"; assertion output: \"Expected length: 1 / Received length: 0\"."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-053",
+  "trial": 1,
+  "gold": "A definitively refused CI rerun remains pending indefinitely.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   387,
+   389
+  ],
+  "finding_line": 388,
+  "finding_title": "Definitively rejected reruns remain pending forever",
+  "finding_detail": "The rerun is claimed before the POST, but a definitive rejection such as HTTP 422 only throws. The ledger remains rerun_requested. Subsequent inspections see the unchanged run_attempt and skip reconciliation, while the pending record suppresses ci.needs_fix indefinitely. Reproduction command: bun /private/tmp/lr-HTIkLJ/claude-501/ci-review.mjs. Output: first inspection: CI job rerun was not confirmed; three subsequent inspections returned false; {\"posts\":1,\"outcome\":\"rerun_requested\",\"needsFix\":0}. The assertion failed with: \"a definitively rejected rerun must emit ci.needs_fix instead of wait"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-054",
+  "trial": 0,
+  "gold": "ANSI-colored Bun failures and pytest security failures are missed by the retry exclusion.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   42,
+   48
+  ],
+  "finding_line": 43,
+  "finding_title": "Strip ANSI escapes before matching security failures and timeouts",
+  "finding_detail": "logLines removes timestamps but leaves terminal escapes. Colored Bun failure lines therefore bypass securityFailure's anchored pattern, allowing a failed security test into the ledger and permitting its job to rerun. Colored timeout diagnostics also fail timeoutDiagnostic, so genuine test timeouts emit needs-fix instead. Temporary regression command `bun test \"$TMPDIR/ci-review.test.ts\"` produced `security failure reruns: 1`, ledger `Expected length: 0 / Received length: 1`, and timeout reruns `Expected length: 1 / Received length: 0`. The timeout fixture was captured from Bun with FORCE_COLOR"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-054",
+  "trial": 0,
+  "gold": "Rate-limit refusals leave rerun claims unresolved across cooldowns and restarts.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   394,
+   400
+  ],
+  "finding_line": 395,
+  "finding_title": "Rate-limited rerun requests remain pending forever",
+  "finding_detail": "HTTP 429 leaves the persisted claim as rerun_requested. Since GitHub rejected the request, run_attempt never advances. Subsequent inspections skip resolution and suppress both another request and ci.needs_fix. The added tests assume a later rerun appears despite the rejection, masking this case. Command: bun \"$TMPDIR/ci-review.ts\". Output: \"Initial inspection: Error: CI job rerun was not confirmed\"; three subsequent inspections returned false; {\"posts\":1,\"outcome\":\"rerun_requested\",\"needsFix\":0}; assertion failed: \"Rejected rate-limited rerun remains pending forever; no retry or needs_fix\"."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-054",
+  "trial": 1,
+  "gold": "Rate-limit refusals leave rerun claims unresolved across cooldowns and restarts.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   394,
+   400
+  ],
+  "finding_line": 395,
+  "finding_title": "Resolve rerun claims rejected by rate limiting",
+  "finding_detail": "The claim is persisted before POST, but a rate-limit response leaves it permanently rerun_requested. Subsequent inspections wait for a newer workflow attempt that was never started, suppressing both another request and ci.needs_fix. Command: `bun test \"$TMPDIR/ci-review.test.ts\"`. After ten polls following HTTP 429 with Retry-After: 2, output was `rejected POST {\"postCount\":1,\"outcome\":\"rerun_requested\",\"needsFix\":0,\"restCalls\":80}`; assertion: `Expected: true; Received: false`."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-054",
+  "trial": 1,
+  "gold": "ANSI-colored Bun failures and pytest security failures are missed by the retry exclusion.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   42,
+   48
+  ],
+  "finding_line": 51,
+  "finding_title": "Recognize Node test-runner timeout diagnostics",
+  "finding_detail": "The timeout matcher rejects Node's actual diagnostic, `error: 'test timed out after 10ms'`, so an eligible test timeout emits ci.needs_fix without rerunning. A fixture using captured Node TAP output with GitHub-style timestamps reproduces this. Command: `bun test \"$TMPDIR/ci-review.test.ts\"`. Output: `Node timeout {\"reruns\":0,\"needsFix\":1}`; assertion: `Expected length: 1; Received length: 0`."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-054",
+  "trial": 1,
+  "gold": "Rate-limit refusals leave rerun claims unresolved across cooldowns and restarts.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   394,
+   400
+  ],
+  "finding_line": 395,
+  "finding_title": "Rate-limit rejection leaves the rerun permanently pending",
+  "finding_detail": "The rerun is claimed before POST, but HTTP 429 leaves it in rerun_requested. The poller also masks rate-limited responses as null. Subsequent inspections wait for a newer run_attempt that will never exist because GitHub rejected the request, suppressing both another request and ci.needs_fix indefinitely. Command: bun /private/tmp/lr-3e5Tq0/claude-501/ci-review-probe.ts. Output after three further inspections: rate-limit: {\"posts\":1,\"outcomes\":[\"rerun_requested\"],\"needsFix\":0}, followed by assertion failure: Rejected HTTP 429 leaves failure pending with no rerun and no needs-fix result."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-057",
+  "trial": 1,
+  "gold": "Effort removal is persisted without checking policy cells hidden by operator overrides.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   71,
+   76
+  ],
+  "finding_line": 71,
+  "finding_title": "Validate catalog mutations against the loaded eval policy",
+  "finding_detail": "PATCH validates only the effective policy, so an operator override can hide eval-policy references. DELETE checks only operator cells. Both can persist changes that invalidate routing/policy.json, which Factory validates before applying operator overrides on restart, preventing daemon startup. Command: `bun test /private/tmp/lr-xUSZ2t/claude-501/catalog-review-nt0xOe/catalog-regressions.test.ts`. The PATCH and DELETE regression tests failed with `Unsupported effort \"high\" for codex/experiment; supported: none` and `unknown model ID \"codex/experiment\"`, respectively."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-057",
+  "trial": 1,
+  "gold": "Effort removal is persisted without checking policy cells hidden by operator overrides.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   71,
+   76
+  ],
+  "finding_line": 81,
+  "finding_title": "Deletion can leave the eval policy invalid and prevent restart",
+  "finding_detail": "remove() checks only persisted operator cells. A runtime model can also be referenced by routing/policy.json, including through the existing eval-policy workflow. Deletion succeeds while leaving that policy unchanged. Factory startup subsequently calls readPolicy(), which rejects the missing model and aborts construction. Reproduced with this exact command: bun -e 'import { Store } from \"./src/db/store.ts\"; import { MODELS, PROVIDERS, DEFAULT_POLICY } from \"./src/router/catalog.ts\"; import { ProviderTracker } from \"./src/router/providers.ts\"; import { Router } from \"./src/router/router.ts\"; im"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Clearing a default effort omits the field from PATCH and leaves the old value stored.",
+  "gold_file": "ui/components/CatalogForm.tsx",
+  "gold_lines": [
+   66,
+   72
+  ],
+  "finding_line": 66,
+  "finding_title": "Clearing the default effort silently preserves its old value",
+  "finding_detail": "An empty effort field omits effort from PATCH, but RuntimeCatalog.patch merges omitted fields from the existing model. Saving therefore retains the old effort. Removing that effort from supportedEfforts also makes the edit fail validation. The isolated command `bun /private/tmp/lr-BSCcne/claude-501/catalog-effort-review.ts` failed with output: `PATCH effort property: false`, `Effort after RuntimeCatalog.patch merge: high`, and `AssertionError: clearing default effort should remove the old effort` (actual `high`, expected undefined)."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Clearing a default effort omits the field from PATCH and leaves the old value stored.",
+  "gold_file": "ui/components/CatalogForm.tsx",
+  "gold_lines": [
+   66,
+   72
+  ],
+  "finding_line": 66,
+  "finding_title": "Clearing default effort silently preserves the existing value",
+  "finding_detail": "When the default-effort field is cleared, the PATCH payload omits effort. RuntimeCatalog.patch merges the payload over the existing model, so omission preserves its previous effort. Save can succeed while leaving routing behavior unchanged. Removing that effort from supportedEfforts simultaneously instead produces a validation refusal."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Catalog history disappears on reload and does not include changes made by another client.",
+  "gold_file": "ui/pages/Setup.tsx",
+  "gold_lines": [
+   619,
+   625
+  ],
+  "finding_line": 619,
+  "finding_title": "Catalog history only records changes made in the current page session",
+  "finding_detail": "The requested recent catalog-change history is replaced with component-local session state. Only this component's successful mutation callbacks populate it; refreshing, navigating away, or changing the catalog through another client loses or omits the history. Catalog SSE messages refresh snapshots without recording changes."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Clearing a default effort omits the field from PATCH and leaves the old value stored.",
+  "gold_file": "ui/components/CatalogForm.tsx",
+  "gold_lines": [
+   66,
+   72
+  ],
+  "finding_line": 66,
+  "finding_title": "Clearing the default effort silently preserves its old value",
+  "finding_detail": "A blank effort field omits effort from the PATCH body. RuntimeCatalog.patch merges that body over the existing model, so the old effort remains despite a successful save. The temporary handler probe `bun \"$TMPDIR/review-catalog-effort.mjs\"` produced `Backend merge effort: high` and `AssertionError: Clearing default effort must remove the stored high effort`."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Clearing a default effort omits the field from PATCH and leaves the old value stored.",
+  "gold_file": "ui/components/CatalogForm.tsx",
+  "gold_lines": [
+   66,
+   72
+  ],
+  "finding_line": 66,
+  "finding_title": "Clearing the default effort silently retains its previous value",
+  "finding_detail": "When the effort input is emptied, the PATCH payload omits effort. RuntimeCatalog.patch merges omitted fields from the existing model, so Save succeeds while retaining the old default. Removing that effort from supportedEfforts also causes validation to fail against the retained default."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Catalog history disappears on reload and does not include changes made by another client.",
+  "gold_file": "ui/pages/Setup.tsx",
+  "gold_lines": [
+   619,
+   625
+  ],
+  "finding_line": 619,
+  "finding_title": "Catalog history is limited to the mounted page",
+  "finding_detail": "Catalog changes are recorded only in the local session signal after this page's mutations. Navigating away or reloading erases them, and catalog SSE updates never populate history. This does not provide the requested recent catalog change history."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-069",
+  "trial": 0,
+  "gold": "Digest actions are derived from stale records instead of current unanswered and review state.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   19,
+   30
+  ],
+  "finding_line": 29,
+  "finding_title": "Stale approvals leave PRs missing from the review digest",
+  "finding_detail": "review.approved permanently removes the PR from the digest's review map. A later observePrHead invalidates that approval without producing an event this reducer handles, so a PR requiring another review disappears. Regression command: `bun test /private/tmp/lr-xUSxPS/claude-501/mcp-review-regressions.test.ts`. Output: Expected \"Needs you: 0; PRs awaiting review: 1; Blocked lands: 0\"; Received \"Needs you: 0; PRs awaiting review: 0; Blocked lands: 0\"."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-069",
+  "trial": 0,
+  "gold": "A historical failed review hides a later approval in MCP status.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   87,
+   91
+  ],
+  "finding_line": 87,
+  "finding_title": "Historical review failure masks a subsequent approval",
+  "finding_detail": "The latest round's failed/cancelled status returns before checking the current approval. The existing review API permits approving the current head after a failed round, but status continues directing the agent to inspect that failure before submitting another verdict. Regression command: `bun test /private/tmp/lr-xUSxPS/claude-501/mcp-review-regressions.test.ts`. Output: Expected \"Approved; landing not queued\"; Received \"Review changes failed\"."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-069",
+  "trial": 0,
+  "gold": "Digest actions are derived from stale records instead of current unanswered and review state.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   19,
+   30
+  ],
+  "finding_line": 23,
+  "finding_title": "Answered questions remain in the needs-you digest",
+  "finding_detail": "Answering a question and resuming work emits no clearing feed event, so replaying the feed leaves the answered question actionable until the run finishes. Command: bun /private/tmp/lr-enUPTV/claude-501/review-repro.ts. Output: FAIL answered question: expected \"Needs you: 0; PRs awaiting review: 0; Blocked lands: 0\", got \"Needs you: 1; PRs awaiting review: 0; Blocked lands: 0\"."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-069",
+  "trial": 0,
+  "gold": "A historical failed review hides a later approval in MCP status.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   87,
+   91
+  ],
+  "finding_line": 87,
+  "finding_title": "Historical failed rounds override a fresh approval",
+  "finding_detail": "Status returns for a failed or cancelled review round before considering the current approval. The existing review API permits approving the current head after a round fails, and the land queue accepts that approval. Command: bun /private/tmp/lr-enUPTV/claude-501/review-repro.ts. Output: FAIL approved after failed round: expected \"Approved; landing not queued\", got \"Review changes failed\"."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-069",
+  "trial": 1,
+  "gold": "Digest actions are derived from stale records instead of current unanswered and review state.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   19,
+   30
+  ],
+  "finding_line": 23,
+  "finding_title": "Exclude answered questions from the needs-you count",
+  "finding_detail": "Answering a question emits no clearing feed event. Consequently, an answered question remains actionable in every digest while the run resumes, until a later terminal event or acknowledgement removes it. Command: `bun test \"$TMPDIR/mcp-digest-review.test.ts\"`. The answered-question check failed with Expected: \"Needs you: 0; PRs awaiting review: 0; Blocked lands: 0\"; Received: \"Needs you: 1; PRs awaiting review: 0; Blocked lands: 0\"."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-069",
+  "trial": 1,
+  "gold": "A historical failed review hides a later approval in MCP status.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   87,
+   91
+  ],
+  "finding_line": 87,
+  "finding_title": "Let a fresh approval supersede a failed historical round",
+  "finding_detail": "The latest failed or cancelled round returns before the current approval is examined. The existing review API permits approving the current PR head after a failed round, but status permanently reports the historical failure and recommends inspecting it before submitting another verdict. Command: `bun test \"$TMPDIR/mcp-digest-review.test.ts\"`. The fresh-approval check failed with Expected: \"Approved; landing not queued\"; Received: \"Review changes failed\"."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-069",
+  "trial": 1,
+  "gold": "Digest actions are derived from stale records instead of current unanswered and review state.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   19,
+   30
+  ],
+  "finding_line": 23,
+  "finding_title": "Exclude questions that have already been answered",
+  "finding_detail": "Answering a question produces no clearing feed event, so the digest continues requesting input while the run proceeds. Reproduced with the real SQLite store. Command: TMPDIR=/private/tmp/lr-v7UYo5/claude-501 TMP=/private/tmp/lr-v7UYo5/claude-501 TEMP=/private/tmp/lr-v7UYo5/claude-501 bun /private/tmp/lr-v7UYo5/claude-501/review-repro.ts. Output includes 'Unanswered questions: 0' followed by 'Needs you: 1; PRs awaiting review: 0; Blocked lands: 0' and the answered question."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-069",
+  "trial": 1,
+  "gold": "A historical failed review hides a later approval in MCP status.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   87,
+   91
+  ],
+  "finding_line": 87,
+  "finding_title": "Let a current approval supersede a failed historical round",
+  "finding_detail": "The failed/cancelled round branch returns before examining the current approval. A subsequent valid approval therefore cannot make status recommend landing. Command: TMPDIR=/private/tmp/lr-v7UYo5/claude-501 TMP=/private/tmp/lr-v7UYo5/claude-501 TEMP=/private/tmp/lr-v7UYo5/claude-501 bun /private/tmp/lr-v7UYo5/claude-501/review-repro.ts. For an open PR with a matching non-stale approval and a historical failed round, output is 'Review changes failed'."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-070",
+  "trial": 0,
+  "gold": "MCP status returns private land reasons unchanged on direct and proxy backends.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   45,
+   50
+  ],
+  "finding_line": 51,
+  "finding_title": "Honor the run's confirmed merged flag",
+  "finding_detail": "Merge reconciliation can record run.merged=true on a succeeded run without updating its saved PR snapshot or creating a land entry. The status schema discards merged, so this tool incorrectly requests another review. Reproduced with `TMPDIR=/private/tmp/lr-EsAYru/claude-501 TMP=/private/tmp/lr-EsAYru/claude-501 TEMP=/private/tmp/lr-EsAYru/claude-501 bun test /private/tmp/lr-EsAYru/claude-501/review-regressions.test.ts`: the confirmed-merge assertion reports Expected: \"Landed\", Received: \"Review needed\"."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-070",
+  "trial": 0,
+  "gold": "MCP status returns private land reasons unchanged on direct and proxy backends.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   45,
+   50
+  ],
+  "finding_line": 51,
+  "finding_title": "Honor the run's confirmed merged flag",
+  "finding_detail": "resolveMergedRun records merged=true without adding a resolution for succeeded runs. The new schema strips that flag, and explainStatus consequently reports unknown PR state or even requests another landing for an already merged PR. Reproduced with a real Store. Minimal command: bun -e 'import {explainStatus,statusDetailSchema as S} from \"./src/integrations/mcp-status.ts\"; const d={run:{id:\"r\",status:\"succeeded\",prUrl:\"https://github.com/o/r/pull/1\",merged:true,resolution:null},questions:[],prSnapshot:null}; const s=explainStatus(S.parse(d),[]).state; console.log(s); if(s!==\"Landed\") throw Err"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-070",
+  "trial": 1,
+  "gold": "MCP status returns private land reasons unchanged on direct and proxy backends.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   45,
+   50
+  ],
+  "finding_line": 51,
+  "finding_title": "Honor the run's persisted merge confirmation",
+  "finding_detail": "The status schema strips run.merged, and this condition never checks it. Both automatic delivery and merge reconciliation can persist merged=true without a PR snapshot or land entry. Status consequently reports an already merged PR as unknown and requests further inspection. Regression command: TMPDIR=/private/tmp/lr-Wkl8tH/claude-501 TMP=/private/tmp/lr-Wkl8tH/claude-501 TEMP=/private/tmp/lr-Wkl8tH/claude-501 LIMITLESS_CONFIG_DIR=/private/tmp/lr-Wkl8tH/claude-501 bun test /private/tmp/lr-Wkl8tH/claude-501/reviewer-regressions.test.ts. Assertion output: Expected: \"Landed\"; Received: \"PR state "
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-070",
+  "trial": 1,
+  "gold": "MCP status returns private land reasons unchanged on direct and proxy backends.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   45,
+   50
+  ],
+  "finding_line": 51,
+  "finding_title": "Honor the run's confirmed merged flag",
+  "finding_detail": "The status schema discards run.merged, and explainStatus never checks it. Existing automatic delivery and GitHub reconciliation can set merged=true without a merged PR snapshot, resolution, or land entry. The tool then tells an agent to review or land an already merged PR. Targeted command: bun -e 'import {explainStatus,statusDetailSchema} from \"./src/integrations/mcp-status.ts\"; const detail = statusDetailSchema.parse({run:{id:\"merged-run\",status:\"succeeded\",prUrl:\"https://github.com/o/r/pull/1\",merged:true},questions:[],prSnapshot:{state:\"OPEN\",headRefOid:\"a\".repeat(40)},review:{approval:nul"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-071",
+  "trial": 0,
+  "gold": "Unicode and URL encodings evade privacy protection in status and digest fields.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   60,
+   64
+  ],
+  "finding_line": 66,
+  "finding_title": "Honor the run's confirmed merge flag",
+  "finding_detail": "The status schema strips run.merged, and the landed check ignores it. The pipeline records merged=true after a successful automatic merge without necessarily updating prSnapshot or creating a land entry. Status consequently asks agents to review an already merged PR. The poller excludes merged runs, so the stale snapshot may persist. Command: bun test \"$TMPDIR/review-probes.test.ts\". Output: Expected: \"Landed\"; Received: \"Review needed\"."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-071",
+  "trial": 1,
+  "gold": "Unicode and URL encodings evade privacy protection in status and digest fields.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   60,
+   64
+  ],
+  "finding_line": 66,
+  "finding_title": "Honor the run's confirmed merged flag",
+  "finding_detail": "The status schema strips run.merged, and the merged-state check ignores it. Existing delivery code records confirmed merges through this flag without necessarily updating the poller snapshot or creating a landed queue entry. Status therefore asks agents to review an already merged PR. Regression command: TMPDIR=/private/tmp/lr-02FaJl/claude-501 TMP=/private/tmp/lr-02FaJl/claude-501 TEMP=/private/tmp/lr-02FaJl/claude-501 bun test /private/tmp/lr-02FaJl/claude-501/mcp-digest-regressions.test.ts. Output: expected state \"Landed\", received \"Review needed\"."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-071",
+  "trial": 1,
+  "gold": "Unicode and URL encodings evade privacy protection in status and digest fields.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   60,
+   64
+  ],
+  "finding_line": 66,
+  "finding_title": "Honor the run's confirmed merged flag",
+  "finding_detail": "The status schema drops run.merged, and the merged-state check never considers it. Existing delivery and reconciliation paths set merged=true without setting resolution.kind or creating a land entry. Consequently, status reports an already merged PR as unknown or needing review. Regression output: Expected \"Landed\"; Received \"PR state unknown\"."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-088",
+  "trial": 0,
+  "gold": "The isolated post-check status still inspects populated submodules with their own git directories, so a submodule that points at the land clone's admin directory runs a clean filter from the clone's configuration, which the request says never applies after the checks.",
+  "gold_file": "scripts/land-pr.sh",
+  "gold_lines": [
+   116,
+   116
+  ],
+  "finding_line": 116,
+  "finding_title": "Prevent submodule status from reopening the clone\u2019s configuration",
+  "finding_detail": "Git status recursively inspects populated submodules using their own Git directories. A submodule\u2019s .git file can point back to the clone\u2019s recorded admin directory, causing its clean filter to execute. safe_git now discovers filter keys only in the isolated repository, so that filter receives no disabling override; the base-style override prevented execution. Reproduction command: TMP=\"$TMPDIR\" TEMP=\"$TMPDIR\" python3 \"$TMPDIR/land-submodule-repro.py\". Output: 'land-pr exit: 1', 'land-pr stderr: Worktree differs from landing commit; refusing to land', 'clone clean-filter marker exists: True', "
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-088",
+  "trial": 1,
+  "gold": "The isolated post-check status still inspects populated submodules with their own git directories, so a submodule that points at the land clone's admin directory runs a clean filter from the clone's configuration, which the request says never applies after the checks.",
+  "gold_file": "scripts/land-pr.sh",
+  "gold_lines": [
+   116,
+   116
+  ],
+  "finding_line": 116,
+  "finding_title": "Submodule inspection escapes the isolated Git configuration",
+  "finding_detail": "The isolated status command recursively inspects initialized submodules using their clone-side repository configuration. A submodule clean filter therefore executes after checks; safe_git only enumerates filters in the isolated parent repository. This leaves the requested post-check isolation incomplete. Using a temporary extension of the existing harness, `bun test /private/tmp/lr-74W8QJ/claude-501/land-review-dz71g4o2/land-submodule.test.ts -t 'checks:submodule-filter'` failed with `Expected: false / Received: true` for the command marker. The landing script itself returned exitCode 0 and pu"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-098",
+  "trial": 0,
+  "gold": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+  "gold_file": "src/router/runtime-policy.ts",
+  "gold_lines": [
+   25,
+   31
+  ],
+  "finding_line": 27,
+  "finding_title": "Persisted routes referencing the removed model prevent startup",
+  "finding_detail": "Removing the catalog entry leaves startup validation of persisted operator routing cells unchanged. RuntimePolicy throws on the historical ID, aborting Factory construction before historical records can render or runs can resume. The temporary reproducer derives the removed ID from the base catalog. Command: bun \"$TMPDIR/retired-provider-review.ts\" startup. Output: `Base: PASS`, followed by `HEAD: Error: triage.default` with `unknown model ID \"<removed-model-id>\"`, then `AssertionError: historical persisted data must remain compatible`."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-098",
+  "trial": 0,
+  "gold": "Historical run references prevent unrelated catalog mutations.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   61,
+   69
+  ],
+  "finding_line": 62,
+  "finding_title": "Historical run pins block unrelated catalog mutations",
+  "finding_detail": "RuntimeCatalog.apply revalidates every stored run against today's catalog. After this removal, any historical run pinned to the removed model makes unrelated model additions, patches and deletions fail. Command: bun \"$TMPDIR/retired-provider-review.ts\" edit. Output: `Base: PASS`, then `HEAD: Error: run mv7ow6n57nya: Error: models.triage entry \"<removed-model-id>\": Error: unknown model ID \"<removed-model-id>\"`, followed by `AssertionError: historical persisted data must remain compatible`."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+  "gold_file": "src/router/runtime-policy.ts",
+  "gold_lines": [
+   25,
+   31
+  ],
+  "finding_line": 27,
+  "finding_title": "Persisted routing references can prevent daemon startup",
+  "finding_detail": "Removing the catalog entries leaves RuntimePolicy strictly validating saved routing cells and provider preferences against the current catalog. Either historical reference now throws during Factory construction, preventing the daemon from starting and all runs from resuming. Command: bun \"$TMPDIR/limitless-provider-review.mpu4wo/compatibility.ts\". Output included: 'base: saved routing cell: PASS', 'HEAD: saved routing cell: FAIL: Error: triage.default' with 'unknown model ID \"<removed-model>\"'; 'base: saved provider preference: PASS', 'HEAD: saved provider preference: FAIL: Error: routing.pref"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "Historical run references prevent unrelated catalog mutations.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   61,
+   69
+  ],
+  "finding_line": 64,
+  "finding_title": "Historical run pins block unrelated catalog changes",
+  "finding_detail": "RuntimeCatalog.apply revalidates every stored run against the proposed catalog. After this removal, any run pinned to the retired model makes unrelated model additions, edits, and deletions fail\u2014even when that run is completed. Command: bun \"$TMPDIR/limitless-provider-review.mpu4wo/compatibility.ts\". Output: 'base: catalog edit with historical run: PASS'; 'HEAD: catalog edit with historical run: FAIL: Error: run mv7p0qzfr93y: Error: models.triage entry \"<removed-model>\": Error: unknown model ID \"<removed-model>\"'."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-101",
+  "trial": 0,
+  "gold": "Raw process output is cut before gate credential redaction can match a boundary-spanning secret.",
+  "gold_file": "src/gates/run.ts",
+  "gold_lines": [
+   88,
+   98
+  ],
+  "finding_line": 88,
+  "finding_title": "Redaction happens after the process runner has already cut output",
+  "finding_detail": "runProcess truncates each raw stream to 64,000 characters before returning it. This call therefore cannot redact a credential split by that earlier cut. Stripping terminal formatting can then bring the surviving credential fragment into the final 6,000-character tail. Targeted command: REVIEW_CHECKOUT=\"$PWD\" TMP=\"$TMPDIR\" TEMP=\"$TMPDIR\" bun test \"$review_dir/redaction.test.ts\", with review_dir=\"$TMPDIR/gate-review-yzBsOY\". The assertion failed with Expected to not contain: \"-boundary-credential\"; Received: \"-boundary-credential\". That fragment reaches stored results, logs, and model feedback."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-101",
+  "trial": 0,
+  "gold": "Raw process output is cut before gate credential redaction can match a boundary-spanning secret.",
+  "gold_file": "src/gates/run.ts",
+  "gold_lines": [
+   88,
+   98
+  ],
+  "finding_line": 88,
+  "finding_title": "Redaction happens after the process runner has already truncated output",
+  "finding_detail": "runProcess retains only the last 64,000 raw characters. The helper therefore cannot recognize a credential split at that earlier boundary. Stripping terminal sequences afterward can bring the surviving credential fragment into the final 6,000-character output, which consumers store and forward. A direct bun subprocess probe produced {\"outputStart\":\"9-ABCDEFGHzzzzzzzzzzzzzzzzzzzz\",\"length\":6000,\"leakedSuffix\":true,\"redacted\":false}. This violates the requested redact-before-truncate guarantee."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-101",
+  "trial": 1,
+  "gold": "Raw process output is cut before gate credential redaction can match a boundary-spanning secret.",
+  "gold_file": "src/gates/run.ts",
+  "gold_lines": [
+   88,
+   98
+  ],
+  "finding_line": 88,
+  "finding_title": "Redact before the process runner's earlier tail cut",
+  "finding_detail": "runConfined already truncates each stream to 64,000 characters. Redaction here cannot match a credential split by that cut. Stripping terminal sequences then brings the surviving credential suffix into the stored 6,000-character tail. Targeted command: TMP=\"$TMPDIR\" TEMP=\"$TMPDIR\" bun \"$TMPDIR/gate-redaction-review.ts\" tail. Output: {\"output\":\"cated-credential-409zzzzzzzzzzzzzzzzzzzz\"}, followed by AssertionError: Credential suffix leaked after upstream tail truncation. This text reaches storage, land logs and model feedback."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-101",
+  "trial": 1,
+  "gold": "Raw process output is cut before gate credential redaction can match a boundary-spanning secret.",
+  "gold_file": "src/gates/run.ts",
+  "gold_lines": [
+   88,
+   98
+  ],
+  "finding_line": 88,
+  "finding_title": "Redaction occurs after the subprocess has already truncated output",
+  "finding_detail": "runConfined uses runProcess's default 64,000-character raw tail. A credential crossing that boundary is already incomplete when redactGateOutput runs, so literal matching cannot remove it. Terminal formatting after the credential can then be stripped, bringing the surviving fragment into the final 6,000-character result. An integration probe returned output \"iew-boundary-credential\". Exact focused command: bun -e 'import {runProcess,registerCredential} from \"./src/util/proc.ts\"; import {redactGateOutput} from \"./src/gates/output.ts\"; const s=\"synthetic-review-boundary-credential\"; registerCred"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-103",
+  "trial": 1,
+  "gold": "Line callbacks store pieces of multiline credentials in failure excerpts.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   17,
+   18
+  ],
+  "finding_line": 18,
+  "finding_title": "Redact multiline credentials before splitting failure output",
+  "finding_detail": "Failure excerpts redact individual lines, so a registered credential containing a newline cannot match. The combined output is sanitized correctly, but failures retains the complete credential and is persisted unchanged. Command: `bun test \"$TMPDIR/review-gate-redaction.test.ts\"`. Assertion output: `Expected to not contain: \"synthetic-secret-first-line\\nsynthetic-secret-second-line\"; Received: \"error: synthetic-secret-first-line\\nsynthetic-secret-second-line\\n(fail) assertion\"`."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-103",
+  "trial": 1,
+  "gold": "Line callbacks store pieces of multiline credentials in failure excerpts.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   17,
+   18
+  ],
+  "finding_line": 18,
+  "finding_title": "Multiline registered credentials survive failure excerpt redaction",
+  "finding_detail": "Redaction runs separately on each line, so a registered credential containing a newline never matches. A direct runGates probe returned a redacted output tail but the complete credential in failures, which is persisted in gate artifacts and state. Reproduction command: bun -e 'import {extractFailures} from \"./src/gates/failures.ts\"; import {registerCredential} from \"./src/util/proc.ts\"; const secret=\"synthetic-multiline-credential\\nsecond-secret-line-123\"; registerCredential(\"MULTILINE_TOKEN\",secret); const failures=extractFailures(\"error: \"+secret+\"\\n(fail) assertion\\n\"); if (failures?.includ"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-104",
+  "trial": 0,
+  "gold": "Lossy excerpt line framing prevents matching multiline credentials before storage.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   49,
+   53
+  ],
+  "finding_line": 50,
+  "finding_title": "Multiline credentials with blank lines leak through failure excerpts",
+  "finding_detail": "The process line callbacks discard empty lines. Reassembling those callbacks here changes a credential containing consecutive newlines, preventing literal redaction. The output tail is redacted, but failures retains the credential's nonempty lines and forwards them to storage and model feedback. Command `TMP=\"$TMPDIR\" TEMP=\"$TMPDIR\" bun \"$TMPDIR/gate-redaction-review.ts\" multiline` returned `{\"output\":\"[redacted]\\n(fail) assertion\",\"failures\":\"synthetic-private-line-one\\nsynthetic-private-line-two\\n(fail) assertion\"}` and failed with `error: multiline: credential fragment leaked from runGates`"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-104",
+  "trial": 0,
+  "gold": "Failure excerpt collection retains unbounded bytes on very long output lines.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   36,
+   41
+  ],
+  "finding_line": 36,
+  "finding_title": "Restore bounded diagnostic retention",
+  "finding_detail": "Removing the 8,000-character per-line cap leaves retained diagnostics unbounded by character count. The collector also joins and splits the entire retained buffer after each additional line. Large gate diagnostics can exhaust daemon memory or cause substantial allocation churn. Command `TMP=\"$TMPDIR\" TEMP=\"$TMPDIR\" bun \"$TMPDIR/gate-redaction-review.ts\" retention` printed `retained diagnostic characters: 39000107` and failed with `error: failure diagnostics exceed the previous bounded retention`."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-104",
+  "trial": 0,
+  "gold": "Failure excerpt collection retains unbounded bytes on very long output lines.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   36,
+   41
+  ],
+  "finding_line": 36,
+  "finding_title": "Restore a byte bound on retained diagnostics",
+  "finding_detail": "Replacing the previous 8,000-character per-line cap with retention of whole lines makes excerpt buffering unbounded in bytes. Every subsequent line beyond the line limit also joins and redacts the entire retained buffer. Reproduction command: bun -e 'import { FailureExcerpts } from \"./src/gates/failures.ts\"; const excerpts = new FailureExcerpts(); for (let i=0;i<39;i++) excerpts.observe(\"x\".repeat(1_000_000)); console.log(JSON.stringify({retainedDiagnosticCharacters: excerpts.lines.reduce((n,s)=>n+s.length,0),lines:excerpts.lines.length})); excerpts.observe(\"(fail) assertion\"); console.log(JSO"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-104",
+  "trial": 1,
+  "gold": "Lossy excerpt line framing prevents matching multiline credentials before storage.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   49,
+   53
+  ],
+  "finding_line": 50,
+  "finding_title": "Preserve blank lines before redacting multiline credentials",
+  "finding_detail": "The process line splitter discards empty lines. Reassembling those callbacks cannot reconstruct a credential containing a blank line, so literal redaction misses it. The output tail is redacted correctly, but failures retains the credential's nonempty lines, which then reach storage, logs and prompts. Targeted command: `bun test \"$TMPDIR/gate-output-review.test.ts\"`. Assertion output: `Expected to not contain: \"synthetic-last-line\"; Received: \"error: synthetic-first-line\\nsynthetic-last-line\\n(fail) assertion\"`."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-104",
+  "trial": 1,
+  "gold": "Failure excerpt collection retains unbounded bytes on very long output lines.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   36,
+   41
+  ],
+  "finding_line": 36,
+  "finding_title": "Restore a size bound on buffered diagnostic lines",
+  "finding_detail": "Removing the previous 8,000-character per-line cap makes retained diagnostics unbounded in bytes. The line-count limit now permits dozens of arbitrarily large strings, and subsequent observations join and redact the entire buffer. Untrusted gate output can exhaust daemon memory or stall its event loop. Targeted command: `bun test \"$TMPDIR/gate-output-review.test.ts\"`. Output: `retained diagnostic characters: 39000107; previous bound: 312000`; the bounded-buffer assertion failed."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-104",
+  "trial": 1,
+  "gold": "Lossy excerpt line framing prevents matching multiline credentials before storage.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   49,
+   53
+  ],
+  "finding_line": 50,
+  "finding_title": "Preserve blank lines before redacting multiline credentials",
+  "finding_detail": "runProcess drops empty lines from its callbacks. Reassembling those callbacks changes a credential containing a blank line, so literal redaction fails and both credential fragments survive in failures. Those excerpts are then stored and forwarded to models; subsequent redaction cannot recognize the altered credential. Exact reproduction: bun -e 'import {strict as assert} from \"node:assert\"; import {runProcess,registerCredential} from \"./src/util/proc.ts\"; import {FailureExcerpts} from \"./src/gates/failures.ts\"; const secret=\"synthetic-prefix\\n\\nsynthetic-suffix\"; registerCredential(\"REVIEW_TOK"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-104",
+  "trial": 1,
+  "gold": "Failure excerpt collection retains unbounded bytes on very long output lines.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   36,
+   41
+  ],
+  "finding_line": 36,
+  "finding_title": "Restore a byte bound on retained diagnostics",
+  "finding_detail": "Replacing line.slice(0, 8_000) with the entire line removes the collector's memory bound. A line-count limit allows untrusted checks to retain arbitrarily large diagnostics in the factory process, with further large allocations when joining and redacting them. Exact reproduction: bun -e 'import {strict as assert} from \"node:assert\"; import {FailureExcerpts} from \"./src/gates/failures.ts\"; const e=new FailureExcerpts(); for(let i=0;i<39;i++) e.observe(\"x\".repeat(1000000)); const retained=Reflect.get(e,\"lines\").join(\"\").length; assert.ok(retained<=39*8000, `retained ${retained} diagnostic charac"
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-105",
+  "trial": 0,
+  "gold": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   453,
+   458
+  ],
+  "finding_line": 453,
+  "finding_title": "Normalize terminal formatting before the runner truncates output",
+  "finding_detail": "The runner redacts literal text before its 64k tail cut, but terminal normalization happens afterward. A credential containing ANSI formatting therefore escapes runner redaction; truncation removes its prefix, making subsequent redaction unable to recognize the remaining suffix. The resulting GateResult exposes credential text to storage and consumers. Command: TMP=\"$TMPDIR\" TEMP=\"$TMPDIR\" bun test \"$TMPDIR/gate-redaction-review.test.ts\". The colored-credential assertion failed: Expected \"[redacted]\", Received \"credential-123456789\"."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-105",
+  "trial": 0,
+  "gold": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   453,
+   458
+  ],
+  "finding_line": 453,
+  "finding_title": "Defer replacement of credentials that overlap an incomplete longer credential",
+  "finding_detail": "Redacting the pending buffer before resolving incomplete matches destroys longer credential prefixes. A shorter registered credential is replaced immediately, so subsequent chunks cannot match the longer credential and its suffix escapes into gate results and downstream consumers. Command: bun test \"$TMPDIR/gate-redaction-review.test.ts\". The overlapping-credentials test failed with Expected: \"[redacted]\"; Received: \"[redacted]-private-credential-suffix\"."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-105",
+  "trial": 1,
+  "gold": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   453,
+   458
+  ],
+  "finding_line": 453,
+  "finding_title": "Normalize terminal formatting before the runner truncates output",
+  "finding_detail": "The runner redacts literal credentials but retains ANSI formatting until runOne receives the already-truncated tail. A credential interrupted by ANSI formatting therefore escapes this redaction; truncation removes its prefix, and subsequent normalization exposes a suffix that can no longer match the registered value. The resulting GateResult is then stored and forwarded unchanged. Targeted command `TMP=\"$TMPDIR\" TEMP=\"$TMPDIR\" bun test \"$TMPDIR/review-gate-redaction.test.ts\"` failed on both streams: `Expected to not contain: \"credential-421\"; Received: \"y-credential-421\"` (0 pass, 2 fail)."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-105",
+  "trial": 1,
+  "gold": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   453,
+   458
+  ],
+  "finding_line": 453,
+  "finding_title": "Defer overlapping credential replacement until the match is complete",
+  "finding_detail": "Redacting the pending buffer immediately can replace a shorter registered credential before a longer credential finishes arriving. Retaining overlap after that replacement cannot recover the longer match, so its remaining secret text reaches gate results and downstream storage and feedback. Command: bun test \"$TMPDIR/gate-redaction-review.test.ts\". The overlapping-credentials test failed with Expected: \"[redacted]\", Received: \"[redacted]-secret-suffix\"."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-044",
+  "trial": 0,
+  "gold": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+  "gold_file": "src/router/router.ts",
+  "gold_lines": [
+   256,
+   262
+  ],
+  "finding_line": 256,
+  "finding_title": "Reset loses its effect on sticky implementers after restart",
+  "finding_detail": "Sticky removal depends on the in-memory changedCells set. Reset deletes the persisted override, so startup reconstructs the base policy without marking the cell changed. A resumed run's removed implementer is then appended and pinned first again. Targeted command: TMPDIR=/private/tmp/lr-dFTlLS/claude-501 TMP=/private/tmp/lr-dFTlLS/claude-501 TEMP=/private/tmp/lr-dFTlLS/claude-501 bun test /private/tmp/lr-dFTlLS/claude-501/routing-review.test.ts. The reset/restart assertion failed: Expected: \"claude/sonnet-5.5\"; Received: \"codex/luna\"."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-044",
+  "trial": 1,
+  "gold": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+  "gold_file": "src/router/router.ts",
+  "gold_lines": [
+   256,
+   262
+  ],
+  "finding_line": 256,
+  "finding_title": "A restart resurrects implementers removed by an operator reset",
+  "finding_detail": "Sticky-target removal depends on changedCells, which exists only in memory. After an operator reset, a running daemon ignores the removed implementer correctly. Restarting initializes the Router with the restored base policy; RuntimePolicy then sets the identical policy, leaving changedCells empty. The persisted implementer is consequently appended and pinned ahead of the current cell again. A focused reproduction printed `before restart: claude/opus` and `after restart: codex/sol` for the same saved preference after resetting the cell to Claude."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-045",
+  "trial": 0,
+  "gold": "Unlimited quota still applies utilization reserves to free and metered providers.",
+  "gold_file": "src/router/providers.ts",
+  "gold_lines": [
+   348,
+   353
+  ],
+  "finding_line": 349,
+  "finding_title": "Unlimited providers still hit reserves outside subscription billing",
+  "finding_detail": "Config accepts unlimited for every billing mode, but headroom bypasses windows only for subscription providers. Free and metered providers can therefore show 'No limit (configured)' while routing excludes them at a window reserve. Reproduction command: bun -e 'import {Store} from \"./src/db/store.ts\"; import {ProviderTracker} from \"./src/router/providers.ts\"; const s=new Store(\":memory:\"); const r={claudeFiveHour:.8,claudeSevenDay:.85,codexWeekly:.9,codexFiveHour:.9}; const p={id:\"work\",label:\"Work\",harness:\"codex\",billing:\"free\",quota:\"unlimited\",maxConcurrent:1}; const t=new ProviderTracker(["
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-045",
+  "trial": 1,
+  "gold": "Unlimited quota still applies utilization reserves to free and metered providers.",
+  "gold_file": "src/router/providers.ts",
+  "gold_lines": [
+   348,
+   353
+  ],
+  "finding_line": 349,
+  "finding_title": "Unlimited quota still gates free and metered providers",
+  "finding_detail": "Window bypass applies only to subscription billing, although configuration accepts unlimited for every billing type. Free and metered providers can therefore become exhausted solely from informational windows. Exact reproduction command: bun -e 'import {Store} from \"./src/db/store.ts\"; import {ProviderTracker} from \"./src/router/providers.ts\"; const s=new Store(\":memory:\"); const d={id:\"work\",label:\"Work\",harness:\"claude\",billing:\"free\",quota:\"unlimited\",maxConcurrent:1}; const t=new ProviderTracker([d],s,{},{}); t.observeWindows(\"work\",{daily:{utilization:1,resetsAt:null}}); console.log(t.hea"
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-050",
+  "trial": 0,
+  "gold": "Legacy adoption trusts Git administration paths selected by an agent-controlled checkout.",
+  "gold_file": "src/pipeline/engine.ts",
+  "gold_lines": [
+   178,
+   184
+  ],
+  "finding_line": 177,
+  "finding_title": "Recover legacy worktrees before their path is persisted",
+  "finding_detail": "The migration only examines state.worktreePath. During prepare(), createWorktree() creates the directory before worktreePath is saved. If the previous release stopped in that interval, the persisted state has no path. On resume this guard skips registration, then createWorktree()'s existing-directory branch calls worktreeGit(), which throws Missing trusted Git paths. This leaves a preexisting upgrade failure unresolved."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-050",
+  "trial": 1,
+  "gold": "Legacy adoption trusts Git administration paths selected by an agent-controlled checkout.",
+  "gold_file": "src/pipeline/engine.ts",
+  "gold_lines": [
+   178,
+   184
+  ],
+  "finding_line": 178,
+  "finding_title": "Record legacy worktrees before the needs-human resume branch",
+  "finding_detail": "The new recording block runs after the existing needsHumanReason check, which throws immediately. The catch handler then retries draft delivery through deliver or deliverVerifiedDraft without recording the worktree. Consequently, legacy runs interrupted during needs-human delivery still encounter Missing trusted Git paths and cannot deliver their completed work."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-051",
+  "trial": 0,
+  "gold": "A fixed review-time cutoff excludes worktrees created before the sidecar-writing release actually started.",
+  "gold_file": "src/db/migrations/20261005T134145-worktree-provenance.sql",
+  "gold_lines": [
+   6,
+   13
+  ],
+  "finding_line": 9,
+  "finding_title": "A commit timestamp does not identify the installed release",
+  "finding_detail": "The migration excludes every run prepared after the hard-coded timestamp, even when the installation was still running the release without sidecars. Those worktrees remain unclassified, so engine.ts skips registration and fails with Missing trusted Git paths. Reproducer command: `bun /private/tmp/lr-ltAE7y/claude-501/review-legacy-check.ts migration-date`. Output: `migration-date { worktree_provenance: null }`, followed by `AssertionError: null !== 'legacy'`."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-051",
+  "trial": 1,
+  "gold": "A fixed review-time cutoff excludes worktrees created before the sidecar-writing release actually started.",
+  "gold_file": "src/db/migrations/20261005T134145-worktree-provenance.sql",
+  "gold_lines": [
+   6,
+   13
+  ],
+  "finding_line": 9,
+  "finding_title": "Commit time does not identify when an installation adopted sidecars",
+  "finding_detail": "An installation can continue running the old release after the hard-coded timestamp. Its worktrees still lack sidecars, but this migration excludes them, so resume fails with Missing trusted Git paths. Reproduction command: bun -e 'import { Database } from \"bun:sqlite\"; import { readFileSync } from \"node:fs\"; import { strict as assert } from \"node:assert\"; const db = new Database(\":memory:\"); db.exec(\"CREATE TABLE runs (id TEXT); CREATE TABLE stages (run_id TEXT, name TEXT, started_at INTEGER, finished_at INTEGER, status TEXT); CREATE TABLE events (run_id TEXT, type TEXT, ts INTEGER); INSERT I"
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "Retry eligibility ignores security failures outside the selected error line.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   297,
+   304
+  ],
+  "finding_line": 304,
+  "finding_title": "Security tests can be rerun when their names occur after the first error line",
+  "finding_detail": "The security guard examines only the check name, job name, and one selected signature line. It ignores security test names elsewhere in the log, although transient detection scans the entire log. A generic test job can therefore rerun security tests and record them in the flake ledger, violating the explicit exclusion. Targeted command: `bun test /private/tmp/lr-yRua1O/claude-501/ci-review.test.ts`. Output for the security fixture: `Expected: 0; Received: 1` rerun POST."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "A paused PR is not inspected again when main recovers without another PR change.",
+  "gold_file": "src/integrations/github-poller.ts",
+  "gold_lines": [
+   314,
+   325
+  ],
+  "finding_line": 315,
+  "finding_title": "Main-red suppression never resumes for an unchanged PR",
+  "finding_detail": "The classifier returns true after suppressing a failure because main is red, so the poller clears ciPending. Subsequent unchanged PR observations do not inspect main. Main can recover while the PR remains permanently suppressed, with neither a rerun nor ci.needs_fix. Targeted command: `bun test /private/tmp/lr-yRua1O/claude-501/ci-review.test.ts`. The recovery-retention assertion failed: `Expected: false; Received: true`."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "An accepted rerun with a lost response is never reconciled to its later result.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   185,
+   190
+  ],
+  "finding_line": 187,
+  "finding_title": "An accepted rerun with a lost response cannot become flake evidence",
+  "finding_detail": "A rerun claim is persisted as rerun_requested before the POST, but reconciliation examines only rerunning rows. If GitHub accepts the POST and the response is lost\u2014or the daemon stops before finishCiFailure\u2014the later same-SHA pass is ignored. If the original failure is still visible, line 352 instead marks the claim failed_again without inspecting the new attempt. Targeted command: `bun test /private/tmp/lr-yRua1O/claude-501/ci-review.test.ts`. Output: `Expected: \"failed_then_passed\"; Received: \"rerun_requested\"`."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "A paused PR is not inspected again when main recovers without another PR change.",
+  "gold_file": "src/integrations/github-poller.ts",
+  "gold_lines": [
+   314,
+   325
+  ],
+  "finding_line": 315,
+  "finding_title": "Resume suppressed PR failures when main recovers",
+  "finding_detail": "A main-red inspection clears ciPending. Subsequent unchanged PR observations never inspect main again, so its recovery cannot resume the suppressed rerun or needs-fix reaction. Command: bun test /private/tmp/lr-UWn1Tq/claude-501/ci-review.test.js. Output: After main recovery: {\"reruns\":0,\"pending\":false,\"mainState\":{\"test\":{\"red\":true,\"episode\":1}}}; assertion failed: Expected length: 1, Received length: 0."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "An accepted rerun with a lost response is never reconciled to its later result.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   185,
+   190
+  ],
+  "finding_line": 187,
+  "finding_title": "Reconcile reruns whose POST response was lost",
+  "finding_detail": "Only rerunning rows are reconciled. A successful POST with a lost response, or a crash before finishCiFailure, leaves rerun_requested. A later same-SHA success is ignored; another failure can prematurely mark the request failed_again without checking its actual attempt. Command: bun test /private/tmp/lr-UWn1Tq/claude-501/ci-review.test.js. Output: After same-SHA pass: rerun_requested; assertion failed: Expected: \"failed_then_passed\", Received: \"rerun_requested\"."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-053",
+  "trial": 0,
+  "gold": "A definitively refused CI rerun remains pending indefinitely.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   387,
+   389
+  ],
+  "finding_line": 388,
+  "finding_title": "Rejected rerun requests remain pending indefinitely",
+  "finding_detail": "The rerun is claimed before the POST, but a definitive rejection leaves its outcome as rerun_requested. Subsequent inspections wait for a higher workflow attempt and suppress ci.needs_fix, although no rerun was created. Command: bun test \"$TMPDIR/ci-review.test.ts\". The rejected-request test failed with \"Expected: 1\\nReceived: 0\" for the needs-fix item count after three subsequent inspections."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-053",
+  "trial": 1,
+  "gold": "A definitively refused CI rerun remains pending indefinitely.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   387,
+   389
+  ],
+  "finding_line": 388,
+  "finding_title": "A rejected rerun request leaves the failure pending forever",
+  "finding_detail": "The claim persists rerun_requested before the POST, but an explicit rejection only throws. Subsequent inspections wait for a later workflow attempt that will never exist and suppress ci.needs_fix. Direct check `bun \"$TMPDIR/ci-review.ts\"` produced `Rejected rerun after four polls: {\"posts\":1,\"outcome\":\"rerun_requested\",\"feed\":0}` and `ASSERTION FAILURE: rejected rerun should emit needs_fix` (`0 !== 1`)."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-054",
+  "trial": 0,
+  "gold": "ANSI-colored Bun failures and pytest security failures are missed by the retry exclusion.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   42,
+   48
+  ],
+  "finding_line": 47,
+  "finding_title": "Playwright security failures can be automatically rerun",
+  "finding_detail": "Security detection ignores Playwright failure headings such as `1) [chromium] \u203a tests/security.spec.ts:10:1 \u203a rejects unauthorized access`. In a generic job concluded timed_out, that evidence does not prevent recording the failure and rerunning the job. This violates the security-test exclusion. Command `bun \"$TMPDIR/ci-review-probes.ts\"` produced `observed rerun POSTs: 1 ledger rows: 1` and `FAIL Playwright security timeout never reruns ... 1 !== 0`."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-054",
+  "trial": 1,
+  "gold": "Rate-limit refusals leave rerun claims unresolved across cooldowns and restarts.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   394,
+   400
+  ],
+  "finding_line": 395,
+  "finding_title": "A rejected rate-limited rerun stays pending indefinitely",
+  "finding_detail": "The rerun is claimed before POST, but HTTP 429 leaves its outcome as rerun_requested. Subsequent inspections wait for a higher workflow attempt that will never exist because GitHub rejected the request, while suppressing ci.needs_fix. Command: `bun /private/tmp/lr-sHSr7q/claude-501/ci-review/probe.ts rate`. Output included `429 subsequent inspection complete: false` on three inspections, `429 final: {\"outcomes\":[\"rerun_requested\"],\"needsFix\":0,\"rerunPosts\":1}`, and `ASSERTION FAILED: a definitively rate-limited POST remains pending forever with no ci.needs_fix`."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-056",
+  "trial": 0,
+  "gold": "Catalog mutation can invalidate a shadowed retained policy and prevent the daemon from restarting.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   71,
+   76
+  ],
+  "finding_line": 81,
+  "finding_title": "Deletion can leave a persisted policy that prevents daemon restart",
+  "finding_detail": "Deletion checks only operator routing rows. A runtime model can also be referenced by the file policy, which Factory loads after restoring runtime models. DELETE succeeds for that reference, but the next startup fails in readPolicy because the model is now missing. Reproduction command: TMPDIR=/private/tmp/lr-MqlmDM/claude-501 TMP=/private/tmp/lr-MqlmDM/claude-501 TEMP=/private/tmp/lr-MqlmDM/claude-501 bun /private/tmp/lr-MqlmDM/claude-501/catalog-delete-reload.ts. Output: `DELETE succeeded; runtime rows: 0`, followed by `AssertionError: Got unwanted exception` and `Invalid routing policy rout"
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-056",
+  "trial": 1,
+  "gold": "Catalog mutation can invalidate a shadowed retained policy and prevent the daemon from restarting.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   71,
+   76
+  ],
+  "finding_line": 81,
+  "finding_title": "Deleting a model referenced by the file-backed policy prevents restart",
+  "finding_detail": "remove() checks only persisted operator cells. The evals policy loaded from routing/policy.json can also reference runtime models, but deletion leaves those references intact. Factory subsequently calls readPolicy() against the reduced catalog during startup, which throws and prevents the daemon from starting. Reproduction command: bun -e 'import {RuntimeCatalog} from \"./src/router/runtime-catalog.ts\"; import {validatePolicy} from \"./src/router/policy.ts\"; const models=[{id:\"codex/experiment\",provider:\"codex\",source:\"runtime\",supportedEfforts:[]}]; const policy={triage:{default:[\"codex/experim"
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-057",
+  "trial": 1,
+  "gold": "Effort removal is persisted without checking policy cells hidden by operator overrides.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   71,
+   76
+  ],
+  "finding_line": 81,
+  "finding_title": "Deletion can invalidate the startup routing policy",
+  "finding_detail": "Deletion checks only stored operator cells. An evals policy loaded at startup can also reference a runtime model, so deletion succeeds while leaving that policy invalid. The next startup rejects the policy and prevents the daemon from starting. Command: bun \"$TMPDIR/review-catalog-boundaries.ts\" delete. Output: DELETE succeeded; restart rejects policy: unknown model ID \"codex/experiment\", followed by a ZodError for triage.default[0]."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Retrying an unchanged run converts inherited model chains into explicit overrides.",
+  "gold_file": "ui/components/RetryModels.tsx",
+  "gold_lines": [
+   15,
+   23
+  ],
+  "finding_line": 19,
+  "finding_title": "Prefill retry chains using each role's actual routing complexity",
+  "finding_detail": "The picker applies the original run's complexity to every role and submits those chains as explicit overrides. However, pipeline triage always routes with small, and deep-profile review routes with large. Opening this picker can therefore silently change untouched roles. Reproduction command: bun -e 'const s = await Bun.file(\"ui/components/RetryModels.tsx\").text(); const e = s.match(/const groups = (.*);/)[1]; console.log(new Function(\"r\", \"role\", \"complexity\", \"return \" + e)({effective:{triage:{small:{groups:[\"small/model\"]},large:{groups:[\"large/model\"]}}}}, \"triage\", \"large\"));' Output: [ \""
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Clearing a default effort omits the field from PATCH and leaves the old value stored.",
+  "gold_file": "ui/components/CatalogForm.tsx",
+  "gold_lines": [
+   66,
+   72
+  ],
+  "finding_line": 66,
+  "finding_title": "Clearing default effort does not clear the persisted value",
+  "finding_detail": "An empty effort field omits effort from PATCH. RuntimeCatalog.patch merges the patch over the existing model, so the old effort survives despite a successful save. It also prevents removing that effort from supportedEfforts, because validation still sees the old default. Reproduction command: bun -e 'const s = await Bun.file(\"ui/components/CatalogForm.tsx\").text(); const e = s.match(/\\.\\.\\.\\(f\\.effort[^\\n]+/)[0].slice(3).replace(/,$/, \"\"); const patch = new Function(\"f\", \"return \" + e)({effort:\"\"}); console.log({...{effort:\"high\"}, ...patch});' Output: { effort: \"high\" }."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Catalog history disappears on reload and does not include changes made by another client.",
+  "gold_file": "ui/pages/Setup.tsx",
+  "gold_lines": [
+   619,
+   625
+  ],
+  "finding_line": 621,
+  "finding_title": "Catalog history disappears when Setup is closed",
+  "finding_detail": "Catalog history is populated only by local mutation callbacks into a component signal. Navigating away or reloading erases it, and catalog changes received through SSE never enter it. This does not provide the requested recent catalog changes alongside routing history."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Retrying an unchanged run converts inherited model chains into explicit overrides.",
+  "gold_file": "ui/components/RetryModels.tsx",
+  "gold_lines": [
+   15,
+   23
+  ],
+  "finding_line": 16,
+  "finding_title": "Keep inherited routing separate from explicit retry overrides",
+  "finding_detail": "For runs without overrides, opening this picker converts every effective policy chain into an explicit run override. Submitting after changing only the implementer therefore also pins review, holdout, and verification. Explicit chains bypass independence ranking and verification checkpoint exclusions. A direct check produced {\"normalReview\":\"codex/sol\",\"retryPrefilledReview\":\"claude/opus\"}. Exact command: bun -e 'import { Router } from \"./src/router/router.ts\"; import { DEFAULT_POLICY, PROVIDERS } from \"./src/router/catalog.ts\"; const tracker = { onDiscoveryChanged() {}, def(id) { return PROVI"
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Clearing a default effort omits the field from PATCH and leaves the old value stored.",
+  "gold_file": "ui/components/CatalogForm.tsx",
+  "gold_lines": [
+   66,
+   72
+  ],
+  "finding_line": 66,
+  "finding_title": "Clearing a runtime model's default effort does not persist",
+  "finding_detail": "When the effort field is cleared, the PATCH payload omits effort. RuntimeCatalog.patch merges that payload over the existing model, so the old effort survives. The UI reports success while retaining the value the operator removed. Removing that effort from supportedEfforts at the same time instead causes validation to reject the edit."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Catalog history disappears on reload and does not include changes made by another client.",
+  "gold_file": "ui/pages/Setup.tsx",
+  "gold_lines": [
+   619,
+   625
+  ],
+  "finding_line": 619,
+  "finding_title": "Catalog history disappears on navigation and misses external changes",
+  "finding_detail": "The requested recent catalog history is implemented only as component-local session state, populated by this page's mutation callbacks. Navigating away or reloading erases it. Catalog changes received over SSE refresh the catalog but never enter history, so changes from another browser or API client are absent."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-069",
+  "trial": 0,
+  "gold": "Digest actions are derived from stale records instead of current unanswered and review state.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   19,
+   30
+  ],
+  "finding_line": 23,
+  "finding_title": "Answered questions remain in the needs-you digest",
+  "finding_detail": "Answering a question emits no clearing feed event, so replaying run.question keeps an answered question actionable until the run finishes. Running `bun \"$TMPDIR/limitless-review-354.ts\"` against an in-memory Store printed `answered question: expected Needs you: 0; actual Needs you: 1; PRs awaiting review: 0; Blocked lands: 0`, despite zero open questions and a running run."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-069",
+  "trial": 0,
+  "gold": "A historical failed review hides a later approval in MCP status.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   87,
+   91
+  ],
+  "finding_line": 87,
+  "finding_title": "Historical round failures override a newer valid approval",
+  "finding_detail": "A failed or cancelled last round returns before the current approval is considered. The existing review API permits approving the current head after such a round, but status continues directing the agent to inspect the failed round instead of landing. Running `bun \"$TMPDIR/limitless-review-354.ts\"` printed `approved after failed round: expected Approved; landing not queued; actual Review changes failed`."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-069",
+  "trial": 1,
+  "gold": "Digest actions are derived from stale records instead of current unanswered and review state.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   19,
+   30
+  ],
+  "finding_line": 29,
+  "finding_title": "Stale approvals permanently hide PRs that need another review",
+  "finding_detail": "review.approved removes the PR from the digest, but a subsequent head change invalidates the approval without generating another run.pr_opened or review.round_delivered event. The digest consequently reports no review needed even though the recorded approval is stale. Reproduction command: bun -e 'import {Store} from \"./src/db/store.ts\"; import {digestCommand} from \"./src/cli/digest.ts\"; const s=new Store(\":memory:\"); const repo=s.upsertRepo({slug:\"o/r\",kind:\"github\",url:null,localPath:null,defaultBranch:\"main\",mergePolicy:\"pr\"}); const r=s.createRun(repo,{repo:\"o/r\",prompt:\"work\"}); const url"
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-069",
+  "trial": 1,
+  "gold": "A historical failed review hides a later approval in MCP status.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   87,
+   91
+  ],
+  "finding_line": 87,
+  "finding_title": "Historical failed rounds override a subsequent valid approval",
+  "finding_detail": "The last failed/cancelled round returns before current approval is considered. submitReview permits approving the owner's current head after a terminal round, but status keeps instructing the caller to inspect that historical round before submitting another verdict. Reproduction command: bun -e 'import { explainStatus } from \"./src/integrations/mcp-status.ts\"; import { strict as assert } from \"node:assert\"; const sha=\"a\".repeat(40); const result=explainStatus({run:{id:\"owner\",status:\"succeeded\",prUrl:\"https://github.com/o/r/pull/1\"},questions:[],prSnapshot:{state:\"OPEN\",headRefOid:sha},review:"
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-070",
+  "trial": 0,
+  "gold": "MCP status returns private land reasons unchanged on direct and proxy backends.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   45,
+   50
+  ],
+  "finding_line": 51,
+  "finding_title": "Honor the run's recorded merged flag",
+  "finding_detail": "Status ignores run.merged, and statusDetailSchema strips that field. The existing pipeline can record merged=true without a land entry or saved MERGED observation, so a confirmed merge is reported as unknown or awaiting review. Exact reproduction command: bun -e 'import {explainStatus,statusDetailSchema} from \"./src/integrations/mcp-status.ts\"; console.log(explainStatus(statusDetailSchema.parse({run:{id:\"r\",status:\"succeeded\",prUrl:\"https://github.com/o/r/pull/1\",merged:true},questions:[]}),[]).state)' Output: PR state unknown. Expected: Landed. A real-Store reproduction also confirmed this re"
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-070",
+  "trial": 1,
+  "gold": "MCP status returns private land reasons unchanged on direct and proxy backends.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   45,
+   50
+  ],
+  "finding_line": 51,
+  "finding_title": "Honor the run's confirmed merge flag",
+  "finding_detail": "The status schema drops run.merged, and the merged-state check ignores it. Existing resolveMergedRun records merged=true on succeeded runs without setting a merged resolution or updating the PR snapshot. Consequently, a confirmed merge can still produce instructions to land again. Reproduced with a real Store. Minimal reproduction command: bun -e 'import { explainStatus, statusDetailSchema } from \"./src/integrations/mcp-status.ts\"; console.log(explainStatus(statusDetailSchema.parse({run:{id:\"r\",status:\"succeeded\",prUrl:\"pr/1\",merged:true},questions:[],prSnapshot:{state:\"OPEN\",headRefOid:\"a\"},r"
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-071",
+  "trial": 0,
+  "gold": "Unicode and URL encodings evade privacy protection in status and digest fields.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   60,
+   64
+  ],
+  "finding_line": 66,
+  "finding_title": "Status ignores the run's confirmed merged flag",
+  "finding_detail": "The status schema strips run.merged, and the merged-state branch never checks it. Store.resolveMergedRun preserves succeeded status and records merged=true without necessarily saving a PR snapshot or merged resolution. This is also the notifier's supported merge path. Exact command: bun -e 'import {explainStatus,statusDetailSchema} from \"./src/integrations/mcp-status.ts\"; console.log(JSON.stringify(explainStatus(statusDetailSchema.parse({run:{id:\"r\",status:\"succeeded\",prUrl:\"https://github.com/o/r/pull/1\",merged:true},questions:[],prSnapshot:null}),[])));' Output: {\"run\":\"r\",\"state\":\"PR state "
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-088",
+  "trial": 0,
+  "gold": "The isolated post-check status still inspects populated submodules with their own git directories, so a submodule that points at the land clone's admin directory runs a clean filter from the clone's configuration, which the request says never applies after the checks.",
+  "gold_file": "scripts/land-pr.sh",
+  "gold_lines": [
+   116,
+   116
+  ],
+  "finding_line": 116,
+  "finding_title": "Submodule inspection escapes the isolated repository configuration",
+  "finding_detail": "Git status recursively inspects populated submodules using their own administration directories. safe_git enumerates filter keys only from the isolated parent repository, so submodule-local clean filters remain executable. A temporary-repository probe running the exact hardened status invocation returned exit 0, empty stdout and stderr, and executed a planted marker command. Redirecting the submodule's .git file to the land clone's administration directory also executed a filter from the clone's root config. This pre-existing bypass remains in the replacement dirty check and defeats the reques"
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-088",
+  "trial": 1,
+  "gold": "The isolated post-check status still inspects populated submodules with their own git directories, so a submodule that points at the land clone's admin directory runs a clean filter from the clone's configuration, which the request says never applies after the checks.",
+  "gold_file": "scripts/land-pr.sh",
+  "gold_lines": [
+   116,
+   116
+  ],
+  "finding_line": 116,
+  "finding_title": "Submodule status escapes the isolated repository configuration",
+  "finding_detail": "Git status recursively inspects populated submodules using their own Git directories. A check can redirect a submodule's .git file to the clone's admin directory and plant filter.attack.clean in the clone config. safe_git now enumerates filter keys only from the isolated repository, so the recursive status executes that clone-configured filter. The eventual dirty-tree refusal happens after execution. Full-script reproduction command: python3 \"$TMPDIR/land-review-submodule.py\". Output: \"land exit: 1\", \"land stderr: Worktree differs from landing commit; refusing to land\", \"clone config command e"
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-093",
+  "trial": 1,
+  "gold": "Forced-color Bun result markers are not recognized by failure extraction.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   15,
+   17
+  ],
+  "finding_line": 17,
+  "finding_title": "Validate TAP result lines before treating them as boundaries",
+  "finding_detail": "The expressions accept any prose starting with `ok ` or `not ok ` as a TAP result. Ordinary test logging can therefore discard the assertion's error line or consume all ten failure slots before the real failure. Direct check: `bun -e 'import {extractFailures} from \"./src/gates/failures.ts\"; const result = extractFailures(\"not ok to retry\\n\".repeat(10) + \"error: actual assertion\\nExpected: 1\\nReceived: 2\\n(fail) actual test\"); console.log(result); if (!result?.includes(\"error: actual assertion\")) throw new Error(\"non-TAP log lines consumed all ten failure slots\");'` exits 1, printing ten `not o"
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-096",
+  "trial": 1,
+  "gold": "The redundant-runtime-entry exception covers only a code-sourced built-in, so after the provider export writes the built-in Haiku model into config, the retained runtime row makes the next startup throw a catalog collision.",
+  "gold_file": "src/app.ts",
+  "gold_lines": [
+   103,
+   107
+  ],
+  "finding_line": 103,
+  "finding_title": "Provider export makes the retained runtime entry fatal again",
+  "finding_detail": "The collision exception requires source=\"code\", but `limitless providers export --write` explicitly exports built-in models and resolveCatalog then marks them source=\"config\". The retained runtime Haiku entry consequently causes the next startup to throw `catalog collision: claude/haiku-5.5`, even when the exported definition preserves the built-in values. A direct export/resolve probe confirmed the source changes from code to config. Full Factory execution was blocked by the installed Zod incompatibility."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-101",
+  "trial": 0,
+  "gold": "Raw process output is cut before gate credential redaction can match a boundary-spanning secret.",
+  "gold_file": "src/gates/run.ts",
+  "gold_lines": [
+   88,
+   98
+  ],
+  "finding_line": 88,
+  "finding_title": "Redaction happens after the process runner has already truncated output",
+  "finding_detail": "runConfined returns streams already truncated to 64,000 characters by runProcess. A credential crossing that boundary cannot match redactCredentials. Removing terminal formatting then brings its surviving suffix into the final 6,000-character result, which consumers store and forward. A targeted `TMPDIR=/private/tmp/lr-5iTEAw/claude-501 TMP=$TMPDIR TEMP=$TMPDIR bun -e` probe invoking runGates with the input described below returned output `ndary-credential-409` and failed with `error: Credential suffix leaked after upstream tail truncation`."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-101",
+  "trial": 1,
+  "gold": "Raw process output is cut before gate credential redaction can match a boundary-spanning secret.",
+  "gold_file": "src/gates/run.ts",
+  "gold_lines": [
+   88,
+   98
+  ],
+  "finding_line": 88,
+  "finding_title": "Process output is truncated before credential redaction",
+  "finding_detail": "runProcess already cuts each raw stream to 64,000 characters before returning res.stdout/res.stderr. A credential split by that cut cannot match here. Terminal formatting stripped by the helper can shrink the remaining output enough that the exposed credential suffix survives the final 6,000-character cut. The targeted command `bun \"$TMPDIR/review-gate-redaction.ts\"` printed `tail result: \"undary-secret-123456789xxxxxxx\"` and `tail leaks secret suffix: true`, then failed its credential-leak check."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-103",
+  "trial": 0,
+  "gold": "Line callbacks store pieces of multiline credentials in failure excerpts.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   17,
+   18
+  ],
+  "finding_line": 18,
+  "finding_title": "Line-by-line redaction leaves multiline credentials in failure excerpts",
+  "finding_detail": "Each line is redacted independently, so a registered credential containing a newline never matches. runGates redacts the combined output correctly but returns the unredacted credential in failures, which is persisted in gate artifacts and run state. Command: bun -e 'import {registerCredential} from \"./src/util/proc.ts\"; import {extractFailures} from \"./src/gates/failures.ts\"; import {redactGateStreams} from \"./src/gates/output.ts\"; const secret = \"synthetic-private-key-line-one\\nsynthetic-private-key-line-two\"; registerCredential(\"TEST_MULTILINE\", secret); const raw = `error: ${secret}\\n(fail)"
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-104",
+  "trial": 0,
+  "gold": "Failure excerpt collection retains unbounded bytes on very long output lines.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   36,
+   41
+  ],
+  "finding_line": 36,
+  "finding_title": "Failure diagnostics no longer have a bounded character budget",
+  "finding_detail": "Replacing line.slice(0, 8_000) with the entire line removes the retained diagnostic size bound. The line-count limit does not bound memory, and subsequent overflow repeatedly joins and redacts all retained text. A targeted bun -e probe fed FailureExcerpts 39 lines of one million characters and observed 39,000,000 retained characters; previously these lines retained at most 312,000 characters. Larger output can exhaust the shared daemon's heap despite the process runner's bounded tail."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-104",
+  "trial": 1,
+  "gold": "Lossy excerpt line framing prevents matching multiline credentials before storage.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   49,
+   53
+  ],
+  "finding_line": 50,
+  "finding_title": "Blank lines break multiline credential redaction in failure excerpts",
+  "finding_detail": "The process line splitter drops empty lines, so assembling callbacks with newlines cannot reconstruct credentials containing blank lines. The output tail is redacted, but failures retains the credential fragments, which then reach storage, logs and prompts. Command: bun test \"$TMPDIR/review-gate-redaction.test.ts\". The blank-line assertion failed with Expected to not contain: \"synthetic-end-key\"; Received: \"synthetic-start-key\\nsynthetic-end-key\\n(fail) assertion\"."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-104",
+  "trial": 1,
+  "gold": "Failure excerpt collection retains unbounded bytes on very long output lines.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   36,
+   41
+  ],
+  "finding_line": 36,
+  "finding_title": "Failure excerpts now retain arbitrarily large diagnostic lines",
+  "finding_detail": "Replacing the 8,000-character per-line cap with full-line retention removes the character bound on the diagnostic window. The final excerpt budget does not constrain memory retained while a gate runs. Additional lines also join and copy the entire window. Command: bun test \"$TMPDIR/review-gate-redaction.test.ts\". The bounded-memory assertion failed with Expected: < 1000000; Received: 39000000 after observing 39 million-character lines."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-105",
+  "trial": 0,
+  "gold": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   453,
+   458
+  ],
+  "finding_line": 453,
+  "finding_title": "Premature redaction exposes overlapping credential suffixes",
+  "finding_detail": "Redacting pending text before resolving possible longer matches destroys a longer credential's prefix. Registering `review-shared-token-prefix` and `review-shared-token-prefix-private-long-token-suffix`, then emitting the prefix and suffix in separate chunks, returns `[redacted]-private-long-token-suffix`. Subsequent redaction cannot recognize the remaining fragment, so it reaches gate results and consumers. Command: `bun test \"$TMPDIR/review-gate-redaction.test.ts\"`. Assertion output: Expected: \"[redacted]\"; Received: \"[redacted]-private-long-token-suffix\"."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-105",
+  "trial": 1,
+  "gold": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   453,
+   458
+  ],
+  "finding_line": 453,
+  "finding_title": "Normalize terminal formatting before the process tail cutoff",
+  "finding_detail": "The streaming runner redacts raw text before applying its 64,000-character cap, but terminal formatting is removed only afterwards by redactGateStreams. ANSI sequences inside a credential prevent the early match. Once the cap drops its prefix, the later helper cannot redact the surviving suffix. Command: TMP=\"$TMPDIR\" TEMP=\"$TMPDIR\" bun test \"$TMPDIR/redaction-boundaries.test.ts\". The terminal-formatting probe failed with Expected to not contain: \"e-suffix\"; Received: \"e-suffix\". This fragment can reach stored gate results and their consumers."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-044",
+  "trial": 0,
+  "gold": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+  "gold_file": "src/router/router.ts",
+  "gold_lines": [
+   256,
+   262
+  ],
+  "finding_line": 256,
+  "finding_title": "Restart resurrects an implementer removed by a reset",
+  "finding_detail": "Sticky-target removal depends on the process-local changedCells set. After resetting an operator cell, restarting constructs the Router with the restored base policy, so no changed cell is recorded. A resumed run's saved implementer is then appended and pinned even though the reset removed it. Reproduction: `bun test \"$TMPDIR/routing-review.test.ts\"` failed with `Expected: \"codex/luna\"; Received: \"claude/opus\"` after reconstructing routing from the same Store."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-044",
+  "trial": 1,
+  "gold": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+  "gold_file": "src/router/router.ts",
+  "gold_lines": [
+   256,
+   262
+  ],
+  "finding_line": 256,
+  "finding_title": "Removed sticky implementers return after restart",
+  "finding_detail": "Sticky-target removal depends on changedCells, which exists only in memory. After resetting an operator override, restarting builds an unchanged base policy and leaves changedCells empty, allowing the saved implementer to be appended and pinned again. Command: `bun test /private/tmp/lr-uMcueA/claude-501/routing-review.test.ts`. Output: `(fail) reset must keep a removed implementer removed after restart`; `Expected: not \"codex/luna@medium\"`."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-045",
+  "trial": 0,
+  "gold": "Unlimited quota still applies utilization reserves to free and metered providers.",
+  "gold_file": "src/router/providers.ts",
+  "gold_lines": [
+   348,
+   353
+  ],
+  "finding_line": 349,
+  "finding_title": "Honor unlimited quota independently of billing mode",
+  "finding_detail": "Configuration accepts unlimited for every billing mode, but headroom ignores windows only for subscription providers. Free and metered providers can therefore display 'No limit (configured)' while routing rejects them at their reserve limit. Reproduction command: bun -e 'import { Store } from \"./src/db/store.ts\"; import { ProviderTracker } from \"./src/router/providers.ts\"; const s = new Store(\":memory:\"); const r = { claudeFiveHour: .8, claudeSevenDay: .85, codexWeekly: .9, codexFiveHour: .9 }; for (const billing of [\"free\", \"metered\", \"subscription\"] as const) { const t = new ProviderTracker("
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-045",
+  "trial": 1,
+  "gold": "Unlimited quota still applies utilization reserves to free and metered providers.",
+  "gold_file": "src/router/providers.ts",
+  "gold_lines": [
+   348,
+   353
+  ],
+  "finding_line": 349,
+  "finding_title": "Honor unlimited quota independently of billing mode",
+  "finding_detail": "Configuration accepts unlimited quota for every billing mode, but headroom ignores windows only for subscription providers. Free and metered providers therefore still become exhausted from informational windows. Reproduction command: bun -e 'import {Store} from \"./src/db/store.ts\"; import {ProviderTracker} from \"./src/router/providers.ts\"; const s=new Store(\":memory:\"); const t=new ProviderTracker([{id:\"work\",label:\"Work\",harness:\"claude\",billing:\"free\",quota:\"unlimited\",maxConcurrent:1}],s,{claudeFiveHour:0.8,claudeSevenDay:0.85,codexFiveHour:0.9,codexWeekly:0.9},{},{},()=>1000000); t.observe"
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-050",
+  "trial": 0,
+  "gold": "Legacy adoption trusts Git administration paths selected by an agent-controlled checkout.",
+  "gold_file": "src/pipeline/engine.ts",
+  "gold_lines": [
+   178,
+   184
+  ],
+  "finding_line": 180,
+  "finding_title": "Recover legacy worktrees before their path is persisted",
+  "finding_detail": "The migration only checks ctx.state.worktreePath. If the previous daemon stopped during preparation after creating the worktree but before saving that path, the resumed state has no worktreePath. This guard skips registration, then prepare() calls createWorktree(), whose existing-directory branch immediately calls worktreeGit and fails with \"Missing trusted Git paths\". The upgrade recovery therefore misses a valid interrupted-run state."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-050",
+  "trial": 0,
+  "gold": "Draft delivery and interrupted preparation can reuse a legacy worktree before path registration.",
+  "gold_file": "src/pipeline/engine.ts",
+  "gold_lines": [
+   173,
+   184
+  ],
+  "finding_line": 178,
+  "finding_title": "Record legacy worktrees before the needs-human guard",
+  "finding_detail": "The migration runs after the needsHumanReason guard at line 173. When that field is persisted, execution jumps into the catch block, which retries draft delivery through deliverVerifiedDraft or deliver(ctx, false). Neither path records the legacy worktree, so its Git operations still fail with \"Missing trusted Git paths\". This leaves the interrupted needs-human delivery case described in the request unresolved."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-050",
+  "trial": 1,
+  "gold": "Legacy adoption trusts Git administration paths selected by an agent-controlled checkout.",
+  "gold_file": "src/pipeline/engine.ts",
+  "gold_lines": [
+   178,
+   184
+  ],
+  "finding_line": 178,
+  "finding_title": "Recover legacy worktrees before their path was checkpointed",
+  "finding_detail": "The backfill only checks state.worktreePath. During prepare, createWorktree creates the checkout before worktreePath is persisted. If the older daemon stopped in that interval, resume skips this guard. prepare then calls createWorktree, whose existing-directory branch immediately invokes worktreeGit and throws \"Missing trusted Git paths\". This legacy run still cannot resume."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-050",
+  "trial": 1,
+  "gold": "Draft delivery and interrupted preparation can reuse a legacy worktree before path registration.",
+  "gold_file": "src/pipeline/engine.ts",
+  "gold_lines": [
+   173,
+   184
+  ],
+  "finding_line": 177,
+  "finding_title": "Recover legacy worktrees before their path is persisted",
+  "finding_detail": "Recovery only examines ctx.state.worktreePath. During preparation, createWorktree creates the checkout before that path is persisted. If the old daemon stops in that interval, the resumed run has an existing legacy worktree but no saved worktreePath. This check skips it, and createWorktree's reuse branch immediately calls worktreeGit, which fails with \"Missing trusted Git paths\"."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-051",
+  "trial": 0,
+  "gold": "A fixed review-time cutoff excludes worktrees created before the sidecar-writing release actually started.",
+  "gold_file": "src/db/migrations/20261005T134145-worktree-provenance.sql",
+  "gold_lines": [
+   6,
+   13
+  ],
+  "finding_line": 9,
+  "finding_title": "Commit time cannot establish when an installation adopted sidecars",
+  "finding_detail": "An installation can keep running the previous release after the hardcoded commit timestamp. Its successfully prepared worktrees have no sidecars, but this migration excludes them. executeScopedRun then skips registration and headSha still throws \"Missing trusted Git paths\", leaving the requested upgrade failure unresolved.\n\nExact reproduction command:\nbun -e 'import {Database} from \"bun:sqlite\"; import {strict as a} from \"node:assert\"; const d=new Database(\":memory:\"); d.exec(`CREATE TABLE runs(id); CREATE TABLE stages(run_id,name,started_at,finished_at,status); CREATE TABLE events(run_id,type"
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-051",
+  "trial": 1,
+  "gold": "A fixed review-time cutoff excludes worktrees created before the sidecar-writing release actually started.",
+  "gold_file": "src/db/migrations/20261005T134145-worktree-provenance.sql",
+  "gold_lines": [
+   6,
+   13
+  ],
+  "finding_line": 9,
+  "finding_title": "Commit time does not establish when an installation gained sidecars",
+  "finding_detail": "The migration excludes every run prepared after the hard-coded sidecar commit timestamp, even when that installation was still running the previous release. Such worktrees legitimately have no sidecar, but hasLegacyWorktree returns false, so resume still fails with Missing trusted Git paths. Reproduction command: bun \"$TMPDIR/review-legacy-migration.ts\". Applying this migration to a successful prepare at 1791100000000 produced {\"worktree_provenance\":null} and the assertion failure: \"Old-release worktree created after the sidecar commit timestamp is not eligible for adoption\"."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "A paused PR is not inspected again when main recovers without another PR change.",
+  "gold_file": "src/integrations/github-poller.ts",
+  "gold_lines": [
+   314,
+   325
+  ],
+  "finding_line": 315,
+  "finding_title": "Resume suppressed PR inspection when main recovers",
+  "finding_detail": "Main-red suppression completes inspection and clears ciPending. Subsequent unchanged PR snapshots never inspect main again, so recovery of the default branch cannot resume the suppressed reaction. Even another PR updating the repository's main-red state does not schedule this PR. Command: bun test \"$TMPDIR/ci-poller-review.test.ts\". The recovery probe output was: Expected length: 1; Received length: 0."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "An accepted rerun with a lost response is never reconciled to its later result.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   185,
+   190
+  ],
+  "finding_line": 187,
+  "finding_title": "Reconcile reruns whose POST response was lost",
+  "finding_detail": "Reconciliation only considers rerunning rows. If GitHub accepts the POST but its response is lost, or the daemon stops before finishCiFailure, the persisted row remains rerun_requested. A subsequent successful attempt is ignored, and SUCCESS clears pending inspection without recording flake evidence. Command: bun test \"$TMPDIR/ci-review.test.ts\". Output: Expected: \"failed_then_passed\"; Received: \"rerun_requested\". The confirmed-rerun control passed."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "A paused PR is not inspected again when main recovers without another PR change.",
+  "gold_file": "src/integrations/github-poller.ts",
+  "gold_lines": [
+   314,
+   325
+  ],
+  "finding_line": 315,
+  "finding_title": "Resume suppressed PR failures when main recovers",
+  "finding_detail": "Classification returns successfully after suppressing a failure because main is red, clearing ciPending. Subsequent classification requires a change to the PR's ciKey. Main recovering does not change that key, so an unchanged failed PR remains suppressed indefinitely, without a rerun or ci.needs_fix."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "An accepted rerun with a lost response is never reconciled to its later result.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   185,
+   190
+  ],
+  "finding_line": 187,
+  "finding_title": "Reconcile reruns whose POST response was lost",
+  "finding_detail": "The reconciliation loop only handles outcome rerunning. A crash or lost response after GitHub accepts the POST leaves rerun_requested, which is never inspected for later-attempt evidence. A subsequent successful rollup completes inspection without recording the flake; a failed observation instead marks it failed_again without establishing the rerun result. The isolated command `bun \"$TMPDIR/ci-review-probe.ts\"` produced `{\"done\":true,\"outcome\":\"rerun_requested\",\"attemptEvidenceFetched\":false}` and `FAIL: confirmed same-SHA rerun pass was not recorded`."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-053",
+  "trial": 0,
+  "gold": "A definitively refused CI rerun remains pending indefinitely.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   387,
+   389
+  ],
+  "finding_line": 388,
+  "finding_title": "Resolve rerun claims when GitHub definitively rejects the request",
+  "finding_detail": "The rerun claim is persisted before the POST, but a rejected POST only throws. Subsequent inspections wait for run_attempt to advance and suppress needs-fix because the claim remains pending. A rejected request never creates that later attempt, so classification stays pending indefinitely. Reproduction command: `bun /private/tmp/lr-o0sYkW/claude-501/ci-review.ts`. Output: `first inspection: Error: CI job rerun was not confirmed`, followed by three `later inspection complete: false` lines and `{\"posts\":1,\"outcome\":\"rerun_requested\",\"needsFix\":0}`."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-053",
+  "trial": 1,
+  "gold": "A definitively refused CI rerun remains pending indefinitely.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   387,
+   389
+  ],
+  "finding_line": 388,
+  "finding_title": "Rejected rerun requests remain pending forever",
+  "finding_detail": "The rerun is claimed before the POST, but a definitive rejection leaves its outcome as rerun_requested. Subsequent inspections wait for a newer run_attempt that will never exist, suppressing ci.needs_fix indefinitely. Command: `bun /private/tmp/lr-pKEV2z/claude-501/review-ci.ts`. Output: `first rejected request: Error: CI job rerun was not confirmed`; three subsequent inspections returned false; final result was `{\"posts\":1,\"outcome\":\"rerun_requested\",\"needsFix\":0}`."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-054",
+  "trial": 0,
+  "gold": "Rate-limit refusals leave rerun claims unresolved across cooldowns and restarts.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   394,
+   400
+  ],
+  "finding_line": 395,
+  "finding_title": "Rate-limited rerun requests remain pending forever",
+  "finding_detail": "A rejected 429 response leaves the durable claim as rerun_requested. Subsequent inspections wait for run_attempt to increase, but GitHub never accepted the rerun, so neither a retry nor ci.needs_fix occurs. Running `bun \"$TMPDIR/ci-review.ts\"` produced `{\"name\":\"rate-limit-rejection\",\"posts\":1,\"outcomes\":[\"rerun_requested\"],\"needsFix\":0,\"error\":\"Error: CI job rerun was not confirmed\"}` after four inspections."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-054",
+  "trial": 0,
+  "gold": "ANSI-colored Bun failures and pytest security failures are missed by the retry exclusion.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   42,
+   48
+  ],
+  "finding_line": 51,
+  "finding_title": "Test timeout classification excludes the requested diagnostic",
+  "finding_detail": "Only three hardcoded diagnostic formats qualify. An actual failure line such as `error: smoke timed out after 30000ms` is classified as needs-fix despite matching the requested test timeout case. The added tests explicitly expect this exclusion. Running `bun \"$TMPDIR/ci-review.ts\"` produced `{\"name\":\"test-own-timeout\",\"posts\":0,\"outcomes\":[\"failed\"],\"needsFix\":4,\"error\":\"\"}`."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-054",
+  "trial": 1,
+  "gold": "Rate-limit refusals leave rerun claims unresolved across cooldowns and restarts.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   394,
+   400
+  ],
+  "finding_line": 395,
+  "finding_title": "Rate-limited rerun requests remain claimed forever",
+  "finding_detail": "A rate-limit refusal leaves the row as 'rerun_requested'. After cooldown, reconciliation sees no newer workflow attempt, and the pending-prior branch prevents both another POST and ci.needs_fix. This permanently stalls classification even though GitHub never started a rerun. Running `bun /private/tmp/lr-MP54Mh/claude-501/ci-review.ts` produced `FAIL a rate-limited POST must eventually rerun or report needs-fix: AssertionError [ERR_ASSERTION]: posts=1, outcome=rerun_requested, needs_fix=0` after three further inspections."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-054",
+  "trial": 1,
+  "gold": "ANSI-colored Bun failures and pytest security failures are missed by the retry exclusion.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   42,
+   48
+  ],
+  "finding_line": 43,
+  "finding_title": "ANSI colors bypass security-failure and timeout detection",
+  "finding_detail": "Log normalization removes timestamps but preserves ANSI escapes. The anchored security and timeout patterns consequently miss colored diagnostics. A generic timed-out job containing a colored '(fail) security tests' line is rerun and recorded in the ledger, violating the security-test exclusion. Colored timeout diagnostics also fail transient classification. Running `bun /private/tmp/lr-MP54Mh/claude-501/ci-review.ts` produced `FAIL a colored security failure is excluded from reruns and ledger` with `1 !== 0`, and the colored-timeout assertion produced `0 !== 1`."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-057",
+  "trial": 0,
+  "gold": "Effort removal is persisted without checking policy cells hidden by operator overrides.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   71,
+   76
+  ],
+  "finding_line": 71,
+  "finding_title": "Validate runtime mutations against the underlying eval policy",
+  "finding_detail": "PATCH validates only the effective policy, so an operator override can hide an eval-policy reference that the patch invalidates. Resetting that override then produces no eligible candidate. On restart, Factory reads and validates the eval policy before applying operator overrides, so startup fails. DELETE similarly checks only operator cells and accepts deletion of an eval-policy model. Reproduction command: `bun /private/tmp/lr-pqEs0s/claude-501/catalog-review.XXXXXX.ts`. Output: `PATCH accepted\\nrestart policy INVALID: Unsupported effort high\\n{\"candidates\":[],\"skipped\":[{\"modelId\":\"codex/ex"
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-057",
+  "trial": 1,
+  "gold": "Effort removal is persisted without checking policy cells hidden by operator overrides.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   71,
+   76
+  ],
+  "finding_line": 72,
+  "finding_title": "Validate catalog patches against shadowed policy layers",
+  "finding_detail": "PATCH validates only the effective policy, so an operator override can hide an evals policy reference that the patch invalidates. Resetting the override then restores an invalid policy; restarting also fails when Factory reads and validates the evals policy against the persisted model. Reproduction command: bun \"$TMPDIR/catalog-hidden-policy.ts\". Output: \"PATCH accepted efforts=[none] while evals references @high\", followed by \"AssertionError: Got unwanted exception: Reset must restore a valid policy\" and \"Unsupported effort \\\"high\\\" for codex/experiment; supported: none\"."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Clearing a default effort omits the field from PATCH and leaves the old value stored.",
+  "gold_file": "ui/components/CatalogForm.tsx",
+  "gold_lines": [
+   66,
+   72
+  ],
+  "finding_line": 66,
+  "finding_title": "Clearing default effort silently preserves the saved value",
+  "finding_detail": "An empty Default effort field omits effort from the PATCH. RuntimeCatalog.patch merges the patch over the existing model, so the old effort survives despite a successful save. A direct Bun execution of the extracted submit handler produced a patch without effort and effortAfterBackendMerge:\"high\". Removing high from supported efforts at the same time instead makes the edit fail validation."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Catalog history disappears on reload and does not include changes made by another client.",
+  "gold_file": "ui/pages/Setup.tsx",
+  "gold_lines": [
+   619,
+   625
+  ],
+  "finding_line": 621,
+  "finding_title": "Catalog history disappears when Setup is reopened",
+  "finding_detail": "Catalog history renders only the component-local session signal, populated by this component's mutation callbacks. Navigating away or refreshing erases all entries. Changes from another browser or API client never appear, even after catalog SSE refreshes. This does not provide the requested recent catalog-change history."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Clearing a default effort omits the field from PATCH and leaves the old value stored.",
+  "gold_file": "ui/components/CatalogForm.tsx",
+  "gold_lines": [
+   66,
+   72
+  ],
+  "finding_line": 66,
+  "finding_title": "Clearing the default effort silently preserves its previous value",
+  "finding_detail": "An empty effort input omits effort from the PATCH payload. RuntimeCatalog.patch merges that payload over the existing model, retaining its previous effort. Saving therefore reports success without applying the edit. A diagnostic executing the extracted payload expression and backend merge returned {\"payloadHasEffort\":false,\"resultingEffortAfterPatchMerge\":\"high\"}."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Catalog history disappears on reload and does not include changes made by another client.",
+  "gold_file": "ui/pages/Setup.tsx",
+  "gold_lines": [
+   619,
+   625
+  ],
+  "finding_line": 619,
+  "finding_title": "Catalog history disappears when Setup is reopened",
+  "finding_detail": "The requested recent catalog history is replaced with a page-local session signal. Only mutations made through this mounted page call record(); catalog SSE messages merely refresh snapshots. Reloading or navigating away discards all entries, and changes from another browser or the CLI never appear."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-069",
+  "trial": 0,
+  "gold": "Digest actions are derived from stale records instead of current unanswered and review state.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   19,
+   30
+  ],
+  "finding_line": 23,
+  "finding_title": "Answered questions remain in the needs-you digest",
+  "finding_detail": "The digest reconstructs current attention state exclusively from feed events, but answering a question and resuming execution emit none of its clearing events. An inline `bun -` reproduction using an in-memory Store printed `current status: running open questions: 0`, followed by `Needs you: 1; PRs awaiting review: 0; Blocked lands: 0` and the already answered question. Every subsequent session continues requesting attention until the run reaches a clearing status."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-069",
+  "trial": 0,
+  "gold": "A historical failed review hides a later approval in MCP status.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   87,
+   91
+  ],
+  "finding_line": 87,
+  "finding_title": "A historical failed round overrides a subsequent valid approval",
+  "finding_detail": "The latest round's failure is returned before examining the current approval. The existing review API allows approving the current head after a failed or cancelled round, so that round does not necessarily describe the next action. An inline `bun -` reproduction supplied a succeeded parent, OPEN PR, matching non-stale approval, and failed round; explainStatus returned `Review changes failed` with `Inspect review round round1 with limitless_get_run before submitting another verdict.` It should report that the approved PR can be queued for landing."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-069",
+  "trial": 1,
+  "gold": "Digest actions are derived from stale records instead of current unanswered and review state.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   19,
+   30
+  ],
+  "finding_line": 23,
+  "finding_title": "Answered questions remain in the needs-you digest",
+  "finding_detail": "Answering a question produces no clearing feed event. Consequently, the digest continues asking for attention while the run resumes work, even with zero unanswered questions. Reproduction command: bun -e 'import { Store } from \"./src/db/store.ts\"; import { digestCommand } from \"./src/cli/digest.ts\"; const store = new Store(\":memory:\"); const repo = store.upsertRepo({slug:\"o/r\",kind:\"github\",url:\"https://github.com/o/r.git\",localPath:null,defaultBranch:\"main\",mergePolicy:\"manual\"}); const run = store.createRun(repo,{repo:\"o/r\",prompt:\"work\",title:\"work\"}); store.updateRun(run.id,{status:\"runnin"
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-069",
+  "trial": 1,
+  "gold": "A historical failed review hides a later approval in MCP status.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   87,
+   91
+  ],
+  "finding_line": 87,
+  "finding_title": "A historical failed round overrides a newer valid approval",
+  "finding_detail": "submitReview permits approving the current head after a failed or cancelled round, but explainStatus returns the round's failure before checking that approval. The next action keeps recommending another verdict even after approval succeeds. Reproduction command: bun -e 'import { explainStatus } from \"./src/integrations/mcp-status.ts\"; const sha=\"a\".repeat(40); const detail={run:{id:\"parent\",status:\"succeeded\",prUrl:\"https://github.com/o/r/pull/1\"},questions:[],prSnapshot:{state:\"OPEN\",headRefOid:sha},review:{approval:{sha,stale:false},rounds:[{runId:\"round\",status:\"failed\"}]}}; console.log(JSO"
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-070",
+  "trial": 0,
+  "gold": "MCP status returns private land reasons unchanged on direct and proxy backends.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   45,
+   50
+  ],
+  "finding_line": 51,
+  "finding_title": "Honor the run's confirmed merged flag",
+  "finding_detail": "The status schema strips run.merged, and the landed predicate never checks it. resolveMergedRun preserves succeeded status and can record a confirmed merge without creating a PR snapshot or a merged resolution. Status then reports an unknown or reviewable PR despite confirmed delivery. Probe command: bun \"$TMPDIR/limitless-review-boundaries.ts\" merged-status. Output: \"Confirmed merged run: PR state unknown; Inspect the PR and await a saved observation before reviewing or landing.\""
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-070",
+  "trial": 1,
+  "gold": "MCP status returns private land reasons unchanged on direct and proxy backends.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   45,
+   50
+  ],
+  "finding_line": 51,
+  "finding_title": "Honor the run's confirmed merged flag",
+  "finding_detail": "The status schema drops run.merged, and explainStatus never checks it. Existing paths, including resolveMergedRun for succeeded runs and delivery recovery, record merged=true without setting a merged resolution or creating a land entry. With an absent or older PR snapshot, status therefore gives incorrect next actions for a confirmed merge. Reproduction: `bun \"$TMPDIR/limitless-review-TYBzZr.ts\" merged`. Output: `{\"run\":\"parent\",\"state\":\"PR state unknown\",\"nextAction\":\"Inspect the PR and await a saved observation before reviewing or landing.\",\"land\":null}` followed by AssertionError with actua"
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-071",
+  "trial": 1,
+  "gold": "Unicode and URL encodings evade privacy protection in status and digest fields.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   60,
+   64
+  ],
+  "finding_line": 68,
+  "finding_title": "Historical landing blocks override closed and resolved states",
+  "finding_detail": "The blocked-land branch runs before checks for resolved runs and closed PRs. Because blocked entries persist, status continues recommending another landing request after the work has been resolved. Command: bun \"$TMPDIR/limitless-review-probes.ts\". For a resolved run with a CLOSED PR, output includes \"state\":\"Landing blocked\" and \"nextAction\":\"Inspect the land reason, resolve the blocker, then request limitless_land again.\" The landing API rejects closed PRs."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-088",
+  "trial": 0,
+  "gold": "The isolated post-check status still inspects populated submodules with their own git directories, so a submodule that points at the land clone's admin directory runs a clean filter from the clone's configuration, which the request says never applies after the checks.",
+  "gold_file": "scripts/land-pr.sh",
+  "gold_lines": [
+   116,
+   116
+  ],
+  "finding_line": 116,
+  "finding_title": "Isolated status still executes configuration through submodules",
+  "finding_detail": "Git status recursively inspects initialized submodules using their actual repository configuration. safe_git only enumerates filter keys from the isolated parent repository, so submodule clean filters remain executable. A submodule include.path can also point back to the clone's .git/config, defeating the requested isolation directly. A real-git probe using this status command returned an empty status while executing a filter from clone/.git/config. An end-to-end probe with `bash scripts/land-pr.sh 123 safe \"$clone\"` printed `push reached` and confirmed the filter marker existed. This exposure"
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-098",
+  "trial": 0,
+  "gold": "A runtime model attached to a retired provider prevents factory construction.",
+  "gold_file": "src/app.ts",
+  "gold_lines": [
+   100,
+   104
+  ],
+  "finding_line": 102,
+  "finding_title": "Runtime models belonging to the removed provider prevent startup",
+  "finding_detail": "Factory construction throws for any persisted runtime model whose provider is absent from providerDefs. Before this change, users could add runtime models to the built-in provider; after its removal, those same database rows prevent the daemon from starting. The new restart test seeds enablement and speed overrides but misses runtime model definitions."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-098",
+  "trial": 0,
+  "gold": "Historical run references prevent unrelated catalog mutations.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   61,
+   69
+  ],
+  "finding_line": 64,
+  "finding_title": "Historical model pins block unrelated catalog edits",
+  "finding_detail": "Every runtime model addition or patch revalidates every historical run against the current catalog. Removing this model makes previously valid run pins fail that validation, so an old run prevents unrelated catalog changes indefinitely, even if its chain includes a valid fallback. A targeted invocation of RuntimeCatalog.add with a historical retired-lan/legacy pin produced: run historical-run: Error: models.triage entry \"retired-lan/legacy\": Error: unknown model ID \"retired-lan/legacy\"."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "Historical run references prevent unrelated catalog mutations.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   61,
+   69
+  ],
+  "finding_line": 64,
+  "finding_title": "Keep historical run pins from blocking unrelated catalog edits",
+  "finding_detail": "RuntimeCatalog.apply revalidates every stored run against the new catalog. Once this change removes the model, any historical run pinned to it makes every subsequent runtime model addition, patch, or removal fail, including edits to unrelated providers. Reproduction command: bun -e 'import { RuntimeCatalog } from \"./src/router/runtime-catalog.ts\"; import { MODELS, PROVIDERS } from \"./src/router/catalog.ts\"; const fixture = await Bun.file(\"test/fixtures/routing-identity.json\").json(); const retired = fixture.snapshot.models.find(m => !PROVIDERS.some(p => p.id === m.provider)); const store = { l"
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-101",
+  "trial": 0,
+  "gold": "Raw process output is cut before gate credential redaction can match a boundary-spanning secret.",
+  "gold_file": "src/gates/run.ts",
+  "gold_lines": [
+   88,
+   98
+  ],
+  "finding_line": 88,
+  "finding_title": "Raw process truncation can leave credential fragments",
+  "finding_detail": "runProcess truncates stdout/stderr to 64,000 characters before this redaction call. A credential crossing that boundary loses its prefix and no longer matches redactCredentials. Terminal stripping can then bring the remaining fragment into the final 6,000-character tail. Exact reproduction command: bun -e 'import {runGates} from \"./src/gates/run.ts\"; import {confinementScope} from \"./src/harness/sandbox.ts\"; import {registerCredential} from \"./src/util/proc.ts\"; const credential=\"synthetic-boundary-secret-123456789\"; registerCredential(\"BOUNDARY_SECRET\",credential); const backend={verify:async"
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-101",
+  "trial": 1,
+  "gold": "Raw process output is cut before gate credential redaction can match a boundary-spanning secret.",
+  "gold_file": "src/gates/run.ts",
+  "gold_lines": [
+   88,
+   98
+  ],
+  "finding_line": 88,
+  "finding_title": "Redaction occurs after the process runner has already truncated output",
+  "finding_detail": "res.stdout and res.stderr are already limited to 64,000 characters by runProcess. A credential split by that earlier cut cannot be matched. Removing terminal formatting afterward can bring its surviving fragment inside the final 6,000-character tail. Command: TMP=\"$TMPDIR\" TEMP=\"$TMPDIR\" bun test \"$TMPDIR/gate-redaction-review.test.ts\". The tail test failed with Expected to not contain: \"al-123456789\"; Received: \"ential-123456789TAILEND!\". This fragment reaches storage and downstream consumers."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-103",
+  "trial": 1,
+  "gold": "Line callbacks store pieces of multiline credentials in failure excerpts.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   17,
+   18
+  ],
+  "finding_line": 18,
+  "finding_title": "Multiline credentials survive failure-excerpt redaction",
+  "finding_detail": "Redaction runs separately on each line, so a registered credential containing a newline never matches. runOne stores the resulting failures string without full-stream redaction. Reproduction command: bun -e 'import assert from \"node:assert/strict\"; import { registerCredential } from \"./src/util/proc.ts\"; import { extractFailures } from \"./src/gates/failures.ts\"; const secret = \"synthetic-multiline-first-credential\\nsynthetic-multiline-second-credential\"; registerCredential(\"MULTILINE_TEST_TOKEN\", secret); assert.equal(extractFailures(`error: ${secret}\\n(fail) assertion\\n`)?.includes(secret), f"
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-104",
+  "trial": 0,
+  "gold": "Lossy excerpt line framing prevents matching multiline credentials before storage.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   49,
+   53
+  ],
+  "finding_line": 50,
+  "finding_title": "Preserve blank lines before redacting multiline credentials",
+  "finding_detail": "runProcess's line splitter drops empty lines. Reassembling its callbacks therefore changes credentials containing blank lines before redaction, leaving their constituent lines in failure excerpts sent to storage and models. Reproduction: bun -e 'import {registerCredential,runProcess} from \"./src/util/proc.ts\"; import {FailureExcerpts} from \"./src/gates/failures.ts\"; const s=\"first-private-line\\n\\nlast-private-line\"; registerCredential(\"REVIEW_TOKEN\",s); const e=new FailureExcerpts(); await runProcess({cmd:[\"printf\",s+\"\\n(fail) assertion\\n\"],cwd:process.cwd(),onStdoutLine:l=>e.observe(l)}); con"
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-104",
+  "trial": 0,
+  "gold": "Failure excerpt collection retains unbounded bytes on very long output lines.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   36,
+   41
+  ],
+  "finding_line": 36,
+  "finding_title": "Failure diagnostics no longer have a byte bound",
+  "finding_detail": "The previous per-line 8,000-character cap was removed. Limiting only the number of lines permits arbitrarily large retained diagnostics, and overflowing the line limit repeatedly joins and redacts the entire buffer. This runs inside the shared daemon even for successful gates. Command: bun /private/tmp/lr-irb8K4/claude-501/gate-review-probes.ts memory. Output: {\"retainedDiagnosticCharacters\":39000000,\"lines\":39}, followed by \"Diagnostic retention lost its byte bound\"."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-104",
+  "trial": 1,
+  "gold": "Lossy excerpt line framing prevents matching multiline credentials before storage.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   49,
+   53
+  ],
+  "finding_line": 50,
+  "finding_title": "Blank lines lost by callbacks prevent multiline credential redaction",
+  "finding_detail": "runProcess's line splitter discards empty lines. Reassembling callbacks therefore changes credentials containing blank lines, so literal redaction misses them and failures retains their sensitive components. Command: bun -e 'import {registerCredential,runProcess} from \"./src/util/proc.ts\"; import {FailureExcerpts} from \"./src/gates/failures.ts\"; registerCredential(\"T\",\"first-sensitive-part\\n\\nlast-sensitive-part\"); const f=new FailureExcerpts(); await runProcess({cmd:[\"printf\",\"error: first-sensitive-part\\n\\nlast-sensitive-part\\n(fail) assertion\\n\"],cwd:process.cwd(),env:process.env,onStdoutLi"
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-104",
+  "trial": 1,
+  "gold": "Failure excerpt collection retains unbounded bytes on very long output lines.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   36,
+   41
+  ],
+  "finding_line": 36,
+  "finding_title": "Restore a byte bound on retained failure diagnostics",
+  "finding_detail": "The previous implementation capped each retained line at 8,000 characters. The replacement retains entire lines and repeatedly joins them, so the 39-line limit no longer bounds memory. Reproduction command: bun -e 'import {FailureExcerpts} from \"./src/gates/failures.ts\";const e=new FailureExcerpts();for(let i=0;i<39;i++)e.observe(\"x\".repeat(1000000));console.log((e as unknown as {lines:string[]}).lines.reduce((n,s)=>n+s.length,0));' Output: 39000000. The previous retained-line bound was approximately 312,000 characters. Larger diagnostic lines can exhaust the shared daemon's memory despite the"
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-105",
+  "trial": 0,
+  "gold": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   453,
+   458
+  ],
+  "finding_line": 453,
+  "finding_title": "Normalize terminal formatting before the runner tail cut",
+  "finding_detail": "The streaming runner redacts without stripping terminal formatting, then truncates its raw tail. Gate normalization happens afterward, when a credential's prefix may already be lost. A targeted reproduction registered `synthetic-colored-boundary-secret-409`, inserted an ANSI color sequence inside it, and appended 15,995 reset sequences. The normalized retained output was the unredacted suffix `-boundary-secret-409`. Command: `bun test \"$TMPDIR/review-gate-boundaries.test.ts\"`. Output: `Expected to not contain: \"-boundary-secret-409\"; Received: \"-boundary-secret-409\"`."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-105",
+  "trial": 1,
+  "gold": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   453,
+   458
+  ],
+  "finding_line": 453,
+  "finding_title": "Premature replacement leaks overlapping credential suffixes",
+  "finding_detail": "The runner replaces complete matches before resolving whether they are prefixes of a longer registered credential. Registering synthetic-prefix and synthetic-prefix-private-suffix, then receiving the longer value in two chunks, produces \"[redacted]-private-suffix\". Retaining an overlap afterwards cannot recover the prefix already replaced. Exact probe command: bun -e 'import { spyOn } from \"bun:test\"; import * as cp from \"node:child_process\"; import { EventEmitter } from \"node:events\"; import { PassThrough } from \"node:stream\"; import { registerCredential,runProcess } from \"./src/util/proc.ts\""
+ }
+]

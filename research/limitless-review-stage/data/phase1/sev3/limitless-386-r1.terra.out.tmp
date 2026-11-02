@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"diag","trigger":"plausible","reason":"Both paths reject the same invalid values, and the reproduced difference is limited to validation wording when an operator enters a model ID as a provider."}]}

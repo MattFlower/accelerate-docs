@@ -1,0 +1,27 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P4",
+    "P5"
+   ],
+   "mechanism": "Calls still awaiting results are skipped by live counting until finish(), so six identical unresolved calls never trigger loop detection while the invocation runs."
+  },
+  {
+   "members": [
+    "P2",
+    "P3",
+    "P6"
+   ],
+   "mechanism": "Unresolved calls are evicted from the window before finish() can count them, so the repetition is lost and never detected."
+  },
+  {
+   "members": [
+    "P7",
+    "P8"
+   ],
+   "mechanism": "An unresolved entry blocks counting of every later call with the same key, so completed identical calls are not counted until that entry leaves the window or the invocation finishes."
+  }
+ ]
+}

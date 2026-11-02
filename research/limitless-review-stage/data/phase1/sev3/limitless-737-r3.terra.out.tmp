@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"state","trigger":"plausible","reason":"A crash or discovery-record save failure can leave a process running while recovery deletes its job directories and durable cleanup records."}]}

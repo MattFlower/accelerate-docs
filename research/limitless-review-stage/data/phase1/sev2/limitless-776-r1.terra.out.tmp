@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"boundary","trigger":"plausible","reason":"A pinned review model can cause a local-only finder to run on a worker, violating the required execution boundary."}]}

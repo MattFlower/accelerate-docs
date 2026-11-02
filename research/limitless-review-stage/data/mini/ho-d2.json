@@ -1,0 +1,1561 @@
+[
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-040",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Configuration errors and encoded feed diagnostics can disclose registered secrets.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-040",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "A failure after configuration replacement leaves initialization partially applied.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-040",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "Doctor omits health probes for implicit providers and presets lacking an explicit health URL.",
+  "trial": 0,
+  "caught": false,
+  "matched": true,
+  "finding": {
+   "title": "Configured providers without a health URL receive no health check",
+   "severity": "major",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-040",
+  "gold": "G5",
+  "goldSeverity": "major",
+  "goldSummary": "The command fake permits mutating operations during read-only diagnosis.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-040",
+  "gold": "G6",
+  "goldSeverity": "major",
+  "goldSummary": "The registration test does not exercise preservation of existing vendor settings.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-040",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Configuration errors and encoded feed diagnostics can disclose registered secrets.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-040",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "A failure after configuration replacement leaves initialization partially applied.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-040",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "Doctor omits health probes for implicit providers and presets lacking an explicit health URL.",
+  "trial": 1,
+  "caught": false,
+  "matched": true,
+  "finding": {
+   "title": "Configured providers without health_url receive no health check",
+   "severity": "major",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-040",
+  "gold": "G5",
+  "goldSeverity": "major",
+  "goldSummary": "The command fake permits mutating operations during read-only diagnosis.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-040",
+  "gold": "G6",
+  "goldSeverity": "major",
+  "goldSummary": "The registration test does not exercise preservation of existing vendor settings.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-042",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Nesting Seatbelt around internally sandboxed CLIs prevents tool-enabled invocations from starting.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-042",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Scanning ordinary agent output for sandbox diagnostics can discard successful invocations.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-042",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Ordinary gate output mentioning sandbox failures can turn a successful check into a confinement error.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Treats ordinary gate output as a confinement failure",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/gates/run.ts:55-60 matches `/signal confinement (?:not|unavailable|preflight|incompatible)/i` anywhere in output. Lines 68,75-76 apply this to both output streams; line 82 sets `ok: !confinementError && res.exitCode === 0 ...`. Lines 195,205 classify matching results as `confinement_error` and blocking. A targeted invocation of compareGates with exitCode:0, ok:true, and output 'PASS: signal confinement unavailable is rejected' returned verdict:'confinement_error', blocking:true.",
+    "trigger": "A passing gate prints 'signal confinement unavailable', for example in an expected-refusal test name or diagnostic. The ordinary output is mistaken for a confinement failure, blocking the run despite exit status zero.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-042",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "The live confinement smoke accepts refusal even when enforcement should work.",
+  "trial": 0,
+  "caught": false,
+  "matched": true,
+  "finding": {
+   "title": "The requested live harness smoke checks are absent",
+   "severity": "minor",
+   "category": "test-gap",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "test/signal-confinement.test.ts:149–154 supplies `substitute(env)` to both harness adapters. docs/research/24-signal-confinement.md:83–85 describes real-CLI validation as `Optional authenticated validation` requiring replacement of `the substitute executable with the installed harness`; lines 93–94 say it was not performed.",
+    "trigger": "Real Claude or Codex sandbox composition differs from the substitute. The committed smoke can pass without exercising either actual CLI, leaving the requested live acceptance coverage absent.",
+    "severity": "medium",
+    "category": "test-gap"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-042",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Nesting Seatbelt around internally sandboxed CLIs prevents tool-enabled invocations from starting.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-042",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Scanning ordinary agent output for sandbox diagnostics can discard successful invocations.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-042",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Ordinary gate output mentioning sandbox failures can turn a successful check into a confinement error.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Treat successful gate output as a confinement failure",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/gates/run.ts:55–60 matches `/...|signal confinement (?:not|unavailable|preflight|incompatible)/i` against output without checking exit status. Lines 68–82 observe both output streams and set `ok: !confinementError && res.exitCode === 0 ...`. Lines 195–205 assign `\"confinement_error\"` and make that verdict blocking.",
+    "trigger": "A passing repository test prints an expected rejection such as \"Signal confinement not verified\" and exits 0. The output matcher classifies it as an operational confinement failure, causing the gate comparison to block the run.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-042",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "The live confinement smoke accepts refusal even when enforcement should work.",
+  "trial": 1,
+  "caught": false,
+  "matched": true,
+  "finding": {
+   "title": "Live harness acceptance checks remain unimplemented",
+   "severity": "minor",
+   "category": "test-gap",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "test/signal-confinement.test.ts:179–183 accepts a `ConfinementError`, checks that the payload never started, and logs `confinement refused; OS enforcement not exercised`. docs/research/24-signal-confinement.md:83–94 describes authenticated validation as `Optional` and states it `was not performed by the worker`.",
+    "trigger": "Sandbox startup is refused, or only substitute launches succeed. The suite passes without demonstrating the required live-agent outside-marker survival and owned-marker termination for either installed harness. Production fails closed, so the demonstrated defect is missing acceptance coverage.",
+    "severity": "medium",
+    "category": "test-gap"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-047",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "LFS pointer exemptions skip inspection of unavailable or executable payloads.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "LFS pointers bypass the opaque-binary allowance",
+   "severity": "major",
+   "category": "security",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/git/repos.ts:770 classifies NUL-free pointer blobs as raw text: `if (match[1] !== \"-\") raw.add(match[2]);`. The binaryPaths filter requires `!afterText.raw.has(path)` at line 882 and `!basePointers.has(from ?? \"\")` at line 883. These exclude new pointer blobs and binary replacements of base pointers respectively.",
+    "trigger": "A new archive.zip containing a strict LFS pointer receives no binary-content finding; replacing an existing strict pointer with opaque binary bytes also bypasses Allow: binary. The replacement case directly violates the binary-edit requirement.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-047",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "A passive PDF converted from text to binary is rejected despite the requested allowance.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-047",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "LFS pointer exemptions skip inspection of unavailable or executable payloads.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "A binary replacing an LFS pointer bypasses the binary allowance",
+   "severity": "major",
+   "category": "security",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/git/repos.ts:802 adds strict base pointers to basePointers. src/git/repos.ts:881-884 requires `matches.has(path) && !afterText.raw.has(path) && !basePointers.has(from ?? \"\") && (beforeText.text.has(from ?? \"\") || !INERT_MEDIA_PATH.test(path))` for binary classification.",
+    "trigger": "Replace module.wasm's strict base LFS pointer with a raw NUL-containing WebAssembly binary. Membership in basePointers defeats the binaryPaths predicate, so no binary allowance is required.",
+    "severity": "high",
+    "category": "security"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-047",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "A passive PDF converted from text to binary is rejected despite the requested allowance.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-048",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "LFS exemptions permit missing payloads and pointer replacements containing archives.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-048",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "The limited text sample exempts a TAR whose first binary byte lies beyond the sample.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-048",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "The WebP inspector rejects valid lossy VP8 images.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-048",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "LFS exemptions permit missing payloads and pointer replacements containing archives.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-048",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "The limited text sample exempts a TAR whose first binary byte lies beyond the sample.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-048",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "The WebP inspector rejects valid lossy VP8 images.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-049",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Magic-byte search misclassifies ordinary text as binary",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/gates/media.ts:22 includes `\"4d5a\"` (MZ) in PAYLOADS; line 33 uses `PAYLOADS.some((magic) => bytes.includes(magic))`. src/git/repos.ts:827 records that as forbidden and line 835 removes the path from text classification. src/gates/audit.ts:280–284 blocks resulting binaryPaths without Allow: binary.",
+    "trigger": "Add or edit ordinary documentation or source containing uppercase `MZ`, without Allow: binary → a binary-content block despite readable content.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-049",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Executable signatures anywhere in ordinary text classify it as binary",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/gates/media.ts:22 includes signature `\"4d5a\"` (MZ); line 33 checks `PAYLOADS.some((magic) => bytes.includes(magic))` anywhere in the content. src/git/repos.ts:835 removes forbidden content from text classification: `if (contents.get(oid)?.forbidden || contents.get(oid)?.binary || /\\.pdf$/i.test(path)) raw.delete(path)`. Lines 949–955 classify such nonexempt paths as binary. A targeted call with the claimed sentence returned true.",
+    "trigger": "Add README.md containing “The MZ header identifies DOS binaries.” without Allow: binary; its embedded MZ text causes a binary-content block.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-060",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Detached descendants survive invocation cleanup and keep modifying the worktree.",
+  "trial": 0,
+  "caught": false,
+  "matched": true,
+  "finding": {
+   "title": "Detached descendants survive invocation cleanup",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/util/proc.ts:80 creates the invocation with `detached: true`, but teardown at :115 targets only `process.kill(-child.pid, sig)`, with immediate-child fallback at :119. A descendant creating its own group/session is outside both targets. A targeted detached-child reproduction confirmed survival after successful return.",
+    "trigger": "An implementer launches a detached background command with redirected streams. Normal exit, stuck termination, or cancellation signals the invocation's original group while the detached command survives and can race cleanup.",
+    "severity": "high",
+    "category": "cleanup"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-060",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Process cleanup returns while owned descendants are still alive.",
+  "trial": 0,
+  "caught": false,
+  "matched": true,
+  "finding": {
+   "title": "Continue successfully while a descendant is still alive",
+   "severity": "blocker",
+   "category": "reliability",
+   "verification": {
+    "verdict": "PLAUSIBLE",
+    "evidence": "src/util/proc.ts:132 sets `const deadline = performance.now() + 10_000`. After that deadline, :147–150 calls `killTree(\"SIGKILL\")` and destroys streams without verifying termination or reporting failure. At :223–225, `await descendantsStopped; resolve({ exitCode: code, ... })` preserves the parent's successful exit code.",
+    "trigger": "If a descendant actually survives repeated SIGKILL attempts beyond ten seconds while its parent exits successfully, runProcess returns exitCode 0 and permits cleanup despite the surviving descendant. Real SIGKILL survival was not demonstrated; the added test simulates it.",
+    "severity": "medium",
+    "category": "reliability"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-060",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Discarding changes replaces the cleanup error that should trigger round recovery.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Finally-block cleanup can mask the retryable cleanup failure",
+   "severity": "major",
+   "category": "reliability",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/pipeline/engine.ts:1106-1108: `finally { ... await discardChanges(cwd); }`. src/git/repos.ts:482-485 checks status then executes `await worktreeGit([\"git\", \"clean\", \"-fdq\"], { cwd, env });`. Its CommandError replaces the pending WorktreeCleanError; src/pipeline/engine.ts:1138 rethrows anything failing `error instanceof WorktreeCleanError`.",
+    "trigger": "After a stuck invocation, both initial clean attempts fail on an untracked, non-ignored directory. The final discard clean also fails, replacing the retryable error and failing the run instead of advancing rounds.",
+    "severity": "high",
+    "category": "reliability"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-060",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Detached descendants survive invocation cleanup and keep modifying the worktree.",
+  "trial": 1,
+  "caught": false,
+  "matched": true,
+  "finding": {
+   "title": "Detached descendants survive invocation termination",
+   "severity": "blocker",
+   "category": "reliability",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/util/proc.ts:115 uses `process.kill(-child.pid, sig)`; :119 falls back to `child.kill(sig)`. On exit, :129 invokes that same helper, and :131 returns immediately when the original group is gone: `if (!killed || child.pid === undefined) return;`. Detached descendant groups are neither tracked nor signalled.",
+    "trigger": "An implementer launches a detached subprocess with redirected stdio and then exits or is stopped. The detached writer survives invocation termination and remains active during git clean.",
+    "severity": "high",
+    "category": "cleanup"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-060",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Process cleanup returns while owned descendants are still alive.",
+  "trial": 1,
+  "caught": false,
+  "matched": true,
+  "finding": {
+   "title": "Process cleanup reports success while descendants remain alive",
+   "severity": "blocker",
+   "category": "reliability",
+   "verification": {
+    "verdict": "PLAUSIBLE",
+    "evidence": "src/util/proc.ts:132 limits waiting to `performance.now() + 10_000`; :146–150 then calls `killTree(\"SIGKILL\")` and destroys the streams without reporting failure. At :223–225, `await descendantsStopped; resolve({ exitCode: code, ... })` preserves the parent's status. test/hardening.test.ts:127–132 explicitly expects exitCode 0 while the simulated surviving group still exists.",
+    "trigger": "A parent exits successfully but a descendant remains alive beyond the ten-second deadline despite SIGKILL. runProcess can return success without exposing incomplete cleanup. Actual persistent survival requires an unusual state such as uninterruptible I/O.",
+    "severity": "medium",
+    "category": "cleanup"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-060",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Discarding changes replaces the cleanup error that should trigger round recovery.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Final cleanup can mask the retryable cleanup error",
+   "severity": "major",
+   "category": "reliability",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/pipeline/engine.ts:1106-1108: `finally { ... await discardChanges(cwd); }`. src/git/repos.ts:482-485 checks status, then runs `reset --hard` and `clean -fdq` without catching failures. src/pipeline/engine.ts:1138: `if (!(error instanceof WorktreeCleanError) || !ctx.state.implementerIssue) throw error;`. The finally block's CommandError replaces the WorktreeCleanError.",
+    "trigger": "Both initial clean attempts fail; a remaining status-visible untracked directory also makes discardChanges fail. Its CommandError escapes the recovery handler, failing the run instead of advancing the round.",
+    "severity": "high",
+    "category": "reliability"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-061",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Shutdown drops an already claimed descendant when its parent exits.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-061",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Holdout snapshot deletion proceeds despite unconfirmed descendant termination.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-061",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Production scratch directories are never registered as process ownership roots.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-061",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "Replacing a descendant environment removes it from invocation discovery.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "A child that replaces its environment survives invocation teardown",
+   "severity": "blocker",
+   "category": "reliability",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/util/processes-darwin.ts:133-138 requires marker membership or an absent environment (`offset === length`), excluding readable sanitized environments. src/util/proc.ts:164 declares shutdown complete after two empty scans. A targeted replacement-environment reproduction returned successfully while its child remained alive.",
+    "trigger": "A background writer receives a sanitized replacement environment without invocation markers. After the implementer exits or is stopped, teardown misses the writer and cleanup can overlap its writes.",
+    "severity": "high",
+    "category": "reliability"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-061",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Shutdown drops an already claimed descendant when its parent exits.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-061",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Holdout snapshot deletion proceeds despite unconfirmed descendant termination.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-061",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Production scratch directories are never registered as process ownership roots.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-061",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "Replacing a descendant environment removes it from invocation discovery.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Background children can escape shutdown by replacing their environment",
+   "severity": "blocker",
+   "category": "security",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/util/proc.ts:101-105 selects only processes satisfying `carriesMarker(...)` and returns `[]` otherwise. src/util/processes-darwin.ts:138 only adds unmarked processes to fallback discovery with `else if (offset === length) hidden.push(pid)`. A targeted macOS reproduction using `{PATH:process.env.PATH,FOO:\"bar\"}` returned exitCode 0 while the background child remained alive.",
+    "trigger": "A background child replaces its environment with PATH and FOO, removing invocation markers, and redirects its streams. Shutdown overlooks it and permits cleanup while it remains running.",
+    "severity": "high",
+    "category": "reliability"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-062",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Run-wide scratch roots let one invocation cleanup kill another invocation writer.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-062",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "A recycled leader PID claims unrelated processes through reused group or session identifiers.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-062",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Run-wide scratch roots let one invocation cleanup kill another invocation writer.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-062",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "A recycled leader PID claims unrelated processes through reused group or session identifiers.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-063",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Pre-aborted shutdown with failed leader inspection references timer cleanup before initialization and never settles.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-063",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Pre-aborted shutdown with failed leader inspection references timer cleanup before initialization and never settles.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-064",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "The reader loopback policy cannot match the intended socket access.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": {
+   "title": "Reader commands can connect to unrelated local services",
+   "severity": "blocker",
+   "category": "security",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/harness/reader.ts:56: `...portRules(\"allow network-outbound\", \"remote\", 49152, 65535)`. At line 35, the generated rule checks only `localhost` and the destination port; it does not require the destination listener to belong to the reader.",
+    "trigger": "An unrelated service listens on 127.0.0.1:50000. A reader command can connect and send requests, crossing the intended network confinement boundary.",
+    "severity": "critical",
+    "category": "security"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-064",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "An allow-default reader policy weakens the established confinement boundary.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-064",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "The reader loopback policy cannot match the intended socket access.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": {
+   "title": "The profile permits fixed ephemeral ports and access to unrelated local services",
+   "severity": "blocker",
+   "category": "security",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/harness/reader.ts:54 permits '(allow network-bind (local tcp \"localhost:*\"))'; lines 55–56 add inbound and outbound allowances for ports 49152–65535. The rule generator at lines 28–35 checks only address and port, with no restriction to sockets created by the verifier or ports allocated through bind(0).",
+    "trigger": "An unrelated service listens on 127.0.0.1:50000. A reader command can contact it, and can explicitly bind/listen on an available 127.0.0.1:50001, crossing the intended network confinement boundary.",
+    "severity": "critical",
+    "category": "security"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-064",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "An allow-default reader policy weakens the established confinement boundary.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-065",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A single extracted test command is treated as proof of a multi-step criterion.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "A partial verification procedure can satisfy the whole criterion",
+   "severity": "blocker",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/pipeline/gate-evidence.ts:33 extracts a substring with `requestedCommand.match(/\\bbun test(?: [\\w./-]+)*/g)`, ignoring surrounding instructions. Lines 113–118 use `passed(check) && covers(check, definitions[0] ?? \"\")` to set the entire criterion to `status: \"met\"`. Direct reproduction confirmed this with a separate manual outbound-denial check.",
+    "trigger": "A blocked criterion says “Run `bun test test/loopback.test.ts`, then manually verify outbound connections are denied.” Matching passing gate coverage promotes the whole criterion despite the blocked manual check.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-065",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A single extracted test command is treated as proof of a multi-step criterion.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "A passing test can substitute for an entire multi-step criterion",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/pipeline/gate-evidence.ts:33–34 extracts one embedded test command and checks only `commands.length !== 1`; it does not require the instructions to consist solely of that command. Lines 106–113 pass the full criterion instructions into `covers`, and line 118 assigns `status: \"met\"` to the whole row. A direct reproduction using a quoted test command followed by a separate manual inspection returned `met`.",
+    "trigger": "A blocked multi-step criterion contains one quoted passing test command followed by a separate manual or behavioral check. Matching gate evidence covers the test file, causing the entire criterion to become met while the additional step remains unverified.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-066",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Free-text claim detection still lets model wording steer gate-evidence substitution.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Ordinary references to gates invalidate independent verification",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/pipeline/gate-evidence.ts:25 matches standalone `gate` using `gat(?:e|es|ed|ing)`. Lines 45–50 apply that matcher to evidence and global notes and change matching met criteria to blocked.",
+    "trigger": "Independent evidence says `The gate rejects invalid input`, or notes say `Gate behavior verified`. These ordinary descriptions trigger sanitization and block met criteria unless command coverage independently restores them.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-066",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Free-text claim detection still lets model wording steer gate-evidence substitution.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "A gate mention in shared notes blocks independently verified criteria",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/pipeline/gate-evidence.ts:45 includes shared `verify.notes` in every row's gate-claim scan; line 50 sets `status: claimed && row.status === \"met\" ? (\"blocked\" as const) : row.status`. Lines 182–184 require command coverage before restoring met.",
+    "trigger": "Shared notes mention a passing gate while an inspection criterion has independently observed evidence and status met. The criterion becomes blocked, and its inspection instructions prevent substitution.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-067",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Matching a successful command does not establish the observation required by the criterion.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-067",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Targeted Bun evidence can satisfy a criterion without proof that any tests ran.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "An exact test command is accepted without evidence that tests ran",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/pipeline/gate-evidence.ts:60-65 accepts matching explicit test-file commands using only `!check.result.testCoverage?.skippedFiles.length && !incompleteTestOutput.test(check.result.output)`, bypassing the passed-file evidence checked at :66-72. At :131 the criterion becomes `status: \"met\"`.",
+    "trigger": "An exact test-file gate has exit code 0, empty output and no recorded coverage. Both negative checks pass, so a sandbox-blocked criterion becomes met without evidence that any test ran. Direct invocation reproduced this result.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-067",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Matching a successful command does not establish the observation required by the criterion.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Treating arbitrary successful commands as test coverage permits false verification",
+   "severity": "major",
+   "category": "security",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/pipeline/gate-evidence.ts:16 accepts any expanded command matching `/^[\\w./-]+(?: [\\w./:=@-]+)*$/`. Lines 40–41 accept non-Bun-test commands solely through `requestedCommand === command || requestedCommand === check.result.command`; lines 129–132 then set `status: \"met\"`.",
+    "trigger": "A configured gate runs a simple script command that exits successfully without executing the required tests. When the blocked criterion names that command, substitution reports it met without evidence that its tests ran.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-067",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Targeted Bun evidence can satisfy a criterion without proof that any tests ran.",
+  "trial": 1,
+  "caught": false,
+  "matched": true,
+  "finding": {
+   "title": "Exact targeted commands are accepted without proof that the requested file ran",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/pipeline/gate-evidence.ts:60–65 accepts identical requested and selected test-file arguments by returning `!check.result.testCoverage?.skippedFiles.length && !incompleteTestOutput.test(check.result.output)`. This returns before lines 68–72 inspect `coverage.passedFiles` and require `ran.includes(file)`.",
+    "trigger": "A targeted Bun filter matches only test/foo.test.ts.bak.test.ts while test/foo.test.ts is absent. Clean passing output satisfies the identical-command shortcut, incorrectly marking the missing file’s criterion met.",
+    "severity": "medium",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-068",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Gate substitution refuses a candidate gate whenever any file in it was skipped, so the repository's normal confined suite, which intentionally skips real-Seatbelt tests, can never supply evidence for a sandbox-blocked loopback test, and the reported needs_human failure remains.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-068",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "The coverage parser treats any test-printed line that names a test file followed by a colon as a runner file header, so output from the change under test can make a file that never ran count as passed and turn a blocked criterion into met factory evidence.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Test output can forge the coverage used to approve verification",
+   "severity": "major",
+   "category": "security",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/gates/run.ts:68-70 passes process output to `coverage.observe(line)`. src/gates/test-coverage.ts:37-47 recognizes printed file headers and pass rows without authenticating their source. src/pipeline/gate-evidence.ts:60 requires a passing summary, line 64 checks `ran.includes(file)`, and line 134 assigns `status: \"met\"`. Reproduction using an actual broad `bun test` exited 0 with summary `{passed:1,failed:0}` and caused a nonexistent required file's criterion to become met.",
+    "trigger": "A discovered passing test prints a header/pass row for an absent or undiscovered required test. Genuine successful suite totals combine with those forged rows, causing gate substitution to approve the sandbox-blocked criterion.",
+    "severity": "high",
+    "category": "security"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-068",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Gate substitution refuses a candidate gate whenever any file in it was skipped, so the repository's normal confined suite, which intentionally skips real-Seatbelt tests, can never supply evidence for a sandbox-blocked loopback test, and the reported needs_human failure remains.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Unrelated skipped tests invalidate all gate evidence",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/pipeline/gate-evidence.ts:74–75 requires \"!result.testCoverage?.skippedFiles.length\" and \"!incompleteTestOutput.test(result.output)\". Lines 104–105 reject evidence unless \"gates.checks.every(passed)\". This happens before requested-file coverage is checked.",
+    "trigger": "The full test gate passes the requested loopback test but skips an unrelated platform-specific test. That skip invalidates all substitution, leaving the verifier blocked despite qualifying coverage of its requested file.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-068",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "The coverage parser treats any test-printed line that names a test file followed by a colon as a runner file header, so output from the change under test can make a file that never ran count as passed and turn a blocked criterion into met factory evidence.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Test output can forge evidence that another file ran",
+   "severity": "major",
+   "category": "security",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/gates/test-coverage.ts:37 recognizes `test/loopback.test.ts:` as a header; :47 recognizes `(pass) loopback`; :53-55 includes the fabricated file in `passedFiles`. src/pipeline/gate-evidence.ts:64 accepts `ran.includes(file)` and :134 marks the blocked criterion met. Reproduction printed those exact lines from another passing test: Bun exited 0, `test/loopback.test.ts` was absent, and the criterion became met.",
+    "trigger": "Another passing test prints `test/loopback.test.ts:` followed by `(pass) loopback`. With clean same-SHA gate records and a sandbox-blocked `bun test test/loopback.test.ts` tests-pass criterion, the engine substitutes forged coverage and marks the criterion met.",
+    "severity": "high",
+    "category": "security"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-083",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "An inherited Git configuration selector redirects trusted SSH lookup into the checkout.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-083",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Trusted remote-dependent credential and SSH settings no longer apply during push.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-083",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Manual landing publishes a fork branch to the upstream repository.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-083",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "Forcing HTTPS during manual push bypasses working SSH authentication.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Manual landing switches SSH users to HTTPS",
+   "severity": "major",
+   "category": "compatibility",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "scripts/land-pr.sh:10 sets `repo=\"MattFlower/limitless\"`; line 67 pushes to `\"https://github.com/$repo.git\"`. scripts/push-git.sh:28-29 passes that destination through to Git.",
+    "trigger": "An origin using SSH with working SSH keys but no HTTPS credentials now receives an HTTPS push, which fails authentication unless trusted configuration rewrites the URL.",
+    "severity": "high",
+    "category": "compatibility"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-083",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "An inherited Git configuration selector redirects trusted SSH lookup into the checkout.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-083",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Trusted remote-dependent credential and SSH settings no longer apply during push.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Preserve trusted hasconfig-conditional credential settings",
+   "severity": "major",
+   "category": "compatibility",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "scripts/push-git.sh:14 creates the isolated config with only `core.repositoryformatversion 0`; line 19 switches to it: `export GIT_DIR=\"$admin\" GIT_COMMON_DIR=\"$isolated\"`. The original remote URL is absent, so trusted `includeIf.hasconfig:remote.*.url:...` conditions stop matching. A targeted Git probe confirmed the normal configuration returns `conditional-helper`, while the wrapper returns no helper.",
+    "trigger": "A global conditional include supplies the required credential helper based on the repository's remote URL. Isolation removes that URL from configuration, omits the helper, and causes authentication to fail.",
+    "severity": "high",
+    "category": "compatibility"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-083",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Manual landing publishes a fork branch to the upstream repository.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-083",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "Forcing HTTPS during manual push bypasses working SSH authentication.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Manual landing switches SSH-only installations to HTTPS",
+   "severity": "major",
+   "category": "compatibility",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "scripts/land-pr.sh:67 pushes to a fixed HTTPS destination: `safe_git push --no-verify -q --no-follow-tags \"https://github.com/$repo.git\" \"$sha:refs/heads/$head_ref\"`. scripts/push-git.sh:29 supplies `core.sshCommand`, but that setting cannot authenticate an HTTPS transport.",
+    "trigger": "An installation previously pushed through an SSH origin and has only SSH authentication, with no global HTTPS-to-SSH URL rewrite. Manual landing now attempts HTTPS and fails authentication.",
+    "severity": "high",
+    "category": "compatibility"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-084",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Manual push reloads mutable clone configuration after its final validation snapshot.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "The manual push still reads repository config after validation",
+   "severity": "blocker",
+   "category": "security",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "scripts/land-pr.sh:105–110 validates and compares config, then separately executes `safe_git push --no-verify -q --no-follow-tags origin \"$sha:refs/heads/$head_ref\"`. scripts/land-pr.sh:30–31 invokes `git -c core.hooksPath=/dev/null -c core.fsmonitor=false -c core.commitGraph=false -c pack.useBitmaps=false ${flags[@]+\"${flags[@]}\"} \"$@\"`; it neither excludes repository config nor overrides receivepack.",
+    "trigger": "A background process started by PR checks writes remote.origin.receivepack after the final config snapshot but before push reads config. The push consults origin's updated configuration and executes the planted command after validation.",
+    "severity": "high",
+    "category": "security"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-084",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "Inherited Git configuration causes validation and push to inspect different settings.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-084",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "An exact upstream URL requirement rejects supported forks and alternate origin spellings.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-084",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Manual push reloads mutable clone configuration after its final validation snapshot.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Configuration can change between validation and the push",
+   "severity": "blocker",
+   "category": "security",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "scripts/land-pr.sh:106 compares `config_before` with `config_after`, then line 110 runs `safe_git push --no-verify -q --no-follow-tags origin \"$sha:refs/heads/$head_ref\"`. `safe_git` (lines 25–31) does not disable receivepack or exclude repository config. An isolated local probe changed receivepack after the snapshot: the push created the command's marker and delivered the pinned SHA.",
+    "trigger": "A background process changes remote.origin.receivepack after the final snapshot but before push reads repository config; the push executes its command.",
+    "severity": "high",
+    "category": "security"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-084",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "Inherited Git configuration causes validation and push to inspect different settings.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-084",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "An exact upstream URL requirement rejects supported forks and alternate origin spellings.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Rejecting ordinary repository configuration blocks legitimate lands",
+   "severity": "major",
+   "category": "compatibility",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "scripts/land-pr.sh:51 excludes fetch.prune from the allowlist. Lines 54–58 report `Repository git config key %s is not allowed; refusing to land` and fail validation. Line 82 exits before installation and checks. An isolated probe with local fetch.prune=true exited 1.",
+    "trigger": "A legitimate checkout has repository-local fetch.prune=true; landing refuses to proceed before running checks.",
+    "severity": "high",
+    "category": "compatibility"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-089",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The loop detector aborts before the threshold call can return evidence of progress.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Stop occurs before the threshold call can report progress",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/harness/types.ts:168–171: `this.recent.push({ key, call: this.total });` then `if (same >= this.maxIdenticalInWindow) return ...`. src/harness/codex.ts:802–806 and src/harness/claude.ts:339–343 immediately call `stuckController.abort()` when that reason is returned, before the result arrives.",
+    "trigger": "Five identical polls return unchanged output. Starting the sixth triggers an abort even if its result would show progress. Reproduced with LoopDetector.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-089",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The loop detector aborts before the threshold call can return evidence of progress.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "The sixth call is stopped before its changed result can show progress",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/harness/types.ts:168–171 pushes the pending call, counts matching keys, and immediately returns `repeated the same ${name} call ${same} times`. src/harness/codex.ts:802–806 and src/harness/claude.ts:339–343 immediately assign `stuckReason` and call `stuckController.abort()`; results are processed afterward.",
+    "trigger": "Five identical polls return \"waiting\". Starting the sixth reaches the threshold and aborts the harness before its changed \"progress\" result can prevent the stop. A direct detector reproduction confirmed this.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-090",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Unresolved tool calls accumulate without a bound during a live invocation.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Unresolved repeated calls do not stop a running agent",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/harness/types.ts:206–208: `if (entry.id !== undefined && entry.hash === undefined && !finished) { blocked.add(entry.key); continue; }`. src/harness/types.ts:197–198: `finish(): string | null { return this.reconcile(true); }` defers counting missing results until completion.",
+    "trigger": "Six identical shell calls with IDs and no results each return null while the invocation remains active, so the sixth call does not stop the agent. Reproduced directly with LoopDetector.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-090",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Unresolved tool calls accumulate without a bound during a live invocation.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": {
+   "title": "Calls with missing results are not counted until the invocation ends",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/harness/types.ts:206–208 skips pending calls: `if (entry.id !== undefined && entry.hash === undefined && !finished) { blocked.add(entry.key); continue; }`. Only `finish()` calls `this.reconcile(true)` (lines 197–198). A direct probe returned null for all six identical unresolved calls, then the repetition reason at finish.",
+    "trigger": "Six identical calls with distinct ids and no results while the invocation remains alive produce no repetition stop; counting waits until completion or another limit intervenes.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-091",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A completed parallel call is classified as repetitive before unresolved predecessors establish progress.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-091",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A completed parallel call is classified as repetitive before unresolved predecessors establish progress.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-092",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "When a call's result changes, the loop detector resets its count but keeps the earlier same-key entries in the window, which the request says must be dropped, so a command failing with identical output between progressing polls is never stopped before the tool-call budget.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-092",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "When a call's result changes, the loop detector resets its count but keeps the earlier same-key entries in the window, which the request says must be dropped, so a command failing with identical output between progressing polls is never stopped before the tool-call budget.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-107",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Increasing panel test deadlines leaves the underlying parallel Git race undiagnosed.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": {
+   "title": "Panel flake is addressed only by increasing deadlines",
+   "severity": "major",
+   "category": "reliability",
+   "verification": {
+    "verdict": "PLAUSIBLE",
+    "evidence": "test/pipeline-panel.test.ts:210–212 says \"Two implementation/panel rounds exceeded waitFor's 20 s deadline under git subprocess load\" and changes the call to \"waitFor(f, run.id, [\\\"succeeded\\\", \\\"failed\\\", \\\"needs_human\\\"], 40_000)\". The handler and assertions match the base test; the comment alone does not establish the original failure's cause.",
+    "trigger": "An underlying race or assertion failure independent of elapsed time would remain after this timeout increase. No such race is demonstrated by the inspected code.",
+    "severity": "medium",
+    "category": "test-gap"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-107",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Factory gate environment construction discards the configured test worker override.",
+  "trial": 0,
+  "caught": false,
+  "matched": true,
+  "finding": {
+   "title": "The worker override is stripped from factory gate commands",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/gates/run.ts:64 defines `gateEnv = ... agentEnv({ CI: \"1\", NO_COLOR: \"1\", FORCE_COLOR: \"0\" })`, and line 79 passes `env: gateEnv()`. src/util/proc.ts:579–582 strips names matching `/^(OPENROUTER_|DISCORD_|GITHUB_WEBHOOK_|LIMITLESS_)/` except invocation markers. Thus .limitless.toml:10 reads a missing `process.env.LIMITLESS_TEST_WORKERS` and selects its `n>0 ? n : 4` fallback.",
+    "trigger": "The daemon starts with LIMITLESS_TEST_WORKERS=6. Factory gate environment filtering removes the override, so the configured test gate runs with four workers.",
+    "severity": "medium",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-107",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Increasing panel test deadlines leaves the underlying parallel Git race undiagnosed.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Panel flake is addressed only by increasing timeouts",
+   "severity": "major",
+   "category": "reliability",
+   "verification": {
+    "verdict": "PLAUSIBLE",
+    "evidence": "test/pipeline-panel.test.ts:210–212 says \"Two implementation/panel rounds exceeded waitFor's 20 s deadline under git subprocess load\" and changes the wait to `waitFor(f, run.id, [\"succeeded\", \"failed\", \"needs_human\"], 40_000)`; line 239 sets `60_000` for Bun. The handler and wait helper are otherwise unchanged from base. test/pipeline-support.ts:175 checks `while (Date.now() < deadline)` and line 189 throws `new Error(`timed out waiting for ...`)`. No code guarantees completion within 40 seconds.",
+    "trigger": "Parallel git subprocess contention delays the two rounds beyond 40 seconds; waitFor throws and fails the suite despite correct eventual completion. This remains plausible under the requested load, but a recurrence at the new deadline is not proven.",
+    "severity": "high",
+    "category": "reliability"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-107",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Factory gate environment construction discards the configured test worker override.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Factory gates discard the worker-count override",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/gates/run.ts:64 defines `gateEnv` using `agentEnv({ CI: \"1\", NO_COLOR: \"1\", FORCE_COLOR: \"0\" })`, and :79 passes that environment to execution. src/util/proc.ts:579-582 strips variables matching `...|LIMITLESS_` except invocation markers. .limitless.toml:10 reads `process.env.LIMITLESS_TEST_WORKERS` and defaults to 4. A runtime probe with the override set to 2 found it absent from gateEnv().",
+    "trigger": "An operator sets LIMITLESS_TEST_WORKERS=2 in the factory environment; gate environment sanitization removes it, so the test gate uses four workers and defeats the requested contention control.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-108",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The change runs the repository's test gate as a parallel `bun test` command with a worker-count substitution, which gate-evidence's command recogniser rejects, so every candidate gate on this repository records no test command and sandbox-blocked verification criteria can no longer be satisfied by gate evidence.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-108",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The change runs the repository's test gate as a parallel `bun test` command with a worker-count substitution, which gate-evidence's command recogniser rejects, so every candidate gate on this repository records no test command and sandbox-blocked verification criteria can no longer be satisfied by gate evidence.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Parallel test gate can no longer provide verification evidence",
+   "severity": "major",
+   "category": "correctness",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/pipeline/engine.ts:1160 sets \"testCommand: gateTestCommand(check.result.command, testScripts)\". src/pipeline/gate-evidence.ts:16 accepts only \"/^bun test(?: [\\w./-]+)*$/\", rejecting the command at .limitless.toml:10 containing \"--parallel=$(...)\". gate-evidence.ts:39 returns false when testCommand is null; lines 125–127 leave the criterion blocked when coverage cannot be established.",
+    "trigger": "A targeted verification command is sandbox-blocked, while the full parallel gate passes and covers its file; the gate command parses to null, preventing evidence substitution and leaving verification blocked.",
+    "severity": "high",
+    "category": "correctness"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-129",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Against an older daemon that ignores the new repo parameter, limitless_list_runs returns other repositories' runs as matches, because the proxy never checks that the filter was applied.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Repository filtering silently fails against an older daemon",
+   "severity": "major",
+   "category": "compatibility",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/integrations/mcp.ts:233–235 forwards repo as a query parameter: `...(repo ? { repo } : {})`. Base src/server/http.ts:402–407 reads only status, ids and limit and calls `store.listRuns({ ...(status ? { status } : {}), ...(ids?.length ? { ids } : {}), limit })`. Head src/integrations/mcp.ts:389–392 slices those results without checking repoSlug.",
+    "trigger": "A new MCP proxy requests a repository filter from the previous daemon version while another repository has newer runs. The daemon ignores repo, and the proxy returns unrelated runs as matching results.",
+    "severity": "high",
+    "category": "compatibility"
+   }
+  }
+ },
+ {
+  "system": "terra-panel-rubric-d2",
+  "caseId": "review-129",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Against an older daemon that ignores the new repo parameter, limitless_list_runs returns other repositories' runs as matches, because the proxy never checks that the filter was applied.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Repository filtering silently fails against an older daemon",
+   "severity": "major",
+   "category": "compatibility",
+   "verification": {
+    "verdict": "CONFIRMED",
+    "evidence": "src/integrations/mcp.ts:235 sends `...(repo ? { repo } : {})` to /api/runs. Base src/server/http.ts:402–408 does not read repo and calls `store.listRuns` with only status, ids, and limit. Head src/integrations/mcp.ts:389–392 trusts and returns that unfiltered response.",
+    "trigger": "A newer MCP proxy requests a repository filter while the previous daemon runs. Other repositories' runs are silently included. This duplicates C1.",
+    "severity": "high",
+    "category": "compatibility"
+   }
+  }
+ }
+]

@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"After a restart, a saved passing gate result can be replayed despite a changed or missing execution binding, allowing the factory to act on verification that does not match the current run."}]}

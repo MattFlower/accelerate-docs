@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"resume","trigger":"plausible","reason":"A restart during the second confirmation repeats completed confirmation and worker gate work."},{"id":"F2","consequence":"diag","trigger":"normal","reason":"The comment misstates the deadline's scope, but the defect has no runtime effect."}]}

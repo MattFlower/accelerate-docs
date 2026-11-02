@@ -1,0 +1,62 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": "G3",
+   "root_cause": "Moving the cut point across dense overlapping credential matches removes the bound on the streaming carry buffer, so it can grow without limit."
+  },
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "Restoring run state applies credential redaction to the executable gate configuration, and checkpoints then save the altered command."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "Gate output is redacted before the sandbox startup marker is detected, so a credential that occurs inside the marker breaks startup detection."
+  },
+  {
+   "members": [
+    "C4",
+    "C4b",
+    "C5"
+   ],
+   "same_as": null,
+   "root_cause": "Gate-specific output normalization (adding a confinement verdict and stripping escapes) is applied to every object and HTTP response, not only to gate results."
+  },
+  {
+   "members": [
+    "C6"
+   ],
+   "same_as": null,
+   "root_cause": "The output privacy filter treats any text containing the \"[redacted]\" marker as sensitive and withholds the whole field."
+  },
+  {
+   "members": [
+    "C7"
+   ],
+   "same_as": null,
+   "root_cause": "stdout and stderr are redacted separately and then joined, so a credential split across the two streams is rebuilt in the stored tail."
+  },
+  {
+   "members": [
+    "C8"
+   ],
+   "same_as": null,
+   "root_cause": "The deployment path in the CLI service runs gates without first registering configured credentials in the redaction registry."
+  },
+  {
+   "members": [
+    "C9"
+   ],
+   "same_as": null,
+   "root_cause": "New stdoutTruncated/stderrTruncated result fields were added that no production code reads."
+  }
+ ]
+}

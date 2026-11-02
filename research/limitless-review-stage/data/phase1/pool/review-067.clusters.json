@@ -1,0 +1,29 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P2",
+    "P3",
+    "P5",
+    "P6",
+    "P7",
+    "P9",
+    "P10"
+   ],
+   "mechanism": "The global requirement that every gate check have no skipped tests rejects substitution whenever any unrelated test (e.g. intentionally skipped Seatbelt tests) is skipped, even though the requested loopback file passed fully, so the blocked criterion is never resolved."
+  },
+  {
+   "members": [
+    "P4"
+   ],
+   "mechanism": "The test-coverage collector trusts arbitrary candidate-controlled stdout/stderr as runner headers and pass rows, so forged output can fabricate passing coverage for a file that never ran."
+  },
+  {
+   "members": [
+    "P8"
+   ],
+   "mechanism": "Exact command-argument matching accepts a command without checking passedFiles, so Bun's substring selector can run a different file while the requested file is marked met."
+  }
+ ]
+}

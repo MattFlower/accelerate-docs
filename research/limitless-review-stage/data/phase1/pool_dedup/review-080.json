@@ -1,0 +1,18 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "Binary detection treats any content that contains the literal \"%PDF-\" signature as binary, so ordinary text files are wrongly classified as binary."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The config-cache test expects exactly one config listing, which breaks when the system Git config includes another file and a second listing is legitimately needed."
+  }
+ ]
+}
