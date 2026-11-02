@@ -1,9 +1,10 @@
 # Code understanding: backlog
 
-*Draft 2, 2026-11-01 (draft 1 plus Matt Pocock's `teach` review; see "Changes in draft 2" below). Repo path: `agentic-dev-research/research/code-understanding/BACKLOG.md`.*
+*Draft 3, 2026-11-02 (draft 2 plus the 2026-11-02 sweep; see "Changes in draft 3" below). Repo path: `agentic-dev-research/research/code-understanding/BACKLOG.md`.*
 *It follows the layout in that repo's README (`research/<topic>/report.md` + `notes/` + optional `BACKLOG.md`)
 and the style of `research/automated-code-review/BACKLOG.md`. Findings and sources are in
 [`research/code-understanding/notes/first-sweep-2026-11-01.md`](notes/first-sweep-2026-11-01.md)
+and [`research/code-understanding/notes/sweep-2026-11-02.md`](notes/sweep-2026-11-02.md)
 until a `report.md` is written.*
 
 **Baseline.** `accelerate/skills/human-review` (v0.6.2, 2026-10-30) is ground truth. Everything here is ranked by
@@ -19,7 +20,7 @@ same rule as the code-review backlog's "fix the eval first".
 
 **Evidence labels.** `measured-RCT` (randomized or controlled study) · `measured-obs` (observational or field data) ·
 `practitioner` (someone describes their own use) · `vendor` (launch post or docs) · `engagement` (X numbers only, as
-returned by the X API on 2026-11-01) · `our own idea`.
+returned by the X API on the date written next to the number: 2026-11-01 in draft 2, 2026-11-02 in draft 3) · `our own idea`.
 
 **Statuses.** `proposed` · `testing` · `shipped` (in human-review, path cited) · `rejected` (with the reason).
 
@@ -45,7 +46,14 @@ factory's deliver/review stages.
   `measured-RCT`: Anthropic's RCT found AI users scored 17% lower on a comprehension quiz (50% vs 67%, d=0.738), and
   people who asked conceptual or explanation questions kept their understanding
   ([Anthropic](https://www.anthropic.com/research/AI-assistance-coding-skills),
-  [arXiv 2601.20245](https://arxiv.org/html/2601.20245v1)). Retrieval testing beats re-reading for retention
+  [arXiv 2601.20245](https://arxiv.org/html/2601.20245v1)).
+  **(Im)Paired Programming** is the same pattern on a build-a-website task: 54 students used either an editing agent
+  or a chatbot. Agents helped the initial completion and harmed comprehension, so users were less able to extend
+  their code without the agent. Copy+paste prompts and auto-accepted edits were linked with lower comprehension.
+  Users still preferred agents
+  ([arXiv 2607.26375](https://arxiv.org/abs/2607.26375),
+  [code](https://github.com/nbalepur/impaired-programming)). Evidence for that result: `measured-RCT` (student sample).
+  Retrieval testing beats re-reading for retention
   ([Roediger & Karpicke 2006](https://pubmed.ncbi.nlm.nih.gov/16507066/)).
 - **Why it helps:** today the page shows what changed but never checks that it landed in your head. A quiz turns
   passive reading into retrieval, and it shows you which part you didn't get. It also gives us a **comprehension
@@ -70,10 +78,14 @@ factory's deliver/review stages.
 - **Sources:** carried over from `agentic-dev-research/research/making-prs-easier-to-review/report.md`, the sections
   "Claims to validate" and "Self-instrumentation". It has not shipped: `HR/assets/app.js` stores viewed state and
   comments in `localStorage`, but no timing. Evidence: `our own idea` (from the earlier report).
+  Supporting evidence for the second measure below: (Im)Paired Programming found that a completion metric missed the
+  harm, and an "extend the code without the agent" task showed it
+  ([arXiv 2607.26375](https://arxiv.org/abs/2607.26375)). Evidence for that result: `measured-RCT` (student sample).
 - **Why it helps:** every other item here is a guess without it. It tells us whether a block saves minutes or only
-  moves them.
+  moves them. The extend task tells us whether the reader can still work once the page is closed.
 - **Test:** 10 reviews with the export on. Check the timings add up to wall-clock time, and that viewed-but-skipped
-  files show near-zero time.
+  files show near-zero time. Beside the quiz, a second comprehension measure: a small follow-up change made by hand
+  after reading the page, with the agent closed (extend it without the agent). Log whether the person can do it.
 
 ### 3. `teach-code`: stateful, mission-led lessons about a repo or one area of it — `proposed`, cost M (v1) / L (v2), target new skill in accelerate (reuses the HR renderer)
 *Merges the old #3 (slice explainer), #10 (repo onboarding course), and #14 (learner profile), 2026-11-01, after
@@ -81,10 +93,12 @@ reading Matt Pocock's `teach`.*
 - **Idea:** a user-invoked skill, `/teach-code <area | question | "this repo">`. It keeps a small learning workspace
   per repo **outside the repo's tree** (like HR's `.human-review/`, excluded from git), so state carries across sessions.
   - **v1 (M): one lesson.** Interview first, with 2–3 questions: what change are you about to make (the *mission*), and
-    what do you already know here? Then a short lesson about one slice at head, built from HR blocks: background,
-    terms, a 3–6 stop reading order into real `code` blocks pulled from git, one diagram, a worked example (#4), and
-    the quiz (#1). Name one "read this yourself next" file or doc, and say who to ask (#10). Apply HR's `build --check`
-    and its "look at it" render step.
+    what do you already know here? Open from a screen or an endpoint the reader already knows, then the stops go
+    behind it (the parts, the requests, the files). Then a short lesson about one slice at head, built from HR
+    blocks: background, terms, a 3–6 stop reading order into real `code` blocks pulled from git, one diagram, a
+    worked example (#4), and the quiz (#1). Name one "read this yourself next" file or doc, and say who to ask (#11).
+    Apply HR's `build --check` and its "look at it" render step. That opening is Floorplan's "start from a screen"
+    entry, kept inside this skill: it is how the lesson starts.
   - **v2 (L): a course.** Numbered lessons in execution order (entry point → one traced flow → edges); durable
     reference cards (glossary, module map, flow) kept apart from the lessons; `learning-records/` written only when
     the quiz or your answers *show* understanding, a disclosed prior skill, or a fixed misconception; earlier quiz
@@ -111,7 +125,21 @@ reading Matt Pocock's `teach`.*
     stop": ECC's `codebase-onboarding`
     ([SKILL.md](https://github.com/affaan-m/ECC/blob/main/skills/codebase-onboarding/SKILL.md); ECC repo 294,392 stars
     per the API) and [claudeskills.page codebase-onboarding](https://claudeskills.page/skills/workflow/codebase-onboarding/).
-  - Evidence: `practitioner` + `engagement`, plus `measured-RCT` for retrieval and spacing (see #1).
+  - **Floorplan**, the strongest new map-style baseline
+    ([repo](https://github.com/haydenschmitty/floorplan); 2,069 stars per the GitHub API on 2026-11-02; created
+    2026-10-27; current release v0.6.1, with v0.6.0 the previous tag). A Claude Code / Codex plugin.
+    Dependency-free Node scripts scan files, imports, routes, and web requests, and match frontend requests to
+    backend endpoints, including across repos. The model names the parts in plain English. The map is a local
+    `floorplan/index.html`; the folder ignores itself in git. The map zooms from the app to a part, a file, and an
+    endpoint. "Start from a screen" is the entry folded into v1 above. The Ask bar answers with a mini-map and a
+    step-by-step walkthrough.
+    "Update the floorplan" re-reads changed files and highlights Recent work. Edits in `floorplan/architecture.json`
+    survive updates. X mention
+    ([X](https://x.com/ai_algoit/status/2116825143930732789): 0 likes). Evidence: `vendor` + `engagement` (stars).
+  - (Im)Paired Programming, for the extend-by-hand measure in the test
+    ([arXiv 2607.26375](https://arxiv.org/abs/2607.26375)). Evidence: `measured-RCT` (student sample). See #1.
+  - Evidence: `practitioner` + `engagement`, plus `measured-RCT` for retrieval and spacing (see #1) and for the
+    extend-by-hand task.
 - **Why a standalone skill, not part of HR:** different input (no diff), state across sessions, and invoked by the
   user before work starts, not after. It shares HR's renderer, block schema, quiz component, and git-truth rules, so
   it's cheap. HR, in turn, reads the learner records for #8.
@@ -123,9 +151,11 @@ reading Matt Pocock's `teach`.*
   the code at head, plus ADRs and docs in the repo.
 - **Test:** v1 on three limitless areas Matt hasn't touched recently (for example the routing policy and the review
   stage). Run Pocock's `/teach` as-is on the same areas as the **baseline**. Measure quiz score, time to first correct
-  edit, factual errors per lesson, and citation count per lesson. v2 only if v1 beats both the baseline and reading
-  cold. For v2: onboard to an unfamiliar public repo (for example `ky`) with the course vs. DeepWiki vs. cold, then make
-  the same small change.
+  edit, factual errors per lesson, and citation count per lesson. After the lesson, a small follow-up change made by
+  hand with the agent closed (extend it without the agent), scored beside the quiz. Also check that the lesson's
+  first stops are the code behind a screen or endpoint the reader named. v2 only if v1 beats both the baseline and
+  reading cold. For v2: onboard to an unfamiliar public repo (for example `ky`) with the course vs. DeepWiki vs.
+  Floorplan vs. cold, then make the same small change. Floorplan is the second baseline arm, beside DeepWiki.
 
 ### 4. Worked example with real values ("intuition with toy data") — `proposed`, cost M, target HR + item 3
 - **Idea:** an `example` block that traces one concrete input through the changed path: input → each stop (file:line)
@@ -158,9 +188,20 @@ reading Matt Pocock's `teach`.*
   Haystack uses the coding-agent transcript to explain "why each hunk changed"
   ([X reply](https://x.com/AkshaySubr42403/status/2067331955494912104), 0 likes). Practitioners asking for the same:
   [@UditKhandelwal8](https://x.com/UditKhandelwal8/status/2082542780237352977),
-  [@GandhiRohith](https://x.com/GandhiRohith/status/2067630870996103481) (low engagement). The earlier report
-  recommended "label each why by source; write *why: not stated*" (`report.md`, row "Brief and summary drawn from…").
-  It hasn't shipped: HR tags signals and `risk.why`, not the brief or rationale. Evidence: `practitioner` + `vendor`.
+  [@GandhiRohith](https://x.com/GandhiRohith/status/2067630870996103481) (low engagement).
+  **DiffNotes** is the same premise, built: the agent that wrote the PR annotates it with a summary, a deploy card
+  (migrations, flags, rollback), a risk list, and one why-not-what note per changed block. A browser extension
+  overlays the notes on GitHub's Files changed tab. Nothing is posted to the PR. Notes expire. Per-repo rules live
+  in `.diffnotes.yml` (the rules file is #9)
+  ([DEV, 2026-11-01](https://dev.to/igorkasyanchuk/i-made-my-coding-agent-explain-its-own-pull-requests-j67),
+  [repo](https://github.com/igorkasyanchuk/diffnotes), 3 stars per the GitHub API on 2026-11-02). Evidence:
+  `practitioner` (low engagement).
+  **Flatbread** is a handoff that keeps the dead ends from a Claude Code, Codex, or Cursor session, so the next
+  agent can pull an execution brief
+  ([X](https://x.com/bulentongun/status/2116366373920391218): 7 likes). Evidence: `engagement` (low).
+  The earlier report recommended "label each why by source; write *why: not stated*" (`report.md`, row "Brief and
+  summary drawn from…"). It hasn't shipped: HR tags signals and `risk.why`, not the brief or rationale. Evidence
+  for the item: `practitioner` + `vendor`.
 - **Why it helps:** "what instigated the change" is reviewers' biggest information need (Bacchelli & Bird, cited in
   the earlier report). The agent already has that information, and HR throws it away.
 - **Test:** on 5 agent-built changes, have Matt rate each entry as accurate, useful, or neither, and count the
@@ -193,7 +234,16 @@ reading Matt Pocock's `teach`.*
   [repo](https://github.com/Egonex-AI/Understand-Anything/)). X: [@techNmak](https://x.com/techNmak/status/2056477994328396263)
   (101 likes, 109 bookmarks) and [@prasenx](https://x.com/prasenx/status/2058119202712723632) (227 likes, 484 bookmarks;
   the tool isn't named in the text). Practitioner need: "the diff reads fine and you still have no idea what it wired
-  itself into" ([X](https://x.com/aiupdatelog/status/2111502507633701033), 0 likes). Evidence: `vendor` + `engagement`.
+  itself into" ([X](https://x.com/aiupdatelog/status/2111502507633701033), 0 likes).
+  **Floorplan** is the other pattern to copy: dependency-free Node scripts scan files, imports, routes, and
+  request-to-endpoint matches, including across repos, and the model only names the parts
+  ([repo](https://github.com/haydenschmitty/floorplan)). That request-to-endpoint match is a cross-boundary edge
+  HR's grep does not see. See #3 for the rest of the tool.
+  **Dyff** offers full-repo symbol search during review (call chains and every use of a symbol, per its README)
+  ([site](https://www.dyff.sh/), [repo](https://github.com/dyffs/dyff), 0 stars per the GitHub API on 2026-11-02).
+  The site did not load on 2026-11-02, and the README does not describe grouping a 34-file PR into 4-5
+  dependency-order stages, so that claim stays unchecked. The walkthrough half (what to read first) is noted on
+  the split advisor. Evidence: `vendor` + `engagement`.
 - **Why it helps:** HR's blast radius is honest but text-only, covers 5 languages, and says "mentioned", never
   "called" (`HR/SKILL.md` "Blast radius"). A resolved graph answers "what else does this touch" faster.
 - **Test:** on 5 PRs, compare the grep and graph outputs by hand: false mentions removed, real callers missed. Time to
@@ -213,16 +263,46 @@ reading Matt Pocock's `teach`.*
   signals, (b) the learner records from #3, or (c) when neither exists, one optional question at the top ("new to this
   area?"). The community "teach pr" skill asks for a teaching level 1–4 up front
   ([#727](https://github.com/mattpocock/skills/issues/727)).
-- **Test:** time on top-of-page for owned vs. unfamiliar areas, with quiz score held constant.
+- **Caution from TARS** ([arXiv 2607.15948](https://arxiv.org/html/2607.15948v1)): an in-IDE agent profiles
+  expertise and role and adapts explanation depth. Within-subjects, n=18, on Java snippets: 26% faster (mean 224.0s
+  vs 304.08s; Mann-Whitney p=0.085, not significant) and no correctness difference (cosine similarity to a
+  ground-truth docstring, 0.888 vs 0.886, p=0.18). Self-reported load was lower; the NASA-TLX tests in the results
+  are against the scale midpoint in the TARS condition. Adapting depth may save time. It has not been shown to
+  improve understanding. Keep this item at cost S, and keep quiz score as the guard. Evidence: `measured-RCT`
+  (small, null on correctness).
+- **Test:** time on top-of-page for owned vs. unfamiliar areas, with quiz score held constant. Quiz score is the
+  guard: a faster top of the page with a lower quiz score fails.
 
-### 9. Split and size advisor — `proposed`, cost S–M, target HR
+### 9. Per-repo explanation rules file — `proposed`, cost S, target HR
+- **Idea:** a repo-owned rules file the page must satisfy. Example: a migration must get a deploy note and a
+  rollback note. `build --check` fails when a required note is missing.
+- **Sources:** DiffNotes reads a `.diffnotes.yml` on the base branch before the agent writes notes. The post's
+  example is "every migration needs a deploy note"
+  ([DEV, 2026-11-01](https://dev.to/igorkasyanchuk/i-made-my-coding-agent-explain-its-own-pull-requests-j67),
+  [repo](https://github.com/igorkasyanchuk/diffnotes), 3 stars per the GitHub API on 2026-11-02). The fail-closed
+  `build --check` is ours; DiffNotes describes the agent reading the rules. See #5 for the rest of the tool.
+  Evidence: `practitioner` (low engagement).
+- **Why it helps:** HR already checks that claims match the diff. A rule makes a missing deploy or rollback note a
+  build failure on the changes that need one.
+- **Why it sits here:** effort is S because `build --check` already exists. The gain shows up on the PRs a rule
+  names (migrations, config) and is absent otherwise, and the only evidence is one low-engagement tool. That puts
+  it under the always-on items #6–#8 and above the split advisor.
+- **Test:** on limitless PRs that touch migrations or config, a missing required note fails `build --check`, and a
+  present note passes.
+
+### 10. Split and size advisor — `proposed`, cost S–M, target HR
 - **Idea:** when the concerns show more than one independent cluster, or the estimated reading time is more than one
   sitting, say so at the top and propose the split. Flag it when the concerns cover more than the brief claims.
 - **Sources:** the earlier report's #8 (Barnett, Baum 2019, Paul). It hasn't shipped: no split or size advice in
   `HR/scripts/human-review.mjs`. Evidence: `measured-RCT` / `measured-obs` via the earlier report.
+  Dyff's README says its walkthrough tells the reviewer what to read first and what to skip on a large diff
+  ([repo](https://github.com/dyffs/dyff), 0 stars per the GitHub API on 2026-11-02;
+  [site](https://www.dyff.sh/), which did not load on 2026-11-02). The README does not describe a 34-file PR grouped
+  into 4-5 dependency-order stages, so that claim stays unchecked. Not enough to move this item. The symbol-search
+  half is noted on #7. Evidence for Dyff: `vendor`.
 - **Test:** on 10 past limitless PRs, does the advisor's split match what Matt would split?
 
-### 10. "Who to ask" for the area — `proposed`, cost S, target HR + #3
+### 11. "Who to ask" for the area — `proposed`, cost S, target HR + #3
 - **Idea:** one visible line naming the two or three people with the most recent commits to the slice or changed files,
   computed by `collect` from git (HR already computes ownership for its signals). It sits beside "What I need from
   you" or at the end of a lesson. It's a fact, never a judgment.
@@ -234,7 +314,22 @@ reading Matt Pocock's `teach`.*
   "Security and privacy").
 - **Test:** for 10 pages, ask Matt whether the named people are the ones he would ask.
 
-### 11. Interactive or animated explainer for the algorithmic core — `proposed`, cost M, target HR (gated)
+### 12. Explain the core change from two or three angles — `proposed`, cost S, target HR + #3
+- **Idea:** for the core of a change, give two or three short explanations, each from one angle: what it does,
+  which concept it relies on, and why it exists.
+- **Sources:** Bernstein et al. randomized 971 first-year students to three diverse LLM explanations (each
+  emphasizing a different aspect; the paper's examples are function, concept, and goal) or three generic
+  explanations. Open-ended accuracy was about 7.7% higher with the diverse set. Multiple-choice accuracy was
+  already high (>87%) and did not differ. The open-ended difference was not significant after Bonferroni
+  (z=2.15, p=0.095). The abstract reports no difference in perceived cognitive load
+  ([arXiv 2606.28882](https://arxiv.org/abs/2606.28882)). Evidence: `measured-RCT` (education, weak).
+- **Why it helps:** one true paragraph can still miss the angle the reader needed. Two or three angles are a small
+  addition to the background block and to a #3 lesson.
+- **Why it sits here:** the effect did not clear a multiple-comparison correction, and the setting is an intro
+  programming course. Cheap to try, and below "Who to ask" (#11), which has a clearer mechanism.
+- **Test:** alternate PRs with and without the extra angles and compare quiz score.
+
+### 13. Interactive or animated explainer for the algorithmic core — `proposed`, cost M, target HR (gated)
 - **Idea:** for a change whose core is an algorithm or state machine, allow one `interactive` block (a sandboxed
   inline script, still no network) that steps through it.
 - **Sources:** [Simon Willison, interactive explanations](https://simonwillison.net/guides/agentic-engineering-patterns/interactive-explanations/).
@@ -245,7 +340,7 @@ reading Matt Pocock's `teach`.*
   `practitioner` + `engagement`.
 - **Test:** only on PRs tagged algorithmic. Compare quiz and time with and without the block.
 
-### 12. Attach the page to every limitless PR — `proposed`, cost M, target limitless
+### 14. Attach the page to every limitless PR — `proposed`, cost M, target limitless
 - **Idea:** limitless's deliver stage runs human-review's `collect`/`build` and attaches `review.html` (or a link) to
   the PR's evidence report.
 - **Sources:** Latitude added "a CI step to every PR… that generates an interactive HTML review artifact"
@@ -255,7 +350,7 @@ reading Matt Pocock's `teach`.*
   keep it as a local or private artifact.
 - **Test:** 10 limitless runs. Does Matt open the page before the diff, and does review latency change?
 
-### 13. "Since you last looked" interdiff — `proposed`, cost M, target HR
+### 15. "Since you last looked" interdiff — `proposed`, cost M, target HR
 - **Idea:** when a page is rebuilt after feedback, show the delta from the last version the reviewer saw (changed
   hunks, and which notes changed) and keep the old comments attached to unchanged lines. Today the new page "starts
   clean" (`HR/SKILL.md` "When feedback comes back").
@@ -271,7 +366,7 @@ reading Matt Pocock's `teach`.*
 |---|---|---|
 | Diff → one self-contained HTML page; branch, PR, range, **uncommitted** work | `HR/SKILL.md` "Decide the scope"; `HR/scripts/human-review.mjs` | Covers PRs and uncommitted changes. Not whole-repo onboarding (item 3). |
 | Code on the page comes from git; annotations checked against real lines | `HR/SKILL.md` "Honesty", build `--check` | Same idea as Showboat's exec-pulled snippets. |
-| Reading order (`focus`, 3–6 stops, riskiest first) | `HR/SKILL.md` "fields that carry the most weight" | Matches the "literate diff" and tour-mode ideas (Litt, Tembo Tour Mode, constellagent code tour). |
+| Reading order (`focus`, 3–6 stops, riskiest first) | `HR/SKILL.md` "fields that carry the most weight" | Matches the "literate diff" and tour-mode ideas (Litt, Tembo Tour Mode, constellagent code tour). Replicas Review's guided tour (2026-10-21) puts a plain-English explanation above each file's diff, starts with the most important file, and collapses tests, lockfiles, and generated files at the end ([post](https://replicas.dev/blog/replicas-review)). That matches this row and the mechanical tier below. |
 | Group by concern, tests next to their code, callees first | `HR/SKILL.md` `concerns` | Earlier report #1. |
 | Written for a newcomer: `background` ("Before this change"), `terms` with hover underlines, readability warnings | `HR/SKILL.md` "Write for someone new to this code"; `HR/references/format.md` | Like Litt's "Background" and codebase-to-course's glossary tooltips. |
 | Annotated diffs (note / decision / risk / question), 2–5 per file | `HR/SKILL.md` "Annotations" | |
@@ -306,6 +401,11 @@ reading Matt Pocock's `teach`.*
   ([docs](https://docs.coderabbit.ai/pr-reviews/walkthroughs)).
 - Practitioner loop: Claude writes the code, then "codex to review uncommitted changes"
   ([X @dejavucoder](https://x.com/dejavucoder/status/2035238484261445807): 573 likes, 88 bookmarks).
+- **Explainable AI and trust in AI-assisted code review**: within-subjects, n=34, three explanation levels. Full
+  explanations gave the highest perceived trust (M=3.99/5) and moderate explanations gave the highest agreement
+  with the AI recommendation (89.22%). No explanations were lowest on both. Explanation level did not
+  significantly affect review time
+  ([arXiv 2607.24601](https://arxiv.org/abs/2607.24601)).
 
 ## Merged
 
@@ -321,6 +421,26 @@ reading Matt Pocock's `teach`.*
 - #8 two-depth background: added the level check (`teach`'s most reported gap).
 - New #10 "Who to ask" (from `teach`'s "wisdom → community" idea).
 - Old #11–#13 keep their content as #11–#13. Old #10 and #14 removed (merged).
+
+## Changes in draft 3 (2026-11-02)
+
+- #1 and #2: (Im)Paired Programming added as supporting `measured-RCT` evidence. #2's test adds an "extend it
+  without the agent" task beside the quiz. The same task is in #3's test.
+- #3: Floorplan added as the map-style baseline, and as a second baseline arm in the v2 test (beside DeepWiki).
+  "Start from a screen or endpoint the reader already knows" is folded into #3's opening. It is how the lesson
+  starts, so it stays in this skill.
+- #5: DiffNotes and Flatbread added as sources.
+- #7: Floorplan's deterministic scan (model only for names; request-to-endpoint matching). Dyff noted on #7 and on
+  the split advisor (#10).
+- #8: TARS added as a caution. Cost stays S. Quiz score stays the guard.
+- New #9 "Per-repo explanation rules file", from DiffNotes' `.diffnotes.yml`. Cost S, target HR. Placed under
+  #6–#8 and above the split advisor: `build --check` makes it cheap, and it only fires when a rule matches, on
+  one low-engagement source.
+- New #12 "Explain the core change from two or three angles". Cost S, target HR + #3, below "Who to ask". The
+  education RCT's open-ended gain was not significant after Bonferroni (p=0.095).
+- "Who to ask" is now #11. The old #9–#13 are now #10–#11 and #13–#15.
+- Shipped reading-order notes: Replicas Review guided tour.
+- Hand-off: the XAI trust study ([arXiv 2607.24601](https://arxiv.org/abs/2607.24601)).
 
 ## Rejected
 
