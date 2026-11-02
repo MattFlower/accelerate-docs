@@ -1,0 +1,36 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P4",
+    "P6",
+    "P8",
+    "P10",
+    "P13",
+    "P14",
+    "P16"
+   ],
+   "mechanism": "The orphan fallback treats any hidden process born during the invocation with a cwd under the invocation directory as owned by it, so shutdown kills unrelated processes."
+  },
+  {
+   "members": [
+    "P2",
+    "P5",
+    "P7",
+    "P9",
+    "P11",
+    "P12",
+    "P15",
+    "P17"
+   ],
+   "mechanism": "Discovery relies on environment markers, cwd and ancestry, so detached descendants that replace their environment and leave the invocation directories escape it, and shutdown reports success while they stay alive."
+  },
+  {
+   "members": [
+    "P3"
+   ],
+   "mechanism": "The second checkoutCommitted call after a gate timeout omits retryClean, so a transient clean failure is thrown as a CommandError instead of being treated as a failed implement round."
+  }
+ ]
+}

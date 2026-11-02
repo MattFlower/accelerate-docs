@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"Quoting a test title containing “Factory gate” can cause a valid passing record to be rejected, leaving the criterion blocked and requiring unnecessary human intervention."}]}

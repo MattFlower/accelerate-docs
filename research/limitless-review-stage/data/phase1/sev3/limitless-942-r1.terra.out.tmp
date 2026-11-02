@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"A launchd inspection error during rollback or recovery can leave the executor running while the release checkout changes, causing work to proceed against an inconsistent release."}]}

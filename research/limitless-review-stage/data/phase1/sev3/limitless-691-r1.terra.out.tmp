@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"After an upgrade with no GitHub owner configured, incomplete warnings can leave the operator unaware that Dependabot PRs no longer receive verification runs, causing failures to be missed."}]}

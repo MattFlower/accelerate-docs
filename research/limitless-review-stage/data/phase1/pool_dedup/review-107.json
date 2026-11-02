@@ -1,0 +1,11 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "Changing the test command string in .limitless.toml means it no longer matches the command the factory recorded, so the factory can't use its existing passing test run as evidence for verification. G2 is a different problem: the gate environment drops the worker override."
+  }
+ ]
+}

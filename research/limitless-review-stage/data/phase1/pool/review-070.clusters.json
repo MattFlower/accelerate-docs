@@ -1,0 +1,119 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P4",
+    "P6",
+    "P8",
+    "P9",
+    "P11",
+    "P15",
+    "P16",
+    "P19",
+    "P22",
+    "P30",
+    "P32",
+    "P33",
+    "P35",
+    "P36",
+    "P38",
+    "P40"
+   ],
+   "mechanism": "statusDetailSchema strips run.merged and explainStatus never checks it, so a confirmed-merged run is reported as unknown, review needed, or landable instead of Landed."
+  },
+  {
+   "members": [
+    "P3",
+    "P7",
+    "P12",
+    "P14",
+    "P18",
+    "P21",
+    "P23",
+    "P39",
+    "P42",
+    "P44",
+    "P48"
+   ],
+   "mechanism": "The digest's awaiting-review predicate ignores review.rounds, so PRs with a queued or running changes round are still listed as awaiting review."
+  },
+  {
+   "members": [
+    "P2",
+    "P10",
+    "P13",
+    "P17",
+    "P20",
+    "P34",
+    "P37",
+    "P41"
+   ],
+   "mechanism": "Only PR-opened, round-delivered and approval events seed digest review candidates, so later unread PR events (e.g. pr.ci_passed) after a stale approval never trigger reconciliation and the review is omitted."
+  },
+  {
+   "members": [
+    "P5",
+    "P31"
+   ],
+   "mechanism": "The digest's blocked-land branch ignores the handled/merged flag, so a confirmed merged run still shows a blocked-land alert."
+  },
+  {
+   "members": [
+    "P24",
+    "P28"
+   ],
+   "mechanism": "The digest makes sequential, unbounded per-run HTTP requests over the whole unacknowledged feed, and the feed is rescanned every session because the digest never acks."
+  },
+  {
+   "members": [
+    "P49"
+   ],
+   "mechanism": "A failed per-run lookup is not handled in the digest, so one error aborts the entire digest output."
+  },
+  {
+   "members": [
+    "P25"
+   ],
+   "mechanism": "quote() does not escape bidi override or zero-width characters in untrusted PR text."
+  },
+  {
+   "members": [
+    "P27",
+    "P45"
+   ],
+   "mechanism": "Digest rows have no length cap, so long untrusted titles or questions flood session context."
+  },
+  {
+   "members": [
+    "P26"
+   ],
+   "mechanism": "approvalIsLatest requires a headRefOid match, so a snapshot without headRefOid lets an older failed round override a newer approval."
+  },
+  {
+   "members": [
+    "P29"
+   ],
+   "mechanism": "getRunDetail re-runs the approval query that approvalFor already runs, only to get created_at."
+  },
+  {
+   "members": [
+    "P43",
+    "P47"
+   ],
+   "mechanism": "limitless_review over MCP passes no reviewer, so submitReview defaults to \"human\" and misattributes agent verdicts."
+  },
+  {
+   "members": [
+    "P46"
+   ],
+   "mechanism": "The Codex skill is copied from the Claude skill and tells Codex to use the 'claude' feed consumer, so they share a cursor."
+  },
+  {
+   "members": [
+    "P50"
+   ],
+   "mechanism": "The change is about twice the requested source line budget."
+  }
+ ]
+}

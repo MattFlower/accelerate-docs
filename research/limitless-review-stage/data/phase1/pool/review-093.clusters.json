@@ -1,0 +1,50 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1"
+   ],
+   "mechanism": "TAP result regexes match any prose starting with 'ok ' or 'not ok ', so ordinary log lines are treated as result boundaries and consume failure slots or discard the error line."
+  },
+  {
+   "members": [
+    "P2"
+   ],
+   "mechanism": "Excerpt truncation in formatGateOutput keeps the start of the excerpts and cuts the end, so the error line, diff and (fail) line are dropped first when preceding console output is long."
+  },
+  {
+   "members": [
+    "P3",
+    "P6",
+    "P9"
+   ],
+   "mechanism": "Bun's end-of-run recap of '(fail)' lines is treated as new failures, producing duplicate excerpts that use up the failure cap and budget and trigger a false 'left out' note."
+  },
+  {
+   "members": [
+    "P4",
+    "P8",
+    "P10"
+   ],
+   "mechanism": "formatGateOutput's fixed 1,000-char tail is applied to the land log and UI panel, which have no prompt-size limit, so they lose most of the previously shown 6,000-char tail."
+  },
+  {
+   "members": [
+    "P5"
+   ],
+   "mechanism": "Failure excerpts are clipped before credential redaction and forwarded unredacted, leaking secrets or leaving fragments that literal redaction cannot match."
+  },
+  {
+   "members": [
+    "P7"
+   ],
+   "mechanism": "The strict eval GateResultSchema was not updated with the new 'failures' field, so gate results containing it are rejected on load."
+  },
+  {
+   "members": [
+    "P11"
+   ],
+   "mechanism": "The land log's 9,000 limit leaves less room than the 8,000-char excerpt cap, so full-size excerpts get cut again and receive a second omission note."
+  }
+ ]
+}

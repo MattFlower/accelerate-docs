@@ -1,0 +1,128 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P4",
+    "P8",
+    "P16",
+    "P18",
+    "P20",
+    "P22",
+    "P33",
+    "P38",
+    "P39",
+    "P41",
+    "P43",
+    "P45",
+    "P47"
+   ],
+   "mechanism": "limitless_status schema strips run.merged and the landed check ignores it, so confirmed-merged runs are reported as unknown or needing review instead of Landed."
+  },
+  {
+   "members": [
+    "P2",
+    "P6",
+    "P7",
+    "P11",
+    "P13",
+    "P23",
+    "P35",
+    "P37",
+    "P40",
+    "P44",
+    "P49"
+   ],
+   "mechanism": "Digest only seeds review candidates from opening, round-delivery and approval events, so unread later PR events (e.g. pr.ci_passed) after an acknowledged approval never trigger reconciliation of a stale approval."
+  },
+  {
+   "members": [
+    "P3",
+    "P9",
+    "P10",
+    "P14",
+    "P17",
+    "P19",
+    "P21",
+    "P24",
+    "P36",
+    "P42",
+    "P46",
+    "P48",
+    "P51",
+    "P55"
+   ],
+   "mechanism": "Digest awaiting-review predicate ignores review.rounds, so PRs with a queued or running changes round are listed as awaiting review."
+  },
+  {
+   "members": [
+    "P5",
+    "P12",
+    "P34"
+   ],
+   "mechanism": "The blocked-land branch in explainStatus precedes the CLOSED PR check, so closed PRs get advice to retry landing."
+  },
+  {
+   "members": [
+    "P15",
+    "P25",
+    "P50",
+    "P56"
+   ],
+   "mechanism": "When the privacy policy is unreadable, the MCP handler runs mutating tools and then replaces their results with a generic withheld message, losing run ids and receipts."
+  },
+  {
+   "members": [
+    "P26",
+    "P52",
+    "P57"
+   ],
+   "mechanism": "With no privacy policy, limitless_status returns only land and openQuestions, dropping the state and nextAction fields."
+  },
+  {
+   "members": [
+    "P27"
+   ],
+   "mechanism": "Digest quote() does not escape bidi and zero-width characters in untrusted PR titles."
+  },
+  {
+   "members": [
+    "P28"
+   ],
+   "mechanism": "An approved PR with no saved snapshot is counted as awaiting review because approval.sha differs from undefined headRefOid."
+  },
+  {
+   "members": [
+    "P29",
+    "P31",
+    "P58"
+   ],
+   "mechanism": "The publication gate decoder was changed to decode \\uXXXX escapes, which is out of scope and pushes the diff over the line budget."
+  },
+  {
+   "members": [
+    "P30"
+   ],
+   "mechanism": "Digest lists PRs as awaiting review while their run is still in progress, because it does not require the run to be finished."
+  },
+  {
+   "members": [
+    "P32"
+   ],
+   "mechanism": "GET /api/land for an unknown run returns 400 instead of 404 because a plain Error is mapped to 400."
+  },
+  {
+   "members": [
+    "P53",
+    "P59"
+   ],
+   "mechanism": "The Codex skill is a copy of the Claude skill and tells Codex to use the claude consumer name."
+  },
+  {
+   "members": [
+    "P54"
+   ],
+   "mechanism": "limitless_review and limitless_land return the raw backend response without zod schema validation."
+  }
+ ]
+}

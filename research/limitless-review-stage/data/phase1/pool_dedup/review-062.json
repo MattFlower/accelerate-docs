@@ -1,0 +1,19 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "Cleanup treats any orphaned process whose cwd is inside the checkout as the invocation's own, so it kills unrelated jobs that just happen to run there. This is a different over-claiming heuristic from G2's recycled PID group and session IDs."
+  },
+  {
+   "members": [
+    "C2",
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "Once the launcher exits, the only way cleanup finds detached descendants is by matching their cwd or inherited environment. A child that runs from another directory or replaces its environment is never found, so it survives while cleanup still reports success."
+  }
+ ]
+}

@@ -1,0 +1,33 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C3",
+    "C3b"
+   ],
+   "same_as": "G1",
+   "root_cause": "The migration decides which worktrees are legacy using a hard-coded timestamp cutoff. That cutoff does not match when each installation actually upgraded, and the test fixtures hide the gap."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The migration only treats a run as eligible if baseline-check evidence exists, but a run interrupted during prepare may never have emitted that evidence."
+  },
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "Worktree registration in the engine only accepts checkouts that come from the bare cache, so it rejects legacy checkouts that belong to the original local source repository."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "On resume, the new headSha Git probe runs before the needsHuman check, so a Git error replaces the human-review status of runs that are already waiting for review."
+  }
+ ]
+}

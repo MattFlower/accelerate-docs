@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"A transient cleanup failure during a gate-timeout rerun can fail the run instead of retrying cleanup or providing feedback for another round."}]}

@@ -1,0 +1,128 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P6",
+    "P8",
+    "P12",
+    "P13",
+    "P19",
+    "P31",
+    "P34",
+    "P35",
+    "P39",
+    "P44"
+   ],
+   "mechanism": "explainStatus ignores the run's persisted merged=true flag (stripped by the schema), so merged PRs are reported as unknown or needing review instead of Landed."
+  },
+  {
+   "members": [
+    "P2",
+    "P5",
+    "P9",
+    "P11",
+    "P14",
+    "P16",
+    "P30",
+    "P32",
+    "P38",
+    "P40",
+    "P46"
+   ],
+   "mechanism": "Digest seeds review candidates only from PR-opened, round-delivered and approval events, so an unread PR event (e.g. pr.ci_passed) that follows a stale approval after acknowledgment never triggers a review check."
+  },
+  {
+   "members": [
+    "P3",
+    "P4",
+    "P7",
+    "P10",
+    "P15",
+    "P17",
+    "P21",
+    "P26",
+    "P29",
+    "P33",
+    "P36",
+    "P43",
+    "P45",
+    "P47",
+    "P51"
+   ],
+   "mechanism": "Digest's awaiting-review predicate ignores review.rounds, so PRs with queued or running changes rounds are still listed as awaiting review."
+  },
+  {
+   "members": [
+    "P22",
+    "P25",
+    "P48",
+    "P54"
+   ],
+   "mechanism": "When loadPrivateStrings throws, limitless_status returns a stripped result without run id, state or nextAction."
+  },
+  {
+   "members": [
+    "P18",
+    "P20"
+   ],
+   "mechanism": "The blocked-land branch in status is evaluated before the resolved or closed-PR checks, so historical land blocks override closed or resolved states."
+  },
+  {
+   "members": [
+    "P23"
+   ],
+   "mechanism": "Digest treats an approved PR with an unobserved head (undefined headRefOid) as awaiting review, disagreeing with status's 'PR state unknown'."
+  },
+  {
+   "members": [
+    "P24",
+    "P53"
+   ],
+   "mechanism": "Digest rows quote full untrusted title and summary text with no per-line length cap, so output size is unbounded despite the 20-line limit."
+  },
+  {
+   "members": [
+    "P27"
+   ],
+   "mechanism": "Digest performs per-item run and land lookups sequentially without per-item error handling, so one failure aborts the whole digest."
+  },
+  {
+   "members": [
+    "P28"
+   ],
+   "mechanism": "The source diff is about twice the requested line budget."
+  },
+  {
+   "members": [
+    "P37",
+    "P42"
+   ],
+   "mechanism": "A newly added assertion in test/mcp-proxy.test.ts is not formatted per Biome, so bun run check fails at lint."
+  },
+  {
+   "members": [
+    "P41"
+   ],
+   "mechanism": "A matching approval recorded after round creation hides an active (running or waiting) review round in status."
+  },
+  {
+   "members": [
+    "P49"
+   ],
+   "mechanism": "The Codex skill is a copy of the Claude skill and instructs use of the 'claude' feed consumer, so the two agents share one cursor."
+  },
+  {
+   "members": [
+    "P50"
+   ],
+   "mechanism": "getRunDetail queries the latest approval twice, which adds a query and risks inconsistent rows."
+  },
+  {
+   "members": [
+    "P52"
+   ],
+   "mechanism": "MCP review verdicts drop the reviewer field, so submitReview defaults it to 'human' and AI approvals are misattributed."
+  }
+ ]
+}

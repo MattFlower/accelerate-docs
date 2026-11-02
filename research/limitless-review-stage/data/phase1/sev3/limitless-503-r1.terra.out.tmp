@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"test","trigger":"normal","reason":"The new assertion can fail during an ordinary test run despite correct wrapper behavior, as reproduced on macOS."}]}

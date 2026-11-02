@@ -1,0 +1,11 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "The final cleanup in the finally block can throw, and that error replaces the recoverable cleanup error, so the whole run fails instead of moving on to another round. This happens at a different site from G3's discard-changes path and needs its own fix."
+  }
+ ]
+}

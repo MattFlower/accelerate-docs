@@ -1,0 +1,25 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": "G2",
+   "root_cause": "Persisted utilization warnings aren't cleared or suppressed when a provider switches to unlimited quota."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "Config export always serializes the default quota = \"windows\" field, which older releases reject as an unknown field."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "The output schema for the MCP providers tool doesn't include the new quota field, so it gets stripped from responses."
+  }
+ ]
+}

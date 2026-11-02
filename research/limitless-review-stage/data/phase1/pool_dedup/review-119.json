@@ -1,0 +1,32 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "Thinking events are clipped to 2,000 characters before the owner diagnostic copy is captured, so the owner copy loses the rest of the original text."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "Raw owner diagnostics stay in the shared database with no protection that holds up after a rollback, so agents started by an older release can read them."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "The owner_diagnostics primary key lacks AUTOINCREMENT, so IDs freed by deletion can be reused and fall behind cursors that follow logs."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "Preview or build code can reach the owner-only diagnostics table through the store, and the factory copies its output into public stage summaries."
+  }
+ ]
+}

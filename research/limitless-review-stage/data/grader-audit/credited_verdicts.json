@@ -1,0 +1,1662 @@
+[
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-044",
+  "trial": 0,
+  "gold": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+  "finding_title": "Preserve implementers escalated after a policy edit",
+  "verdict": "SAME",
+  "reason": "Both: changedCells permanently marks edited cells, so implementers selected (escalated) after the edit lose stickiness."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-044",
+  "trial": 0,
+  "gold": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+  "finding_title": "Removed sticky implementers return after a daemon restart",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is the opposite failure: changedCells is in-memory so a restart forgets a reset and re-pins a removed implementer; gold is changedCells permanently suppressing post-edit selections."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-044",
+  "trial": 1,
+  "gold": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+  "finding_title": "Preserve stickiness for implementers escalated after an edit",
+  "verdict": "SAME",
+  "reason": "Both: changedCells permanently marks edited cells, so implementers selected (escalated) after the edit lose stickiness."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-044",
+  "trial": 1,
+  "gold": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+  "finding_title": "Removed sticky implementers become eligible again after restart",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is the opposite failure: changedCells is in-memory so a restart forgets a reset and re-pins a removed implementer; gold is changedCells permanently suppressing post-edit selections."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-045",
+  "trial": 0,
+  "gold": "Unlimited quota still applies utilization reserves to free and metered providers.",
+  "finding_title": "Unlimited providers still hit reserves outside subscription billing",
+  "verdict": "SAME",
+  "reason": "Both: unlimited-quota window bypass applies only to subscription billing, so free/metered providers still hit reserves."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-045",
+  "trial": 0,
+  "gold": "Unlimited quota still applies utilization reserves to free and metered providers.",
+  "finding_title": "Honor unlimited quota independently of billing",
+  "verdict": "SAME",
+  "reason": "Both: unlimited-quota window bypass applies only to subscription billing, so free/metered providers still hit reserves."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-045",
+  "trial": 1,
+  "gold": "Unlimited quota still applies utilization reserves to free and metered providers.",
+  "finding_title": "Honor unlimited quota independently of billing",
+  "verdict": "SAME",
+  "reason": "Both: unlimited-quota window bypass applies only to subscription billing, so free/metered providers still hit reserves."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-045",
+  "trial": 1,
+  "gold": "Unlimited quota still applies utilization reserves to free and metered providers.",
+  "finding_title": "Unlimited providers still gate on windows outside subscription billing",
+  "verdict": "SAME",
+  "reason": "Both: unlimited-quota window bypass applies only to subscription billing, so free/metered providers still hit reserves."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-050",
+  "trial": 1,
+  "gold": "Legacy adoption trusts Git administration paths selected by an agent-controlled checkout.",
+  "finding_title": "Include worktrees created before their path was persisted",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is the completeness gap (needs-human/draft path or pre-persist worktree skipping registration), which is the other gold in this case; the credited gold is the security issue of trusting agent-selected Git admin paths during adoption."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-051",
+  "trial": 0,
+  "gold": "A fixed review-time cutoff excludes worktrees created before the sidecar-writing release actually started.",
+  "finding_title": "Commit timestamp does not identify an installation's upgrade boundary",
+  "verdict": "SAME",
+  "reason": "Both: the hard-coded commit timestamp cutoff excludes worktrees an installation still running the old release created after that time."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-051",
+  "trial": 0,
+  "gold": "A fixed review-time cutoff excludes worktrees created before the sidecar-writing release actually started.",
+  "finding_title": "Commit timestamp excludes legitimate pre-upgrade worktrees",
+  "verdict": "SAME",
+  "reason": "Both: the hard-coded commit timestamp cutoff excludes worktrees an installation still running the old release created after that time."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-051",
+  "trial": 1,
+  "gold": "A fixed review-time cutoff excludes worktrees created before the sidecar-writing release actually started.",
+  "finding_title": "Do not use the commit timestamp as the installation upgrade boundary",
+  "verdict": "SAME",
+  "reason": "Both: the hard-coded commit timestamp cutoff excludes worktrees an installation still running the old release created after that time."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-051",
+  "trial": 1,
+  "gold": "A fixed review-time cutoff excludes worktrees created before the sidecar-writing release actually started.",
+  "finding_title": "Commit timestamp excludes legitimate old-release worktrees",
+  "verdict": "SAME",
+  "reason": "Both: the hard-coded commit timestamp cutoff excludes worktrees an installation still running the old release created after that time."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "A paused PR is not inspected again when main recovers without another PR change.",
+  "finding_title": "Isolate CI inspection errors to the affected PR",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is a classifier exception aborting the whole repo observation loop; gold is a main-red-suppressed PR never being re-inspected when main recovers."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "An accepted rerun with a lost response is never reconciled to its later result.",
+  "finding_title": "Reconcile reruns whose POST response was lost",
+  "verdict": "SAME",
+  "reason": "Both: claim persisted before POST, reconciliation only looks at 'rerunning' rows, so an accepted rerun with a lost response is never reconciled."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "A paused PR is not inspected again when main recovers without another PR change.",
+  "finding_title": "Suppressed PR failures are never reconsidered when main recovers",
+  "verdict": "SAME",
+  "reason": "Both: main-red suppression clears ciPending, and an unchanged PR is never re-inspected after main recovers."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "A paused PR is not inspected again when main recovers without another PR change.",
+  "finding_title": "Resume suppressed PR failures when main recovers",
+  "verdict": "SAME",
+  "reason": "Both: main-red suppression clears ciPending, and an unchanged PR is never re-inspected after main recovers."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "An accepted rerun with a lost response is never reconciled to its later result.",
+  "finding_title": "Reconcile reruns whose POST response was lost",
+  "verdict": "SAME",
+  "reason": "Both: claim persisted before POST, reconciliation only looks at 'rerunning' rows, so an accepted rerun with a lost response is never reconciled."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "A paused PR is not inspected again when main recovers without another PR change.",
+  "finding_title": "A CI inspection error starves subsequent PR observations",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is a classifier exception aborting the whole repo observation loop; gold is a main-red-suppressed PR never being re-inspected when main recovers."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "An accepted rerun with a lost response is never reconciled to its later result.",
+  "finding_title": "Lost POST responses prevent confirmed reruns from entering the flake ledger",
+  "verdict": "SAME",
+  "reason": "Both: claim persisted before POST, reconciliation only looks at 'rerunning' rows, so an accepted rerun with a lost response is never reconciled."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-053",
+  "trial": 0,
+  "gold": "A definitively refused CI rerun remains pending indefinitely.",
+  "finding_title": "A definitively rejected rerun remains pending forever",
+  "verdict": "SAME",
+  "reason": "Both: a definitive rejection leaves the rerun_requested claim pending forever, suppressing needs_fix."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-053",
+  "trial": 0,
+  "gold": "A definitively refused CI rerun remains pending indefinitely.",
+  "finding_title": "A rejected rerun request leaves classification pending forever",
+  "verdict": "SAME",
+  "reason": "Both: a definitive rejection leaves the rerun_requested claim pending forever, suppressing needs_fix."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-053",
+  "trial": 1,
+  "gold": "A definitively refused CI rerun remains pending indefinitely.",
+  "finding_title": "Rejected reruns remain pending forever",
+  "verdict": "SAME",
+  "reason": "Both: a definitive rejection leaves the rerun_requested claim pending forever, suppressing needs_fix."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-053",
+  "trial": 1,
+  "gold": "A definitively refused CI rerun remains pending indefinitely.",
+  "finding_title": "Definitively rejected reruns remain pending forever",
+  "verdict": "SAME",
+  "reason": "Both: a definitive rejection leaves the rerun_requested claim pending forever, suppressing needs_fix."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-054",
+  "trial": 0,
+  "gold": "ANSI-colored Bun failures and pytest security failures are missed by the retry exclusion.",
+  "finding_title": "Strip ANSI escapes before matching security failures and timeouts",
+  "verdict": "SAME",
+  "reason": "ANSI escapes left in log lines let colored Bun security failures bypass the exclusion - same as the gold's ANSI half."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-054",
+  "trial": 0,
+  "gold": "Rate-limit refusals leave rerun claims unresolved across cooldowns and restarts.",
+  "finding_title": "Rate-limited rerun requests remain pending forever",
+  "verdict": "SAME",
+  "reason": "Both: a 429/rate-limit refusal leaves the claim rerun_requested so it never resolves after cooldown."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-054",
+  "trial": 1,
+  "gold": "Rate-limit refusals leave rerun claims unresolved across cooldowns and restarts.",
+  "finding_title": "Resolve rerun claims rejected by rate limiting",
+  "verdict": "SAME",
+  "reason": "Both: a 429/rate-limit refusal leaves the claim rerun_requested so it never resolves after cooldown."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-054",
+  "trial": 1,
+  "gold": "ANSI-colored Bun failures and pytest security failures are missed by the retry exclusion.",
+  "finding_title": "Recognize Node test-runner timeout diagnostics",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is about timeout-diagnostic recognition (Node timeouts -> no rerun); gold is the security-failure retry exclusion missing ANSI Bun / pytest failures."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-054",
+  "trial": 1,
+  "gold": "Rate-limit refusals leave rerun claims unresolved across cooldowns and restarts.",
+  "finding_title": "Rate-limit rejection leaves the rerun permanently pending",
+  "verdict": "SAME",
+  "reason": "Both: a 429/rate-limit refusal leaves the claim rerun_requested so it never resolves after cooldown."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-057",
+  "trial": 1,
+  "gold": "Effort removal is persisted without checking policy cells hidden by operator overrides.",
+  "finding_title": "Validate catalog mutations against the loaded eval policy",
+  "verdict": "SAME",
+  "reason": "Both: PATCH validates only the effective policy, so an operator override hides eval-policy references the effort change invalidates."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-057",
+  "trial": 1,
+  "gold": "Effort removal is persisted without checking policy cells hidden by operator overrides.",
+  "finding_title": "Deletion can leave the eval policy invalid and prevent restart",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is DELETE checking only operator cells; gold is specifically effort removal (PATCH) validated only against the effective policy, missing cells hidden by overrides."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Clearing a default effort omits the field from PATCH and leaves the old value stored.",
+  "finding_title": "Clearing the default effort silently preserves its old value",
+  "verdict": "SAME",
+  "reason": "Both: clearing effort omits the field from PATCH and the merge keeps the old value."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Clearing a default effort omits the field from PATCH and leaves the old value stored.",
+  "finding_title": "Clearing default effort silently preserves the existing value",
+  "verdict": "SAME",
+  "reason": "Both: clearing effort omits the field from PATCH and the merge keeps the old value."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Catalog history disappears on reload and does not include changes made by another client.",
+  "finding_title": "Catalog history only records changes made in the current page session",
+  "verdict": "SAME",
+  "reason": "Both: catalog history is component-local session state, lost on reload and missing other clients' changes."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Clearing a default effort omits the field from PATCH and leaves the old value stored.",
+  "finding_title": "Clearing the default effort silently preserves its old value",
+  "verdict": "SAME",
+  "reason": "Both: clearing effort omits the field from PATCH and the merge keeps the old value."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Clearing a default effort omits the field from PATCH and leaves the old value stored.",
+  "finding_title": "Clearing the default effort silently retains its previous value",
+  "verdict": "SAME",
+  "reason": "Both: clearing effort omits the field from PATCH and the merge keeps the old value."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Catalog history disappears on reload and does not include changes made by another client.",
+  "finding_title": "Catalog history is limited to the mounted page",
+  "verdict": "SAME",
+  "reason": "Both: catalog history is component-local session state, lost on reload and missing other clients' changes."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-069",
+  "trial": 0,
+  "gold": "Digest actions are derived from stale records instead of current unanswered and review state.",
+  "finding_title": "Stale approvals leave PRs missing from the review digest",
+  "verdict": "SAME",
+  "reason": "Stale approvals hide PRs needing review because the digest derives from past events rather than current review state - the gold's 'review state' half."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-069",
+  "trial": 0,
+  "gold": "A historical failed review hides a later approval in MCP status.",
+  "finding_title": "Historical review failure masks a subsequent approval",
+  "verdict": "SAME",
+  "reason": "Both: a failed/cancelled historical round returns before the current approval is considered."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-069",
+  "trial": 0,
+  "gold": "Digest actions are derived from stale records instead of current unanswered and review state.",
+  "finding_title": "Answered questions remain in the needs-you digest",
+  "verdict": "SAME",
+  "reason": "Answered questions stay in the digest because it replays feed events rather than current unanswered state - the gold's 'unanswered' half."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-069",
+  "trial": 0,
+  "gold": "A historical failed review hides a later approval in MCP status.",
+  "finding_title": "Historical failed rounds override a fresh approval",
+  "verdict": "SAME",
+  "reason": "Both: a failed/cancelled historical round returns before the current approval is considered."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-069",
+  "trial": 1,
+  "gold": "Digest actions are derived from stale records instead of current unanswered and review state.",
+  "finding_title": "Exclude answered questions from the needs-you count",
+  "verdict": "SAME",
+  "reason": "Answered questions stay in the digest because it replays feed events rather than current unanswered state - the gold's 'unanswered' half."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-069",
+  "trial": 1,
+  "gold": "A historical failed review hides a later approval in MCP status.",
+  "finding_title": "Let a fresh approval supersede a failed historical round",
+  "verdict": "SAME",
+  "reason": "Both: a failed/cancelled historical round returns before the current approval is considered."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-069",
+  "trial": 1,
+  "gold": "Digest actions are derived from stale records instead of current unanswered and review state.",
+  "finding_title": "Exclude questions that have already been answered",
+  "verdict": "SAME",
+  "reason": "Answered questions stay in the digest because it replays feed events rather than current unanswered state - the gold's 'unanswered' half."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-069",
+  "trial": 1,
+  "gold": "A historical failed review hides a later approval in MCP status.",
+  "finding_title": "Let a current approval supersede a failed historical round",
+  "verdict": "SAME",
+  "reason": "Both: a failed/cancelled historical round returns before the current approval is considered."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-070",
+  "trial": 0,
+  "gold": "MCP status returns private land reasons unchanged on direct and proxy backends.",
+  "finding_title": "Honor the run's confirmed merged flag",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is status ignoring run.merged; gold is private land reasons being returned unredacted."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-070",
+  "trial": 0,
+  "gold": "MCP status returns private land reasons unchanged on direct and proxy backends.",
+  "finding_title": "Honor the run's confirmed merged flag",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is status ignoring run.merged; gold is private land reasons being returned unredacted."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-070",
+  "trial": 1,
+  "gold": "MCP status returns private land reasons unchanged on direct and proxy backends.",
+  "finding_title": "Honor the run's persisted merge confirmation",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is status ignoring run.merged; gold is private land reasons being returned unredacted."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-070",
+  "trial": 1,
+  "gold": "MCP status returns private land reasons unchanged on direct and proxy backends.",
+  "finding_title": "Honor the run's confirmed merged flag",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is status ignoring run.merged; gold is private land reasons being returned unredacted."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-071",
+  "trial": 0,
+  "gold": "Unicode and URL encodings evade privacy protection in status and digest fields.",
+  "finding_title": "Honor the run's confirmed merge flag",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is status ignoring run.merged; gold is Unicode/URL encodings evading privacy redaction."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-071",
+  "trial": 1,
+  "gold": "Unicode and URL encodings evade privacy protection in status and digest fields.",
+  "finding_title": "Honor the run's confirmed merged flag",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is status ignoring run.merged; gold is Unicode/URL encodings evading privacy redaction."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-071",
+  "trial": 1,
+  "gold": "Unicode and URL encodings evade privacy protection in status and digest fields.",
+  "finding_title": "Honor the run's confirmed merged flag",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is status ignoring run.merged; gold is Unicode/URL encodings evading privacy redaction."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-088",
+  "trial": 0,
+  "gold": "The isolated post-check status still inspects populated submodules with their own git directories, so a submodule that points at the land clone's admin directory runs a clean filter from the clone's configuration, which the request says never applies after the checks.",
+  "finding_title": "Prevent submodule status from reopening the clone\u2019s configuration",
+  "verdict": "SAME",
+  "reason": "Both: isolated status recurses into submodules with their own git dirs, executing a clean filter (incl. from the clone's config)."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-088",
+  "trial": 1,
+  "gold": "The isolated post-check status still inspects populated submodules with their own git directories, so a submodule that points at the land clone's admin directory runs a clean filter from the clone's configuration, which the request says never applies after the checks.",
+  "finding_title": "Submodule inspection escapes the isolated Git configuration",
+  "verdict": "SAME",
+  "reason": "Both: isolated status recurses into submodules with their own git dirs, executing a clean filter (incl. from the clone's config)."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-098",
+  "trial": 0,
+  "gold": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+  "finding_title": "Persisted routes referencing the removed model prevent startup",
+  "verdict": "SAME",
+  "reason": "Both: persisted routing overrides referencing the removed model fail RuntimePolicy validation at startup."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-098",
+  "trial": 0,
+  "gold": "Historical run references prevent unrelated catalog mutations.",
+  "finding_title": "Historical run pins block unrelated catalog mutations",
+  "verdict": "SAME",
+  "reason": "Both: apply() revalidates historical run pins, so a pin to the removed model blocks unrelated catalog edits."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+  "finding_title": "Persisted routing references can prevent daemon startup",
+  "verdict": "SAME",
+  "reason": "Both: persisted routing overrides referencing the removed model fail RuntimePolicy validation at startup."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "Historical run references prevent unrelated catalog mutations.",
+  "finding_title": "Historical run pins block unrelated catalog changes",
+  "verdict": "SAME",
+  "reason": "Both: apply() revalidates historical run pins, so a pin to the removed model blocks unrelated catalog edits."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-101",
+  "trial": 0,
+  "gold": "Raw process output is cut before gate credential redaction can match a boundary-spanning secret.",
+  "finding_title": "Redaction happens after the process runner has already cut output",
+  "verdict": "SAME",
+  "reason": "Both: runProcess truncates raw output before redaction, so a credential split at the cut leaks a suffix."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-101",
+  "trial": 0,
+  "gold": "Raw process output is cut before gate credential redaction can match a boundary-spanning secret.",
+  "finding_title": "Redaction happens after the process runner has already truncated output",
+  "verdict": "SAME",
+  "reason": "Both: runProcess truncates raw output before redaction, so a credential split at the cut leaks a suffix."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-101",
+  "trial": 1,
+  "gold": "Raw process output is cut before gate credential redaction can match a boundary-spanning secret.",
+  "finding_title": "Redact before the process runner's earlier tail cut",
+  "verdict": "SAME",
+  "reason": "Both: runProcess truncates raw output before redaction, so a credential split at the cut leaks a suffix."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-101",
+  "trial": 1,
+  "gold": "Raw process output is cut before gate credential redaction can match a boundary-spanning secret.",
+  "finding_title": "Redaction occurs after the subprocess has already truncated output",
+  "verdict": "SAME",
+  "reason": "Both: runProcess truncates raw output before redaction, so a credential split at the cut leaks a suffix."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-103",
+  "trial": 1,
+  "gold": "Line callbacks store pieces of multiline credentials in failure excerpts.",
+  "finding_title": "Redact multiline credentials before splitting failure output",
+  "verdict": "SAME",
+  "reason": "Both: per-line redaction cannot match a registered multiline credential, which then lands in failure excerpts."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-103",
+  "trial": 1,
+  "gold": "Line callbacks store pieces of multiline credentials in failure excerpts.",
+  "finding_title": "Multiline registered credentials survive failure excerpt redaction",
+  "verdict": "SAME",
+  "reason": "Both: per-line redaction cannot match a registered multiline credential, which then lands in failure excerpts."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-104",
+  "trial": 0,
+  "gold": "Lossy excerpt line framing prevents matching multiline credentials before storage.",
+  "finding_title": "Multiline credentials with blank lines leak through failure excerpts",
+  "verdict": "SAME",
+  "reason": "Both: the line splitter drops empty lines, so reassembled excerpts cannot match multiline credentials containing blank lines."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-104",
+  "trial": 0,
+  "gold": "Failure excerpt collection retains unbounded bytes on very long output lines.",
+  "finding_title": "Restore bounded diagnostic retention",
+  "verdict": "SAME",
+  "reason": "Both: removing the per-line 8,000-char cap makes retained excerpt lines unbounded in size."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-104",
+  "trial": 0,
+  "gold": "Failure excerpt collection retains unbounded bytes on very long output lines.",
+  "finding_title": "Restore a byte bound on retained diagnostics",
+  "verdict": "SAME",
+  "reason": "Both: removing the per-line 8,000-char cap makes retained excerpt lines unbounded in size."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-104",
+  "trial": 1,
+  "gold": "Lossy excerpt line framing prevents matching multiline credentials before storage.",
+  "finding_title": "Preserve blank lines before redacting multiline credentials",
+  "verdict": "SAME",
+  "reason": "Both: the line splitter drops empty lines, so reassembled excerpts cannot match multiline credentials containing blank lines."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-104",
+  "trial": 1,
+  "gold": "Failure excerpt collection retains unbounded bytes on very long output lines.",
+  "finding_title": "Restore a size bound on buffered diagnostic lines",
+  "verdict": "SAME",
+  "reason": "Both: removing the per-line 8,000-char cap makes retained excerpt lines unbounded in size."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-104",
+  "trial": 1,
+  "gold": "Lossy excerpt line framing prevents matching multiline credentials before storage.",
+  "finding_title": "Preserve blank lines before redacting multiline credentials",
+  "verdict": "SAME",
+  "reason": "Both: the line splitter drops empty lines, so reassembled excerpts cannot match multiline credentials containing blank lines."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-104",
+  "trial": 1,
+  "gold": "Failure excerpt collection retains unbounded bytes on very long output lines.",
+  "finding_title": "Restore a byte bound on retained diagnostics",
+  "verdict": "SAME",
+  "reason": "Both: removing the per-line 8,000-char cap makes retained excerpt lines unbounded in size."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-105",
+  "trial": 0,
+  "gold": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+  "finding_title": "Normalize terminal formatting before the runner truncates output",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is ANSI formatting inside a credential defeating runner redaction before the tail cut; gold is early carry redaction leaking suffixes of overlapping credentials."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-105",
+  "trial": 0,
+  "gold": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+  "finding_title": "Defer replacement of credentials that overlap an incomplete longer credential",
+  "verdict": "SAME",
+  "reason": "Both: redacting the pending carry replaces a shorter credential before a longer overlapping one completes, leaking its suffix."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-105",
+  "trial": 1,
+  "gold": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+  "finding_title": "Normalize terminal formatting before the runner truncates output",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is ANSI formatting inside a credential defeating runner redaction before the tail cut; gold is early carry redaction leaking suffixes of overlapping credentials."
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-105",
+  "trial": 1,
+  "gold": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+  "finding_title": "Defer overlapping credential replacement until the match is complete",
+  "verdict": "SAME",
+  "reason": "Both: redacting the pending carry replaces a shorter credential before a longer overlapping one completes, leaking its suffix."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-044",
+  "trial": 0,
+  "gold": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+  "finding_title": "Reset loses its effect on sticky implementers after restart",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is the opposite failure: changedCells is in-memory so a restart forgets a reset and re-pins a removed implementer; gold is changedCells permanently suppressing post-edit selections."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-044",
+  "trial": 1,
+  "gold": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+  "finding_title": "A restart resurrects implementers removed by an operator reset",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is the opposite failure: changedCells is in-memory so a restart forgets a reset and re-pins a removed implementer; gold is changedCells permanently suppressing post-edit selections."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-045",
+  "trial": 0,
+  "gold": "Unlimited quota still applies utilization reserves to free and metered providers.",
+  "finding_title": "Unlimited providers still hit reserves outside subscription billing",
+  "verdict": "SAME",
+  "reason": "Both: unlimited-quota window bypass applies only to subscription billing, so free/metered providers still hit reserves."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-045",
+  "trial": 1,
+  "gold": "Unlimited quota still applies utilization reserves to free and metered providers.",
+  "finding_title": "Unlimited quota still gates free and metered providers",
+  "verdict": "SAME",
+  "reason": "Both: unlimited-quota window bypass applies only to subscription billing, so free/metered providers still hit reserves."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-050",
+  "trial": 0,
+  "gold": "Legacy adoption trusts Git administration paths selected by an agent-controlled checkout.",
+  "finding_title": "Recover legacy worktrees before their path is persisted",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is the completeness gap (needs-human/draft path or pre-persist worktree skipping registration), which is the other gold in this case; the credited gold is the security issue of trusting agent-selected Git admin paths during adoption."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-050",
+  "trial": 1,
+  "gold": "Legacy adoption trusts Git administration paths selected by an agent-controlled checkout.",
+  "finding_title": "Record legacy worktrees before the needs-human resume branch",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is the completeness gap (needs-human/draft path or pre-persist worktree skipping registration), which is the other gold in this case; the credited gold is the security issue of trusting agent-selected Git admin paths during adoption."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-051",
+  "trial": 0,
+  "gold": "A fixed review-time cutoff excludes worktrees created before the sidecar-writing release actually started.",
+  "finding_title": "A commit timestamp does not identify the installed release",
+  "verdict": "SAME",
+  "reason": "Both: the hard-coded commit timestamp cutoff excludes worktrees an installation still running the old release created after that time."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-051",
+  "trial": 1,
+  "gold": "A fixed review-time cutoff excludes worktrees created before the sidecar-writing release actually started.",
+  "finding_title": "Commit time does not identify when an installation adopted sidecars",
+  "verdict": "SAME",
+  "reason": "Both: the hard-coded commit timestamp cutoff excludes worktrees an installation still running the old release created after that time."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "Retry eligibility ignores security failures outside the selected error line.",
+  "finding_title": "Security tests can be rerun when their names occur after the first error line",
+  "verdict": "SAME",
+  "reason": "Both: security guard checks only the selected signature line, so security failures elsewhere in the log are still rerun."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "A paused PR is not inspected again when main recovers without another PR change.",
+  "finding_title": "Main-red suppression never resumes for an unchanged PR",
+  "verdict": "SAME",
+  "reason": "Both: main-red suppression clears ciPending, and an unchanged PR is never re-inspected after main recovers."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "An accepted rerun with a lost response is never reconciled to its later result.",
+  "finding_title": "An accepted rerun with a lost response cannot become flake evidence",
+  "verdict": "SAME",
+  "reason": "Both: claim persisted before POST, reconciliation only looks at 'rerunning' rows, so an accepted rerun with a lost response is never reconciled."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "A paused PR is not inspected again when main recovers without another PR change.",
+  "finding_title": "Resume suppressed PR failures when main recovers",
+  "verdict": "SAME",
+  "reason": "Both: main-red suppression clears ciPending, and an unchanged PR is never re-inspected after main recovers."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "An accepted rerun with a lost response is never reconciled to its later result.",
+  "finding_title": "Reconcile reruns whose POST response was lost",
+  "verdict": "SAME",
+  "reason": "Both: claim persisted before POST, reconciliation only looks at 'rerunning' rows, so an accepted rerun with a lost response is never reconciled."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-053",
+  "trial": 0,
+  "gold": "A definitively refused CI rerun remains pending indefinitely.",
+  "finding_title": "Rejected rerun requests remain pending indefinitely",
+  "verdict": "SAME",
+  "reason": "Both: a definitive rejection leaves the rerun_requested claim pending forever, suppressing needs_fix."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-053",
+  "trial": 1,
+  "gold": "A definitively refused CI rerun remains pending indefinitely.",
+  "finding_title": "A rejected rerun request leaves the failure pending forever",
+  "verdict": "SAME",
+  "reason": "Both: a definitive rejection leaves the rerun_requested claim pending forever, suppressing needs_fix."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-054",
+  "trial": 0,
+  "gold": "ANSI-colored Bun failures and pytest security failures are missed by the retry exclusion.",
+  "finding_title": "Playwright security failures can be automatically rerun",
+  "verdict": "DIFFERENT",
+  "reason": "Playwright failure headings are a separate unrecognized runner format; gold names ANSI-colored Bun lines and pytest FAILED lines. Same defect class, different instance (fixing the gold's cases would not cover Playwright)."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-054",
+  "trial": 1,
+  "gold": "Rate-limit refusals leave rerun claims unresolved across cooldowns and restarts.",
+  "finding_title": "A rejected rate-limited rerun stays pending indefinitely",
+  "verdict": "SAME",
+  "reason": "Both: a 429/rate-limit refusal leaves the claim rerun_requested so it never resolves after cooldown."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-056",
+  "trial": 0,
+  "gold": "Catalog mutation can invalidate a shadowed retained policy and prevent the daemon from restarting.",
+  "finding_title": "Deletion can leave a persisted policy that prevents daemon restart",
+  "verdict": "UNCLEAR",
+  "reason": "Finding is DELETE checking only operator cells and so deleting a model the file/eval policy references (restart fails). Gold lines 71-76 are the PATCH validatePolicy(effective policy) that misses the shadowed retained policy. Same consequence and broad 'catalog mutation' wording, but a different code path and check."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-056",
+  "trial": 1,
+  "gold": "Catalog mutation can invalidate a shadowed retained policy and prevent the daemon from restarting.",
+  "finding_title": "Deleting a model referenced by the file-backed policy prevents restart",
+  "verdict": "UNCLEAR",
+  "reason": "Finding is DELETE checking only operator cells and so deleting a model the file/eval policy references (restart fails). Gold lines 71-76 are the PATCH validatePolicy(effective policy) that misses the shadowed retained policy. Same consequence and broad 'catalog mutation' wording, but a different code path and check."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-057",
+  "trial": 1,
+  "gold": "Effort removal is persisted without checking policy cells hidden by operator overrides.",
+  "finding_title": "Deletion can invalidate the startup routing policy",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is DELETE checking only operator cells; gold is specifically effort removal (PATCH) validated only against the effective policy, missing cells hidden by overrides."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Retrying an unchanged run converts inherited model chains into explicit overrides.",
+  "finding_title": "Prefill retry chains using each role's actual routing complexity",
+  "verdict": "UNCLEAR",
+  "reason": "Finding blames applying the run's complexity to every role when prefilling (wrong chains for triage/deep review), which then become explicit overrides that change untouched roles; overlaps with the gold's inherited-to-explicit conversion but frames a different root cause."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Clearing a default effort omits the field from PATCH and leaves the old value stored.",
+  "finding_title": "Clearing default effort does not clear the persisted value",
+  "verdict": "SAME",
+  "reason": "Both: clearing effort omits the field from PATCH and the merge keeps the old value."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Catalog history disappears on reload and does not include changes made by another client.",
+  "finding_title": "Catalog history disappears when Setup is closed",
+  "verdict": "SAME",
+  "reason": "Both: catalog history is component-local session state, lost on reload and missing other clients' changes."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Retrying an unchanged run converts inherited model chains into explicit overrides.",
+  "finding_title": "Keep inherited routing separate from explicit retry overrides",
+  "verdict": "SAME",
+  "reason": "Both: opening the retry picker on a run without overrides converts every inherited chain into explicit run overrides."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Clearing a default effort omits the field from PATCH and leaves the old value stored.",
+  "finding_title": "Clearing a runtime model's default effort does not persist",
+  "verdict": "SAME",
+  "reason": "Both: clearing effort omits the field from PATCH and the merge keeps the old value."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Catalog history disappears on reload and does not include changes made by another client.",
+  "finding_title": "Catalog history disappears on navigation and misses external changes",
+  "verdict": "SAME",
+  "reason": "Both: catalog history is component-local session state, lost on reload and missing other clients' changes."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-069",
+  "trial": 0,
+  "gold": "Digest actions are derived from stale records instead of current unanswered and review state.",
+  "finding_title": "Answered questions remain in the needs-you digest",
+  "verdict": "SAME",
+  "reason": "Answered questions stay in the digest because it replays feed events rather than current unanswered state - the gold's 'unanswered' half."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-069",
+  "trial": 0,
+  "gold": "A historical failed review hides a later approval in MCP status.",
+  "finding_title": "Historical round failures override a newer valid approval",
+  "verdict": "SAME",
+  "reason": "Both: a failed/cancelled historical round returns before the current approval is considered."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-069",
+  "trial": 1,
+  "gold": "Digest actions are derived from stale records instead of current unanswered and review state.",
+  "finding_title": "Stale approvals permanently hide PRs that need another review",
+  "verdict": "SAME",
+  "reason": "Stale approvals hide PRs needing review because the digest derives from past events rather than current review state - the gold's 'review state' half."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-069",
+  "trial": 1,
+  "gold": "A historical failed review hides a later approval in MCP status.",
+  "finding_title": "Historical failed rounds override a subsequent valid approval",
+  "verdict": "SAME",
+  "reason": "Both: a failed/cancelled historical round returns before the current approval is considered."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-070",
+  "trial": 0,
+  "gold": "MCP status returns private land reasons unchanged on direct and proxy backends.",
+  "finding_title": "Honor the run's recorded merged flag",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is status ignoring run.merged; gold is private land reasons being returned unredacted."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-070",
+  "trial": 1,
+  "gold": "MCP status returns private land reasons unchanged on direct and proxy backends.",
+  "finding_title": "Honor the run's confirmed merge flag",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is status ignoring run.merged; gold is private land reasons being returned unredacted."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-071",
+  "trial": 0,
+  "gold": "Unicode and URL encodings evade privacy protection in status and digest fields.",
+  "finding_title": "Status ignores the run's confirmed merged flag",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is status ignoring run.merged; gold is Unicode/URL encodings evading privacy redaction."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-088",
+  "trial": 0,
+  "gold": "The isolated post-check status still inspects populated submodules with their own git directories, so a submodule that points at the land clone's admin directory runs a clean filter from the clone's configuration, which the request says never applies after the checks.",
+  "finding_title": "Submodule inspection escapes the isolated repository configuration",
+  "verdict": "SAME",
+  "reason": "Both: isolated status recurses into submodules with their own git dirs, executing a clean filter (incl. from the clone's config)."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-088",
+  "trial": 1,
+  "gold": "The isolated post-check status still inspects populated submodules with their own git directories, so a submodule that points at the land clone's admin directory runs a clean filter from the clone's configuration, which the request says never applies after the checks.",
+  "finding_title": "Submodule status escapes the isolated repository configuration",
+  "verdict": "SAME",
+  "reason": "Both: isolated status recurses into submodules with their own git dirs, executing a clean filter (incl. from the clone's config)."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-093",
+  "trial": 1,
+  "gold": "Forced-color Bun result markers are not recognized by failure extraction.",
+  "finding_title": "Validate TAP result lines before treating them as boundaries",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is prose lines starting 'ok '/'not ok ' being taken as TAP boundaries; gold is forced-color Bun result markers not being recognized."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-096",
+  "trial": 1,
+  "gold": "The redundant-runtime-entry exception covers only a code-sourced built-in, so after the provider export writes the built-in Haiku model into config, the retained runtime row makes the next startup throw a catalog collision.",
+  "finding_title": "Provider export makes the retained runtime entry fatal again",
+  "verdict": "SAME",
+  "reason": "Both: the source='code' exception no longer applies after provider export makes the built-in source='config', so startup throws a collision."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-101",
+  "trial": 0,
+  "gold": "Raw process output is cut before gate credential redaction can match a boundary-spanning secret.",
+  "finding_title": "Redaction happens after the process runner has already truncated output",
+  "verdict": "SAME",
+  "reason": "Both: runProcess truncates raw output before redaction, so a credential split at the cut leaks a suffix."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-101",
+  "trial": 1,
+  "gold": "Raw process output is cut before gate credential redaction can match a boundary-spanning secret.",
+  "finding_title": "Process output is truncated before credential redaction",
+  "verdict": "SAME",
+  "reason": "Both: runProcess truncates raw output before redaction, so a credential split at the cut leaks a suffix."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-103",
+  "trial": 0,
+  "gold": "Line callbacks store pieces of multiline credentials in failure excerpts.",
+  "finding_title": "Line-by-line redaction leaves multiline credentials in failure excerpts",
+  "verdict": "SAME",
+  "reason": "Both: per-line redaction cannot match a registered multiline credential, which then lands in failure excerpts."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-104",
+  "trial": 0,
+  "gold": "Failure excerpt collection retains unbounded bytes on very long output lines.",
+  "finding_title": "Failure diagnostics no longer have a bounded character budget",
+  "verdict": "SAME",
+  "reason": "Both: removing the per-line 8,000-char cap makes retained excerpt lines unbounded in size."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-104",
+  "trial": 1,
+  "gold": "Lossy excerpt line framing prevents matching multiline credentials before storage.",
+  "finding_title": "Blank lines break multiline credential redaction in failure excerpts",
+  "verdict": "SAME",
+  "reason": "Both: the line splitter drops empty lines, so reassembled excerpts cannot match multiline credentials containing blank lines."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-104",
+  "trial": 1,
+  "gold": "Failure excerpt collection retains unbounded bytes on very long output lines.",
+  "finding_title": "Failure excerpts now retain arbitrarily large diagnostic lines",
+  "verdict": "SAME",
+  "reason": "Both: removing the per-line 8,000-char cap makes retained excerpt lines unbounded in size."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-105",
+  "trial": 0,
+  "gold": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+  "finding_title": "Premature redaction exposes overlapping credential suffixes",
+  "verdict": "SAME",
+  "reason": "Both: redacting the pending carry replaces a shorter credential before a longer overlapping one completes, leaking its suffix."
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-105",
+  "trial": 1,
+  "gold": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+  "finding_title": "Normalize terminal formatting before the process tail cutoff",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is ANSI formatting inside a credential defeating runner redaction before the tail cut; gold is early carry redaction leaking suffixes of overlapping credentials."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-044",
+  "trial": 0,
+  "gold": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+  "finding_title": "Restart resurrects an implementer removed by a reset",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is the opposite failure: changedCells is in-memory so a restart forgets a reset and re-pins a removed implementer; gold is changedCells permanently suppressing post-edit selections."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-044",
+  "trial": 1,
+  "gold": "A historical policy edit keeps invalidating implementer selections made after that edit.",
+  "finding_title": "Removed sticky implementers return after restart",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is the opposite failure: changedCells is in-memory so a restart forgets a reset and re-pins a removed implementer; gold is changedCells permanently suppressing post-edit selections."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-045",
+  "trial": 0,
+  "gold": "Unlimited quota still applies utilization reserves to free and metered providers.",
+  "finding_title": "Honor unlimited quota independently of billing mode",
+  "verdict": "SAME",
+  "reason": "Both: unlimited-quota window bypass applies only to subscription billing, so free/metered providers still hit reserves."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-045",
+  "trial": 1,
+  "gold": "Unlimited quota still applies utilization reserves to free and metered providers.",
+  "finding_title": "Honor unlimited quota independently of billing mode",
+  "verdict": "SAME",
+  "reason": "Both: unlimited-quota window bypass applies only to subscription billing, so free/metered providers still hit reserves."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-050",
+  "trial": 0,
+  "gold": "Legacy adoption trusts Git administration paths selected by an agent-controlled checkout.",
+  "finding_title": "Recover legacy worktrees before their path is persisted",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is the completeness gap (needs-human/draft path or pre-persist worktree skipping registration), which is the other gold in this case; the credited gold is the security issue of trusting agent-selected Git admin paths during adoption."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-050",
+  "trial": 0,
+  "gold": "Draft delivery and interrupted preparation can reuse a legacy worktree before path registration.",
+  "finding_title": "Record legacy worktrees before the needs-human guard",
+  "verdict": "SAME",
+  "reason": "Needs-human guard returns before legacy registration, so draft delivery reuses the unregistered legacy worktree - the gold's draft-delivery half."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-050",
+  "trial": 1,
+  "gold": "Legacy adoption trusts Git administration paths selected by an agent-controlled checkout.",
+  "finding_title": "Recover legacy worktrees before their path was checkpointed",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is the completeness gap (needs-human/draft path or pre-persist worktree skipping registration), which is the other gold in this case; the credited gold is the security issue of trusting agent-selected Git admin paths during adoption."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-050",
+  "trial": 1,
+  "gold": "Draft delivery and interrupted preparation can reuse a legacy worktree before path registration.",
+  "finding_title": "Recover legacy worktrees before their path is persisted",
+  "verdict": "SAME",
+  "reason": "Worktree created before its path is persisted is skipped on resume - the gold's interrupted-preparation half."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-051",
+  "trial": 0,
+  "gold": "A fixed review-time cutoff excludes worktrees created before the sidecar-writing release actually started.",
+  "finding_title": "Commit time cannot establish when an installation adopted sidecars",
+  "verdict": "SAME",
+  "reason": "Both: the hard-coded commit timestamp cutoff excludes worktrees an installation still running the old release created after that time."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-051",
+  "trial": 1,
+  "gold": "A fixed review-time cutoff excludes worktrees created before the sidecar-writing release actually started.",
+  "finding_title": "Commit time does not establish when an installation gained sidecars",
+  "verdict": "SAME",
+  "reason": "Both: the hard-coded commit timestamp cutoff excludes worktrees an installation still running the old release created after that time."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "A paused PR is not inspected again when main recovers without another PR change.",
+  "finding_title": "Resume suppressed PR inspection when main recovers",
+  "verdict": "SAME",
+  "reason": "Both: main-red suppression clears ciPending, and an unchanged PR is never re-inspected after main recovers."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "An accepted rerun with a lost response is never reconciled to its later result.",
+  "finding_title": "Reconcile reruns whose POST response was lost",
+  "verdict": "SAME",
+  "reason": "Both: claim persisted before POST, reconciliation only looks at 'rerunning' rows, so an accepted rerun with a lost response is never reconciled."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "A paused PR is not inspected again when main recovers without another PR change.",
+  "finding_title": "Resume suppressed PR failures when main recovers",
+  "verdict": "SAME",
+  "reason": "Both: main-red suppression clears ciPending, and an unchanged PR is never re-inspected after main recovers."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "An accepted rerun with a lost response is never reconciled to its later result.",
+  "finding_title": "Reconcile reruns whose POST response was lost",
+  "verdict": "SAME",
+  "reason": "Both: claim persisted before POST, reconciliation only looks at 'rerunning' rows, so an accepted rerun with a lost response is never reconciled."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-053",
+  "trial": 0,
+  "gold": "A definitively refused CI rerun remains pending indefinitely.",
+  "finding_title": "Resolve rerun claims when GitHub definitively rejects the request",
+  "verdict": "SAME",
+  "reason": "Both: a definitive rejection leaves the rerun_requested claim pending forever, suppressing needs_fix."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-053",
+  "trial": 1,
+  "gold": "A definitively refused CI rerun remains pending indefinitely.",
+  "finding_title": "Rejected rerun requests remain pending forever",
+  "verdict": "SAME",
+  "reason": "Both: a definitive rejection leaves the rerun_requested claim pending forever, suppressing needs_fix."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-054",
+  "trial": 0,
+  "gold": "Rate-limit refusals leave rerun claims unresolved across cooldowns and restarts.",
+  "finding_title": "Rate-limited rerun requests remain pending forever",
+  "verdict": "SAME",
+  "reason": "Both: a 429/rate-limit refusal leaves the claim rerun_requested so it never resolves after cooldown."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-054",
+  "trial": 0,
+  "gold": "ANSI-colored Bun failures and pytest security failures are missed by the retry exclusion.",
+  "finding_title": "Test timeout classification excludes the requested diagnostic",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is the timeout matcher being too narrow (missed eligible timeouts); gold is the security exclusion missing ANSI Bun / pytest failures."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-054",
+  "trial": 1,
+  "gold": "Rate-limit refusals leave rerun claims unresolved across cooldowns and restarts.",
+  "finding_title": "Rate-limited rerun requests remain claimed forever",
+  "verdict": "SAME",
+  "reason": "Both: a 429/rate-limit refusal leaves the claim rerun_requested so it never resolves after cooldown."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-054",
+  "trial": 1,
+  "gold": "ANSI-colored Bun failures and pytest security failures are missed by the retry exclusion.",
+  "finding_title": "ANSI colors bypass security-failure and timeout detection",
+  "verdict": "SAME",
+  "reason": "ANSI escapes are not stripped, so colored Bun security failure lines miss the anchored pattern - the gold's ANSI half (timeout aspect is extra)."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-057",
+  "trial": 0,
+  "gold": "Effort removal is persisted without checking policy cells hidden by operator overrides.",
+  "finding_title": "Validate runtime mutations against the underlying eval policy",
+  "verdict": "SAME",
+  "reason": "Both: PATCH validates only the effective policy, so an operator override hides eval-policy references the effort change invalidates."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-057",
+  "trial": 1,
+  "gold": "Effort removal is persisted without checking policy cells hidden by operator overrides.",
+  "finding_title": "Validate catalog patches against shadowed policy layers",
+  "verdict": "SAME",
+  "reason": "Both: PATCH validates only the effective policy, so an operator override hides eval-policy references the effort change invalidates."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Clearing a default effort omits the field from PATCH and leaves the old value stored.",
+  "finding_title": "Clearing default effort silently preserves the saved value",
+  "verdict": "SAME",
+  "reason": "Both: clearing effort omits the field from PATCH and the merge keeps the old value."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Catalog history disappears on reload and does not include changes made by another client.",
+  "finding_title": "Catalog history disappears when Setup is reopened",
+  "verdict": "SAME",
+  "reason": "Both: catalog history is component-local session state, lost on reload and missing other clients' changes."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Clearing a default effort omits the field from PATCH and leaves the old value stored.",
+  "finding_title": "Clearing the default effort silently preserves its previous value",
+  "verdict": "SAME",
+  "reason": "Both: clearing effort omits the field from PATCH and the merge keeps the old value."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Catalog history disappears on reload and does not include changes made by another client.",
+  "finding_title": "Catalog history disappears when Setup is reopened",
+  "verdict": "SAME",
+  "reason": "Both: catalog history is component-local session state, lost on reload and missing other clients' changes."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-069",
+  "trial": 0,
+  "gold": "Digest actions are derived from stale records instead of current unanswered and review state.",
+  "finding_title": "Answered questions remain in the needs-you digest",
+  "verdict": "SAME",
+  "reason": "Answered questions stay in the digest because it replays feed events rather than current unanswered state - the gold's 'unanswered' half."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-069",
+  "trial": 0,
+  "gold": "A historical failed review hides a later approval in MCP status.",
+  "finding_title": "A historical failed round overrides a subsequent valid approval",
+  "verdict": "SAME",
+  "reason": "Both: a failed/cancelled historical round returns before the current approval is considered."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-069",
+  "trial": 1,
+  "gold": "Digest actions are derived from stale records instead of current unanswered and review state.",
+  "finding_title": "Answered questions remain in the needs-you digest",
+  "verdict": "SAME",
+  "reason": "Answered questions stay in the digest because it replays feed events rather than current unanswered state - the gold's 'unanswered' half."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-069",
+  "trial": 1,
+  "gold": "A historical failed review hides a later approval in MCP status.",
+  "finding_title": "A historical failed round overrides a newer valid approval",
+  "verdict": "SAME",
+  "reason": "Both: a failed/cancelled historical round returns before the current approval is considered."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-070",
+  "trial": 0,
+  "gold": "MCP status returns private land reasons unchanged on direct and proxy backends.",
+  "finding_title": "Honor the run's confirmed merged flag",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is status ignoring run.merged; gold is private land reasons being returned unredacted."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-070",
+  "trial": 1,
+  "gold": "MCP status returns private land reasons unchanged on direct and proxy backends.",
+  "finding_title": "Honor the run's confirmed merged flag",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is status ignoring run.merged; gold is private land reasons being returned unredacted."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-071",
+  "trial": 1,
+  "gold": "Unicode and URL encodings evade privacy protection in status and digest fields.",
+  "finding_title": "Historical landing blocks override closed and resolved states",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is blocked-land branch ordering overriding resolved/closed states; gold is Unicode/URL encodings evading privacy redaction."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-088",
+  "trial": 0,
+  "gold": "The isolated post-check status still inspects populated submodules with their own git directories, so a submodule that points at the land clone's admin directory runs a clean filter from the clone's configuration, which the request says never applies after the checks.",
+  "finding_title": "Isolated status still executes configuration through submodules",
+  "verdict": "SAME",
+  "reason": "Both: isolated status recurses into submodules with their own git dirs, executing a clean filter (incl. from the clone's config)."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-098",
+  "trial": 0,
+  "gold": "A runtime model attached to a retired provider prevents factory construction.",
+  "finding_title": "Runtime models belonging to the removed provider prevent startup",
+  "verdict": "SAME",
+  "reason": "Both: persisted runtime models for the removed provider make Factory construction throw."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-098",
+  "trial": 0,
+  "gold": "Historical run references prevent unrelated catalog mutations.",
+  "finding_title": "Historical model pins block unrelated catalog edits",
+  "verdict": "SAME",
+  "reason": "Both: apply() revalidates historical run pins, so a pin to the removed model blocks unrelated catalog edits."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "Historical run references prevent unrelated catalog mutations.",
+  "finding_title": "Keep historical run pins from blocking unrelated catalog edits",
+  "verdict": "SAME",
+  "reason": "Both: apply() revalidates historical run pins, so a pin to the removed model blocks unrelated catalog edits."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-101",
+  "trial": 0,
+  "gold": "Raw process output is cut before gate credential redaction can match a boundary-spanning secret.",
+  "finding_title": "Raw process truncation can leave credential fragments",
+  "verdict": "SAME",
+  "reason": "Both: runProcess truncates raw output before redaction, so a credential split at the cut leaks a suffix."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-101",
+  "trial": 1,
+  "gold": "Raw process output is cut before gate credential redaction can match a boundary-spanning secret.",
+  "finding_title": "Redaction occurs after the process runner has already truncated output",
+  "verdict": "SAME",
+  "reason": "Both: runProcess truncates raw output before redaction, so a credential split at the cut leaks a suffix."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-103",
+  "trial": 1,
+  "gold": "Line callbacks store pieces of multiline credentials in failure excerpts.",
+  "finding_title": "Multiline credentials survive failure-excerpt redaction",
+  "verdict": "SAME",
+  "reason": "Both: per-line redaction cannot match a registered multiline credential, which then lands in failure excerpts."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-104",
+  "trial": 0,
+  "gold": "Lossy excerpt line framing prevents matching multiline credentials before storage.",
+  "finding_title": "Preserve blank lines before redacting multiline credentials",
+  "verdict": "SAME",
+  "reason": "Both: the line splitter drops empty lines, so reassembled excerpts cannot match multiline credentials containing blank lines."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-104",
+  "trial": 0,
+  "gold": "Failure excerpt collection retains unbounded bytes on very long output lines.",
+  "finding_title": "Failure diagnostics no longer have a byte bound",
+  "verdict": "SAME",
+  "reason": "Both: removing the per-line 8,000-char cap makes retained excerpt lines unbounded in size."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-104",
+  "trial": 1,
+  "gold": "Lossy excerpt line framing prevents matching multiline credentials before storage.",
+  "finding_title": "Blank lines lost by callbacks prevent multiline credential redaction",
+  "verdict": "SAME",
+  "reason": "Both: the line splitter drops empty lines, so reassembled excerpts cannot match multiline credentials containing blank lines."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-104",
+  "trial": 1,
+  "gold": "Failure excerpt collection retains unbounded bytes on very long output lines.",
+  "finding_title": "Restore a byte bound on retained failure diagnostics",
+  "verdict": "SAME",
+  "reason": "Both: removing the per-line 8,000-char cap makes retained excerpt lines unbounded in size."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-105",
+  "trial": 0,
+  "gold": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+  "finding_title": "Normalize terminal formatting before the runner tail cut",
+  "verdict": "DIFFERENT",
+  "reason": "Finding is ANSI formatting inside a credential defeating runner redaction before the tail cut; gold is early carry redaction leaking suffixes of overlapping credentials."
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-105",
+  "trial": 1,
+  "gold": "Redacting the carry early emits suffixes of overlapping registered credentials.",
+  "finding_title": "Premature replacement leaks overlapping credential suffixes",
+  "verdict": "SAME",
+  "reason": "Both: redacting the pending carry replaces a shorter credential before a longer overlapping one completes, leaking its suffix."
+ }
+]

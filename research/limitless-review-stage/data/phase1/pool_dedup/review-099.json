@@ -1,0 +1,49 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1",
+    "C9"
+   ],
+   "same_as": null,
+   "root_cause": "Catalog additions that bring back a missing model are accepted without checking that model's saved routing and preference references against its new settings, so the daemon fails at its next startup."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The filtered operator routing is built once at startup and is not rebuilt when the catalog changes, so a restored model is not used for routing until the daemon restarts."
+  },
+  {
+   "members": [
+    "C3",
+    "C4b"
+   ],
+   "same_as": null,
+   "root_cause": "Building the URL for the SSH destination in src/cli/local.ts does not put brackets around IPv6 addresses, so it throws before any management command runs."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "Provider matching in src/cli/local.ts does not account for providers reached through an SSH tunnel, so the health probe goes to the wrong endpoint without the API key and the provider's enablement is never updated."
+  },
+  {
+   "members": [
+    "C5",
+    "C5b"
+   ],
+   "same_as": null,
+   "root_cause": "The resume/retry check rejects a whole historical eval if any saved model is retired, when it should skip the retired model and continue with the available ones."
+  },
+  {
+   "members": [
+    "C7"
+   ],
+   "same_as": null,
+   "root_cause": "Startup validation of stored prefer and REMOVED_MODELS cells was weakened to treat any unknown value as a retired model, so a misplaced model ID gets a misleading error and the fail-loud tests were removed."
+  }
+ ]
+}

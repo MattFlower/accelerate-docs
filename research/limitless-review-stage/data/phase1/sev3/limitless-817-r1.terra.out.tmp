@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"boundary","trigger":"plausible","reason":"After a failed shutdown leaves a descendant running, recovery in the same daemon skips it and starts another command despite the surviving process."}]}

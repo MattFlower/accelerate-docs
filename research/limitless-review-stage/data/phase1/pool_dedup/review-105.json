@@ -1,0 +1,67 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": "G2",
+   "root_cause": "Terminal formatting is stripped only after the runner has already framed and tail-cut the output, so credential fragments split by escape sequences slip past redaction."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": "G1",
+   "root_cause": "The carry is redacted as soon as the shorter credential matches, so the sensitive suffix of a longer registered credential that shares its prefix gets emitted in a later chunk."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The failure-excerpt path never gets ANSI-normalized, multiline-aware redaction, so a formatted multiline credential comes back whole in the excerpt."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "The privacy filter treats the literal \"[redacted]\" marker as sensitive and withholds the entire text instead of passing the already-redacted content through."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": null,
+   "root_cause": "The HTTP/SSE layer runs gate-data redaction on every response object, which rewrites non-gate payloads and adds confinement metadata to them."
+  },
+  {
+   "members": [
+    "C6"
+   ],
+   "same_as": null,
+   "root_cause": "The artifact endpoint parses and sanitizes stored artifacts instead of serving the stored bytes unchanged, which alters JSON formatting and strips escape bytes from non-gate artifacts like patches."
+  },
+  {
+   "members": [
+    "C7"
+   ],
+   "same_as": null,
+   "root_cause": "Prompt construction runs gate-output sanitization over every input, including the patch under review, which removes literal escape bytes from the source changes."
+  },
+  {
+   "members": [
+    "C8"
+   ],
+   "same_as": null,
+   "root_cause": "The new stdoutTruncated/stderrTruncated fields are added to the process result but nothing reads them."
+  },
+  {
+   "members": [
+    "C9"
+   ],
+   "same_as": null,
+   "root_cause": "confinementError is now always written and saved output is VT-normalized, so an older release reading results after a rollback can mistake the normalized text for a real confinement failure."
+  }
+ ]
+}

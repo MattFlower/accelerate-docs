@@ -1,0 +1,31 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P3",
+    "P6"
+   ],
+   "mechanism": "The exact-file targeted-command shortcut in gate-evidence.ts accepts a successful exit when the arguments match, without positive evidence that each requested file actually ran and passed tests. This covers zero tests run, a missing file, and a substring filter that matched a different file."
+  },
+  {
+   "members": [
+    "P4",
+    "P7"
+   ],
+   "mechanism": "The regex that parses verification instructions extracts only a partial Bun command prefix. It silently drops quoted paths, unsupported syntax and further verification steps, so passing tests that don't cover the whole criterion mark it met."
+  },
+  {
+   "members": [
+    "P2"
+   ],
+   "mechanism": "Evidence eligibility checks only the HEAD commit after discardChanges. It does not check the working-tree bytes that were tested, so tests that passed against modified files are attributed to the original commit."
+  },
+  {
+   "members": [
+    "P5"
+   ],
+   "mechanism": "Gate evidence is persisted before the gate stage is marked succeeded. After a crash and resume, the stage is left cancelled while the gates cache skips re-execution, so the new status check rejects the evidence and the run ends environment-blocked."
+  }
+ ]
+}

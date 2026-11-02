@@ -1,0 +1,19 @@
+{
+ "items": [
+  {
+   "id": "C1",
+   "verdict": "not_explicit",
+   "quote": ""
+  },
+  {
+   "id": "C2",
+   "verdict": "explicit",
+   "quote": "When a run resumes and its worktree is a linked worktree with no record, record it once (`recordWorktree`). Log that this happened."
+  },
+  {
+   "id": "C3",
+   "verdict": "not_explicit",
+   "quote": ""
+  }
+ ]
+}

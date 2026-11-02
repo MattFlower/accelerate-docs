@@ -1,0 +1,15 @@
+{
+ "systems": [
+  {
+   "name": "terra-6.1-medium-adversarial",
+   "mode": "single",
+   "finders": [
+    {
+     "target": "codex/terra-6.1@medium",
+     "prompt": "adversarial"
+    }
+   ],
+   "implementerReport": "include"
+  }
+ ]
+}

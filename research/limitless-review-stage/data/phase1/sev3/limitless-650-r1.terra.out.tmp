@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"secret","trigger":"plausible","reason":"A filename or diagnostic containing a protected value encoded as percent-escaped HTML can be retained and published without redaction, exposing recoverable private data."}]}

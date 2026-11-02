@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"test","trigger":"plausible","reason":"A brief PID-file creation race can cause Linux tests to fail spuriously or pass a process assertion without checking the intended process, but it has no demonstrated runtime effect."}]}

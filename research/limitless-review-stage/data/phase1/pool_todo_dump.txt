@@ -1,0 +1,479 @@
+#1 pool-review-044/C7 [agree_minor] `eval policy` now diffs the proposed overlay against a 'current' policy that includes operator overrides
+  sol=REAL/minor/newly_exposed opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'}
+  S: An operator reviews an eval policy recommendation while a live override exists. The CLI reports that writing the recommendation changes effective routing even when the overlay is unchanged and the override will continue to win.
+  O: While an operator override is active, `limitless eval policy` reports that cell as a change `--write` would make. Writing policy.json would not change that cell, because the operator layer still wins, so the eval review is misleading.
+#2 pool-review-044/C9 [verdict_dispute] The GUIDE says provider cards are only on the Providers page, but the Models page still renders them
+  sol=NOT_REAL/None/None opus=REAL/nit/introduced raters={}
+  S: The reviewer infers exclusivity that the documentation does not claim.
+  O: A reader of the GUIDE is told provider cards and the enable button are only on the Providers page, but the Models page still shows a Providers section with the same cards.
+#3 pool-review-045/C2 [verdict_dispute] Export now writes quota = "windows" into every exported provider
+  sol=NOT_REAL/None/None opus=REAL/major/introduced raters={'sonnet': 'compat/normal', 'terra': 'compat/plausible'}
+  S: Exported configuration explicitly includes the default quota mode; no incorrect behavior was demonstrated.
+  O: A user upgrades and runs `limitless providers export --write`, as the deprecation notice tells them to. Every provider in their config now carries quota = "windows" even though they never chose a quota setting. If they roll back to the previous release, it rejects the config with 'unknown fields quo
+#4 pool-review-046/C1 [sev_dispute] Preserve exhausted implementer exclusions after escalation
+  sol=REAL/major/requirement_gap opus=REAL/minor/introduced raters={'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'}
+  S: After the first implementer exhausts its rounds, the run escalates to the second. If the second becomes unavailable on the following round, the factory returns to the exhausted first implementer and spends additional work there.
+  O: An operator pins implement to the chain A, B. A fails its rounds and the run escalates to B. Later B runs out of quota or fails, and the run quietly goes back to A, a model it already escalated away from. That pays for another round on a known-failing model instead of stopping for the operator as so
+#5 pool-review-046/C3b [split_one_side] The pinned-verify warning names the implementer when the excluded model is actually the previous verifier
+  sol=REAL/minor/introduced opus=None/None/None raters={'sonnet': 'diag/plausible', 'terra': 'diag/plausible'}
+  S: A panel verifier shares a vendor with a finder but uses a different checkpoint. The warning incorrectly says it shared the implementer's vendor, misleading the operator about which independence preference was overridden.
+#6 pool-review-046/C4 [verdict_dispute] In panel review mode, a single-entry review chain hits needs_human whenever a finding is raised
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'}
+  S: A panel with only one permitted checkpoint cannot independently verify findings raised by that checkpoint, so it requests human intervention.
+  O: With production review set to panel mode, an operator pins review to a single model to try it out. Every finder then runs on that model, and as soon as any finding is raised, no verifier is allowed (it may not check its own findings). The run stops at needs_human after the finders have already been 
+#7 pool-review-046/C6 [verdict_dispute] Chain mode ignores independence even as a tie-break between `|` alternatives
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'diag/plausible'}
+  S: An interchangeable pinned group selects the implementer's vendor because that provider has more headroom, while recording the requested override warning.
+  O: An operator pins review to 'claude/opus|codex/sol', offering both as interchangeable. The implementer was an OpenAI model, and codex has more spare capacity, so the router picks the OpenAI reviewer even though an independent one was available in the same group. The log then wrongly says no other ven
+#8 pool-review-046/C6b [split_one_side] Chain mode ignores independence even as a tie-break between `|` alternatives
+  sol=REAL/minor/newly_exposed opus=None/None/None raters={'sonnet': 'diag/plausible', 'terra': 'diag/plausible'}
+  S: A pinned review selects the implementer's vendor while an independent alternative remains available. The completed review nevertheless tells the operator that no other vendor was available.
+#9 pool-review-051/C4 [agree_minor] New headSha probe runs before the needsHuman check on every resume
+  sol=REAL/minor/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'}
+  S: An operator resumes a run already waiting for human review whose checkout has a Git trust problem. The run is reported as failed with the Git error instead of retaining its human-review status and displayed reason.
+  O: A parked run waiting on a human resumes, and its worktree's Git state can't be trusted (for example, an unrecorded worktree the migration skipped). The run is now marked failed with a git error, where before it went straight back to 'needs a human' with its original reason.
+#10 pool-review-052/C2 [sev_dispute] Main-red failures bypass the job logs needed for ledger signatures
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'}
+  S: When main has the same failing check, the factory records a generic conclusion instead of the actual error and runner image. Different failures consequently become indistinguishable in the ledger.
+  O: While main is red on a check, a PR failure on that check is written to the ledger using only the check's conclusion text and no runner image, because the job and its log are never fetched. Different failures therefore collapse into the same low-information row.
+#11 pool-review-052/C3 [sev_dispute] Match repository casing consistently in job URLs
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'}
+  S: An operator registers a repository using different capitalization from GitHub's canonical spelling. Valid job responses are rejected indefinitely, so failures receive neither retries nor classification.
+  O: If the repository is configured as 'o/r' but GitHub reports it as 'O/R', every failing Actions job is rejected as 'Incomplete failing job'. Nothing is ever rerun or reported, and because of C1 this also stops observation of later PRs.
+#12 pool-review-052/C4 [sev_dispute] Resolve completed reruns with skipped conclusions
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'}
+  S: A requested rerun finishes with a skipped conclusion and the overall checks become green. The factory leaves the retry unresolved and repeatedly inspects it forever.
+  O: If a rerun job finishes as 'skipped' or 'neutral', its ledger row stays 'rerunning' forever. The PR's CI inspection then stays pending once CI goes green, and REST inspection repeats on every poll.
+#13 pool-review-052/C6 [verdict_dispute] Find the rerun job across workflow attempts
+  sol=REAL/major/introduced opus=UNCLEAR/None/None raters={'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'}
+  S: One job's retry finishes, then someone retries another job before the factory checks again. The factory searches only the newest attempt and cannot resolve the earlier retry.
+  O: If a later attempt of the same workflow run does not list the job that was rerun, reconciliation throws 'Ambiguous CI rerun job' on every poll.
+#14 pool-review-052/C7 [verdict_dispute] Deduplicate main-red notifications at repository scope
+  sol=REAL/minor/introduced opus=NOT_REAL/None/None raters={'sonnet': 'nuisance/plausible', 'terra': 'nuisance/plausible'}
+  S: Main fails two checks that also fail on factory pull requests. Operators receive two repository alerts instead of the requested single repository item.
+  O: One repository-level item per red check is a reasonable reading of the request; the behaviour exists, but it is not a defect.
+#15 pool-review-052/C9 [verdict_dispute] Matrix siblings cancelled by fail-fast are rerun and recorded as flakes
+  sol=NOT_REAL/None/None opus=REAL/major/introduced raters={'sonnet': 'nuisance/normal', 'terra': 'nuisance/plausible'}
+  S: The probe demonstrates a cancelled job being retried and a later success being recorded, but that behavior follows the requested cancellation policy.
+  O: In a matrix build, one leg fails for real and GitHub cancels the other legs (fail-fast is the default). Each cancelled leg is rerun, passes, and is written to the ledger as a flake even though it never failed. This also spends paid CI runs.
+#16 pool-review-052/C10 [verdict_dispute] The rerun cap is spent when GitHub rejects a job rerun while its workflow run is still in progress
+  sol=UNCLEAR/None/None opus=REAL/major/introduced raters={'sonnet': 'wrong/plausible', 'terra': 'wrong/plausible'}
+  S: If GitHub rejects job retries until all sibling jobs finish, an early request consumes the retry allowance without performing a retry.
+  O: A job times out while other jobs in the same workflow are still running. The classifier spends the single allowed rerun and asks GitHub to rerun the job. GitHub refuses because the run is still in progress, so the job is reported as needing a fix without ever being rerun, and the refusal is logged a
+#17 pool-review-052/C12 [verdict_dispute] A second migration alters a table added in the same change
+  sol=NOT_REAL/None/None opus=REAL/nit/introduced raters={'sonnet': 'diag/normal', 'terra': 'diag/normal'}
+  S: No migration failure or compatibility break follows from applying these two additive migrations in order.
+  O: The change ships two migrations: one creates a table and a second adds a column to it, though neither has been released. This only adds churn.
+#18 pool-review-052/C14 [sev_dispute] Reconcile reruns hidden beyond the GraphQL context limit
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'}
+  S: A repository has more than 100 check contexts, and a retried job falls outside the observed page. Its completion is never reconciled while another check keeps the overall result red.
+  O: On a PR with more than 100 checks, a rerun whose check falls outside the first 100 can finish without changing what the poller sees, while another check keeps CI red. Its result is then never recorded.
+#19 pool-review-052/C16 [verdict_dispute] Closed tracked PRs emit failures without classification
+  sol=REAL/major/requirement_gap opus=NOT_REAL/None/None raters={'sonnet': 'nuisance/plausible', 'terra': 'nuisance/plausible'}
+  S: Checks on a recently closed factory pull request turn red. The factory emits its ordinary failure notification but never performs the classification required for every such notification.
+  O: Skipping classification for closed PRs is sensible scoping, not a defect.
+#20 pool-review-052/C19 [sev_dispute] The failure signature uses the first line containing 'fail' or 'error', often an echoed action input
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'wrong/normal'}
+  S: An action prints a normal input containing the word fail before tests run. Different test failures then receive the same ledger identity, obscuring their causes and conflating their retry allowances.
+  O: A job log that echoes an action input such as 'fail-on-cache-miss: false' before the real failure gets that echo line as its recorded 'failing line'. The ledger then records the same meaningless line for every failure of that check.
+#21 pool-review-052/C20 [verdict_dispute] The main-red state resets while main's newest commit is still running checks, which creates duplicate ci.main_red items
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'nuisance/plausible'}
+  S: The probe produces separate alerts across a failed old main commit, a pending new main commit, and a failed new main commit.
+  O: Main is broken, and a new commit lands while its checks are still running. Main briefly counts as not red, so a PR inspected in that window can be rerun or reported, and when main finishes red again a second main-red alert is emitted.
+#22 pool-review-053/C4 [sev_dispute] A later sibling-only attempt hides the originating rerun
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'}
+  S: The factory's rerun completes, then someone reruns a different job in the workflow before the next poll. The factory examines only that newer attempt and never records its own completed rerun.
+  O: After the factory reruns job A, someone reruns another job in the same workflow, which creates a newer attempt that does not contain job A. The classifier then throws 'Ambiguous CI rerun job' on every poll, never records A's result, and (through C1) blocks later PRs.
+#23 pool-review-053/C5 [sev_dispute] Completed skipped or neutral reruns never resolve
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'}
+  S: A rerun finishes with a skipped or neutral result. The factory keeps it marked as running and repeatedly inspects it without producing a terminal classification.
+  O: A rerun job that finishes as 'skipped' or 'neutral' is never resolved. The ledger row stays 'rerunning' forever, and the PR keeps repeating REST inspections even after its CI turns green.
+#24 pool-review-053/C6 [sev_dispute] Inspect main's commit statuses independently of the PR's context types
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'}
+  S: Main reports a failing legacy status with the same check name as the PR's Actions check. Because the PR has no legacy statuses, the factory misses main's failure and reruns the PR instead of pausing it.
+  O: Main reports a failing check as a legacy commit status, while the PR has only an Actions check of the same name. Main's red status is never fetched, so the PR's transient failure is rerun instead of paused.
+#25 pool-review-053/C7 [verdict_dispute] Job reruns can also rerun downstream security tests
+  sol=REAL/major/introduced opus=NOT_REAL/None/None raters={'sonnet': 'nuisance/unusual', 'terra': 'nuisance/plausible'}
+  S: A timed-out build has a downstream security job. Automatically rerunning the build also reruns its dependent security job, despite the requested security-test exclusion.
+  O: Rerunning a job whose dependents include security jobs does not violate the requirement, which is about the ledger, not about reruns.
+#26 pool-review-053/C7b [verdict_dispute] Job reruns can also rerun downstream security tests
+  sol=REAL/major/introduced opus=NOT_REAL/None/None raters={'sonnet': 'nuisance/unusual', 'terra': 'nuisance/plausible'}
+  S: A generic job passes its security-test step and later times out. If the other evidence does not mention security, the factory reruns the whole job, including those security tests.
+  O: Asking to exclude jobs because they contain successful security steps misreads the requirement and contradicts G2.
+#27 pool-review-053/C11b [split_one_side] Failure signature uses the first line that loosely matches error/fail, including volatile durations
+  sol=REAL/minor/introduced opus=None/None/None raters={'sonnet': 'nuisance/normal', 'terra': 'diag/normal'}
+  S: A job's setup output exceeds the excerpt limit. The feed contains the setup preamble instead of the later failure context.
+#28 pool-review-053/C12b [verdict_dispute] The change is roughly twice the requested source budget
+  sol=NOT_REAL/None/None opus=REAL/nit/introduced raters={'sonnet': 'diag/normal', 'terra': 'diag/normal'}
+  S: No migration failure was found: both additive files apply successfully in order.
+  O: Two migration files are shipped for one new table, the second only adding a column to the table the first created. This is harmless churn.
+#29 pool-review-054/C6 [sev_dispute] Recognize Node test-runner timeout diagnostics
+  sol=REAL/major/requirement_gap opus=REAL/minor/requirement_gap raters={'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'}
+  S: A Node test times out and CI reports its normal timeout diagnostic. The factory treats it as needing a fix and does not perform the requested transient rerun.
+  O: A test in a Node test-runner project hits its own timeout ('test timed out after 10ms'). It is reported as needing a fix instead of being rerun, so the flake still has to be rerun by hand, as today.
+#30 pool-review-054/C6b [split_one_side] Recognize Node test-runner timeout diagnostics
+  sol=REAL/minor/introduced opus=None/None/None raters={'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'}
+  S: An indented Playwright timeout appears on an untimestamped log line. The factory misses the timeout and requests a fix instead of rerunning it.
+#31 pool-review-054/C4 [verdict_dispute] Reconciliation loses results when a later attempt reruns another job
+  sol=REAL/major/introduced opus=UNCLEAR/None/None raters={'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'}
+  S: A tracked job passes on its rerun, then someone reruns another job in the workflow before the factory reconciles it. The factory searches only the newest partial attempt and leaves the successful tracked rerun unresolved.
+  O: If a later partial rerun of a different job leaves the tracked job out of the newest attempt's job list, reconciliation would throw 'Ambiguous CI rerun job' forever.
+#32 pool-review-054/C5 [sev_dispute] Keep newly requested reruns pending until their outcome is observed
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'}
+  S: A large CI matrix has a rerun outside the first 100 displayed checks while another check keeps CI red. The rerun finishes, but the visible observation never changes, so its ledger entry remains pending indefinitely.
+  O: On a PR with more than 100 checks, a rerun of a check outside the first 100 can finish without the observed CI state changing while another check keeps it red. The ledger row then stays 'rerunning' forever and the rerun's outcome is never recorded.
+#33 pool-review-054/C8 [sev_dispute] While main is red or a rerun is pending, the full REST inspection repeats on every poll although GraphQL is unchanged
+  sol=REAL/major/requirement_gap opus=REAL/minor/introduced raters={'sonnet': 'nuisance/normal', 'terra': 'wrong/plausible'}
+  S: Main stays red while PR observations remain unchanged. Every PR keeps repeating REST inspection, consuming API quota and postponing mergeability nudges and access-problem recovery for the duration of the pause.
+  O: While main stays red, every poll repeats the full REST inspection for each paused PR (main commit, main checks, PR checks) even when nothing changed in GraphQL. That spends API quota and skips the mergeability nudge and the clearing of access problems until main recovers.
+#34 pool-review-054/C9 [verdict_dispute] Observations are now discarded entirely whenever observePrHead refuses, including while a push is in progress or left stuck
+  sol=REAL/minor/introduced opus=NOT_REAL/None/None raters={'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'}
+  S: A crash leaves a nonterminal review round marked as pushing. Until that marker is cleared or the round finishes, remote PR closure and other observations remain hidden.
+  O: Dropping an overtaken observation is the documented intent; it only delays recording by one poll and loses nothing.
+#35 pool-review-054/C13 [sev_dispute] Main-branch status lookup depends on the PR's context types
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'}
+  S: Main reports a failing check through a legacy status, while the PR reports the same check through a check run. The factory misses main's failure and reruns the PR instead of pausing it.
+  O: Main fails a legacy commit status named, say, 'test', while the PR reports 'test' as a check run. The main-red check never looks at main's statuses, so the PR is rerun instead of paused.
+#36 pool-review-054/C14 [verdict_dispute] Failures observed after PR closure escape classification
+  sol=REAL/major/requirement_gap opus=NOT_REAL/None/None raters={'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'}
+  S: A previously observed PR closes while its pending CI finishes red. The feed reports the CI failure, but the factory never classifies or records it.
+  O: Not classifying failures on closed PRs is a reasonable scope choice, not a defect.
+#37 pool-review-054/C15 [sev_dispute] A rerun that ends with a conclusion other than success or a failure stays pending forever
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'}
+  S: A requested rerun finishes as skipped or neutral. The factory never gives its ledger entry a terminal outcome and keeps inspecting it even after overall CI succeeds.
+  O: A rerun that ends 'neutral' or 'skipped' is never resolved. Once the PR goes green, every poll repeats the REST inspection indefinitely and the ledger row stays 'rerunning'.
+#38 pool-review-054/C18 [verdict_dispute] Ad-hoc '> ' quoting instead of the codebase's untrusted-data convention
+  sol=NOT_REAL/None/None opus=REAL/nit/introduced raters={}
+  S: No instruction-following or tagged-prompt injection path is established by this claim.
+  O: Untrusted log text in feed items is quoted with a home-made '> ' prefix instead of the project's existing quoting helper, so there are now two conventions to keep consistent.
+#39 pool-review-054/C20 [verdict_dispute] Second migration alters a table created by this same change
+  sol=NOT_REAL/None/None opus=REAL/nit/introduced raters={}
+  S: The two migrations successfully produce the intended schema.
+  O: The new table is created by one migration and then immediately altered by a second migration in the same unshipped change. It works, but adds a needless migration.
+#40 pool-review-054/C21 [agree_minor] Security regex matches unrelated substrings such as 'disaster'
+  sol=REAL/minor/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'}
+  S: A nonsecurity check is named disaster recovery. Its name accidentally matches the security heuristic, so a timeout is neither rerun nor entered in the ledger.
+  O: A check or failing line containing a word such as 'disaster' counts as security evidence. A genuine timeout in it is neither rerun nor recorded in the ledger.
+#41 pool-review-056/C3 [sev_dispute] An older probe can overwrite discovery after provider re-enablement
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'}
+  S: An operator disables and re-enables a provider while a health check is pending. An older response arriving last replaces the current model list, causing routing to skip a model the provider currently serves.
+  O: An operator disables and quickly re-enables a local provider while a scheduled probe is still in flight. The server's model list changes in that same few-second window. The older probe finishes last and saves the stale list, so the router may skip a model as 'not served' until the next probe a minut
+#42 pool-review-056/C5 [verdict_dispute] Smoke silently drops checks for disabled or missing providers
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={'sonnet': 'wrong/plausible', 'terra': 'nuisance/plausible'}
+  S: No incorrect check selection was established for an enabled, configured provider.
+  O: A provider that is disabled at runtime, or missing from config, is now dropped from the deploy smoke gate with no skip line. Before this change smoke threw for a missing provider. A broken CLI contract for that provider then goes unreported.
+#43 pool-review-056/C5b [verdict_dispute] Smoke silently drops checks for disabled or missing providers
+  sol=NOT_REAL/None/None opus=REAL/major/introduced raters={'sonnet': 'nuisance/unusual', 'terra': 'outage/plausible'}
+  S: Schema mutation was reproduced, but no corruption, rollback incompatibility or operational failure was established.
+  O: Smoke, run by hand or as the deploy gate, now opens the live database at ~/.../limitless.db and applies the checkout's new migrations before the release is accepted. If smoke fails and the developer edits that migration that never shipped, every later Store open throws 'Applied migration changed'. D
+#44 pool-review-056/C6 [verdict_dispute] Test client decodes the :id param itself, so it doesn't verify decoding of the encoded slash
+  sol=REAL/minor/introduced opus=NOT_REAL/None/None raters={'sonnet': 'test/normal', 'terra': 'test/normal'}
+  S: The catalog API tests can pass even if the HTTP server fails to decode encoded model names. Such a routing regression would therefore escape these tests.
+  O: The behaviour the tests skip is correct: Bun decodes the encoded id.
+#45 pool-review-056/C8 [verdict_dispute] Eval eligibility bypasses the served-model guard
+  sol=REAL/major/newly_exposed opus=NOT_REAL/None/None raters={'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'}
+  S: An operator evaluates a catalog model that discovery has already confirmed is absent from the provider. Evaluation still invokes the harness and consumes a trial instead of skipping the unavailable model.
+  O: Evals sit outside the router behaviour the request specifies, and the change leaves them as they were.
+#46 pool-review-057/C2 [sev_dispute] Allow PATCH to clear a model's default effort
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'}
+  S: An operator wants an existing local model to use the server's default effort so it can serve agent roles. PATCH cannot clear its configured effort, leaving those roles unable to use the model.
+  O: An operator who wants to remove a runtime model's default effort through PATCH has no way to do it: leaving the field out keeps the old value, and sending null is rejected. They have to delete the model and add it again, which is refused while a policy cell names it.
+#47 pool-review-057/C4 [sev_dispute] An older probe can overwrite newer discovery results
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'}
+  S: An operator enables a provider while an earlier health request is pending. If the older response arrives last, discovery incorrectly reports the old models and routing excludes a currently available model.
+  O: A provider is disabled and re-enabled while an earlier health probe is still in flight. If the older response arrives last, its out-of-date served list replaces the newer one, and a model that is really served is skipped as "not served" until the next scheduled probe, about a minute later.
+#48 pool-review-057/C6b [verdict_dispute] Smoke check now opens the production SQLite DB and runs migrations as a side effect
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'diag/plausible'}
+  S: Explicitly disabled providers receive no smoke checks; a provider later re-enabled was outside the checked configuration.
+  O: If an operator has disabled a provider at runtime, the deploy smoke check now quietly leaves out that provider's checks, without even a 'skipped' line. A broken provider can pass the deploy and only fail once it is re-enabled.
+#49 pool-review-058/C4 [verdict_dispute] Out-of-scope Playwright dependency plus a postinstall script that downloads Chromium
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={'sonnet': 'nuisance/normal', 'terra': 'outage/plausible'}
+  S: Cold installation requires the new browser dependency, but no defect in successfully installed operation was established.
+  O: Every development, CI, gate and release install now also downloads a headless Chromium into node_modules. Gate runs wipe ignored files, so each gate run downloads it again, and if the browser CDN can't be reached the install step fails and blocks gates or deploys. The browser serves only a single 37
+#50 pool-review-058/C5 [sev_dispute] Every provider SSE event re-fetches the whole page, with one preview request per cell and no debounce
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/normal', 'terra': 'wrong/normal'}
+  S: An operator leaves Setup open while provider activity generates frequent updates. Each update starts another request batch, and overlapping batches can prevent routing previews from appearing until the updates stop.
+  O: While runs are active, every model-slot acquire or release publishes a provider event. An open Setup tab answers each one by re-fetching routing, catalog, providers and 7-day workload stats, plus one preview per role and cell, so the daemon gets a steady burst of requests.
+#51 pool-review-069/C2 [agree_gold] Clear blocked lands when their PR merges
+  sol=REAL/major/introduced opus=REAL/major/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'}
+  S: An operator merges a PR externally after its landing attempt was blocked. The digest continues listing the completed PR as a blocked land requiring attention.
+  O: A land is blocked, and the operator then merges the PR by hand on GitHub. Every later digest still reports that already-merged PR as a blocked land, so the agent is sent to fix a problem that no longer exists.
+#52 pool-review-069/C11 [agree_minor] The Codex skill tells Codex to use consumer name 'claude'
+  sol=REAL/minor/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/normal', 'terra': 'wrong/plausible'}
+  S: A Codex session follows its bundled digest command after Claude has acknowledged feed items. Its digest reads Claude's cursor and omits items that remain unread under Codex's own consumer name.
+  O: A Codex session follows its skill and runs the digest with the consumer named 'claude'. It summarises items since Claude's cursor instead of its own.
+#53 pool-review-070/C7 [verdict_dispute] Quoting does not escape bidi override or zero-width characters in untrusted PR text
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={'sonnet': 'diag/unusual', 'terra': 'diag/unusual'}
+  S: Unicode direction and invisible characters remain inside a correctly quoted title; visual hardening could make them easier to inspect.
+  O: A hostile PR title containing bidirectional-override or zero-width characters is printed inside the quotes as is. A human viewing the digest in a terminal could see text reordered or hidden, so it appears to sit outside the quoted untrusted region.
+#54 pool-review-070/C9 [verdict_dispute] Status reports an outdated failed review round when the PR snapshot lacks headRefOid
+  sol=REAL/minor/introduced opus=NOT_REAL/None/None raters={'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'}
+  S: A reviewer approves after an earlier changes attempt fails, while the saved PR observation lacks its head. Status incorrectly resurfaces the old failure instead of explaining that the current head is unknown.
+  O: A saved snapshot always carries headRefOid, so the case only arises with no snapshot, where the reported state is still a reasonable non-ready answer.
+#55 pool-review-070/C10 [verdict_dispute] Approval row is read twice in getRunDetail
+  sol=NOT_REAL/None/None opus=REAL/nit/introduced raters={'sonnet': 'diag/normal', 'terra': 'nuisance/normal'}
+  S: Fetching run details performs one additional indexed approval lookup without changing the returned result.
+  O: Each run-detail request reads the latest approval row twice, once for the approval and again for its timestamp. This is a small amount of wasted work.
+#56 pool-review-071/C4 [agree_minor] limitless_status omits state and nextAction when the private-strings policy cannot be loaded
+  sol=REAL/minor/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'}
+  S: The privacy-policy file becomes unreadable. Status returns a successful-looking response containing counts but no explanation or next action, leaving the agent without the requested guidance.
+  O: If the private-strings file can't be read (an unusual setup), status returns only the land id and state and a count of open questions. The agent gets no plain-language state and no next action, and nothing tells it the answer was cut down.
+#57 pool-review-071/C5 [sev_dispute] Historical landing blocks override closed and resolved states
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'}
+  S: Someone closes or resolves work after a landing attempt was blocked. Status continues directing the agent to retry landing, even though the PR is closed and landing will be refused.
+  O: A land request is blocked, and the PR is then closed or the run resolved. Status still says landing is blocked and tells the agent to request landing again, which the land API will refuse for a closed PR.
+#58 pool-review-071/C7 [agree_minor] Digest lines have no length cap, so 20 lines can still carry a lot of untrusted text
+  sol=REAL/minor/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'}
+  S: A run contains an exceptionally long question. The session-start digest injects that entire question into the agent's context despite displaying only a few lines.
+  O: A run fails with a multi-kilobyte error, or a question has very long text. The digest prints all of it on one quoted line, so the SessionStart hook puts that much untrusted text into every new session's context despite the 20-line cap.
+#59 pool-review-071/C12 [sev_dispute] Codex skill tells Codex to use the 'claude' feed consumer
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/normal', 'terra': 'wrong/normal'}
+  S: A Codex session follows the documented digest command after Claude has acknowledged items. It reads Claude's cursor and misses attention items still unread for Codex.
+  O: A Codex session follows its skill and runs the digest with the consumer named claude. It sees Claude's unread items instead of its own inbox, and if it then acknowledges under that name it moves Claude's cursor.
+#60 pool-review-071/C13 [verdict_dispute] getRunDetail queries the latest approval twice
+  sol=NOT_REAL/None/None opus=REAL/nit/introduced raters={'sonnet': 'nuisance/normal', 'terra': 'nuisance/normal'}
+  S: The detail reader performs an additional small query to obtain the approval timestamp.
+  O: Every run-detail read runs one extra, nearly identical database query for the approval time. The race the reviewer describes is not realistic in this synchronous, single-process store.
+#61 pool-review-071/C14 [agree_minor] MCP review verdicts are attributed to reviewer "human"
+  sol=REAL/minor/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/normal', 'terra': 'wrong/normal'}
+  S: An AI agent approves a PR through MCP. The saved approval and activity feed attribute that approval to a human, misleading anyone inspecting its provenance.
+  O: An AI agent approves a PR through the MCP review tool, and the approval is stored and announced in the feed as made by "human". The audit trail then misrepresents who approved the PR before it landed.
+#62 pool-review-072/C4 [agree_minor] Do not let historical blocked lands override a closed PR
+  sol=REAL/minor/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'}
+  S: A PR is closed after a landing attempt was blocked. Status continues presenting the historical landing blocker and generic retry guidance, obscuring the current closure and potentially prompting a refused retry.
+  O: A land is blocked and someone then closes the PR. limitless_status still says 'Landing blocked' and tells the agent to request landing again, which the land queue refuses because the PR is closed.
+#63 pool-review-072/C8 [sev_dispute] Approved PRs with no saved PR snapshot are listed as awaiting review
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'}
+  S: A PR has a recorded approval, but polling has not saved a PR snapshot. The session digest incorrectly advertises another review instead of distinguishing the missing observation from a missing approval.
+  O: A PR has a valid approval but no saved PR observation yet (for example, the poller has not run). The digest counts it as awaiting review while limitless_status says the PR state is unknown, so the two disagree.
+#64 pool-review-072/C5 [sev_dispute] Unreadable privacy policy allows mutations but discards their results
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'}
+  S: An agent submits work while the privacy-policy file cannot be read. The work is queued, but the successful MCP response hides its identifier, making follow-up difficult and creating a risk of duplicate submissions.
+  O: If private-strings.txt exists but cannot be read (bad permissions or invalid UTF-8), an agent's create-run, land or review call still changes state, but the reply is a non-error 'output withheld' message with no run id or land entry. The agent cannot follow what it created and may retry, making a du
+#65 pool-review-072/C6 [agree_minor] limitless_status returns no state or nextAction when the privacy policy is unavailable
+  sol=REAL/minor/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'}
+  S: When the privacy policy is unavailable, an agent asks what a run needs next. The tool succeeds with only a land summary and question count, providing neither the requested state nor guidance.
+  O: When the privacy file cannot be read, limitless_status returns only a land id and state plus an open-question count, with no plain-language state or next action. The agent loses the tool's main output, although that text is fixed wording written by the code.
+#66 pool-review-072/C7 [verdict_dispute] Digest quoting does not escape bidi or zero-width characters in untrusted PR titles
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={'sonnet': 'diag/unusual', 'terra': 'nuisance/unusual'}
+  S: No quoting-contract failure was demonstrated; renderer-dependent visual spoofing remains a separate hardening concern.
+  O: A PR title containing right-to-left override or zero-width characters is printed unescaped inside its quotes, so in a terminal the line can look reordered or hide text. The quote delimiters themselves stay intact.
+#67 pool-review-073/C2 [agree_gold] Exclude running change rounds from awaiting-review counts
+  sol=REAL/major/introduced opus=REAL/major/introduced raters={'sonnet': 'nuisance/normal', 'terra': 'wrong/normal'}
+  S: An agent requests changes and the factory starts implementing them. The next session is nevertheless told that the unfinished PR is awaiting review.
+  O: A user requests changes on a factory PR and opens a new agent session while the factory is still reworking it. The digest lists that PR under 'PRs awaiting review' (limitless_status says 'Review changes in progress'), so the agent is told to review a head that is about to be replaced.
+#68 pool-review-073/C10 [sev_dispute] Approved PRs with no saved head observation are counted as awaiting review
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'}
+  S: An agent approves a PR before the background observer has saved a PR snapshot. The next digest incorrectly asks for another review despite the valid recorded approval.
+  O: A PR has a fresh approval, but no PR snapshot has been saved yet. The digest still lists it as awaiting review, while limitless_status reports 'PR state unknown', so the two disagree and the agent may review it again.
+#69 pool-review-073/C4 [sev_dispute] Let a closed PR supersede a historical blocked land
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'}
+  S: An operator closes a PR after its landing attempt was blocked. The agent is told to retry landing instead of being told that the PR is closed, and that retry is rejected.
+  O: A land attempt is blocked and the operator then closes the PR. limitless_status still says 'Landing blocked' and tells the agent to request landing again, and the land queue refuses that because the PR is closed.
+#70 pool-review-073/C7 [sev_dispute] Short registered credentials cause substring withholding of whole MCP output fields
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'}
+  S: An operator registers a short credential used by a local service. Ordinary response fields and even field names containing those letters disappear, so agents receive malformed or unusable tool results.
+  O: If a provider API key registered as a credential is very short, any MCP or digest field that contains it as a case-insensitive substring is replaced entirely by '[withheld: private text]'. That can hide run ids, titles and URLs across all tools.
+#71 pool-review-073/C9 [verdict_dispute] Digest makes 1–2 API calls for every distinct run in the unread feed, sequentially, inside a SessionStart hook
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'nuisance/plausible'}
+  S: The digest performs serial current-state reads, but no actual hook timeout or unacceptable production latency was established.
+  O: A consumer that has never acknowledged anything starts a session. The digest fetches run detail, and land state when there is a PR, for every distinct candidate run in the retained feed, one request at a time, which slows session start.
+#72 pool-review-073/C11 [verdict_dispute] GET /api/land?run=<unknown> throws a generic Error and likely returns 500 instead of 404
+  sol=NOT_REAL/None/None opus=REAL/nit/introduced raters={'sonnet': 'nuisance/unusual', 'terra': 'diag/plausible'}
+  S: An unknown run filter receives a structured client-error response, rather than an uncaught exception or server error.
+  O: Asking for land entries of an unknown run returns HTTP 400 'run not found' instead of the 404 that other run routes return. Callers fetch the run detail first, which already returns 404, so in practice this is only an inconsistency.
+#73 pool-review-073/C12 [agree_minor] MCP review approvals are recorded as reviewer "human"
+  sol=REAL/minor/introduced opus=REAL/minor/introduced raters={'sonnet': 'diag/normal', 'terra': 'wrong/normal'}
+  S: An AI agent approves a PR through MCP. The stored approval and activity feed identify the reviewer as human, leaving an inaccurate audit trail.
+  O: An AI agent approves a PR through MCP and the approval is stored with reviewer 'human'. The feed and the audit trail then credit a person with an approval an agent made, and that approval is what lets landing proceed.
+#74 pool-review-073/C13 [verdict_dispute] Digest caps the line count but not line length
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={'sonnet': 'nuisance/unusual', 'terra': 'nuisance/unusual'}
+  S: A long question produces a long quoted row, while the digest still satisfies the specified line-count bound.
+  O: A long question, blocked-land reason or PR title is printed in full on its digest line. The '20 lines' SessionStart output can therefore still put a large block of untrusted text into every new session.
+#75 pool-review-076/C2 [sev_dispute] Recheck current origin eligibility before dispatching queued calls
+  sol=REAL/blocker/newly_exposed opus=REAL/minor/introduced raters={'sonnet': 'boundary/unusual', 'terra': 'secret/plausible'}
+  S: While a chat request waits for capacity, an operator corrects its selected model's catalog entry to an excluded origin. The queued request still sends the conversation to that prohibited model.
+  O: A chat request picks a model and waits for a provider slot. During the wait an operator edits that model's origin in the catalog to an excluded country. The chat still sends its prompt to that model, because it never checks eligibility again after waiting.
+#76 pool-review-076/C7 [verdict_dispute] Awkward manual line wrap in docs paragraph
+  sol=NOT_REAL/None/None opus=REAL/nit/introduced raters={'sonnet': 'diag/normal', 'terra': 'diag/normal'}
+  S: The source paragraph has a short manually wrapped line, without an effect on its rendered meaning or layout.
+  O: In the evals documentation, one paragraph breaks its line early, after 'Excluded models are never'. The text is correct but uneven to read.
+#77 pool-review-076/C8 [verdict_dispute] Configured [review.rosters] finder pins to an excluded model aren't refused at startup
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'nuisance/plausible'}
+  S: An excluded roster preference is rejected by runtime routing, while an eligible policy candidate can still serve the finder; optional local skips report their reasons.
+  O: An operator pins a review roster finder to a model whose origin is excluded, and runs panel mode. The daemon starts without complaint, and every review then fails, or silently drops a local finder, before the operator learns of the conflict.
+#78 pool-review-087/C1 [verdict_dispute] Clean-filter tests never hit the key-enumeration race from #402
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={'sonnet': 'test/unusual', 'terra': 'test/plausible'}
+  S: The marker assertions alone do not exercise the enumeration race, but the complete tests detect the claimed regression through valid assertions on the executed isolation boundary.
+  O: Someone later moves the post-check dirty check back onto the clone's own git directory. Both clean-filter tests would still find no marker file, because the filter is planted before the script's per-call scan of filter keys, and that scan blanks it out. Only the separate assertions on the status cal
+#79 pool-review-088/C1 [sev_dispute] Writing info/exclude assumes `git init` created info/ from templates
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'}
+  S: A user has a global Git template directory without an info directory. Every manual landing aborts after successful checks because the script cannot create the exclusions file.
+  O: Someone whose global git config sets an init template directory with no info/ folder (for example a hooks-only git-secrets template) runs the manual land script. Every land then stops with a raw shell 'No such file or directory' error. It fails closed, but that user can never land.
+#80 pool-review-093/C1 [verdict_dispute] Validate TAP result lines before treating them as boundaries
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'}
+  S: The supplied example contains ten valid unnumbered TAP failure lines followed by another failure, so the ten-failure limit applies.
+  O: A test that prints a log line starting with 'not ok ' (for example 'not ok to retry') is treated as a TAP failure. Ten such lines use up all ten failure slots, so the real assertion error is left out of the excerpts.
+#81 pool-review-093/C4 [agree_minor] Land log now keeps only a 1,000-char tail when excerpts exist (was the full 6,000-char tail)
+  sol=REAL/minor/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/normal', 'terra': 'wrong/plausible'}
+  S: An operator opens a failed check's land log or artifact view. Messages in the first approximately 5,000 characters of the stored tail disappear whenever excerpts are present, reducing the available troubleshooting evidence.
+  O: When a land check or a gate shown in the UI fails with excerpts, the land log and the UI panel now show only the last 1,000 characters of the stored 6,000-character tail. Earlier output (other stderr messages, output from other test files) that used to be visible is now hidden, although neither plac
+#82 pool-review-093/C5 [verdict_dispute] Redact credentials before clipping failure excerpts
+  sol=REAL/blocker/newly_exposed opus=NOT_REAL/None/None raters={'sonnet': 'secret/unusual', 'terra': 'secret/plausible'}
+  S: A failing check prints a credential early in a long run. The new excerpts retain it in events, artifacts or diagnostic logs; if clipping cuts through the credential, later literal redaction cannot remove the surviving fragment.
+  O: The excerpts follow the same unredacted, truncated path as `output`, as the request specifies; nothing new about redaction is introduced.
+#83 pool-review-096/C1 [verdict_dispute] Redundant runtime claude/haiku-5.5 row can never be removed; warning repeats forever
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'nuisance/normal'}
+  S: Removal is refused and the warning repeats, but retaining the redundant entry is the documented implementation choice.
+  O: The operator sees the new 'redundant runtime entry' warning at startup and tries to clear it with `limitless catalog remove claude/haiku-5.5`. The command refuses because the model counts as a read-only built-in, so the stale stored entry stays and the warning comes back on every start with nothing 
+#84 pool-review-096/C2 [verdict_dispute] Collision handling is hard-coded to the literal id claude/haiku-5.5
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={'sonnet': 'outage/unusual', 'terra': 'outage/unusual'}
+  S: A hypothetical future built-in could collide with another runtime entry, but this change does not introduce such another collision.
+  O: A later release ships another built-in model whose id an installation already added at runtime. That daemon then fails to start with 'catalog collision', because the tolerance covers only the literal id claude/haiku-5.5.
+#85 pool-review-096/C5 [sev_dispute] Startup can still fail when operator routing names an effort the built-in doesn't support
+  sol=REAL/blocker/introduced opus=REAL/minor/introduced raters={'sonnet': 'outage/unusual', 'terra': 'outage/plausible'}
+  S: An operator has saved a routing choice using an effort accepted by the runtime model. After upgrading, the built-in replaces that model and rejects the saved choice, preventing the daemon from starting.
+  O: An installation's runtime Haiku 5.5 entry declared an effort the built-in lacks (for example xhigh), and an operator routing cell uses it. After upgrading, the daemon swaps in the built-in and then refuses to start with 'Unsupported effort', though the request said startup must not fail.
+#86 pool-review-096/C3 [verdict_dispute] Pin test now hard-codes the decision date and eval ids
+  sol=NOT_REAL/None/None opus=REAL/nit/introduced raters={'sonnet': 'test/normal', 'terra': 'test/plausible'}
+  S: A future decision may require updating this regression test, but the current decision and policy regeneration work.
+  O: The next owner decision for triage changes the date in overrides.json, and this test fails even though the pin still works, so someone has to edit the test by hand.
+#87 pool-review-096/C4 [verdict_dispute] Frozen identity test now hides Haiku 5.5 joining widened chains in every role
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={'sonnet': 'test/normal', 'terra': 'test/plausible'}
+  S: An explicitly widened route can include the new built-in; ordinary routes for the out-of-scope roles retain their existing candidates.
+  O: Adding Haiku 5.5 as a built-in quietly adds it as a widened fallback in chat, summarize, plan, review and other roles. The frozen routing test removes it from every role before comparing, so none of those routing changes, and no later regression involving this model, is checked anywhere.
+#88 pool-review-096/C6 [verdict_dispute] triage.default reason drops earlier decision history instead of appending to it
+  sol=NOT_REAL/None/None opus=REAL/nit/introduced raters={'sonnet': 'diag/normal', 'terra': 'diag/normal'}
+  S: The pin message emphasizes the current decision; the earlier rationale remains available in the evidence document it references.
+  O: Someone runs `limitless eval policy` and reads the triage pin reason, which no longer says why OpenRouter Luna follows or that Sonnet 5.5 became the last fallback. That history is still in EVIDENCE.md.
+#89 pool-review-098/C1 [verdict_dispute] Legacy eval resume is explicitly tested to fail
+  sol=REAL/major/newly_exposed opus=NOT_REAL/None/None raters={'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'}
+  S: An operator resumes an interrupted evaluation containing both the retired model and a supported model. The entire request is rejected, preventing the remaining supported work from continuing.
+  O: Refusing to resume an eval whose stored request names a model that no longer exists is the existing, tested design (same as base for removed models), not a regression this change introduced.
+#90 pool-review-098/C1b [split_one_side] Legacy eval resume is explicitly tested to fail
+  sol=REAL/major/newly_exposed opus=None/None/None raters={'sonnet': 'nuisance/unusual', 'terra': 'wrong/plausible'}
+  S: An operator resumes an interrupted implementation evaluation whose saved fallback chain includes the retired model. Resume fails even when its main target and another fallback remain supported.
+#91 pool-review-098/C2 [agree_minor] A valid IPv6 SSH destination crashes remote management
+  sol=REAL/minor/introduced opus=REAL/minor/introduced raters={'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'}
+  S: An operator configures a bare IPv6 address as the remote SSH destination. Every local-management action throws before contacting SSH, and the command returns no oMLX report.
+  O: An operator sets the remote host to a bare IPv6 address, which SSH accepts. Every `limitless local` action then crashes with 'Invalid URL' before it runs any SSH command, and the oMLX status it already worked out is lost too.
+#92 pool-review-098/C8 [agree_minor] Docs still say the llama-server binary lives in `~/.local/share/limitless/llama-bin/`, but the generated unit now defaults to `/usr/local/bin/llama-server`
+  sol=REAL/minor/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'}
+  S: An operator keeps the binary only in the nonstandard directory described by Operations and generates a fresh unit without specifying a binary override. The generated unit points elsewhere, so the remote server cannot start until the path is corrected.
+  O: Someone setting up a new remote host follows OPERATIONS, puts llama-server in ~/.local/share/limitless/llama-bin/, and leaves the binary setting unset. `local up` then writes a unit pointing at /usr/local/bin/llama-server, and the service fails to start.
+#93 pool-review-099/C1 [agree_gold] Validate revived persisted references before accepting catalog additions
+  sol=REAL/blocker/introduced opus=REAL/blocker/introduced raters={'sonnet': 'outage/unusual', 'terra': 'outage/plausible'}
+  S: An operator restores a missing model with settings incompatible with its saved routing override. The addition succeeds, but the daemon cannot start after its next restart.
+  O: A saved routing cell still names a model that is no longer in the catalog. An operator then adds a model with that id at runtime, giving it different supported efforts. The add is accepted and saved, but on the next restart or deploy the daemon refuses to start, because the saved cell now points at 
+#94 pool-review-099/C9 [agree_gold] Catalog-edit validation was relaxed beyond retired references, and the change is over budget
+  sol=REAL/blocker/introduced opus=REAL/blocker/introduced raters={'sonnet': 'outage/unusual', 'terra': 'outage/plausible'}
+  S: An operator restores a missing model whose saved references require unsupported settings. The edit succeeds but leaves the next daemon startup failing.
+  O: Catalog edits now check only references that were already valid. Adding a model under an id that saved chains still name skips checking those chains, and the next restart can fail.
+#95 pool-review-099/C3 [sev_dispute] IPv6 SSH destinations crash remote management
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'outage/unusual', 'terra': 'wrong/plausible'}
+  S: An operator configures a remote server using its IPv6 address. Every local-management action fails before SSH runs, including the command intended to stop the server.
+  O: An operator sets the remote host to a bare IPv6 address, which SSH accepts. Every 'limitless local' action then crashes with 'Invalid URL' before running SSH, and doesn't even print the oMLX status.
+#96 pool-review-099/C4b [split_one_side] A provider reached through an SSH tunnel is never matched, so its health probe is sent without the API key
+  sol=REAL/major/introduced opus=None/None/None raters={'sonnet': 'outage/unusual', 'terra': 'wrong/plausible'}
+  S: An operator supplies an IPv6 address for the remote server. URL construction throws before the management command can contact it.
+#97 pool-review-099/C4 [sev_dispute] A provider reached through an SSH tunnel is never matched, so its health probe is sent without the API key
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'}
+  S: An operator configures a protected LAN provider through an SSH tunnel. Remote management reports the service as active but probes the wrong endpoint without authentication and never updates the provider's enablement.
+  O: An operator's remote host is an SSH alias, or the provider is reached through an SSH tunnel, so the host doesn't match the provider's base URL exactly. 'local up' and 'local status' then probe a guessed URL without the API key. They report a healthy server as unreachable and never enable the provide
+#98 pool-review-099/C5b [split_one_side] Historical evals containing the removed model cannot resume
+  sol=REAL/major/newly_exposed opus=None/None/None raters={'sonnet': 'wrong/plausible', 'terra': 'wrong/plausible'}
+  S: An operator retries a historical run whose saved model chain includes the removed model and an available fallback. The retry is rejected before the fallback can be used.
+#99 pool-review-099/C7 [verdict_dispute] Fail-loud startup checks for stored prefer and REMOVED_MODELS cells were silently weakened and their tests deleted
+  sol=REAL/minor/introduced opus=NOT_REAL/None/None raters={'sonnet': 'diag/unusual', 'terra': 'diag/unusual'}
+  S: A database contains a model ID where a provider preference belongs. Startup now labels that existing model as retired and absent from the catalog, giving the operator a misleading explanation.
+  O: Replacing fail-loud startup errors with reported, generic retired-reference handling is the requested behaviour, not a defect.
+#100 pool-review-100/C1 [agree_gold] Validate persisted references revived by catalog additions
+  sol=REAL/blocker/introduced opus=REAL/major/introduced raters={'sonnet': 'outage/unusual', 'terra': 'outage/plausible'}
+  S: An operator restores a model that an older saved routing rule references, with different supported settings. The addition succeeds, but the daemon cannot start after its next restart.
+  O: A saved routing override still names a model that has left the catalog, for example "model@high". An operator then re-adds a model with that ID that does not support "high". The catalog edit is accepted and saved, and on the next restart the daemon refuses to start until someone fixes the database b
+#101 pool-review-100/C2 [agree_minor] IPv6 remote hosts abort local management before SSH
+  sol=REAL/minor/introduced opus=REAL/minor/introduced raters={'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'}
+  S: An operator configures an IPv6 address as the remote SSH destination. Every local-management action aborts before SSH, including the action intended to stop the remote service.
+  O: An operator sets the remote host to a bare IPv6 address, which ssh accepts. Every `limitless local` command then crashes with an "Invalid URL" error, even `down` and the oMLX report.
+#102 pool-review-100/C10 [verdict_dispute] Matching the remote host to a provider only works for a base URL of exactly http://<remote_host>:8080
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'nuisance/plausible'}
+  S: An endpoint whose origin differs from the managed server is not automatically associated with that server for enablement changes.
+  O: An operator's ssh alias for the GPU host differs from the host in the provider's address, or the server uses a port other than 8080. `local up`/`down` then never enables or disables that provider, and the health check probes a guessed address without the API key.
+#103 pool-review-101/C4 [verdict_dispute] Baseline cache entries from before redaction are still reused
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={}
+  S: The claimed cross-upgrade cache reuse does not occur because the factory build commit changes the cache key.
+  O: Passing baseline results cached before the upgrade still hold unredacted output. For up to 7 days, new runs on the same base reuse them and copy that text into new run artifacts and events. The data is already in the store, so this spreads it further rather than exposing anything new.
+#104 pool-review-103/C2b [split_one_side] Do not redact execution fields when restoring run state
+  sol=REAL/blocker/introduced opus=None/None/None raters={'sonnet': 'wrong/plausible', 'terra': 'wrong/plausible'}
+  S: An operator resumes a run whose saved test command contains literal color sequences. Restoration changes the trusted command snapshot, and the audit incorrectly reports that the unchanged test script was modified.
+#105 pool-review-103/C5 [agree_minor] Artifact endpoint rewrites artifact content (reformats JSON, strips control characters from text artifacts)
+  sol=REAL/minor/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/normal', 'terra': 'wrong/plausible'}
+  S: An operator downloads a stored patch containing literal terminal sequences. The endpoint silently removes those bytes, so the downloaded diagnostic artifact describes different source text.
+  O: Someone opens a run artifact in the UI or API and gets compacted JSON with an extra field that was never stored, or a diff whose escape sequences were removed, instead of the stored bytes. Display and diagnostics suffer, and no persisted data changes.
+#106 pool-review-103/C7 [agree_minor] Out-of-scope API-wide rewrite changes every JSON response, every SSE message and every artifact download
+  sol=REAL/minor/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/normal', 'terra': 'wrong/plausible'}
+  S: An operator reads an artifact or event through the API. The response can contain altered diagnostic text, including a patch whose literal terminal sequences were removed.
+  O: Every API JSON response and SSE message now has escape sequences stripped from all strings and gets an added confinementError field on any object with ok and output. Artifacts are reserialized. Clients see altered display text, but the UI renders no ANSI and the field is additive.
+#107 pool-review-103/C6 [agree_minor] Review prompt input redaction strips terminal escape sequences from the patch under review
+  sol=REAL/minor/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'}
+  S: A reviewer receives an inline patch containing literal terminal sequences in source text. Prompt construction removes those sequences, so the inline evidence differs from the actual change and can obscure what needs inspection.
+  O: A change adds raw terminal color or cursor escape sequences to a source file or fixture. The reviewer model gets the patch with those sequences removed, so it can't see or flag them. Only escape sequences are hidden, not ordinary code.
+#108 pool-review-104/C5 [agree_minor] Privacy filter now withholds any text that contains the literal "[redacted]"
+  sol=REAL/minor/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/normal', 'terra': 'wrong/plausible'}
+  S: An operator reads an already-redacted failure through MCP or the digest. The entire diagnostic disappears, including useful information that contains no secret.
+  O: An MCP client or the digest command reads a run error, gate output or issue text that already contains the redaction marker. The whole field is now replaced with a 'withheld' placeholder, where the redacted text used to be shown, so operators lose diagnostics the request never asked to hide.
+#109 pool-review-104/C7 [sev_dispute] redactGateData is applied to whole API, prompt, report and state payloads and changes data that is not gate output
+  sol=REAL/blocker/introduced opus=REAL/minor/introduced raters={'sonnet': 'state/unusual', 'terra': 'state/plausible'}
+  S: An existing run contains an answer specifying literal terminal escape sequences. Resuming the run removes those sequences from the answer, and the next save permanently overwrites the original instructions.
+  O: Every API response, live-update message, loaded run state, cached stage value and prompt input now goes through a full JSON copy that strips terminal escape codes from every string. Any object with 'ok' and 'output' fields also gains a confinementError field, and the run state is saved back in that 
+#110 pool-review-104/C8 [verdict_dispute] Artifact endpoint re-serialises pretty-printed JSON artifacts into compact JSON
+  sol=NOT_REAL/None/None opus=REAL/minor/introduced raters={'sonnet': 'nuisance/normal', 'terra': 'nuisance/normal'}
+  S: Transport compaction occurs, but the claimed single-line UI regression is contradicted by the artifact renderer.
+  O: An operator opens a gate-results artifact in the UI. The file was stored pretty-printed but is now served as one long compact JSON line, which is harder to read.
+#111 pool-review-105/C4 [agree_minor] Privacy filter now withholds any text containing "[redacted]" in full
+  sol=REAL/minor/introduced opus=REAL/minor/introduced raters={'sonnet': 'nuisance/plausible', 'terra': 'wrong/normal'}
+  S: An operator requests a failure explanation containing an already-redacted password. The privacy filter removes the entire explanation, including the useful assertion details.
+  O: An operator uses the MCP tools or the digest to look at a run whose error, feedback or gate output had a credential redacted, or that just mentions the word "[redacted]". The whole field is replaced with "[withheld: private text]" instead of showing the redacted text, so the diagnostics are lost.
+#112 pool-review-105/C7 [sev_dispute] Whole prompt inputs (including the patch under review) go through gate-output sanitization
+  sol=REAL/minor/introduced opus=REAL/major/introduced raters={'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'}
+  S: A contributor changes source text containing literal terminal escape bytes. The inline patch shown to the reviewer removes those bytes, obscuring the actual change.
+  O: An external pull request adds terminal escape sequences to a source file, for example to hide or rewrite what a terminal shows. In the verify-change flow, the review model gets the diff with those sequences silently removed, so it reviews a different diff from the one that would merge and cannot fla
+#113 pool-review-105/C8 [verdict_dispute] New `stdoutTruncated`/`stderrTruncated` result fields are unused
+  sol=NOT_REAL/None/None opus=REAL/nit/introduced raters={}
+  S: No behavioral failure was established.
+  O: The process runner now reports whether each output stream was cut short, but nothing in the product reads those two flags, so they are unused code that works against the line budget.
+#114 pool-review-106/C1 [sev_dispute] Preserve executable configuration when restoring run state
+  sol=REAL/blocker/introduced opus=REAL/minor/introduced raters={'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'}
+  S: An operator resumes a run whose saved gate command contains a registered credential. Loading replaces that credential inside the executable command, and subsequent checkpoints save the altered configuration, causing an unchanged check to fail after restart.
+  O: When a run is restarted, every text field in its saved state, including the gate commands it will run next and its phase name, goes through credential redaction and terminal-code stripping. If a registered credential appears in a gate command, or a short credential exactly equals a field such as the
+#115 pool-review-106/C2 [sev_dispute] Detect sandbox startup before redacting its marker
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'outage/unusual', 'terra': 'wrong/plausible'}
+  S: An operator configures a provider credential such as "limitless" that also occurs in the sandbox startup marker. Successful gate commands are rejected as confinement startup failures, blocking runs and landing.
+  O: If a registered credential is a substring of the sandbox start marker (for example the word 'limitless'), redaction rewrites the marker before the sandbox wrapper looks for it. Every gate then fails with a confinement error even though the command ran fine.
+#116 pool-review-106/C4b [split_one_side] Restrict gate-specific object rewriting to gate results
+  sol=REAL/minor/introduced opus=None/None/None raters={'sonnet': 'nuisance/plausible', 'terra': 'wrong/plausible'}
+  S: A patch or request contains literal terminal escape sequences as meaningful data. Applying gate-output normalization to the entire object removes those bytes and changes the content presented to users or models.
+#117 pool-review-106/C9 [verdict_dispute] stdoutTruncated/stderrTruncated added but unused in source
+  sol=NOT_REAL/None/None opus=REAL/nit/introduced raters={'sonnet': 'diag/normal', 'terra': 'nuisance/normal'}
+  S: No behavioral failure follows from returning additional optional truncation metadata.
+  O: Two new result fields are added that no production code reads; only tests use them. This is extra surface with no behavioural effect.
+#118 pool-review-119/C2 [verdict_dispute] Raw diagnostics become agent-readable after rollback
+  sol=REAL/blocker/introduced opus=NOT_REAL/None/None raters={'sonnet': 'compat/plausible', 'terra': 'boundary/plausible'}
+  S: The owner runs the new release and then rolls back. An editor launched by the previous release can read the retained owner diagnostics directly from the shared database.
+  O: The base release already lets agents read the database, and the holdout is stored in plain form in runs.state_json, so the leftover owner rows open no new exposure after a rollback.
+#119 pool-review-119/C4 [verdict_dispute] Preview code can read and publish the new owner-only table
+  sol=REAL/blocker/newly_exposed opus=NOT_REAL/None/None raters={'sonnet': 'nuisance/unusual', 'terra': 'secret/plausible'}
+  S: An implementer changes an existing preview build script to read owner diagnostics and print them before failing. The factory copies that private text into the public stage summary, exposing it through ordinary run details.
+  O: Unconfined preview code could already read the holdout from the same database before this change, so the new table neither creates nor widens that exposure, and the request did not cover preview.
+#120 pool-review-127/C1 [sev_dispute] Handle interrupted gate completion before rejecting cached evidence
+  sol=REAL/major/introduced opus=REAL/minor/introduced raters={'sonnet': 'wrong/unusual', 'terra': 'wrong/plausible'}
+  S: The daemon stops after saving passing gate results but before marking the gate stage complete. After restart, unchanged work passes audit, review and verification, yet delivery unnecessarily stops for human intervention.
+  O: The daemon is hard-killed in the instant after the gate results are saved but before the gates step is marked finished. On restart the saved results are reused and the step stays marked 'running', so the new delivery check refuses an unchanged, fully checked commit and the run ends needing a human.
+#121 pool-review-127/C2 [verdict_dispute] Errors before the guard can still push through draft fallback
+  sol=REAL/major/requirement_gap opus=NOT_REAL/None/None raters={'sonnet': 'nuisance/unusual', 'terra': 'bypass/plausible'}
+  S: An operator restarts delivery after the worktree commit was amended, and the initial pull-request lookup fails. The factory pushes the previously verified commit and opens a draft instead of refusing all pushes and reporting both commit IDs.
+  O: In this path the fallback pushes the reviewed commit, not the amended HEAD, so no unchecked commit is published.
+#122 pool-review-127/C3 [agree_gold] Pending-merge exception accepts unreviewed amendments
+  sol=REAL/major/requirement_gap opus=REAL/major/requirement_gap raters={'sonnet': 'bypass/unusual', 'terra': 'wrong/plausible'}
+  S: Delivery stops after creating a clean merge, and someone amends that merge with additional file changes. On restart, the factory accepts the preserved parents, runs gates and publishes the amendment without auditing or reviewing it.
+  O: A run stops during post-merge gates, after the factory finished its clean merge with the new base. Someone amends that merge commit with extra file changes but keeps both parents. On restart the new delivery check accepts it because the parents match, the gates run on the amended tree, and the amend

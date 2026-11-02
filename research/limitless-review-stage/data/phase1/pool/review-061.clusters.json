@@ -1,0 +1,29 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P3",
+    "P4",
+    "P5",
+    "P6",
+    "P7",
+    "P9",
+    "P10"
+   ],
+   "mechanism": "Orphan fallback in processes-darwin.ts treats any hidden-environment process born during the invocation with a cwd under the worktree as an invocation member without proof of ancestry or marker ownership, so cleanup signals unrelated processes."
+  },
+  {
+   "members": [
+    "P2"
+   ],
+   "mechanism": "The gate-timeout rerun's second checkoutCommitted call omits retryClean, so a failing clean throws CommandError instead of WorktreeCleanError and bypasses the recovery handler."
+  },
+  {
+   "members": [
+    "P8"
+   ],
+   "mechanism": "Process-group/session membership is only accepted for hidden-environment processes, so a same-group descendant with a visible explicit environment lacking markers is missed and left running."
+  }
+ ]
+}

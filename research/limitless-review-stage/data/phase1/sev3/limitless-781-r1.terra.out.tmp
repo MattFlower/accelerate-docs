@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"outage","trigger":"normal","reason":"A normal release build retains Babel, causing the required validation to reject and delete the binary and preventing release delivery."}]}

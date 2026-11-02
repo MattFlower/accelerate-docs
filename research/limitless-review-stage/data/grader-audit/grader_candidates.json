@@ -1,0 +1,4699 @@
+[
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-046",
+  "trial": 0,
+  "gold": "A pinned candidate slot deadline exits without recording the chain-exhaustion question.",
+  "gold_file": "src/pipeline/context.ts",
+  "gold_lines": [
+   549,
+   552
+  ],
+  "cands": [
+   [
+    0.1,
+    true,
+    "src/pipeline/context.ts",
+    480,
+    "Retain the blocked verifier exclusion during environment retries"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-046",
+  "trial": 0,
+  "gold": "A pinned candidate slot deadline exits without recording the chain-exhaustion question.",
+  "gold_file": "src/pipeline/context.ts",
+  "gold_lines": [
+   549,
+   552
+  ],
+  "cands": [
+   [
+    0.2,
+    true,
+    "src/pipeline/context.ts",
+    480,
+    "Preserve the blocked verifier exclusion during environment retries"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-046",
+  "trial": 1,
+  "gold": "A pinned candidate slot deadline exits without recording the chain-exhaustion question.",
+  "gold_file": "src/pipeline/context.ts",
+  "gold_lines": [
+   549,
+   552
+  ],
+  "cands": [
+   [
+    0.2,
+    true,
+    "src/pipeline/context.ts",
+    480,
+    "Preserve verifier exclusions for environment retries"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-046",
+  "trial": 1,
+  "gold": "A pinned candidate slot deadline exits without recording the chain-exhaustion question.",
+  "gold_file": "src/pipeline/context.ts",
+  "gold_lines": [
+   549,
+   552
+  ],
+  "cands": [
+   [
+    0.3,
+    true,
+    "src/pipeline/context.ts",
+    480,
+    "Preserve the excluded verifier when retrying blocked verification"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "Arbitrary assertion text mentioning a timeout is classified as a transient CI failure.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   321,
+   327
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    187,
+    "Reconcile reruns whose POST response was lost"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "Retry eligibility ignores security failures outside the selected error line.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   297,
+   304
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    187,
+    "Reconcile reruns whose POST response was lost"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "Arbitrary assertion text mentioning a timeout is classified as a transient CI failure.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   321,
+   327
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/integrations/ci-classifier.ts",
+    263,
+    "Main-red failures bypass the job logs needed for ledger signatures"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "Retry eligibility ignores security failures outside the selected error line.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   297,
+   304
+  ],
+  "cands": [
+   [
+    0.22,
+    true,
+    "src/integrations/ci-classifier.ts",
+    263,
+    "Main-red failures bypass the job logs needed for ledger signatures"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "An accepted rerun with a lost response is never reconciled to its later result.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   185,
+   190
+  ],
+  "cands": [
+   [
+    0.11,
+    true,
+    "src/integrations/ci-classifier.ts",
+    263,
+    "Main-red failures bypass the job logs needed for ledger signatures"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "Arbitrary assertion text mentioning a timeout is classified as a transient CI failure.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   321,
+   327
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/integrations/ci-classifier.ts",
+    187,
+    "Reconcile reruns whose POST response was lost"
+   ],
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    280,
+    "Match repository casing consistently in job URLs"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "Retry eligibility ignores security failures outside the selected error line.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   297,
+   304
+  ],
+  "cands": [
+   [
+    0.11,
+    true,
+    "src/integrations/ci-classifier.ts",
+    280,
+    "Match repository casing consistently in job URLs"
+   ],
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    187,
+    "Reconcile reruns whose POST response was lost"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "Arbitrary assertion text mentioning a timeout is classified as a transient CI failure.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   321,
+   327
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    187,
+    "Lost POST responses prevent confirmed reruns from entering the flake ledger"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "Retry eligibility ignores security failures outside the selected error line.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   297,
+   304
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    187,
+    "Lost POST responses prevent confirmed reruns from entering the flake ledger"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-053",
+  "trial": 0,
+  "gold": "Passing security-test output incorrectly prevents a transient CI rerun.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   345,
+   346
+  ],
+  "cands": [
+   [
+    0.25,
+    true,
+    "src/integrations/ci-classifier.ts",
+    388,
+    "A definitively rejected rerun remains pending forever"
+   ],
+   [
+    0.25,
+    true,
+    "src/integrations/ci-classifier.ts",
+    315,
+    "Case-sensitive repository URLs reject valid GitHub jobs"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-053",
+  "trial": 0,
+  "gold": "Passing security-test output incorrectly prevents a transient CI rerun.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   345,
+   346
+  ],
+  "cands": [
+   [
+    0.25,
+    true,
+    "src/integrations/ci-classifier.ts",
+    388,
+    "A rejected rerun request leaves classification pending forever"
+   ],
+   [
+    0.25,
+    true,
+    "src/integrations/ci-classifier.ts",
+    296,
+    "Main-red failures never enter the flake ledger"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-053",
+  "trial": 1,
+  "gold": "Passing security-test output incorrectly prevents a transient CI rerun.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   345,
+   346
+  ],
+  "cands": [
+   [
+    0.38,
+    true,
+    "src/integrations/ci-classifier.ts",
+    388,
+    "Rejected reruns remain pending forever"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-053",
+  "trial": 1,
+  "gold": "Passing security-test output incorrectly prevents a transient CI rerun.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   345,
+   346
+  ],
+  "cands": [
+   [
+    0.25,
+    true,
+    "src/integrations/ci-classifier.ts",
+    388,
+    "Definitively rejected reruns remain pending forever"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-054",
+  "trial": 0,
+  "gold": "Rate-limit refusals leave rerun claims unresolved across cooldowns and restarts.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   394,
+   400
+  ],
+  "cands": [
+   [
+    0.1,
+    true,
+    "src/integrations/ci-classifier.ts",
+    411,
+    "Keep newly requested reruns pending until their outcome is observed"
+   ],
+   [
+    0.1,
+    true,
+    "src/integrations/ci-classifier.ts",
+    43,
+    "Strip ANSI escapes before matching security failures and timeouts"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-054",
+  "trial": 0,
+  "gold": "ANSI-colored Bun failures and pytest security failures are missed by the retry exclusion.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   42,
+   48
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/integrations/ci-classifier.ts",
+    395,
+    "Rate-limited rerun requests remain pending forever"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-054",
+  "trial": 1,
+  "gold": "ANSI-colored Bun failures and pytest security failures are missed by the retry exclusion.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   42,
+   48
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/integrations/ci-classifier.ts",
+    303,
+    "Main-red failures bypass the failure ledger"
+   ],
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    395,
+    "Rate-limit rejection leaves the rerun permanently pending"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-056",
+  "trial": 1,
+  "gold": "Catalog mutation can invalidate a shadowed retained policy and prevent the daemon from restarting.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   71,
+   76
+  ],
+  "cands": [
+   [
+    0.1,
+    true,
+    "src/router/runtime-catalog.ts",
+    56,
+    "PATCH cannot clear a default effort"
+   ],
+   [
+    0.1,
+    true,
+    "src/router/runtime-catalog.ts",
+    41,
+    "Backend corrections retain the old model rejection"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-056",
+  "trial": 1,
+  "gold": "Catalog mutation can invalidate a shadowed retained policy and prevent the daemon from restarting.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   71,
+   76
+  ],
+  "cands": [
+   [
+    0.2,
+    true,
+    "src/router/runtime-catalog.ts",
+    40,
+    "Clear stale model rejection blocks when replacing a backend"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-057",
+  "trial": 0,
+  "gold": "Effort removal is persisted without checking policy cells hidden by operator overrides.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   71,
+   76
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/router/runtime-catalog.ts",
+    41,
+    "Clear stale model rejection blocks when replacing a backend"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-057",
+  "trial": 0,
+  "gold": "Effort removal is persisted without checking policy cells hidden by operator overrides.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   71,
+   76
+  ],
+  "cands": [
+   [
+    0.1,
+    true,
+    "src/router/runtime-catalog.ts",
+    58,
+    "Allow PATCH to clear a model's default effort"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Routing previews remain stale after quota or cooldown expiry without an event.",
+  "gold_file": "ui/pages/Setup.tsx",
+  "gold_lines": [
+   78,
+   88
+  ],
+  "cands": [
+   [
+    0.1,
+    true,
+    "ui/pages/Setup.tsx",
+    37,
+    "Catalog history disappears when Setup is closed"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Catalog history disappears on reload and does not include changes made by another client.",
+  "gold_file": "ui/pages/Setup.tsx",
+  "gold_lines": [
+   619,
+   625
+  ],
+  "cands": [
+   [
+    0.5,
+    true,
+    "ui/pages/Setup.tsx",
+    37,
+    "Catalog history disappears when Setup is closed"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Routing previews remain stale after quota or cooldown expiry without an event.",
+  "gold_file": "ui/pages/Setup.tsx",
+  "gold_lines": [
+   78,
+   88
+  ],
+  "cands": [
+   [
+    0.1,
+    true,
+    "ui/pages/Setup.tsx",
+    619,
+    "Catalog history only records changes made in the current page session"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Routing previews remain stale after quota or cooldown expiry without an event.",
+  "gold_file": "ui/pages/Setup.tsx",
+  "gold_lines": [
+   78,
+   88
+  ],
+  "cands": [
+   [
+    0.2,
+    true,
+    "ui/pages/Setup.tsx",
+    37,
+    "Catalog history disappears on navigation and excludes external changes"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Catalog history disappears on reload and does not include changes made by another client.",
+  "gold_file": "ui/pages/Setup.tsx",
+  "gold_lines": [
+   619,
+   625
+  ],
+  "cands": [
+   [
+    0.5,
+    true,
+    "ui/pages/Setup.tsx",
+    37,
+    "Catalog history disappears on navigation and excludes external changes"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Routing previews remain stale after quota or cooldown expiry without an event.",
+  "gold_file": "ui/pages/Setup.tsx",
+  "gold_lines": [
+   78,
+   88
+  ],
+  "cands": [
+   [
+    0.1,
+    true,
+    "ui/pages/Setup.tsx",
+    619,
+    "Catalog history is limited to the mounted page"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-070",
+  "trial": 0,
+  "gold": "Embedded short registered secrets remain visible in digest fields.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   115,
+   119
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/cli/digest.ts",
+    35,
+    "Include PR changes that invalidate an acknowledged approval"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-070",
+  "trial": 0,
+  "gold": "Embedded short registered secrets remain visible in digest fields.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   115,
+   119
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/cli/digest.ts",
+    92,
+    "Suppress blocked lands for confirmed merged runs"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-070",
+  "trial": 1,
+  "gold": "Embedded short registered secrets remain visible in digest fields.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   115,
+   119
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/cli/digest.ts",
+    90,
+    "Exclude PRs whose requested changes are still in progress"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-073",
+  "trial": 0,
+  "gold": "Digest title truncation occurs before filtering and discloses private prefixes.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   126,
+   130
+  ],
+  "cands": [
+   [
+    0.11,
+    true,
+    "src/cli/digest.ts",
+    52,
+    "Include PR observation events when identifying review work"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-073",
+  "trial": 0,
+  "gold": "Digest title truncation occurs before filtering and discloses private prefixes.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   126,
+   130
+  ],
+  "cands": [
+   [
+    0.22,
+    true,
+    "src/cli/digest.ts",
+    107,
+    "Exclude PRs whose review changes are still running"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-073",
+  "trial": 1,
+  "gold": "Digest title truncation occurs before filtering and discloses private prefixes.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   126,
+   130
+  ],
+  "cands": [
+   [
+    0.11,
+    true,
+    "src/cli/digest.ts",
+    103,
+    "Exclude active changes rounds from the review queue"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-073",
+  "trial": 1,
+  "gold": "Digest title truncation occurs before filtering and discloses private prefixes.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   126,
+   130
+  ],
+  "cands": [
+   [
+    0.11,
+    true,
+    "src/cli/digest.ts",
+    52,
+    "Unread PR updates can hide a newly stale approval"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-077",
+  "trial": 1,
+  "gold": "Queued chat dispatch uses a target whose origin became excluded after selection.",
+  "gold_file": "src/concierge.ts",
+  "gold_lines": [
+   282,
+   295
+  ],
+  "cands": [
+   [
+    0.45,
+    true,
+    "src/concierge.ts",
+    249,
+    "Revalidate origin eligibility after waiting for chat capacity"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-077",
+  "trial": 1,
+  "gold": "Queued eval dispatch does not revalidate origin eligibility after catalog changes.",
+  "gold_file": "src/evals/runner.ts",
+  "gold_lines": [
+   841,
+   849
+  ],
+  "cands": [
+   [
+    0.5,
+    false,
+    "src/concierge.ts",
+    249,
+    "Revalidate origin eligibility after waiting for chat capacity"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-087",
+  "trial": 0,
+  "gold": "Post-check publication scanning executes Git against mutable clone configuration.",
+  "gold_file": "scripts/land-pr.sh",
+  "gold_lines": [
+   74,
+   76
+  ],
+  "cands": [
+   [
+    0.44,
+    true,
+    "scripts/land-pr.sh",
+    98,
+    "Isolated status still executes clone configuration through submodules"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-087",
+  "trial": 1,
+  "gold": "Post-check publication scanning executes Git against mutable clone configuration.",
+  "gold_file": "scripts/land-pr.sh",
+  "gold_lines": [
+   74,
+   76
+  ],
+  "cands": [
+   [
+    0.44,
+    true,
+    "scripts/land-pr.sh",
+    98,
+    "Submodule status can execute the clone\u2019s configured filters"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-087",
+  "trial": 1,
+  "gold": "Post-check publication scanning executes Git against mutable clone configuration.",
+  "gold_file": "scripts/land-pr.sh",
+  "gold_lines": [
+   74,
+   76
+  ],
+  "cands": [
+   [
+    0.33,
+    true,
+    "scripts/land-pr.sh",
+    98,
+    "Isolated status still executes filters through tracked submodules"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-098",
+  "trial": 0,
+  "gold": "A runtime model attached to a retired provider prevents factory construction.",
+  "gold_file": "src/app.ts",
+  "gold_lines": [
+   100,
+   104
+  ],
+  "cands": [
+   [
+    0.62,
+    false,
+    "src/router/runtime-policy.ts",
+    27,
+    "Persisted routes referencing the removed model prevent startup"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "A runtime model attached to a retired provider prevents factory construction.",
+  "gold_file": "src/app.ts",
+  "gold_lines": [
+   100,
+   104
+  ],
+  "cands": [
+   [
+    0.5,
+    false,
+    "src/router/runtime-policy.ts",
+    27,
+    "Persisted routing references can prevent daemon startup"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+  "gold_file": "src/router/runtime-policy.ts",
+  "gold_lines": [
+   25,
+   31
+  ],
+  "cands": [
+   [
+    0.5,
+    false,
+    "src/router/catalog.ts",
+    94,
+    "Persisted references to the removed provider can prevent daemon startup"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "A runtime model attached to a retired provider prevents factory construction.",
+  "gold_file": "src/app.ts",
+  "gold_lines": [
+   100,
+   104
+  ],
+  "cands": [
+   [
+    0.5,
+    false,
+    "test/removed-models.test.ts",
+    145,
+    "Legacy eval resume is explicitly tested to fail"
+   ],
+   [
+    0.5,
+    false,
+    "src/router/catalog.ts",
+    94,
+    "Persisted references to the removed provider can prevent daemon startup"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "Historical run references prevent unrelated catalog mutations.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   61,
+   69
+  ],
+  "cands": [
+   [
+    0.5,
+    false,
+    "src/router/catalog.ts",
+    94,
+    "Persisted references to the removed provider can prevent daemon startup"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-099",
+  "trial": 1,
+  "gold": "Unavailable-target diagnostics expose registered credentials in routing API and Setup output.",
+  "gold_file": "src/router/runtime-policy.ts",
+  "gold_lines": [
+   113,
+   117
+  ],
+  "cands": [
+   [
+    0.33,
+    true,
+    "src/router/runtime-policy.ts",
+    29,
+    "Refresh filtered operator routing after catalog changes"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-100",
+  "trial": 0,
+  "gold": "Retired identifiers and catalog or routing history can publish registered credentials.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   27,
+   34
+  ],
+  "cands": [
+   [
+    0.38,
+    true,
+    "src/router/runtime-catalog.ts",
+    59,
+    "Validate persisted references revived by catalog additions"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-100",
+  "trial": 0,
+  "gold": "Retired identifiers and catalog or routing history can publish registered credentials.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   27,
+   34
+  ],
+  "cands": [
+   [
+    0.38,
+    true,
+    "src/router/runtime-catalog.ts",
+    59,
+    "Validate retired references that become live after a catalog addition"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-100",
+  "trial": 1,
+  "gold": "Retired identifiers and catalog or routing history can publish registered credentials.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   27,
+   34
+  ],
+  "cands": [
+   [
+    0.38,
+    true,
+    "src/router/runtime-catalog.ts",
+    59,
+    "Validate retired references reactivated by catalog additions"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@high",
+  "case": "review-103",
+  "trial": 0,
+  "gold": "JSON escaping lets ordinary logged credentials evade literal gate-output redaction.",
+  "gold_file": "src/gates/output.ts",
+  "gold_lines": [
+   7,
+   8
+  ],
+  "cands": [
+   [
+    0.18,
+    true,
+    "src/gates/output.ts",
+    35,
+    "Credential suffixes survive cuts inside ANSI sequences"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-103",
+  "trial": 0,
+  "gold": "JSON escaping lets ordinary logged credentials evade literal gate-output redaction.",
+  "gold_file": "src/gates/output.ts",
+  "gold_lines": [
+   7,
+   8
+  ],
+  "cands": [
+   [
+    0.27,
+    true,
+    "src/gates/output.ts",
+    35,
+    "Truncated ANSI sequences defeat the credential overlap removal"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-104",
+  "trial": 0,
+  "gold": "Lossy excerpt line framing prevents matching multiline credentials before storage.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   49,
+   53
+  ],
+  "cands": [
+   [
+    0.2,
+    true,
+    "src/gates/failures.ts",
+    36,
+    "Restore a byte bound on retained diagnostics"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-105",
+  "trial": 0,
+  "gold": "ANSI stripping after framing and tail cuts leaves accidental credential fragments visible.",
+  "gold_file": "src/gates/run.ts",
+  "gold_lines": [
+   71,
+   74
+  ],
+  "cands": [
+   [
+    0.18,
+    true,
+    "src/gates/run.ts",
+    90,
+    "Normalize terminal formatting before the process runner truncates output"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-106",
+  "trial": 1,
+  "gold": "An incomplete terminal escape consumes part of a credential before it can be matched.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   464,
+   467
+  ],
+  "cands": [
+   [
+    0.25,
+    true,
+    "src/util/proc.ts",
+    474,
+    "Overlapping credential matches make the streaming buffer unbounded"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv7igcxy1tl7bg203warej",
+  "system": "codex/sol-6.1@medium",
+  "case": "review-106",
+  "trial": 1,
+  "gold": "Terminal-control stripping changes with chunk boundaries and loses state at the hold limit.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   460,
+   467
+  ],
+  "cands": [
+   [
+    0.09,
+    true,
+    "src/util/proc.ts",
+    474,
+    "Overlapping credential matches make the streaming buffer unbounded"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-046",
+  "trial": 0,
+  "gold": "A pinned candidate slot deadline exits without recording the chain-exhaustion question.",
+  "gold_file": "src/pipeline/context.ts",
+  "gold_lines": [
+   549,
+   552
+  ],
+  "cands": [
+   [
+    0.2,
+    true,
+    "src/pipeline/context.ts",
+    480,
+    "Preserve the blocked verifier exclusion on verification retry"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "Arbitrary assertion text mentioning a timeout is classified as a transient CI failure.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   321,
+   327
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/integrations/ci-classifier.ts",
+    304,
+    "Security tests can be rerun when their names occur after the first error line"
+   ],
+   [
+    0.12,
+    true,
+    "src/integrations/ci-classifier.ts",
+    187,
+    "An accepted rerun with a lost response cannot become flake evidence"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "Arbitrary assertion text mentioning a timeout is classified as a transient CI failure.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   321,
+   327
+  ],
+  "cands": [
+   [
+    0.25,
+    true,
+    "src/integrations/ci-classifier.ts",
+    187,
+    "Reconcile reruns whose POST response was lost"
+   ],
+   [
+    0.12,
+    true,
+    "src/integrations/ci-classifier.ts",
+    223,
+    "Resolve completed reruns with skipped conclusions"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "Retry eligibility ignores security failures outside the selected error line.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   297,
+   304
+  ],
+  "cands": [
+   [
+    0.11,
+    true,
+    "src/integrations/ci-classifier.ts",
+    223,
+    "Resolve completed reruns with skipped conclusions"
+   ],
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    187,
+    "Reconcile reruns whose POST response was lost"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-053",
+  "trial": 0,
+  "gold": "Passing security-test output incorrectly prevents a transient CI rerun.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   345,
+   346
+  ],
+  "cands": [
+   [
+    0.38,
+    true,
+    "src/integrations/ci-classifier.ts",
+    229,
+    "A later sibling-only attempt hides the originating rerun"
+   ],
+   [
+    0.25,
+    true,
+    "src/integrations/ci-classifier.ts",
+    388,
+    "Rejected rerun requests remain pending indefinitely"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-053",
+  "trial": 1,
+  "gold": "Passing security-test output incorrectly prevents a transient CI rerun.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   345,
+   346
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/integrations/ci-classifier.ts",
+    388,
+    "A rejected rerun request leaves the failure pending forever"
+   ],
+   [
+    0.12,
+    true,
+    "src/integrations/ci-classifier.ts",
+    266,
+    "Completed skipped or neutral reruns never resolve"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-054",
+  "trial": 0,
+  "gold": "Rate-limit refusals leave rerun claims unresolved across cooldowns and restarts.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   394,
+   400
+  ],
+  "cands": [
+   [
+    0.1,
+    true,
+    "src/integrations/ci-classifier.ts",
+    51,
+    "Indented Playwright timeout diagnostics are not classified as transient"
+   ],
+   [
+    0.1,
+    true,
+    "src/integrations/ci-classifier.ts",
+    47,
+    "Playwright security failures can be automatically rerun"
+   ],
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    311,
+    "Main-red failures are omitted from the failure ledger"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-054",
+  "trial": 1,
+  "gold": "ANSI-colored Bun failures and pytest security failures are missed by the retry exclusion.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   42,
+   48
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    395,
+    "A rejected rate-limited rerun stays pending indefinitely"
+   ],
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    236,
+    "Reconciliation loses results when a later attempt reruns another job"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Routing previews remain stale after quota or cooldown expiry without an event.",
+  "gold_file": "ui/pages/Setup.tsx",
+  "gold_lines": [
+   78,
+   88
+  ],
+  "cands": [
+   [
+    0.1,
+    true,
+    "ui/pages/Setup.tsx",
+    621,
+    "Catalog history disappears when Setup is closed"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Routing previews remain stale after quota or cooldown expiry without an event.",
+  "gold_file": "ui/pages/Setup.tsx",
+  "gold_lines": [
+   78,
+   88
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "ui/pages/Setup.tsx",
+    619,
+    "Catalog history disappears on navigation and misses external changes"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-070",
+  "trial": 0,
+  "gold": "Embedded short registered secrets remain visible in digest fields.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   115,
+   119
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/cli/digest.ts",
+    35,
+    "Reconcile PR activity after an acknowledged approval becomes stale"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-070",
+  "trial": 1,
+  "gold": "Embedded short registered secrets remain visible in digest fields.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   115,
+   119
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/cli/digest.ts",
+    90,
+    "Exclude active review rounds from PRs awaiting review"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-071",
+  "trial": 1,
+  "gold": "Unicode and URL encodings evade privacy protection in status and digest fields.",
+  "gold_file": "src/integrations/mcp-status.ts",
+  "gold_lines": [
+   60,
+   64
+  ],
+  "cands": [
+   [
+    0.25,
+    true,
+    "src/integrations/mcp-status.ts",
+    9,
+    "Preserve and check the run's persisted merge flag"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-073",
+  "trial": 0,
+  "gold": "Digest title truncation occurs before filtering and discloses private prefixes.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   126,
+   130
+  ],
+  "cands": [
+   [
+    0.22,
+    true,
+    "src/cli/digest.ts",
+    52,
+    "Include unread PR events when discovering review candidates"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-073",
+  "trial": 1,
+  "gold": "Digest title truncation occurs before filtering and discloses private prefixes.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   126,
+   130
+  ],
+  "cands": [
+   [
+    0.22,
+    true,
+    "src/cli/digest.ts",
+    52,
+    "Reconcile unread PR activity when selecting review candidates"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-077",
+  "trial": 0,
+  "gold": "Queued chat dispatch uses a target whose origin became excluded after selection.",
+  "gold_file": "src/concierge.ts",
+  "gold_lines": [
+   282,
+   295
+  ],
+  "cands": [
+   [
+    0.36,
+    true,
+    "src/concierge.ts",
+    249,
+    "Recheck origin eligibility after waiting for model capacity"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-077",
+  "trial": 0,
+  "gold": "Queued eval dispatch does not revalidate origin eligibility after catalog changes.",
+  "gold_file": "src/evals/runner.ts",
+  "gold_lines": [
+   841,
+   849
+  ],
+  "cands": [
+   [
+    0.5,
+    false,
+    "src/concierge.ts",
+    249,
+    "Recheck origin eligibility after waiting for model capacity"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-077",
+  "trial": 1,
+  "gold": "Queued chat dispatch uses a target whose origin became excluded after selection.",
+  "gold_file": "src/concierge.ts",
+  "gold_lines": [
+   282,
+   295
+  ],
+  "cands": [
+   [
+    0.45,
+    true,
+    "src/concierge.ts",
+    249,
+    "Recheck exclusions after waiting for chat capacity"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-087",
+  "trial": 0,
+  "gold": "Post-check publication scanning executes Git against mutable clone configuration.",
+  "gold_file": "scripts/land-pr.sh",
+  "gold_lines": [
+   74,
+   76
+  ],
+  "cands": [
+   [
+    0.33,
+    true,
+    "scripts/land-pr.sh",
+    98,
+    "Isolated status still executes submodule repository configuration"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-098",
+  "trial": 0,
+  "gold": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+  "gold_file": "src/router/runtime-policy.ts",
+  "gold_lines": [
+   25,
+   31
+  ],
+  "cands": [
+   [
+    0.5,
+    false,
+    "src/router/catalog.ts",
+    94,
+    "Persisted references to the removed provider can prevent daemon startup"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-098",
+  "trial": 0,
+  "gold": "Historical run references prevent unrelated catalog mutations.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   61,
+   69
+  ],
+  "cands": [
+   [
+    0.67,
+    false,
+    "src/router/catalog.ts",
+    94,
+    "Persisted references to the removed provider can prevent daemon startup"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+  "gold_file": "src/router/runtime-policy.ts",
+  "gold_lines": [
+   25,
+   31
+  ],
+  "cands": [
+   [
+    0.5,
+    false,
+    "src/router/catalog.ts",
+    94,
+    "Persisted provider preferences can prevent daemon startup"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "Historical run references prevent unrelated catalog mutations.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   61,
+   69
+  ],
+  "cands": [
+   [
+    0.67,
+    false,
+    "src/router/catalog.ts",
+    426,
+    "Historical run pins block unrelated catalog mutations"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-100",
+  "trial": 0,
+  "gold": "Retired identifiers and catalog or routing history can publish registered credentials.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   27,
+   34
+  ],
+  "cands": [
+   [
+    0.38,
+    true,
+    "src/router/runtime-catalog.ts",
+    59,
+    "Restoring a retired model ID can persist state that prevents startup"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-103",
+  "trial": 1,
+  "gold": "Line callbacks store pieces of multiline credentials in failure excerpts.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   17,
+   18
+  ],
+  "cands": [
+   [
+    0.5,
+    false,
+    "src/gates/run.ts",
+    74,
+    "Multiline credentials survive in stored failure excerpts"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-104",
+  "trial": 0,
+  "gold": "Lossy excerpt line framing prevents matching multiline credentials before storage.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   49,
+   53
+  ],
+  "cands": [
+   [
+    0.5,
+    true,
+    "src/gates/failures.ts",
+    21,
+    "Per-line redaction prevents complete multiline credential matching"
+   ],
+   [
+    0.1,
+    true,
+    "src/gates/failures.ts",
+    36,
+    "Failure diagnostics no longer have a bounded character budget"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv8gnw6f03ggcas1ml9ate",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-105",
+  "trial": 0,
+  "gold": "ANSI stripping after framing and tail cuts leaves accidental credential fragments visible.",
+  "gold_file": "src/gates/run.ts",
+  "gold_lines": [
+   71,
+   74
+  ],
+  "cands": [
+   [
+    0.36,
+    true,
+    "src/gates/run.ts",
+    87,
+    "Terminal normalization happens after the runner truncates output"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-040",
+  "trial": 0,
+  "gold": "Configuration errors and encoded feed diagnostics can disclose registered secrets.",
+  "gold_file": "src/cli/setup.ts",
+  "gold_lines": [
+   24,
+   30
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/cli/setup.ts",
+    207,
+    "Apply new configuration to an already healthy daemon"
+   ],
+   [
+    0.12,
+    true,
+    "src/cli/setup.ts",
+    190,
+    "Check access to newly selected repositories before writing"
+   ],
+   [
+    0.0,
+    true,
+    "src/cli/setup.ts",
+    269,
+    "Smoke-test the effective configured providers"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-040",
+  "trial": 0,
+  "gold": "Configuration errors and encoded feed diagnostics can disclose registered secrets.",
+  "gold_file": "src/cli/setup.ts",
+  "gold_lines": [
+   24,
+   30
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/cli/setup.ts",
+    207,
+    "Apply changed config to an already-running daemon"
+   ],
+   [
+    0.0,
+    true,
+    "src/cli/setup.ts",
+    269,
+    "Run smoke checks against the effective provider catalog"
+   ],
+   [
+    0.0,
+    true,
+    "src/cli/setup.ts",
+    189,
+    "Check requested repository access before writing config"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-040",
+  "trial": 0,
+  "gold": "Doctor omits health probes for implicit providers and presets lacking an explicit health URL.",
+  "gold_file": "src/cli/setup.ts",
+  "gold_lines": [
+   79,
+   95
+  ],
+  "cands": [
+   [
+    0.22,
+    true,
+    "src/cli/setup.ts",
+    269,
+    "Run smoke checks against the effective provider catalog"
+   ],
+   [
+    0.11,
+    true,
+    "src/cli/setup.ts",
+    207,
+    "Apply changed config to an already-running daemon"
+   ],
+   [
+    0.11,
+    true,
+    "src/cli/setup.ts",
+    189,
+    "Check requested repository access before writing config"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-040",
+  "trial": 1,
+  "gold": "Configuration errors and encoded feed diagnostics can disclose registered secrets.",
+  "gold_file": "src/cli/setup.ts",
+  "gold_lines": [
+   24,
+   30
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/cli/setup.ts",
+    269,
+    "Run smoke checks against the configured provider catalog"
+   ],
+   [
+    0.0,
+    true,
+    "src/cli/setup.ts",
+    223,
+    "Implement the requested discreet-mode setup choice"
+   ],
+   [
+    0.0,
+    true,
+    "src/cli/setup.ts",
+    207,
+    "Apply newly written settings to an already healthy daemon"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-040",
+  "trial": 1,
+  "gold": "Doctor omits health probes for implicit providers and presets lacking an explicit health URL.",
+  "gold_file": "src/cli/setup.ts",
+  "gold_lines": [
+   79,
+   95
+  ],
+  "cands": [
+   [
+    0.22,
+    true,
+    "src/cli/setup.ts",
+    269,
+    "Run smoke checks against the configured provider catalog"
+   ],
+   [
+    0.11,
+    true,
+    "src/cli/setup.ts",
+    223,
+    "Implement the requested discreet-mode setup choice"
+   ],
+   [
+    0.11,
+    true,
+    "src/cli/setup.ts",
+    207,
+    "Apply newly written settings to an already healthy daemon"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-040",
+  "trial": 1,
+  "gold": "Configuration errors and encoded feed diagnostics can disclose registered secrets.",
+  "gold_file": "src/cli/setup.ts",
+  "gold_lines": [
+   24,
+   30
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/cli/setup.ts",
+    220,
+    "Limit smoke checks to available setup providers"
+   ],
+   [
+    0.12,
+    true,
+    "src/cli/setup.ts",
+    207,
+    "Apply configuration changes to an already healthy daemon"
+   ],
+   [
+    0.12,
+    true,
+    "src/cli/setup.ts",
+    190,
+    "Check access to requested repositories before persisting setup"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-040",
+  "trial": 1,
+  "gold": "Doctor omits health probes for implicit providers and presets lacking an explicit health URL.",
+  "gold_file": "src/cli/setup.ts",
+  "gold_lines": [
+   79,
+   95
+  ],
+  "cands": [
+   [
+    0.33,
+    true,
+    "src/cli/setup.ts",
+    220,
+    "Limit smoke checks to available setup providers"
+   ],
+   [
+    0.11,
+    true,
+    "src/cli/setup.ts",
+    207,
+    "Apply configuration changes to an already healthy daemon"
+   ],
+   [
+    0.11,
+    true,
+    "src/cli/setup.ts",
+    190,
+    "Check access to requested repositories before persisting setup"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-048",
+  "trial": 0,
+  "gold": "The WebP inspector rejects valid lossy VP8 images.",
+  "gold_file": "src/gates/media.ts",
+  "gold_lines": [
+   515,
+   524
+  ],
+  "cands": [
+   [
+    0.5,
+    true,
+    "src/gates/media.ts",
+    33,
+    "Do not classify incidental media bytes as executable payloads"
+   ],
+   [
+    0.33,
+    true,
+    "src/gates/media.ts",
+    126,
+    "Preserve the exemption for PNGs with ordinary metadata"
+   ],
+   [
+    0.33,
+    true,
+    "src/gates/media.ts",
+    44,
+    "Avoid imposing an unrequested decoded media size cutoff"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-048",
+  "trial": 0,
+  "gold": "The WebP inspector rejects valid lossy VP8 images.",
+  "gold_file": "src/gates/media.ts",
+  "gold_lines": [
+   515,
+   524
+  ],
+  "cands": [
+   [
+    0.33,
+    true,
+    "src/gates/media.ts",
+    34,
+    "Do not reject ordinary media based on incidental byte sequences"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-048",
+  "trial": 1,
+  "gold": "LFS exemptions permit missing payloads and pointer replacements containing archives.",
+  "gold_file": "src/git/repos.ts",
+  "gold_lines": [
+   904,
+   911
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/git/repos.ts",
+    888,
+    "Do not remove media exemptions above 32 MiB"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-048",
+  "trial": 1,
+  "gold": "The limited text sample exempts a TAR whose first binary byte lies beyond the sample.",
+  "gold_file": "src/git/repos.ts",
+  "gold_lines": [
+   904,
+   910
+  ],
+  "cands": [
+   [
+    0.2,
+    true,
+    "src/git/repos.ts",
+    888,
+    "Do not remove media exemptions above 32 MiB"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-048",
+  "trial": 1,
+  "gold": "The WebP inspector rejects valid lossy VP8 images.",
+  "gold_file": "src/gates/media.ts",
+  "gold_lines": [
+   515,
+   524
+  ],
+  "cands": [
+   [
+    0.33,
+    true,
+    "src/gates/media.ts",
+    126,
+    "Preserve exemptions for valid media containing ordinary metadata"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-048",
+  "trial": 1,
+  "gold": "The WebP inspector rejects valid lossy VP8 images.",
+  "gold_file": "src/gates/media.ts",
+  "gold_lines": [
+   515,
+   524
+  ],
+  "cands": [
+   [
+    0.33,
+    true,
+    "src/gates/media.ts",
+    126,
+    "Do not reject ordinary media metadata"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-049",
+  "trial": 0,
+  "gold": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+  "gold_file": "src/gates/media.ts",
+  "gold_lines": [
+   43,
+   45
+  ],
+  "cands": [
+   [
+    0.27,
+    true,
+    "src/gates/media.ts",
+    125,
+    "Do not reject valid PNGs with ordinary metadata"
+   ],
+   [
+    0.09,
+    true,
+    "src/gates/media.ts",
+    33,
+    "Do not classify ordinary text by embedded signature substrings"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-049",
+  "trial": 0,
+  "gold": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+  "gold_file": "src/gates/media.ts",
+  "gold_lines": [
+   43,
+   45
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/gates/media.ts",
+    33,
+    "Do not treat arbitrary text substrings as binary formats"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-049",
+  "trial": 1,
+  "gold": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+  "gold_file": "src/gates/media.ts",
+  "gold_lines": [
+   43,
+   45
+  ],
+  "cands": [
+   [
+    0.27,
+    true,
+    "src/gates/media.ts",
+    125,
+    "Allow ordinary PNG metadata"
+   ],
+   [
+    0.09,
+    true,
+    "src/gates/media.ts",
+    33,
+    "Do not classify arbitrary signature substrings as binary"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-049",
+  "trial": 1,
+  "gold": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+  "gold_file": "src/gates/media.ts",
+  "gold_lines": [
+   43,
+   45
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/gates/media.ts",
+    33,
+    "Do not classify visible source strings as opaque binaries"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-060",
+  "trial": 0,
+  "gold": "Process cleanup returns while owned descendants are still alive.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   146,
+   151
+  ],
+  "cands": [
+   [
+    0.25,
+    true,
+    "src/util/proc.ts",
+    129,
+    "Process-group termination does not kill the whole descendant tree"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-060",
+  "trial": 0,
+  "gold": "Discarding changes replaces the cleanup error that should trigger round recovery.",
+  "gold_file": "src/pipeline/engine.ts",
+  "gold_lines": [
+   1106,
+   1109
+  ],
+  "cands": [
+   [
+    0.4,
+    true,
+    "src/pipeline/engine.ts",
+    1138,
+    "Final cleanup can mask the recoverable cleanup error"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-060",
+  "trial": 0,
+  "gold": "Process cleanup returns while owned descendants are still alive.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   146,
+   151
+  ],
+  "cands": [
+   [
+    0.62,
+    true,
+    "src/util/proc.ts",
+    129,
+    "Process-group cleanup still lets detached descendants survive"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-060",
+  "trial": 1,
+  "gold": "Process cleanup returns while owned descendants are still alive.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   146,
+   151
+  ],
+  "cands": [
+   [
+    0.62,
+    true,
+    "src/util/proc.ts",
+    129,
+    "Process-group termination still leaves detached descendants alive"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-060",
+  "trial": 1,
+  "gold": "Discarding changes replaces the cleanup error that should trigger round recovery.",
+  "gold_file": "src/pipeline/engine.ts",
+  "gold_lines": [
+   1106,
+   1109
+  ],
+  "cands": [
+   [
+    0.5,
+    true,
+    "src/pipeline/engine.ts",
+    1138,
+    "Final cleanup can mask the recoverable cleanup error"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-060",
+  "trial": 1,
+  "gold": "Process cleanup returns while owned descendants are still alive.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   146,
+   151
+  ],
+  "cands": [
+   [
+    0.62,
+    true,
+    "src/util/proc.ts",
+    129,
+    "Process-group killing still leaves detached descendants alive"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-060",
+  "trial": 1,
+  "gold": "Discarding changes replaces the cleanup error that should trigger round recovery.",
+  "gold_file": "src/pipeline/engine.ts",
+  "gold_lines": [
+   1106,
+   1109
+  ],
+  "cands": [
+   [
+    0.6,
+    true,
+    "src/pipeline/engine.ts",
+    1138,
+    "Finally cleanup can bypass round-failure recovery"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-061",
+  "trial": 0,
+  "gold": "Holdout snapshot deletion proceeds despite unconfirmed descendant termination.",
+  "gold_file": "src/pipeline/engine.ts",
+  "gold_lines": [
+   845,
+   847
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/pipeline/engine.ts",
+    1106,
+    "Gate timeout rerun bypasses cleanup retry and recovery"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-061",
+  "trial": 0,
+  "gold": "Shutdown drops an already claimed descendant when its parent exits.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   158,
+   175
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/util/proc.ts",
+    257,
+    "Detached platform children outside the checkout survive invocation teardown"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-061",
+  "trial": 0,
+  "gold": "Production scratch directories are never registered as process ownership roots.",
+  "gold_file": "src/harness/scratch.ts",
+  "gold_lines": [
+   182,
+   187
+  ],
+  "cands": [
+   [
+    0.62,
+    false,
+    "src/util/proc.ts",
+    257,
+    "Detached platform children outside the checkout survive invocation teardown"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-061",
+  "trial": 0,
+  "gold": "Replacing a descendant environment removes it from invocation discovery.",
+  "gold_file": "src/util/processes-darwin.ts",
+  "gold_lines": [
+   132,
+   138
+  ],
+  "cands": [
+   [
+    0.43,
+    true,
+    "src/util/processes-darwin.ts",
+    55,
+    "Birth time and working directory do not prove process ownership"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-062",
+  "trial": 0,
+  "gold": "A recycled leader PID claims unrelated processes through reused group or session identifiers.",
+  "gold_file": "src/util/processes-darwin.ts",
+  "gold_lines": [
+   156,
+   162
+  ],
+  "cands": [
+   [
+    0.2,
+    true,
+    "src/util/processes-darwin.ts",
+    66,
+    "Directory membership can cause teardown to kill unrelated processes"
+   ],
+   [
+    0.0,
+    true,
+    "src/util/processes-darwin.ts",
+    197,
+    "Detached shells outside the captured directories still outlive invocation shutdown"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-062",
+  "trial": 0,
+  "gold": "A recycled leader PID claims unrelated processes through reused group or session identifiers.",
+  "gold_file": "src/util/processes-darwin.ts",
+  "gold_lines": [
+   156,
+   162
+  ],
+  "cands": [
+   [
+    0.2,
+    true,
+    "src/util/processes-darwin.ts",
+    66,
+    "Do not claim unrelated orphan processes based on their cwd"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-062",
+  "trial": 1,
+  "gold": "A recycled leader PID claims unrelated processes through reused group or session identifiers.",
+  "gold_file": "src/util/processes-darwin.ts",
+  "gold_lines": [
+   156,
+   162
+  ],
+  "cands": [
+   [
+    0.3,
+    true,
+    "src/util/processes-darwin.ts",
+    66,
+    "Working directory does not prove ownership of an orphan process"
+   ],
+   [
+    0.0,
+    true,
+    "src/util/processes-darwin.ts",
+    49,
+    "Detached descendants can still write after shutdown reports success"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-062",
+  "trial": 1,
+  "gold": "A recycled leader PID claims unrelated processes through reused group or session identifiers.",
+  "gold_file": "src/util/processes-darwin.ts",
+  "gold_lines": [
+   156,
+   162
+  ],
+  "cands": [
+   [
+    0.3,
+    true,
+    "src/util/processes-darwin.ts",
+    65,
+    "Working directory and birth time do not prove process ownership"
+   ],
+   [
+    0.0,
+    true,
+    "src/util/processes-darwin.ts",
+    192,
+    "Detached children with replaced environments survive shutdown"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-063",
+  "trial": 0,
+  "gold": "Pre-aborted shutdown with failed leader inspection references timer cleanup before initialization and never settles.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   365,
+   368
+  ],
+  "cands": [
+   [
+    0.23,
+    true,
+    "src/util/proc.ts",
+    203,
+    "Shutdown is confirmed while detached descendants remain alive"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-064",
+  "trial": 0,
+  "gold": "The reader loopback policy cannot match the intended socket access.",
+  "gold_file": "src/harness/reader.ts",
+  "gold_lines": [
+   28,
+   56
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/harness/reader.ts",
+    167,
+    "Disable the HTTP idle timeout for long verification commands"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-064",
+  "trial": 0,
+  "gold": "An allow-default reader policy weakens the established confinement boundary.",
+  "gold_file": "src/harness/reader.ts",
+  "gold_lines": [
+   48,
+   51
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/harness/reader.ts",
+    167,
+    "Disable the HTTP idle timeout for long verification commands"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-064",
+  "trial": 0,
+  "gold": "The reader loopback policy cannot match the intended socket access.",
+  "gold_file": "src/harness/reader.ts",
+  "gold_lines": [
+   28,
+   56
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/harness/reader.ts",
+    167,
+    "Disable the HTTP idle timeout for long-running commands"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-064",
+  "trial": 0,
+  "gold": "An allow-default reader policy weakens the established confinement boundary.",
+  "gold_file": "src/harness/reader.ts",
+  "gold_lines": [
+   48,
+   51
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/harness/reader.ts",
+    167,
+    "Disable the HTTP idle timeout for long-running commands"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-064",
+  "trial": 1,
+  "gold": "The reader loopback policy cannot match the intended socket access.",
+  "gold_file": "src/harness/reader.ts",
+  "gold_lines": [
+   28,
+   56
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/harness/reader.ts",
+    110,
+    "Preserve installed Rust toolchain discovery when replacing HOME"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-064",
+  "trial": 1,
+  "gold": "An allow-default reader policy weakens the established confinement boundary.",
+  "gold_file": "src/harness/reader.ts",
+  "gold_lines": [
+   48,
+   51
+  ],
+  "cands": [
+   [
+    0.25,
+    true,
+    "src/harness/reader.ts",
+    110,
+    "Preserve installed Rust toolchain discovery when replacing HOME"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-064",
+  "trial": 1,
+  "gold": "The reader loopback policy cannot match the intended socket access.",
+  "gold_file": "src/harness/reader.ts",
+  "gold_lines": [
+   28,
+   56
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/harness/reader.ts",
+    167,
+    "Disable the HTTP idle timeout for verification commands"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-064",
+  "trial": 1,
+  "gold": "An allow-default reader policy weakens the established confinement boundary.",
+  "gold_file": "src/harness/reader.ts",
+  "gold_lines": [
+   48,
+   51
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/harness/reader.ts",
+    167,
+    "Disable the HTTP idle timeout for verification commands"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-066",
+  "trial": 0,
+  "gold": "Free-text claim detection still lets model wording steer gate-evidence substitution.",
+  "gold_file": "src/pipeline/gate-evidence.ts",
+  "gold_lines": [
+   43,
+   50
+  ],
+  "cands": [
+   [
+    0.17,
+    true,
+    "src/pipeline/gate-evidence.ts",
+    23,
+    "Independent evidence mentioning a gate is discarded"
+   ],
+   [
+    0.08,
+    true,
+    "src/pipeline/gate-evidence.ts",
+    143,
+    "Unrelated skipped tests disable the loopback fallback"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-067",
+  "trial": 0,
+  "gold": "Matching a successful command does not establish the observation required by the criterion.",
+  "gold_file": "src/pipeline/gate-evidence.ts",
+  "gold_lines": [
+   40,
+   41
+  ],
+  "cands": [
+   [
+    0.38,
+    true,
+    "src/pipeline/gate-evidence.ts",
+    60,
+    "Targeted-command shortcut certifies a file that never ran"
+   ],
+   [
+    0.0,
+    true,
+    "src/pipeline/gate-evidence.ts",
+    112,
+    "Unrelated skipped tests prevent resolving the reported verification failure"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-067",
+  "trial": 0,
+  "gold": "Matching a successful command does not establish the observation required by the criterion.",
+  "gold_file": "src/pipeline/gate-evidence.ts",
+  "gold_lines": [
+   40,
+   41
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/pipeline/gate-evidence.ts",
+    112,
+    "Unrelated skipped tests disable gate evidence in normal factory runs"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-067",
+  "trial": 0,
+  "gold": "Targeted Bun evidence can satisfy a criterion without proof that any tests ran.",
+  "gold_file": "src/pipeline/gate-evidence.ts",
+  "gold_lines": [
+   60,
+   65
+  ],
+  "cands": [
+   [
+    0.5,
+    true,
+    "src/pipeline/gate-evidence.ts",
+    112,
+    "Unrelated skipped tests disable gate evidence in normal factory runs"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-067",
+  "trial": 1,
+  "gold": "Matching a successful command does not establish the observation required by the criterion.",
+  "gold_file": "src/pipeline/gate-evidence.ts",
+  "gold_lines": [
+   40,
+   41
+  ],
+  "cands": [
+   [
+    0.25,
+    true,
+    "src/pipeline/gate-evidence.ts",
+    82,
+    "Unrelated skipped tests disable the fix for confined factory gates"
+   ],
+   [
+    0.25,
+    true,
+    "src/pipeline/gate-evidence.ts",
+    63,
+    "Preserve Bun's distinction between substring filters and exact paths"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-067",
+  "trial": 1,
+  "gold": "Matching a successful command does not establish the observation required by the criterion.",
+  "gold_file": "src/pipeline/gate-evidence.ts",
+  "gold_lines": [
+   40,
+   41
+  ],
+  "cands": [
+   [
+    0.25,
+    true,
+    "src/pipeline/gate-evidence.ts",
+    82,
+    "Unrelated platform skips disable loopback gate evidence"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-067",
+  "trial": 1,
+  "gold": "Targeted Bun evidence can satisfy a criterion without proof that any tests ran.",
+  "gold_file": "src/pipeline/gate-evidence.ts",
+  "gold_lines": [
+   60,
+   65
+  ],
+  "cands": [
+   [
+    0.38,
+    true,
+    "src/pipeline/gate-evidence.ts",
+    82,
+    "Unrelated platform skips disable loopback gate evidence"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-083",
+  "trial": 1,
+  "gold": "Forcing HTTPS during manual push bypasses working SSH authentication.",
+  "gold_file": "scripts/land-pr.sh",
+  "gold_lines": [
+   67,
+   67
+  ],
+  "cands": [
+   [
+    0.5,
+    false,
+    "scripts/push-git.sh",
+    19,
+    "Preserve trusted URL-conditional credential configuration"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-084",
+  "trial": 0,
+  "gold": "An exact upstream URL requirement rejects supported forks and alternate origin spellings.",
+  "gold_file": "scripts/land-pr.sh",
+  "gold_lines": [
+   60,
+   66
+  ],
+  "cands": [
+   [
+    0.11,
+    true,
+    "scripts/land-pr.sh",
+    106,
+    "Config snapshots do not isolate the final push"
+   ],
+   [
+    0.11,
+    true,
+    "scripts/land-pr.sh",
+    51,
+    "Allow ordinary repository configuration"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-084",
+  "trial": 0,
+  "gold": "An exact upstream URL requirement rejects supported forks and alternate origin spellings.",
+  "gold_file": "scripts/land-pr.sh",
+  "gold_lines": [
+   60,
+   66
+  ],
+  "cands": [
+   [
+    0.11,
+    true,
+    "scripts/land-pr.sh",
+    110,
+    "Exclude untrusted config during the actual push"
+   ],
+   [
+    0.11,
+    true,
+    "scripts/land-pr.sh",
+    51,
+    "Do not reject harmless repository settings"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-084",
+  "trial": 1,
+  "gold": "An exact upstream URL requirement rejects supported forks and alternate origin spellings.",
+  "gold_file": "scripts/land-pr.sh",
+  "gold_lines": [
+   60,
+   66
+  ],
+  "cands": [
+   [
+    0.22,
+    true,
+    "scripts/land-pr.sh",
+    110,
+    "The push still trusts repository config after its final snapshot"
+   ],
+   [
+    0.11,
+    true,
+    "scripts/land-pr.sh",
+    51,
+    "The allowlist blocks landing repositories with harmless local settings"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-084",
+  "trial": 1,
+  "gold": "An exact upstream URL requirement rejects supported forks and alternate origin spellings.",
+  "gold_file": "scripts/land-pr.sh",
+  "gold_lines": [
+   60,
+   66
+  ],
+  "cands": [
+   [
+    0.22,
+    true,
+    "scripts/land-pr.sh",
+    106,
+    "Exclude repository config instead of checking it before use"
+   ],
+   [
+    0.11,
+    true,
+    "scripts/land-pr.sh",
+    51,
+    "Allow harmless local configuration without blocking landing"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-090",
+  "trial": 0,
+  "gold": "Unresolved tool calls accumulate without a bound during a live invocation.",
+  "gold_file": "src/harness/types.ts",
+  "gold_lines": [
+   203,
+   209
+  ],
+  "cands": [
+   [
+    0.33,
+    true,
+    "src/harness/types.ts",
+    180,
+    "Unresolved calls can be evicted without ever counting"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-adversarial",
+  "case": "review-091",
+  "trial": 1,
+  "gold": "A completed parallel call is classified as repetitive before unresolved predecessors establish progress.",
+  "gold_file": "src/harness/types.ts",
+  "gold_lines": [
+   225,
+   228
+  ],
+  "cands": [
+   [
+    0.3,
+    true,
+    "src/harness/types.ts",
+    175,
+    "Do not finalize pending results when another tool starts"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mv92iu6p0y8ns1b0ifjg8t",
+  "system": "sol-6.1-medium-standard",
+  "case": "review-091",
+  "trial": 1,
+  "gold": "A completed parallel call is classified as repetitive before unresolved predecessors establish progress.",
+  "gold_file": "src/harness/types.ts",
+  "gold_lines": [
+   225,
+   228
+  ],
+  "cands": [
+   [
+    0.2,
+    true,
+    "src/harness/types.ts",
+    184,
+    "Preserve the previous result hash after window eviction"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-046",
+  "trial": 0,
+  "gold": "A pinned candidate slot deadline exits without recording the chain-exhaustion question.",
+  "gold_file": "src/pipeline/context.ts",
+  "gold_lines": [
+   549,
+   552
+  ],
+  "cands": [
+   [
+    0.3,
+    true,
+    "src/pipeline/context.ts",
+    480,
+    "Preserve the failed verifier exclusion when using a pinned chain"
+   ],
+   [
+    0.3,
+    true,
+    "src/pipeline/context.ts",
+    480,
+    "Preserve exclusions for previously attempted verifiers"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "Arbitrary assertion text mentioning a timeout is classified as a transient CI failure.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   321,
+   327
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    193,
+    "Find the rerun job across workflow attempts"
+   ],
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    187,
+    "Reconcile reruns whose POST response was lost"
+   ],
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    187,
+    "Reconcile rerun requests whose POST response was lost"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-052",
+  "trial": 0,
+  "gold": "Retry eligibility ignores security failures outside the selected error line.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   297,
+   304
+  ],
+  "cands": [
+   [
+    0.11,
+    true,
+    "src/integrations/ci-classifier.ts",
+    193,
+    "Find the rerun job across workflow attempts"
+   ],
+   [
+    0.11,
+    true,
+    "src/integrations/ci-classifier.ts",
+    176,
+    "Deduplicate main-red notifications at repository scope"
+   ],
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    187,
+    "Reconcile reruns whose POST response was lost"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "Arbitrary assertion text mentioning a timeout is classified as a transient CI failure.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   321,
+   327
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    187,
+    "Reconcile reruns whose POST response was lost"
+   ],
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    187,
+    "Reconcile rerun requests with ambiguous responses"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-052",
+  "trial": 1,
+  "gold": "Retry eligibility ignores security failures outside the selected error line.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   297,
+   304
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    187,
+    "Reconcile reruns whose POST response was lost"
+   ],
+   [
+    0.0,
+    true,
+    "src/integrations/ci-classifier.ts",
+    187,
+    "Reconcile rerun requests with ambiguous responses"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-053",
+  "trial": 0,
+  "gold": "Passing security-test output incorrectly prevents a transient CI rerun.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   345,
+   346
+  ],
+  "cands": [
+   [
+    0.25,
+    true,
+    "src/integrations/ci-classifier.ts",
+    388,
+    "Resolve rerun claims when GitHub definitively rejects the request"
+   ],
+   [
+    0.25,
+    true,
+    "src/integrations/ci-classifier.ts",
+    133,
+    "Inspect main's commit statuses independently of the PR's context types"
+   ],
+   [
+    0.12,
+    true,
+    "src/integrations/ci-classifier.ts",
+    388,
+    "Definitively rejected reruns remain pending forever"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-053",
+  "trial": 1,
+  "gold": "Passing security-test output incorrectly prevents a transient CI rerun.",
+  "gold_file": "src/integrations/ci-classifier.ts",
+  "gold_lines": [
+   345,
+   346
+  ],
+  "cands": [
+   [
+    0.5,
+    true,
+    "src/integrations/ci-classifier.ts",
+    387,
+    "Job reruns can also rerun downstream security tests"
+   ],
+   [
+    0.38,
+    true,
+    "src/integrations/ci-classifier.ts",
+    388,
+    "Resolve definitively rejected reruns instead of waiting forever"
+   ],
+   [
+    0.38,
+    true,
+    "src/integrations/ci-classifier.ts",
+    46,
+    "Recognize test timeout diagnostics beyond Bun and Playwright"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-056",
+  "trial": 0,
+  "gold": "Catalog mutation can invalidate a shadowed retained policy and prevent the daemon from restarting.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   71,
+   76
+  ],
+  "cands": [
+   [
+    0.1,
+    true,
+    "src/router/runtime-catalog.ts",
+    41,
+    "Clear stale model rejection blocks when replacing a backend"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-056",
+  "trial": 1,
+  "gold": "Catalog mutation can invalidate a shadowed retained policy and prevent the daemon from restarting.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   71,
+   76
+  ],
+  "cands": [
+   [
+    0.1,
+    true,
+    "src/router/runtime-catalog.ts",
+    40,
+    "Clear stale backend rejection when replacing a runtime model"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-058",
+  "trial": 0,
+  "gold": "Routing previews remain stale after quota or cooldown expiry without an event.",
+  "gold_file": "ui/pages/Setup.tsx",
+  "gold_lines": [
+   78,
+   88
+  ],
+  "cands": [
+   [
+    0.1,
+    true,
+    "ui/pages/Setup.tsx",
+    621,
+    "Catalog history disappears when Setup is reopened"
+   ],
+   [
+    0.0,
+    true,
+    "ui/pages/Setup.tsx",
+    619,
+    "Catalog history only records changes made during the current mount"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-058",
+  "trial": 1,
+  "gold": "Routing previews remain stale after quota or cooldown expiry without an event.",
+  "gold_file": "ui/pages/Setup.tsx",
+  "gold_lines": [
+   78,
+   88
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "ui/pages/Setup.tsx",
+    621,
+    "Catalog history disappears whenever Setup unmounts"
+   ],
+   [
+    0.0,
+    true,
+    "ui/pages/Setup.tsx",
+    619,
+    "Catalog history disappears when Setup is reopened"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-070",
+  "trial": 0,
+  "gold": "Embedded short registered secrets remain visible in digest fields.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   115,
+   119
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/cli/digest.ts",
+    90,
+    "Exclude active review rounds from PRs awaiting review"
+   ],
+   [
+    0.0,
+    true,
+    "src/cli/digest.ts",
+    35,
+    "Unread PR events can hide a newly required review"
+   ],
+   [
+    0.0,
+    true,
+    "src/cli/digest.ts",
+    35,
+    "Consider new PR events when discovering pending reviews"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-070",
+  "trial": 1,
+  "gold": "Embedded short registered secrets remain visible in digest fields.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   115,
+   119
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/cli/digest.ts",
+    86,
+    "Exclude PRs whose changes round is still in progress"
+   ],
+   [
+    0.12,
+    true,
+    "src/cli/digest.ts",
+    35,
+    "Reconcile new PR activity after the consumer cursor"
+   ],
+   [
+    0.0,
+    true,
+    "src/cli/digest.ts",
+    90,
+    "Exclude PRs whose review changes are still running"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-073",
+  "trial": 0,
+  "gold": "Digest title truncation occurs before filtering and discloses private prefixes.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   126,
+   130
+  ],
+  "cands": [
+   [
+    0.22,
+    true,
+    "src/cli/digest.ts",
+    104,
+    "Exclude PRs with active review rounds from the review queue"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-073",
+  "trial": 1,
+  "gold": "Digest title truncation occurs before filtering and discloses private prefixes.",
+  "gold_file": "src/cli/digest.ts",
+  "gold_lines": [
+   126,
+   130
+  ],
+  "cands": [
+   [
+    0.11,
+    true,
+    "src/cli/digest.ts",
+    52,
+    "Include PR activity that invalidates an acknowledged approval"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-077",
+  "trial": 1,
+  "gold": "Queued chat dispatch uses a target whose origin became excluded after selection.",
+  "gold_file": "src/concierge.ts",
+  "gold_lines": [
+   282,
+   295
+  ],
+  "cands": [
+   [
+    0.45,
+    true,
+    "src/concierge.ts",
+    249,
+    "Revalidate chat routing after asynchronous slot waits"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-087",
+  "trial": 0,
+  "gold": "Post-check publication scanning executes Git against mutable clone configuration.",
+  "gold_file": "scripts/land-pr.sh",
+  "gold_lines": [
+   74,
+   76
+  ],
+  "cands": [
+   [
+    0.22,
+    true,
+    "scripts/land-pr.sh",
+    98,
+    "Recursive status still executes submodule configuration"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-098",
+  "trial": 0,
+  "gold": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+  "gold_file": "src/router/runtime-policy.ts",
+  "gold_lines": [
+   25,
+   31
+  ],
+  "cands": [
+   [
+    0.6,
+    false,
+    "src/router/catalog.ts",
+    429,
+    "Handle retired IDs in persisted routing overrides before removing the model"
+   ],
+   [
+    0.5,
+    false,
+    "src/app.ts",
+    102,
+    "Runtime models belonging to the removed provider prevent startup"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "Removing a built-in model leaves persisted routing overrides unable to load at startup.",
+  "gold_file": "src/router/runtime-policy.ts",
+  "gold_lines": [
+   25,
+   31
+  ],
+  "cands": [
+   [
+    0.6,
+    false,
+    "src/router/catalog.ts",
+    94,
+    "Handle persisted routing references before removing the provider"
+   ],
+   [
+    0.5,
+    false,
+    "src/router/catalog.ts",
+    94,
+    "Handle retired IDs in persisted operator routing before removing the provider"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-098",
+  "trial": 1,
+  "gold": "A runtime model attached to a retired provider prevents factory construction.",
+  "gold_file": "src/app.ts",
+  "gold_lines": [
+   100,
+   104
+  ],
+  "cands": [
+   [
+    0.75,
+    false,
+    "src/router/catalog.ts",
+    94,
+    "Handle retired IDs in persisted operator routing before removing the provider"
+   ],
+   [
+    0.62,
+    false,
+    "src/router/catalog.ts",
+    94,
+    "Handle persisted routing references before removing the provider"
+   ],
+   [
+    0.5,
+    false,
+    "src/router/runtime-catalog.ts",
+    64,
+    "Keep historical run pins from blocking unrelated catalog edits"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-099",
+  "trial": 1,
+  "gold": "Unavailable-target diagnostics expose registered credentials in routing API and Setup output.",
+  "gold_file": "src/router/runtime-policy.ts",
+  "gold_lines": [
+   113,
+   117
+  ],
+  "cands": [
+   [
+    0.44,
+    true,
+    "src/router/runtime-policy.ts",
+    29,
+    "Reconcile filtered routing when a missing model is restored"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-100",
+  "trial": 0,
+  "gold": "Retired identifiers and catalog or routing history can publish registered credentials.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   27,
+   34
+  ],
+  "cands": [
+   [
+    0.38,
+    true,
+    "src/router/runtime-catalog.ts",
+    59,
+    "Validate persisted references when restoring a retired model ID"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-100",
+  "trial": 1,
+  "gold": "Retired identifiers and catalog or routing history can publish registered credentials.",
+  "gold_file": "src/router/runtime-catalog.ts",
+  "gold_lines": [
+   27,
+   34
+  ],
+  "cands": [
+   [
+    0.25,
+    true,
+    "src/router/runtime-catalog.ts",
+    59,
+    "Revalidate persisted references when restoring a runtime model"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-103",
+  "trial": 0,
+  "gold": "Line callbacks store pieces of multiline credentials in failure excerpts.",
+  "gold_file": "src/gates/failures.ts",
+  "gold_lines": [
+   17,
+   18
+  ],
+  "cands": [
+   [
+    0.75,
+    false,
+    "src/gates/run.ts",
+    91,
+    "Multiline credentials survive in stored failure excerpts"
+   ],
+   [
+    0.5,
+    false,
+    "src/gates/run.ts",
+    74,
+    "Redact multiline credentials before splitting failure diagnostics"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-105",
+  "trial": 0,
+  "gold": "ANSI stripping after framing and tail cuts leaves accidental credential fragments visible.",
+  "gold_file": "src/gates/run.ts",
+  "gold_lines": [
+   71,
+   74
+  ],
+  "cands": [
+   [
+    0.27,
+    true,
+    "src/gates/run.ts",
+    87,
+    "Normalize terminal formatting before the process tail cut"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-105",
+  "trial": 1,
+  "gold": "ANSI stripping after framing and tail cuts leaves accidental credential fragments visible.",
+  "gold_file": "src/gates/run.ts",
+  "gold_lines": [
+   71,
+   74
+  ],
+  "cands": [
+   [
+    0.36,
+    true,
+    "src/gates/run.ts",
+    87,
+    "Terminal normalization happens after irreversible framing and truncation"
+   ],
+   [
+    0.09,
+    true,
+    "src/gates/run.ts",
+    92,
+    "Terminal-formatted multiline credentials survive in failure excerpts"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-106",
+  "trial": 0,
+  "gold": "An incomplete terminal escape consumes part of a credential before it can be matched.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   464,
+   467
+  ],
+  "cands": [
+   [
+    0.25,
+    true,
+    "src/util/proc.ts",
+    474,
+    "Overlapping matches make the raw carry buffer unbounded"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-106",
+  "trial": 0,
+  "gold": "Terminal-control stripping changes with chunk boundaries and loses state at the hold limit.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   460,
+   467
+  ],
+  "cands": [
+   [
+    0.09,
+    true,
+    "src/util/proc.ts",
+    474,
+    "Overlapping matches make the raw carry buffer unbounded"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-106",
+  "trial": 1,
+  "gold": "An incomplete terminal escape consumes part of a credential before it can be matched.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   464,
+   467
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/util/proc.ts",
+    477,
+    "Bound the carry buffer for self-overlapping credentials"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvi7bktt0cz50o81qkik8c",
+  "system": "D-adversarial-union2",
+  "case": "review-106",
+  "trial": 1,
+  "gold": "Terminal-control stripping changes with chunk boundaries and loses state at the hold limit.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   460,
+   467
+  ],
+  "cands": [
+   [
+    0.09,
+    true,
+    "src/util/proc.ts",
+    477,
+    "Bound the carry buffer for self-overlapping credentials"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-040",
+  "trial": 0,
+  "gold": "Configuration errors and encoded feed diagnostics can disclose registered secrets.",
+  "gold_file": "src/cli/setup.ts",
+  "gold_lines": [
+   24,
+   30
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/cli/setup.ts",
+    269,
+    "Run smoke checks against the detected provider configuration"
+   ],
+   [
+    0.12,
+    true,
+    "src/cli/setup.ts",
+    207,
+    "Apply new configuration to an already healthy daemon"
+   ],
+   [
+    0.12,
+    true,
+    "src/cli/setup.ts",
+    207,
+    "Apply config changes to an already healthy daemon"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-040",
+  "trial": 1,
+  "gold": "Configuration errors and encoded feed diagnostics can disclose registered secrets.",
+  "gold_file": "src/cli/setup.ts",
+  "gold_lines": [
+   24,
+   30
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/cli/setup.ts",
+    269,
+    "Run smoke checks against the effective configured providers"
+   ],
+   [
+    0.12,
+    true,
+    "src/cli/setup.ts",
+    207,
+    "Apply changed configuration to an already healthy daemon"
+   ],
+   [
+    0.12,
+    true,
+    "src/cli/setup.ts",
+    207,
+    "Apply changed configuration to an already healthy daemon"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-048",
+  "trial": 0,
+  "gold": "The WebP inspector rejects valid lossy VP8 images.",
+  "gold_file": "src/gates/media.ts",
+  "gold_lines": [
+   515,
+   524
+  ],
+  "cands": [
+   [
+    0.33,
+    true,
+    "src/gates/media.ts",
+    126,
+    "Do not reject ordinary media metadata"
+   ],
+   [
+    0.33,
+    true,
+    "src/gates/media.ts",
+    126,
+    "Do not reject ordinary PNG metadata"
+   ],
+   [
+    0.33,
+    true,
+    "src/gates/media.ts",
+    33,
+    "Do not treat incidental sample bytes as embedded executables"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-048",
+  "trial": 1,
+  "gold": "LFS exemptions permit missing payloads and pointer replacements containing archives.",
+  "gold_file": "src/git/repos.ts",
+  "gold_lines": [
+   904,
+   911
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/git/repos.ts",
+    888,
+    "Do not impose an undocumented 32 MiB media exemption limit"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-048",
+  "trial": 1,
+  "gold": "The limited text sample exempts a TAR whose first binary byte lies beyond the sample.",
+  "gold_file": "src/git/repos.ts",
+  "gold_lines": [
+   904,
+   910
+  ],
+  "cands": [
+   [
+    0.2,
+    true,
+    "src/git/repos.ts",
+    888,
+    "Do not impose an undocumented 32 MiB media exemption limit"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-048",
+  "trial": 1,
+  "gold": "The WebP inspector rejects valid lossy VP8 images.",
+  "gold_file": "src/gates/media.ts",
+  "gold_lines": [
+   515,
+   524
+  ],
+  "cands": [
+   [
+    0.33,
+    true,
+    "src/gates/media.ts",
+    33,
+    "Do not treat coincidental media bytes as executable payloads"
+   ],
+   [
+    0.33,
+    true,
+    "src/gates/media.ts",
+    33,
+    "Do not reject legitimate media based on incidental bytes or metadata"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-049",
+  "trial": 0,
+  "gold": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+  "gold_file": "src/gates/media.ts",
+  "gold_lines": [
+   43,
+   45
+  ],
+  "cands": [
+   [
+    0.27,
+    true,
+    "src/gates/media.ts",
+    125,
+    "Allow ordinary PNG metadata"
+   ],
+   [
+    0.18,
+    true,
+    "src/gates/media.ts",
+    33,
+    "Do not classify ordinary text by embedded signature strings"
+   ],
+   [
+    0.09,
+    true,
+    "src/gates/media.ts",
+    33,
+    "Do not classify readable text by embedded signature substrings"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-049",
+  "trial": 1,
+  "gold": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+  "gold_file": "src/gates/media.ts",
+  "gold_lines": [
+   43,
+   45
+  ],
+  "cands": [
+   [
+    0.27,
+    true,
+    "src/gates/media.ts",
+    125,
+    "Allow ordinary PNG metadata"
+   ],
+   [
+    0.27,
+    true,
+    "src/gates/media.ts",
+    33,
+    "Do not classify visible text from incidental signature substrings"
+   ],
+   [
+    0.27,
+    true,
+    "src/gates/media.ts",
+    33,
+    "Do not classify readable text by embedded magic strings"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-060",
+  "trial": 0,
+  "gold": "Process cleanup returns while owned descendants are still alive.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   146,
+   151
+  ],
+  "cands": [
+   [
+    0.62,
+    true,
+    "src/util/proc.ts",
+    129,
+    "Process-group termination still leaves detached descendants alive"
+   ],
+   [
+    0.62,
+    true,
+    "src/util/proc.ts",
+    129,
+    "Process-group termination still leaves detached descendants alive"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-060",
+  "trial": 0,
+  "gold": "Discarding changes replaces the cleanup error that should trigger round recovery.",
+  "gold_file": "src/pipeline/engine.ts",
+  "gold_lines": [
+   1106,
+   1109
+  ],
+  "cands": [
+   [
+    0.5,
+    true,
+    "src/pipeline/engine.ts",
+    1138,
+    "Final cleanup can bypass the new round-failure recovery"
+   ],
+   [
+    0.3,
+    true,
+    "src/pipeline/engine.ts",
+    1138,
+    "Cleanup failures from the finally block still fail the run"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-060",
+  "trial": 1,
+  "gold": "Process cleanup returns while owned descendants are still alive.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   146,
+   151
+  ],
+  "cands": [
+   [
+    0.75,
+    true,
+    "src/util/proc.ts",
+    129,
+    "Process-group termination still leaves detached descendants alive"
+   ],
+   [
+    0.62,
+    true,
+    "src/util/proc.ts",
+    129,
+    "Process-group cleanup still leaves detached descendants alive"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-060",
+  "trial": 1,
+  "gold": "Discarding changes replaces the cleanup error that should trigger round recovery.",
+  "gold_file": "src/pipeline/engine.ts",
+  "gold_lines": [
+   1106,
+   1109
+  ],
+  "cands": [
+   [
+    0.5,
+    true,
+    "src/pipeline/engine.ts",
+    1138,
+    "Final cleanup can mask the recoverable cleanup error"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-061",
+  "trial": 1,
+  "gold": "Shutdown drops an already claimed descendant when its parent exits.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   158,
+   175
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/util/proc.ts",
+    257,
+    "Production scratch directories are absent from process discovery"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-061",
+  "trial": 1,
+  "gold": "Production scratch directories are never registered as process ownership roots.",
+  "gold_file": "src/harness/scratch.ts",
+  "gold_lines": [
+   182,
+   187
+  ],
+  "cands": [
+   [
+    0.5,
+    false,
+    "src/util/proc.ts",
+    257,
+    "Production scratch directories are absent from process discovery"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-062",
+  "trial": 0,
+  "gold": "A recycled leader PID claims unrelated processes through reused group or session identifiers.",
+  "gold_file": "src/util/processes-darwin.ts",
+  "gold_lines": [
+   156,
+   162
+  ],
+  "cands": [
+   [
+    0.3,
+    true,
+    "src/util/processes-darwin.ts",
+    66,
+    "Working directory does not prove an orphan belongs to the invocation"
+   ],
+   [
+    0.2,
+    true,
+    "src/util/processes-darwin.ts",
+    66,
+    "Working-directory matching kills unrelated orphan processes"
+   ],
+   [
+    0.1,
+    true,
+    "src/util/processes-darwin.ts",
+    199,
+    "Detached descendants with replaced environments survive shutdown"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-062",
+  "trial": 1,
+  "gold": "A recycled leader PID claims unrelated processes through reused group or session identifiers.",
+  "gold_file": "src/util/processes-darwin.ts",
+  "gold_lines": [
+   156,
+   162
+  ],
+  "cands": [
+   [
+    0.2,
+    true,
+    "src/util/processes-darwin.ts",
+    66,
+    "Working-directory matching kills unrelated orphan processes"
+   ],
+   [
+    0.2,
+    true,
+    "src/util/processes-darwin.ts",
+    66,
+    "Directory overlap does not prove process ownership"
+   ],
+   [
+    0.0,
+    true,
+    "src/util/processes-darwin.ts",
+    49,
+    "Detached descendants outside the captured directories still survive"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-063",
+  "trial": 0,
+  "gold": "Pre-aborted shutdown with failed leader inspection references timer cleanup before initialization and never settles.",
+  "gold_file": "src/util/proc.ts",
+  "gold_lines": [
+   365,
+   368
+  ],
+  "cands": [
+   [
+    0.23,
+    true,
+    "src/util/proc.ts",
+    191,
+    "Shutdown can succeed while a background descendant remains alive"
+   ],
+   [
+    0.23,
+    true,
+    "src/util/proc.ts",
+    107,
+    "Children that replace their environment can escape shutdown"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-064",
+  "trial": 0,
+  "gold": "The reader loopback policy cannot match the intended socket access.",
+  "gold_file": "src/harness/reader.ts",
+  "gold_lines": [
+   28,
+   56
+  ],
+  "cands": [
+   [
+    0.0,
+    true,
+    "src/harness/reader.ts",
+    167,
+    "Disable the MCP server's default HTTP idle timeout"
+   ],
+   [
+    0.0,
+    true,
+    "src/harness/reader.ts",
+    167,
+    "Disable the HTTP idle timeout for long verification commands"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-064",
+  "trial": 0,
+  "gold": "An allow-default reader policy weakens the established confinement boundary.",
+  "gold_file": "src/harness/reader.ts",
+  "gold_lines": [
+   48,
+   51
+  ],
+  "cands": [
+   [
+    0.12,
+    true,
+    "src/harness/reader.ts",
+    167,
+    "Disable the MCP server's default HTTP idle timeout"
+   ],
+   [
+    0.12,
+    true,
+    "src/harness/reader.ts",
+    167,
+    "Disable the HTTP idle timeout for long verification commands"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-067",
+  "trial": 0,
+  "gold": "Matching a successful command does not establish the observation required by the criterion.",
+  "gold_file": "src/pipeline/gate-evidence.ts",
+  "gold_lines": [
+   40,
+   41
+  ],
+  "cands": [
+   [
+    0.38,
+    true,
+    "src/pipeline/gate-evidence.ts",
+    65,
+    "Exact command matching bypasses actual Bun file coverage"
+   ],
+   [
+    0.25,
+    true,
+    "src/pipeline/gate-evidence.ts",
+    65,
+    "Exact command equality does not prove the requested file ran"
+   ],
+   [
+    0.0,
+    true,
+    "src/pipeline/gate-evidence.ts",
+    112,
+    "Unrelated skipped tests disable the fix for this repository"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-067",
+  "trial": 1,
+  "gold": "Matching a successful command does not establish the observation required by the criterion.",
+  "gold_file": "src/pipeline/gate-evidence.ts",
+  "gold_lines": [
+   40,
+   41
+  ],
+  "cands": [
+   [
+    0.38,
+    true,
+    "src/pipeline/gate-evidence.ts",
+    65,
+    "Exact command text does not prove Bun ran the requested file"
+   ],
+   [
+    0.25,
+    true,
+    "src/pipeline/gate-evidence.ts",
+    112,
+    "Allow unrelated platform skips when the required test passed"
+   ],
+   [
+    0.12,
+    true,
+    "src/pipeline/gate-evidence.ts",
+    112,
+    "Unrelated skipped tests disable loopback verification"
+   ]
+  ]
+ },
+ {
+  "eval": "eval-mvif9n84010bmzy1tk9std",
+  "system": "D-adversarial-union2",
+  "case": "review-084",
+  "trial": 1,
+  "gold": "An exact upstream URL requirement rejects supported forks and alternate origin spellings.",
+  "gold_file": "scripts/land-pr.sh",
+  "gold_lines": [
+   60,
+   66
+  ],
+  "cands": [
+   [
+    0.11,
+    true,
+    "scripts/land-pr.sh",
+    106,
+    "Config snapshots leave the final push vulnerable to concurrent mutation"
+   ],
+   [
+    0.11,
+    true,
+    "scripts/land-pr.sh",
+    106,
+    "Config snapshots leave a race before the final push"
+   ],
+   [
+    0.11,
+    true,
+    "scripts/land-pr.sh",
+    51,
+    "The allowlist rejects ordinary repository-local identity settings"
+   ]
+  ]
+ }
+]

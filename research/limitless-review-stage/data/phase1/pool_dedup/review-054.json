@@ -1,0 +1,153 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C10"
+   ],
+   "same_as": "G1",
+   "root_cause": "When GitHub refuses a rerun request (for example, due to rate limiting), the saved rerun claim is never released or resolved, so it stays pending through cooldowns and restarts."
+  },
+  {
+   "members": [
+    "C7",
+    "C7b"
+   ],
+   "same_as": "G2",
+   "root_cause": "The security-failure heading patterns in the retry exclusion are too narrow, so security-test failures from some runners (Playwright, Go) are missed and the jobs get rerun."
+  },
+  {
+   "members": [
+    "C6",
+    "C6b"
+   ],
+   "same_as": null,
+   "root_cause": "The timeout regex misses common runner timeout diagnostics, such as Node test-runner messages and indented, untimestamped Playwright lines, so transient timeouts are not rerun."
+  },
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "An error while inspecting one PR's CI aborts the whole poll, so later PRs' observations are lost."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The main-red pause path returns before the PR failure is written to the ledger."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "The API URL repository check compares owner and repo names case-sensitively."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "Reconciliation looks only at the newest workflow attempt, which may be a partial rerun that does not include the tracked job."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": null,
+   "root_cause": "Pending reruns are reconciled only when the paginated, capped check observation changes, so reruns outside the first 100 checks are never resolved."
+  },
+  {
+   "members": [
+    "C8"
+   ],
+   "same_as": null,
+   "root_cause": "While main is red or a rerun is pending, the full REST inspection runs again on every poll even when the GraphQL observation is unchanged."
+  },
+  {
+   "members": [
+    "C9"
+   ],
+   "same_as": null,
+   "root_cause": "Whenever observePrHead refuses, for example during a push or with a stuck pushing marker, the whole observation is discarded."
+  },
+  {
+   "members": [
+    "C11"
+   ],
+   "same_as": null,
+   "root_cause": "A failed job in lagging check data is still classified as needing a fix even after its rerun was confirmed passing."
+  },
+  {
+   "members": [
+    "C12"
+   ],
+   "same_as": null,
+   "root_cause": "Main-red alerts are deduplicated per check rather than per repository."
+  },
+  {
+   "members": [
+    "C13"
+   ],
+   "same_as": null,
+   "root_cause": "The main-branch status lookup only queries the context types the PR uses, so main failures reported through other types are missed."
+  },
+  {
+   "members": [
+    "C14"
+   ],
+   "same_as": null,
+   "root_cause": "CI failures observed after a PR has closed skip the classification path."
+  },
+  {
+   "members": [
+    "C15"
+   ],
+   "same_as": null,
+   "root_cause": "Rerun reconciliation treats only success and failure as terminal, so skipped or neutral conclusions stay pending."
+  },
+  {
+   "members": [
+    "C16"
+   ],
+   "same_as": null,
+   "root_cause": "The feed excerpt is taken from the start of the job log instead of around the failure."
+  },
+  {
+   "members": [
+    "C17"
+   ],
+   "same_as": null,
+   "root_cause": "The failure signature is taken from the first line containing 'error', which can be setup noise rather than the actual failure."
+  },
+  {
+   "members": [
+    "C18"
+   ],
+   "same_as": null,
+   "root_cause": "Untrusted log text is quoted with an ad-hoc '> ' prefix instead of the project's existing quoting helper."
+  },
+  {
+   "members": [
+    "C20"
+   ],
+   "same_as": null,
+   "root_cause": "A second migration alters a table that was created by another migration in the same unshipped change."
+  },
+  {
+   "members": [
+    "C21"
+   ],
+   "same_as": null,
+   "root_cause": "The security name regex has no word boundaries, so it matches unrelated substrings such as 'disaster'."
+  },
+  {
+   "members": [
+    "C22"
+   ],
+   "same_as": null,
+   "root_cause": "Jobs cancelled by fail-fast are treated as transient, then rerun and recorded as flakes."
+  }
+ ]
+}

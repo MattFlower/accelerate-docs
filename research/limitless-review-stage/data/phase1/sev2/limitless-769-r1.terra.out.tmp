@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"secret","trigger":"plausible","reason":"A buggy or modified authenticated worker can send account details as a version, which the coordinator stores and exposes in worker listings."}]}

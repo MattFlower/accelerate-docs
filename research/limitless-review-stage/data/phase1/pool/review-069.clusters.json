@@ -1,0 +1,101 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P4",
+    "P9",
+    "P11",
+    "P15",
+    "P17",
+    "P25"
+   ],
+   "mechanism": "Digest ignores review.round_started, so a PR stays 'awaiting review' while a review round is running."
+  },
+  {
+   "members": [
+    "P2",
+    "P3",
+    "P5",
+    "P8",
+    "P10",
+    "P14",
+    "P18",
+    "P20",
+    "P23",
+    "P26",
+    "P27",
+    "P30",
+    "P31",
+    "P35"
+   ],
+   "mechanism": "Digest 'Blocked lands' group is cleared only by land.queued/land.landed, not by pr.merged/pr.closed/run.merged/run.resolved, so externally merged or closed PRs stay listed as blocked."
+  },
+  {
+   "members": [
+    "P6",
+    "P12"
+   ],
+   "mechanism": "mcp-status schema drops the persisted run.merged flag, so a confirmed merge without a PR snapshot or landed entry is reported as unknown."
+  },
+  {
+   "members": [
+    "P7",
+    "P29"
+   ],
+   "mechanism": "Digest permanently removes a PR on review.approved and never restores it when a head change makes the approval stale."
+  },
+  {
+   "members": [
+    "P13",
+    "P21"
+   ],
+   "mechanism": "A failed or cancelled historical review round takes precedence over a later valid approval in status."
+  },
+  {
+   "members": [
+    "P16",
+    "P19"
+   ],
+   "mechanism": "Answered questions are never cleared from the digest's 'Needs you' because answering emits no clearing event."
+  },
+  {
+   "members": [
+    "P22"
+   ],
+   "mechanism": "GET /api/land with an empty run= value is converted to an empty string, so land.list throws 'run not found' instead of listing."
+  },
+  {
+   "members": [
+    "P24",
+    "P34"
+   ],
+   "mechanism": "MCP limitless_review omits the reviewer, so approvals are recorded as 'human' instead of being attributed to MCP/agent."
+  },
+  {
+   "members": [
+    "P28"
+   ],
+   "mechanism": "Status checks the blocked-land branch before the CLOSED PR observation, so a closed PR is reported as landing blocked."
+  },
+  {
+   "members": [
+    "P32"
+   ],
+   "mechanism": "'PRs awaiting review' is not cleared by run.resolved or run.cancelled, so resolved or cancelled runs' PRs stay listed."
+  },
+  {
+   "members": [
+    "P33",
+    "P36"
+   ],
+   "mechanism": "The Codex skill is a copy of the Claude skill and recommends the 'claude' consumer cursor name."
+  },
+  {
+   "members": [
+    "P37"
+   ],
+   "mechanism": "Change size exceeds the stated ~200-line budget."
+  }
+ ]
+}

@@ -1,0 +1,198 @@
+[
+ {
+  "tid": "T1",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold scripts/land-pr.sh:74-76 is the post-check check_private scan (check-private-strings.ts runs worktreeGit with GIT_DIR/GIT_WORK_TREE of the clone, whose config the checks at :61-66 can rewrite). The finding cites :97-98, the isolated `safe_git --git-dir=$push_repo --work-tree=$clone status`, and a submodule-recursion path.",
+  "reason": "The finding is about the isolated status command recursing into submodules, a different git invocation and mechanism than the gold's post-check private-strings scan run against the clone's own mutable config."
+ },
+ {
+  "tid": "T2",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold scripts/land-pr.sh:74-76 is the post-check check_private scan (check-private-strings.ts runs worktreeGit with GIT_DIR/GIT_WORK_TREE of the clone, whose config the checks at :61-66 can rewrite). The finding cites :97-98, the isolated `safe_git --git-dir=$push_repo --work-tree=$clone status`, and a submodule-recursion path. F1 adds a submodule include of the clone config, but still through the status at :98.",
+  "reason": "The finding is about the isolated status command recursing into submodules, a different git invocation and mechanism than the gold's post-check private-strings scan run against the clone's own mutable config."
+ },
+ {
+  "tid": "T3",
+  "verdict": "SAME",
+  "finding": "F1",
+  "evidence": "src/router/runtime-policy.ts:25-31 (head 5a57b035e2) revalidates store.routingCells() via this.groups()/validatePolicy and store.routingPrefer() via validatePrefer against the current catalog in the constructor; catalog.ts diff removes the twilight provider and twilight/qwen-27b, so persisted references now throw at Factory construction. F1 says RuntimePolicy revalidates persisted routing preferences and cells against the current catalog, so startup throws.",
+  "reason": "The same mechanism: persisted operator routing cells and prefer rows that name the removed provider or model are strictly revalidated in the RuntimePolicy constructor and abort startup."
+ },
+ {
+  "tid": "T4",
+  "verdict": "SAME",
+  "finding": "F1",
+  "evidence": "src/app.ts:100-104 throws `unknown provider ${model.provider}` for any store.runtimeModels() row whose provider is no longer in providerDefs; the twilight provider is removed in src/router/catalog.ts. F1 says 'Factory also throws for persisted runtime models whose provider is absent', and its failure scenario lists 'a runtime model attached to that provider'.",
+  "reason": "F1 explicitly names Factory throwing for a persisted runtime model whose provider was removed, which is exactly app.ts:100-104."
+ },
+ {
+  "tid": "T5",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold scripts/land-pr.sh:74-76 is the post-check check_private scan (check-private-strings.ts runs worktreeGit with GIT_DIR/GIT_WORK_TREE of the clone, whose config the checks at :61-66 can rewrite). The finding cites :97-98, the isolated `safe_git --git-dir=$push_repo --work-tree=$clone status`, and a submodule-recursion path.",
+  "reason": "The finding is about the isolated status command recursing into submodules, a different git invocation and mechanism than the gold's post-check private-strings scan run against the clone's own mutable config."
+ },
+ {
+  "tid": "T6",
+  "verdict": "SAME",
+  "finding": "F1",
+  "evidence": "src/router/runtime-policy.ts:25-31 (head 5a57b035e2) revalidates store.routingCells() via this.groups()/validatePolicy and store.routingPrefer() via validatePrefer against the current catalog in the constructor; catalog.ts diff removes the twilight provider and twilight/qwen-27b, so persisted references now throw at Factory construction. F1 says RuntimePolicy rejects a persisted routing preference naming the removed provider, and cells have similar paths.",
+  "reason": "The same mechanism: strict revalidation of persisted routing overrides in the RuntimePolicy constructor after the catalog entry was removed."
+ },
+ {
+  "tid": "T7",
+  "verdict": "SAME",
+  "finding": "F1",
+  "evidence": "src/app.ts:100-104 throws `unknown provider ${model.provider}` for any store.runtimeModels() row whose provider is no longer in providerDefs; the twilight provider is removed in src/router/catalog.ts. F1 says 'persisted routing cells and runtime models have similar rejection paths', so an existing database prevents startup.",
+  "reason": "F1 names persisted runtime models referencing the removed provider as a startup rejection path, the gold's mechanism, though only in passing beside its main prefer example."
+ },
+ {
+  "tid": "T8",
+  "verdict": "SAME",
+  "finding": "F1",
+  "evidence": "src/router/runtime-policy.ts:25-31 (head 5a57b035e2) revalidates store.routingCells() via this.groups()/validatePolicy and store.routingPrefer() via validatePrefer against the current catalog in the constructor; catalog.ts diff removes the twilight provider and twilight/qwen-27b, so persisted references now throw at Factory construction. F1 covers the routing.prefer path, runtime-policy.ts:29-31 (validatePrefer), which is inside the gold range.",
+  "reason": "The same mechanism: persisted routing.prefer overrides naming the removed provider fail validatePrefer at RuntimePolicy construction. Only the cell half of the gold is left unmentioned."
+ },
+ {
+  "tid": "T9",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold scripts/land-pr.sh:74-76 is the post-check check_private scan (check-private-strings.ts runs worktreeGit with GIT_DIR/GIT_WORK_TREE of the clone, whose config the checks at :61-66 can rewrite). The finding cites :97-98, the isolated `safe_git --git-dir=$push_repo --work-tree=$clone status`, and a submodule-recursion path. F1 itself notes that the submodule exposure existed in the previous status path.",
+  "reason": "The finding is about the isolated status command recursing into submodules, a different git invocation and mechanism than the gold's post-check private-strings scan run against the clone's own mutable config."
+ },
+ {
+  "tid": "T10",
+  "verdict": "UNCLEAR",
+  "finding": "F1",
+  "evidence": "src/router/router.ts:256-262 (head 73b2feae37) drops `preference` whenever changedCells has the cell and the prefer target is not in its groups. changedCells (setPolicy) is never cleared, so an edit keeps invalidating later selections. F1 cites the same line and condition, and mentions an implementer escalated beyond the cell through minTier and cells re-marked at startup by the RuntimePolicy constructor. Its main claim, though, is that prefer also carries finder and verifier targets.",
+  "reason": "F1 targets the same over-broad drop condition and touches the gold's scenario (an implementer outside the cell, with edits persisting across restart). But it frames the root cause as prefer serving non-implementer purposes, not as invalidation that ignores whether the selection came after the edit."
+ },
+ {
+  "tid": "T11",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold src/router/runtime-catalog.ts:71-76 is patch(): it validates the effort change only against router.getPolicy() (the effective policy with operator overrides on top), so eval or code cells hidden by an override are not checked. F1 cites :79-87, remove(), which checks only store.routingCells() and not routing/policy.json.",
+  "reason": "The finding concerns model deletion that ignores the persisted eval policy. The gold concerns effort removal in patch() validated against the effective policy, which hides lower-layer cells behind operator overrides. The method and the missed layer differ."
+ },
+ {
+  "tid": "T12",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold scripts/land-pr.sh:74-76 is the post-check check_private scan (check-private-strings.ts runs worktreeGit with GIT_DIR/GIT_WORK_TREE of the clone, whose config the checks at :61-66 can rewrite). The finding cites :97-98, the isolated `safe_git --git-dir=$push_repo --work-tree=$clone status`, and a submodule-recursion path. F1 adds a submodule include of the clone config, but still through the status at :98.",
+  "reason": "The finding is about the isolated status command recursing into submodules, a different git invocation and mechanism than the gold's post-check private-strings scan run against the clone's own mutable config."
+ },
+ {
+  "tid": "T13",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold src/gates/media.ts:43-45 is clean(), used by isInertMedia image validation, which rejects any buffer containing a PAYLOADS magic such as 2-byte 4d5a ('MZ') anywhere. The finding cites media.ts:33, isForbiddenFormat, which repos.ts:827/835 uses to drop blobs from the text set; images are judged separately via isInertMedia (repos.ts:910-934).",
+  "reason": "The finding is about readable text or source being misclassified as binary by isForbiddenFormat, while the gold is about valid image bytes being rejected by clean() during inert-media validation. The substring-matching pattern is the same, but the call site and the consequence differ."
+ },
+ {
+  "tid": "T14",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold src/gates/media.ts:43-45 is clean(), used by isInertMedia image validation, which rejects any buffer containing a PAYLOADS magic such as 2-byte 4d5a ('MZ') anywhere. The finding cites media.ts:33, isForbiddenFormat, which repos.ts:827/835 uses to drop blobs from the text set; images are judged separately via isInertMedia (repos.ts:910-934).",
+  "reason": "The finding is about readable text or source being misclassified as binary by isForbiddenFormat, while the gold is about valid image bytes being rejected by clean() during inert-media validation. The substring-matching pattern is the same, but the call site and the consequence differ."
+ },
+ {
+  "tid": "T15",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold src/gates/media.ts:43-45 is clean(), used by isInertMedia image validation, which rejects any buffer containing a PAYLOADS magic such as 2-byte 4d5a ('MZ') anywhere. The finding cites media.ts:33, isForbiddenFormat, which repos.ts:827/835 uses to drop blobs from the text set; images are judged separately via isInertMedia (repos.ts:910-934).",
+  "reason": "The finding is about readable text or source being misclassified as binary by isForbiddenFormat, while the gold is about valid image bytes being rejected by clean() during inert-media validation. The substring-matching pattern is the same, but the call site and the consequence differ."
+ },
+ {
+  "tid": "T16",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold src/harness/scratch.ts:184-187 adds every invocation's scratch dir to the run-wide processScope.scratchDirs, which proc.ts:289 feeds as ownership directories, so one invocation's teardown claims another concurrent invocation's orphan in its scratch. The finding cites processes-darwin.ts:59-69 (birth time plus cwd under the invocation's directories) with an unrelated process in the same cwd.",
+  "reason": "The finding says the cwd-plus-birth-time heuristic claims unrelated processes in the invocation's own directory. The gold's root cause, that scratch roots are shared run-wide across invocations, is neither named nor implied."
+ },
+ {
+  "tid": "T17",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold src/harness/scratch.ts:184-187 adds every invocation's scratch dir to the run-wide processScope.scratchDirs, which proc.ts:289 feeds as ownership directories, so one invocation's teardown claims another concurrent invocation's orphan in its scratch. The finding cites processes-darwin.ts:59-69 (birth time plus cwd under the invocation's directories) with an unrelated process in the same cwd.",
+  "reason": "The finding says the cwd-plus-birth-time heuristic claims unrelated processes in the invocation's own directory. The gold's root cause, that scratch roots are shared run-wide across invocations, is neither named nor implied."
+ },
+ {
+  "tid": "T18",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "src/pipeline/gate-evidence.ts:43-50 (head 9206127b9d) sets claimed=true when gateClaim() matches model-written evidence, publicSummary, requirementCitation or verify.notes, and turns met into blocked. Gold says this free-text detection lets model wording steer substitution (a security concern). The findings report that ordinary uses of the word 'gate' cause false blocks of genuine evidence.",
+  "reason": "The findings report false-positive blocking of independent evidence (an availability and correctness harm, which the code's own comment accepts as fail-closed). The gold is about model-controlled wording deciding the substitution/claim path at all, a security boundary issue. The regex is the same, but the failure differs and so would the fix."
+ },
+ {
+  "tid": "T19",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "src/pipeline/gate-evidence.ts:43-50 (head 9206127b9d) sets claimed=true when gateClaim() matches model-written evidence, publicSummary, requirementCitation or verify.notes, and turns met into blocked. Gold says this free-text detection lets model wording steer substitution (a security concern). The findings report that ordinary uses of the word 'gate' cause false blocks of genuine evidence.",
+  "reason": "The findings report false-positive blocking of independent evidence (an availability and correctness harm, which the code's own comment accepts as fail-closed). The gold is about model-controlled wording deciding the substitution/claim path at all, a security boundary issue. The regex is the same, but the failure differs and so would the fix."
+ },
+ {
+  "tid": "T20",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "src/pipeline/gate-evidence.ts:43-50 (head 9206127b9d) sets claimed=true when gateClaim() matches model-written evidence, publicSummary, requirementCitation or verify.notes, and turns met into blocked. Gold says this free-text detection lets model wording steer substitution (a security concern). The findings report that ordinary uses of the word 'gate' cause false blocks of genuine evidence. F2 also notes that verify.notes is applied to every criterion (line 45).",
+  "reason": "The findings report false-positive blocking of independent evidence (an availability and correctness harm, which the code's own comment accepts as fail-closed). The gold is about model-controlled wording deciding the substitution/claim path at all, a security boundary issue. The regex is the same, but the failure differs and so would the fix."
+ },
+ {
+  "tid": "T21",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold src/pipeline/gate-evidence.ts:40-41 (head 73b9a9cc79) is the non-Bun branch: `requestedCommand === command || === check.result.command` marks the criterion met on a matching successful command, without checking the outcome the criterion requires (later fixed in 1cbd6b03 with 'Exit success attests only to tests passing'). F2 cites :60, the Bun exact-match shortcut, plus './' normalization at :50/:54.",
+  "reason": "The finding is about the Bun targeted-file shortcut and './' filter semantics, a different branch and mechanism from the gold's non-Bun command-equality path not proving the required observation."
+ },
+ {
+  "tid": "T22",
+  "verdict": "SAME",
+  "finding": "F2",
+  "evidence": "src/pipeline/gate-evidence.ts:60-65 returns true when the requested files equal the gate's selected files after './' stripping, checking only skippedFiles and incompleteTestOutput and never coverage.passedFiles or a pass summary (the later fix 1cbd6b03 removed this shortcut and requires summary.passed>=1). F2 says 'The shortcut ... accepts matching command arguments without consulting passedFiles' and shows the requested file never ran.",
+  "reason": "Both blame the targeted-command shortcut at :60-65, which accepts Bun evidence without coverage proof that the requested tests ran."
+ },
+ {
+  "tid": "T23",
+  "verdict": "SAME",
+  "finding": "F3",
+  "evidence": "src/pipeline/gate-evidence.ts:60-65 is the exact-match shortcut that skips the passedFiles check. F3 cites :63 and says 'the matching-command shortcut then accepts them without checking discovered files', with a reproduction in which the required file never ran but the result is met.",
+  "reason": "F3 identifies the same shortcut that accepts targeted Bun evidence without coverage proof. Its emphasis on './' normalization is the trigger, but the defect it names is the shortcut not checking which tests ran."
+ },
+ {
+  "tid": "T24",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold src/harness/types.ts:225-228 fires when the last identical call has a hash (completed) even though earlier identical calls in the window are still pending (hash undefined) and could reset `same`; only `last` pending is deferred (:227). F1 cites :175, where observe() calls reconcile(true) so that the pending last call is treated as finished as soon as any other tool starts.",
+  "reason": "The finding concerns the threshold call itself being force-finalized by an unrelated observe(). The gold concerns a completed last call being judged while its unresolved predecessors could still show progress. These are distinct conditions in the loop detector."
+ },
+ {
+  "tid": "T25",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold src/router/runtime-catalog.ts:71-76 is patch() validating only router.getPolicy(). F1 cites remove() at :79-87, which checks only operator cells and so lets routing/policy.json reference a deleted model.",
+  "reason": "The finding is about remove() and the eval policy file. The gold is about patch() effort removal missing cells hidden by operator overrides. Same theme, different code path and mechanism."
+ },
+ {
+  "tid": "T26",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold src/cli/digest.ts:19-30 covers the 'Needs you' and 'PRs awaiting review' groups, whose actionable state is rebuilt by replaying feed kinds and clears instead of reading current unanswered-question and review state. F1 cites :33-37, the 'Blocked lands' group, whose clears list lacks pr.merged, pr.closed and run.merged.",
+  "reason": "The finding is a missing clear event in the Blocked lands group, outside the gold range and fixable by adding clears. The gold is that the Needs-you and review groups derive state from stale history rather than from current records."
+ },
+ {
+  "tid": "T27",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold src/gates/media.ts:43-45 is clean(), used by isInertMedia image validation, which rejects any buffer containing a PAYLOADS magic such as 2-byte 4d5a ('MZ') anywhere. The finding cites media.ts:33, isForbiddenFormat, which repos.ts:827/835 uses to drop blobs from the text set; images are judged separately via isInertMedia (repos.ts:910-934).",
+  "reason": "The finding is about readable text or source being misclassified as binary by isForbiddenFormat, while the gold is about valid image bytes being rejected by clean() during inert-media validation. The substring-matching pattern is the same, but the call site and the consequence differ."
+ },
+ {
+  "tid": "T28",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold src/util/proc.ts:146-151 runs after the 10 s deadline while `process.kill(-child.pid, 0)` still succeeds: it sends one more SIGKILL, destroys the pipes and returns with group members still alive. F1/F4 cites :129 killTree and descendants that call setsid or leave the process group, so the group-alive probe returns early.",
+  "reason": "The finding is about descendants escaping the process group. The gold is about the deadline fallback returning while members of the group are still alive."
+ }
+]

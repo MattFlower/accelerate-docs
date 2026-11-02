@@ -1,0 +1,491 @@
+{
+ "pool-review-044/C7": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-044/C9": {
+  "sev": "nit",
+  "why": ""
+ },
+ "pool-review-045/C2": {
+  "sev": "major",
+  "why": "rollback rejects exported config (compat)"
+ },
+ "pool-review-046/C1": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-046/C3b": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-046/C4": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-046/C6": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-046/C6b": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-051/C4": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-052/C2": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-052/C3": {
+  "sev": "major",
+  "why": "precedent: case-sensitive repo slug"
+ },
+ "pool-review-052/C4": {
+  "sev": "major",
+  "why": "pending state never ends (skipped/neutral reruns)"
+ },
+ "pool-review-052/C6": {
+  "sev": "major",
+  "why": "manual rerun of another job -> Ambiguous every poll, blocks later PRs"
+ },
+ "pool-review-052/C7": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-052/C9": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-052/C10": {
+  "sev": "major",
+  "why": "GitHub refuses job rerun while run in progress; cap spent, flake reported as needing fix"
+ },
+ "pool-review-052/C12": {
+  "sev": "nit",
+  "why": ""
+ },
+ "pool-review-052/C14": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-052/C16": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-052/C19": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-052/C20": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-053/C4": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-053/C5": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-053/C6": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-053/C7": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-053/C7b": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-053/C11b": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-053/C12b": {
+  "sev": "nit",
+  "why": ""
+ },
+ "pool-review-054/C6": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-054/C6b": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-054/C4": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-054/C5": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-054/C8": {
+  "sev": "major",
+  "why": "REST inspection per paused PR every poll while main red: API quota"
+ },
+ "pool-review-054/C9": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-054/C13": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-054/C14": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-054/C15": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-054/C18": {
+  "sev": "nit",
+  "why": ""
+ },
+ "pool-review-054/C20": {
+  "sev": "nit",
+  "why": ""
+ },
+ "pool-review-054/C21": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-056/C3": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-056/C5": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-056/C5b": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-056/C6": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-056/C8": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-057/C2": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-057/C4": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-057/C6b": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-058/C4": {
+  "sev": "major",
+  "why": "every gate install downloads Chromium; CDN failure blocks gates/deploys"
+ },
+ "pool-review-058/C5": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-069/C2": {
+  "sev": "major",
+  "why": "precedent: digest lists a state that no longer holds (major)"
+ },
+ "pool-review-069/C11": {
+  "sev": "major",
+  "why": "Codex acks under 'claude' and moves Claude's cursor"
+ },
+ "pool-review-070/C7": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-070/C9": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-070/C10": {
+  "sev": "nit",
+  "why": ""
+ },
+ "pool-review-071/C4": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-071/C5": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-071/C7": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-071/C12": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-071/C13": {
+  "sev": "nit",
+  "why": ""
+ },
+ "pool-review-071/C14": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-072/C4": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-072/C8": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-072/C5": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-072/C6": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-072/C7": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-073/C2": {
+  "sev": "major",
+  "why": "precedent: PR under rework listed as awaiting review"
+ },
+ "pool-review-073/C10": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-073/C4": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-073/C7": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-073/C9": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-073/C11": {
+  "sev": "nit",
+  "why": ""
+ },
+ "pool-review-073/C12": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-073/C13": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-076/C2": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-076/C7": {
+  "sev": "nit",
+  "why": ""
+ },
+ "pool-review-076/C8": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-087/C1": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-088/C1": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-093/C1": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-093/C4": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-093/C5": {
+  "sev": "major",
+  "why": "Q5: credential fragment survives clipping"
+ },
+ "pool-review-096/C1": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-096/C2": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-096/C5": {
+  "sev": "blocker",
+  "why": "precedent: daemon won't start after upgrade"
+ },
+ "pool-review-096/C3": {
+  "sev": "nit",
+  "why": ""
+ },
+ "pool-review-096/C4": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-096/C6": {
+  "sev": "nit",
+  "why": ""
+ },
+ "pool-review-098/C1": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-098/C1b": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-098/C2": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-098/C8": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-099/C1": {
+  "sev": "blocker",
+  "why": ""
+ },
+ "pool-review-099/C9": {
+  "sev": "blocker",
+  "why": ""
+ },
+ "pool-review-099/C3": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-099/C4b": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-099/C4": {
+  "sev": "major",
+  "why": "SSH alias/tunnel host never matched; provider never enabled"
+ },
+ "pool-review-099/C5b": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-099/C7": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-100/C1": {
+  "sev": "blocker",
+  "why": ""
+ },
+ "pool-review-100/C2": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-100/C10": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-101/C4": {
+  "sev": "not_real",
+  "why": "Sol: cache key includes factory build commit"
+ },
+ "pool-review-103/C2b": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-103/C5": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-103/C7": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-103/C6": {
+  "sev": "major",
+  "why": "untrusted PR can hide escape sequences from the reviewer"
+ },
+ "pool-review-104/C5": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-104/C7": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-104/C8": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-105/C4": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-105/C7": {
+  "sev": "major",
+  "why": "same, verify-change flow"
+ },
+ "pool-review-105/C8": {
+  "sev": "nit",
+  "why": ""
+ },
+ "pool-review-106/C1": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-106/C2": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-106/C4b": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-106/C9": {
+  "sev": "nit",
+  "why": ""
+ },
+ "pool-review-119/C2": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-119/C4": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-127/C1": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-127/C2": {
+  "sev": "minor",
+  "why": ""
+ },
+ "pool-review-127/C3": {
+  "sev": "major",
+  "why": "explicit requirement; amended merge published unreviewed"
+ },
+ "_note": "Pool dev rulings 10-30 late; precedents as escape rulings + pool_val*. Same mechanism across cases ruled alike."
+}

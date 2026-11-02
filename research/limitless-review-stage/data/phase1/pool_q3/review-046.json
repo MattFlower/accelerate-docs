@@ -1,0 +1,9 @@
+{
+ "items": [
+  {
+   "id": "C1",
+   "verdict": "explicit",
+   "quote": "Implement escalation (after `ROUNDS_PER_IMPLEMENTER` rounds; `minTier`/`exclude` in `src/pipeline/engine.ts`) moves to the next untried candidate in the run's chain, never to a model outside it. When the chain is used up, the run goes to needs_human as above."
+  }
+ ]
+}

@@ -1,0 +1,33 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C2",
+    "C2b"
+   ],
+   "same_as": "G1",
+   "root_cause": "The criterion parser only partly parses the instruction text. It pulls out one test command and treats that as proof of the whole criterion, so steps or filenames it drops are never checked."
+  },
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "Gate evidence counts a successful exit code as proof of the targeted tests without positive evidence that those exact tests ran."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "Commit provenance is recorded without checking that the tested working-tree bytes match the commit, so a setup step that changed the code can produce passing results that get credited to the original commit."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "On resume, cached gate results are skipped but their evidence is rejected because the stage was never marked successful, so the criterion stays blocked forever."
+  }
+ ]
+}

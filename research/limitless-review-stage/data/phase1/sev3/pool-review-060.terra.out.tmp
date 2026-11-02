@@ -1,0 +1,1 @@
+{"ratings":[{"id":"C1","consequence":"wrong","trigger":"plausible","reason":"A cleanup failure in the finally block can replace the recoverable cleanup error and fail the run instead of allowing another round, requiring an uncommon but realistic persistent worktree cleanup failure."}]}

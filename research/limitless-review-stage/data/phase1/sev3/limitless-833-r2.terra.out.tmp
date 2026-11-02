@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"normal","reason":"In a normal confined gate with inaccessible sibling worktrees, privacy initialization causes most tests to fail and incorrectly blocks the change, as reproduced."}]}

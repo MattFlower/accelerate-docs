@@ -1,0 +1,82 @@
+{
+ "pool-review-073/C5": {
+  "sev": "minor",
+  "why": "unusual: exactly 5 nested encodings"
+ },
+ "pool-review-100/C8": {
+  "sev": "minor",
+  "why": "Q1 test-only"
+ },
+ "pool-review-105/C6": {
+  "sev": "minor",
+  "why": "same class as V13: served artifact reformatted"
+ },
+ "pool-review-054/C3": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-107/C2": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-083/C2": {
+  "sev": "major",
+  "why": "plausible operator option; pushes fail"
+ },
+ "pool-review-103/C2": {
+  "sev": "minor",
+  "why": "unusual: credential equal to 'loop'"
+ },
+ "pool-review-057/C5": {
+  "sev": "blocker",
+  "why": "promoting a runtime experiment is the natural flow; daemon won't boot"
+ },
+ "pool-review-119/C3": {
+  "sev": "minor",
+  "why": "diag: one live-follow line missed"
+ },
+ "pool-review-105/C5": {
+  "sev": "minor",
+  "why": "same class as V13/V18"
+ },
+ "pool-review-057/C1": {
+  "sev": "minor",
+  "why": "workaround: restart clears block; routing falls back"
+ },
+ "pool-review-048/C4": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-080/C1": {
+  "sev": "minor",
+  "why": "preexisting + unusual"
+ },
+ "pool-review-069/C7": {
+  "sev": "minor",
+  "why": "contrived client input"
+ },
+ "pool-review-049/C2": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-056/C4": {
+  "sev": "blocker",
+  "why": ""
+ },
+ "pool-review-044/C3": {
+  "sev": "blocker",
+  "why": "upgrades retire models (10-04 did)"
+ },
+ "pool-review-049/C3": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-071/C6": {
+  "sev": "minor",
+  "why": "self-correcting after the next poll"
+ },
+ "pool-review-048/C2": {
+  "sev": "major",
+  "why": ""
+ }
+}

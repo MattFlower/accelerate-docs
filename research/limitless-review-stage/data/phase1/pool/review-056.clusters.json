@@ -1,0 +1,79 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P3",
+    "P6",
+    "P7",
+    "P14"
+   ],
+   "mechanism": "RuntimeCatalog mutations (patch/delete/re-add) leave ProviderTracker.modelBlocks keyed by the unchanged catalog ID, so a stale rejection of the old backend blocks the replacement backend for up to 24 hours."
+  },
+  {
+   "members": [
+    "P2",
+    "P5",
+    "P19"
+   ],
+   "mechanism": "PATCH merge preserves the old effort when omitted and rejects null/default as invalid, so an existing runtime model's default effort cannot be cleared."
+  },
+  {
+   "members": [
+    "P4",
+    "P8"
+   ],
+   "mechanism": "Provider probe results are recorded without a generation/ordering guard, so a late older probe overwrites a newer served-model discovery result."
+  },
+  {
+   "members": [
+    "P9",
+    "P12",
+    "P18",
+    "P23"
+   ],
+   "mechanism": "Factory constructor throws on stored runtime models that collide with code/config models or reference a removed provider, so the daemon fails to boot and the API cannot be used to recover."
+  },
+  {
+   "members": [
+    "P10",
+    "P13",
+    "P22",
+    "P24"
+   ],
+   "mechanism": "scripts/smoke.ts now opens the live production DB (running migrations) and silently drops checks for disabled or missing providers, beyond what was requested."
+  },
+  {
+   "members": [
+    "P11",
+    "P20"
+   ],
+   "mechanism": "Route tests decode the :id path param themselves, so they never verify that the real router decodes the encoded slash (%2F) in model ids."
+  },
+  {
+   "members": [
+    "P15",
+    "P16"
+   ],
+   "mechanism": "Pre-existing smoke.test.ts escaped-process fixtures are flaky or failing independent of this change."
+  },
+  {
+   "members": [
+    "P17"
+   ],
+   "mechanism": "Eval runner's availability check bypasses Router.route() and omits the tracker.notServed() guard, so unserved models can still be called."
+  },
+  {
+   "members": [
+    "P21"
+   ],
+   "mechanism": "probeProvider publishes provider status on every probe even when nothing changed, adding needless publishes and served_models queries."
+  },
+  {
+   "members": [
+    "P25"
+   ],
+   "mechanism": "The change exceeds the ~350 source-line budget."
+  }
+ ]
+}

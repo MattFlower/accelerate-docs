@@ -1,0 +1,14 @@
+{
+ "items": [
+  {
+   "id": "C2",
+   "verdict": "explicit",
+   "quote": "When an agent invocation ends (normally, stuck, or cancelled), kill its whole process tree before any worktree cleanup. Background children must not outlive the invocation."
+  },
+  {
+   "id": "C3",
+   "verdict": "explicit",
+   "quote": "When an agent invocation ends (normally, stuck, or cancelled), kill its whole process tree before any worktree cleanup. Background children must not outlive the invocation."
+  }
+ ]
+}

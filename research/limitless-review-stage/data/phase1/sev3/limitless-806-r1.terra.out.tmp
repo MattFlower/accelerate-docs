@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"compat","trigger":"unusual","reason":"A coordinator rollback during an active newer-worker job causes the older coordinator to reject the refusal event and the worker to abort the session."}]}

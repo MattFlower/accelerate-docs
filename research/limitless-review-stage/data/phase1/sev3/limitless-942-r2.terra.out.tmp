@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"An abnormal service inspection can be mistaken for confirmed absence, allowing deployment or uninstallation to proceed while the executor remains loaded and potentially disrupting or wasting its work."}]}

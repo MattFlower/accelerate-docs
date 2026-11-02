@@ -1,0 +1,19 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P3",
+    "P4"
+   ],
+   "mechanism": "compactRun copies the entire dependsOn array without any count limit, so runs with many dependencies produce compact output that exceeds the intended byte budgets."
+  },
+  {
+   "members": [
+    "P2",
+    "P5"
+   ],
+   "mechanism": "The MCP proxy relies solely on the new HTTP repo query parameter, which the previous daemon ignores, so version skew returns runs from unrelated repositories and computes hasMore incorrectly."
+  }
+ ]
+}

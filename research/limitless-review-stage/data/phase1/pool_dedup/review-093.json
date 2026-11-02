@@ -1,0 +1,47 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C6"
+   ],
+   "same_as": "G4",
+   "root_cause": "The strict eval GateResultSchema doesn't allow the newly added optional failures/excerpt field."
+  },
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "Any line starting with 'not ok ' is treated as a TAP failure boundary without checking it is a real TAP result line, so log output can fill all the failure slots."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "Bun's end-of-run summary list of failed tests is not excluded, so those entries are extracted again as duplicate failures and can wrongly trigger the 'left out' note."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "Implementer feedback truncation keeps the start of each excerpt and drops the end, so the assertion error, diff and (fail) line are lost first."
+  },
+  {
+   "members": [
+    "C4",
+    "C7"
+   ],
+   "same_as": null,
+   "root_cause": "The land log character budget at queue.ts:318 is too small when excerpts are present: it shrinks the raw tail to 1,000 characters and is below the excerpt cap, so excerpts get clipped and noted twice."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": null,
+   "root_cause": "Failure excerpts are clipped before credential redaction runs, so credentials stay in excerpts and fragments cut by clipping can't be removed by literal redaction afterwards."
+  }
+ ]
+}

@@ -1,0 +1,65 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P3",
+    "P4",
+    "P11",
+    "P15",
+    "P16",
+    "P17"
+   ],
+   "mechanism": "EvalRunner.resume re-validates the stored request against the current catalog, so a removed model ID is rejected (HTTP 400) and legacy evals cannot resume. The new test asserts this rejection."
+  },
+  {
+   "members": [
+    "P2",
+    "P6",
+    "P9",
+    "P20",
+    "P18"
+   ],
+   "mechanism": "manageLocal builds new URL(`http://${host}:8080`) from an unvalidated remote_host with no error handling. Valid SSH destinations such as bare IPv6 addresses or host:port values make it throw TypeError: Invalid URL and abort the command."
+  },
+  {
+   "members": [
+    "P7"
+   ],
+   "mechanism": "The remote provider is matched only by exact origin equality between http://<remote_host>:8080 and the provider's base_url. An SSH alias, user@host or https therefore matches nothing, so the probe runs without the API key and enablement is never toggled."
+  },
+  {
+   "members": [
+    "P5"
+   ],
+   "mechanism": "RuntimePolicy strictly validates persisted routing cells and provider preferences at construction, so retired provider or model IDs saved by an operator stop the daemon from starting."
+  },
+  {
+   "members": [
+    "P12",
+    "P13",
+    "P14"
+   ],
+   "mechanism": "The removed-models tests depend on the absent evals/triage/cases.json dataset. They fail with ENOENT before reaching the resume validation they are meant to exercise."
+  },
+  {
+   "members": [
+    "P8"
+   ],
+   "mechanism": "The LAN provider test does not cover mapping the removed built-in's Claude-harness base_url onto a config-defined provider (agentic path). This is a test coverage gap."
+  },
+  {
+   "members": [
+    "P10",
+    "P21"
+   ],
+   "mechanism": "The OPERATIONS.md link uses the anchor GUIDE.md#providers-1, which points to the second 'Providers' heading instead of the first, where the LAN example lives."
+  },
+  {
+   "members": [
+    "P19"
+   ],
+   "mechanism": "The docs still describe the llama-server binary at ~/.local/share/limitless/llama-bin/, but the generated unit now defaults to /usr/local/bin/llama-server, so the default points to a nonexistent binary on the documented setup."
+  }
+ ]
+}

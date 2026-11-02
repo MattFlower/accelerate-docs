@@ -1,0 +1,31 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P2",
+    "P3",
+    "P7",
+    "P9",
+    "P11"
+   ],
+   "mechanism": "The orphan fallback claims any hidden process born during the invocation whose cwd is under a recorded directory, with no marker or ancestry evidence, so shutdown kills unrelated processes."
+  },
+  {
+   "members": [
+    "P1",
+    "P4",
+    "P8",
+    "P10",
+    "P12"
+   ],
+   "mechanism": "Discovery starts only at shutdown, so a detached descendant that has lost its parent chain, has no marker, and has a cwd outside the recorded roots is missed and survives while shutdown reports success."
+  },
+  {
+   "members": [
+    "P5",
+    "P6"
+   ],
+   "mechanism": "A detached orphan with a visible, non-empty replacement environment and no marker is excluded by the hidden-process fallback, so it survives shutdown."
+  }
+ ]
+}

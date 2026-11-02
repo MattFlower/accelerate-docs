@@ -1,0 +1,55 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P2"
+   ],
+   "mechanism": "Rejected routing load in RetryModels never clears the loading state or offers a retry, leaving the picker stuck loading and submission disabled."
+  },
+  {
+   "members": [
+    "P3"
+   ],
+   "mechanism": "Clearing default effort omits it from the PATCH payload, so the merge on the server preserves the old effort value."
+  },
+  {
+   "members": [
+    "P4"
+   ],
+   "mechanism": "Catalog history is stored only in component-local session state, so it is lost on unmount and misses changes from other clients."
+  },
+  {
+   "members": [
+    "P5",
+    "P7",
+    "P11",
+    "P14"
+   ],
+   "mechanism": "Unrequested Playwright devDependency with a root postinstall that downloads Chromium on every install, causing install and gate failures when the CDN is unreachable and making unrelated tests depend on it."
+  },
+  {
+   "members": [
+    "P6",
+    "P8",
+    "P12",
+    "P15"
+   ],
+   "mechanism": "Every provider SSE event triggers an undebounced full Setup refresh with many requests (including a preview per role\u00d7cell and a stats query), causing a request storm."
+  },
+  {
+   "members": [
+    "P9"
+   ],
+   "mechanism": "The same error is rendered twice, once in RunModelPicker and again in RetryModels' own alert box."
+  },
+  {
+   "members": [
+    "P10",
+    "P13",
+    "P16"
+   ],
+   "mechanism": "The change greatly exceeds the stated source-line budget, with repetitive inline code."
+  }
+ ]
+}

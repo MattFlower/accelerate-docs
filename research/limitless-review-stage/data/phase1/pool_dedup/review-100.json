@@ -1,0 +1,48 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "Catalog additions that bring back a model referenced by saved routing rules are not checked against those rules, so a mismatch in supported settings only fails at the next daemon startup."
+  },
+  {
+   "members": [
+    "C3",
+    "C4",
+    "C3b"
+   ],
+   "same_as": null,
+   "root_cause": "Resolving saved references rejects the whole resume or retry when any referenced model is retired, instead of skipping retired entries and using the available targets or fallbacks."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The remote-host validation in local management is too strict and rejects IPv6 addresses before SSH is invoked."
+  },
+  {
+   "members": [
+    "C2b"
+   ],
+   "same_as": null,
+   "root_cause": "The remote host value is passed to SSH without blocking option-like values (such as a leading dash), so SSH treats it as an option and status can falsely report the service as active."
+  },
+  {
+   "members": [
+    "C10"
+   ],
+   "same_as": null,
+   "root_cause": "Providers are linked to the remote host only by an exact match on http://<remote_host>:8080, so SSH aliases or other ports break enabling/disabling the provider and the health check, which also omits the API key."
+  },
+  {
+   "members": [
+    "C8"
+   ],
+   "same_as": null,
+   "root_cause": "No end-to-end test covers reading the [local].remote_* keys from config.toml into local management."
+  }
+ ]
+}

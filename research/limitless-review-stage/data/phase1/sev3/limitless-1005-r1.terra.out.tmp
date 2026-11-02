@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"diag","trigger":"unusual","reason":"A narrowly timed cancellation combined with an invalid object reports a validation error instead of cancellation, while the read still fails without returning data or changing state."}]}

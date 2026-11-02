@@ -1,0 +1,100 @@
+{
+  "systems": [
+    {
+      "name": "rubric-d-failure-paths",
+      "mode": "panel",
+      "finders": [
+        {
+          "target": "codex/terra-6.1@medium",
+          "prompt": "adversarial"
+        },
+        {
+          "target": "codex/terra-6.1@medium",
+          "prompt": "standard",
+          "lens": {
+            "name": "silent-failures",
+            "focus": "Error handling and fallbacks. List every catch, .catch, default-on-error, optional chaining or ?? fallback, retry, timeout and early return that the change adds or touches. For each, ask: which unexpected errors could it hide; did the request or spec ask for this fallback; should the failure propagate or fail closed instead; is a retry limited to transient failures, bounded by one deadline, and does it keep the original failure and its classification; does every pending or in-flight state end on every path. A failed security, isolation or inspection check that ends in silent success or an unchecked path is a blocker."
+          }
+        },
+        {
+          "target": "codex/terra-6.1@medium",
+          "prompt": "standard",
+          "lens": {
+            "name": "test-gaps",
+            "focus": "Tests. For each new or changed behaviour, find the test that would fail if that behaviour regressed, and say so when none exists. Flag tests that assert the defect they should catch, compare the code with itself, mock away the logic under test, pass for the wrong reason (invalid fixture, swallowed error, early return, wrong file), or were weakened, skipped or special-cased to pass. Name the missing or broken test case precisely. A test gap that hides a real defect in the change is at least major; report the underlying defect itself as its own finding."
+          }
+        },
+        {
+          "target": "codex/terra-6.1@medium",
+          "prompt": "standard",
+          "lens": {
+            "name": "trust-boundaries",
+            "focus": "Secrets, untrusted input and isolation. Trace every credential, token, private value and untrusted input (issue or PR text, gate or test output, model output, configuration or scripts from the change) from its source to every sink: logs, events, errors, PR comments, commit metadata, branch names, model prompts, files and network. Check that redaction happens after decoding and before truncation, on error and retry paths as well as the normal one. Check sandbox profiles, deny lists and allowlists for path aliases, symlinks, files versus directories, environment variables and child processes. Anything that steers the factory must come from the base commit, never the change. When isolation or a check cannot be confirmed, the code must refuse with a clear reason, never fall back silently."
+          }
+        },
+        {
+          "target": "codex/terra-6.1@medium",
+          "prompt": "standard",
+          "lens": {
+            "name": "requirements",
+            "focus": "Requirements. Restate each requirement, acceptance criterion and universal clause (every, all, never, only, ordering, on resume or restart) from the request and the specification. For each one, find the code that implements it on every entry point: resume paths, both harness backends, the daemon and scripts/, CLI and HTTP, cache-side calls. Mark it implemented, partly implemented or missing. Every missing or partly implemented clause that the request states is a finding that quotes the clause. A clause only the specification adds, which the request does not need, is at most minor."
+          }
+        }
+      ],
+      "verifier": {
+        "target": "codex/sol-6.1@medium"
+      },
+      "implementerReport": "include",
+      "replayFrom": "terra-specialist-panel",
+      "severityRubric": "# Severity by consequence and trigger (the reviewer's severity is not an input you must keep)\nFor each candidate ask: \"would this plausibly happen in the next month of normal factory operation?\" Deploys restart the daemon daily, so restart windows count unless they last milliseconds.\n- critical: a realistic trigger that loses or corrupts persisted state, leaks a secret or private data, breaks a trust or confinement boundary, or stops the factory or deploys.\n- high: a realistic trigger with real harm: a wrong result, a silent failure, lost or repeated work, a check the change claims to add that a realistic input bypasses, or a compatibility break with the previous release.\n- medium: a real defect with a contrived trigger (an unusual input, configuration, environment or timing the request does not ask to handle), or a cost only in tests or diagnostics, such as a missing or weak test on its own, or a missing or less informative log line or error message.\n- low: cosmetic, a process ask (a report, measurements, PR text), or behaviour the repository's own rules adopt.\nA secret or credential stored or shown unredacted is at least high whatever the trigger. A new test that fails in normal runs stops deploys, so it is at least high.\nRequirements: a requirement counts as undelivered only when the behaviour or protection it exists for is missing at head; then rate the missing behaviour by its trigger and harm like any other defect. Different wording, a different mechanism than the one the request preferred, log or message text, and places the request does not name are not undelivered requirements. Edits outside the request's scope are not an undelivered requirement either.\nFailure paths are realistic triggers, not contrived ones: a failed read, command or network call, a lost response, a crash or restart, a concurrent change between two reads of shared state, and timestamps that share a second all happen in normal factory operation. A failure path the request explicitly asks the change to handle is a realistic trigger however rare it is.\nA digest, report, status or feed the change produces that omits or misstates items is a wrong result, not a diagnostics cost."
+    },
+    {
+      "name": "rubric-d2-failure-paths-narrow",
+      "mode": "panel",
+      "finders": [
+        {
+          "target": "codex/terra-6.1@medium",
+          "prompt": "adversarial"
+        },
+        {
+          "target": "codex/terra-6.1@medium",
+          "prompt": "standard",
+          "lens": {
+            "name": "silent-failures",
+            "focus": "Error handling and fallbacks. List every catch, .catch, default-on-error, optional chaining or ?? fallback, retry, timeout and early return that the change adds or touches. For each, ask: which unexpected errors could it hide; did the request or spec ask for this fallback; should the failure propagate or fail closed instead; is a retry limited to transient failures, bounded by one deadline, and does it keep the original failure and its classification; does every pending or in-flight state end on every path. A failed security, isolation or inspection check that ends in silent success or an unchecked path is a blocker."
+          }
+        },
+        {
+          "target": "codex/terra-6.1@medium",
+          "prompt": "standard",
+          "lens": {
+            "name": "test-gaps",
+            "focus": "Tests. For each new or changed behaviour, find the test that would fail if that behaviour regressed, and say so when none exists. Flag tests that assert the defect they should catch, compare the code with itself, mock away the logic under test, pass for the wrong reason (invalid fixture, swallowed error, early return, wrong file), or were weakened, skipped or special-cased to pass. Name the missing or broken test case precisely. A test gap that hides a real defect in the change is at least major; report the underlying defect itself as its own finding."
+          }
+        },
+        {
+          "target": "codex/terra-6.1@medium",
+          "prompt": "standard",
+          "lens": {
+            "name": "trust-boundaries",
+            "focus": "Secrets, untrusted input and isolation. Trace every credential, token, private value and untrusted input (issue or PR text, gate or test output, model output, configuration or scripts from the change) from its source to every sink: logs, events, errors, PR comments, commit metadata, branch names, model prompts, files and network. Check that redaction happens after decoding and before truncation, on error and retry paths as well as the normal one. Check sandbox profiles, deny lists and allowlists for path aliases, symlinks, files versus directories, environment variables and child processes. Anything that steers the factory must come from the base commit, never the change. When isolation or a check cannot be confirmed, the code must refuse with a clear reason, never fall back silently."
+          }
+        },
+        {
+          "target": "codex/terra-6.1@medium",
+          "prompt": "standard",
+          "lens": {
+            "name": "requirements",
+            "focus": "Requirements. Restate each requirement, acceptance criterion and universal clause (every, all, never, only, ordering, on resume or restart) from the request and the specification. For each one, find the code that implements it on every entry point: resume paths, both harness backends, the daemon and scripts/, CLI and HTTP, cache-side calls. Mark it implemented, partly implemented or missing. Every missing or partly implemented clause that the request states is a finding that quotes the clause. A clause only the specification adds, which the request does not need, is at most minor."
+          }
+        }
+      ],
+      "verifier": {
+        "target": "codex/sol-6.1@medium"
+      },
+      "implementerReport": "include",
+      "replayFrom": "terra-specialist-panel",
+      "severityRubric": "# Severity by consequence and trigger (the reviewer's severity is not an input you must keep)\nFor each candidate ask: \"would this plausibly happen in the next month of normal factory operation?\" Deploys restart the daemon daily, so restart windows count unless they last milliseconds.\n- critical: a realistic trigger that loses or corrupts persisted state, leaks a secret or private data, breaks a trust or confinement boundary, or stops the factory or deploys.\n- high: a realistic trigger with real harm: a wrong result, a silent failure, lost or repeated work, a check the change claims to add that a realistic input bypasses, or a compatibility break with the previous release.\n- medium: a real defect with a contrived trigger (an unusual input, configuration, environment or timing the request does not ask to handle), or a cost only in tests or diagnostics, such as a missing or weak test on its own, or a missing or less informative log line or error message.\n- low: cosmetic, a process ask (a report, measurements, PR text), or behaviour the repository's own rules adopt.\nA secret or credential stored or shown unredacted is at least high whatever the trigger. A new test that fails in normal runs stops deploys, so it is at least high.\nRequirements: a requirement counts as undelivered only when the behaviour or protection it exists for is missing at head; then rate the missing behaviour by its trigger and harm like any other defect. Different wording, a different mechanism than the one the request preferred, log or message text, and places the request does not name are not undelivered requirements. Edits outside the request's scope are not an undelivered requirement either.\nFailure paths are realistic triggers, not contrived ones: a failed read, command or network call, a lost response, a crash or restart, and timestamps that share a second all happen in normal factory operation. A concurrent change between two reads is realistic when another process or loop writes that state in normal operation; an operator editing configuration or the model catalog during a run is not. A failure path the request explicitly asks the change to handle is a realistic trigger however rare it is.\nA digest, report, status or feed the change produces that omits or misstates items is a wrong result, not a diagnostics cost."
+    }
+  ]
+}

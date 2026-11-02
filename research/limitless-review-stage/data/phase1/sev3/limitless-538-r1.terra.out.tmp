@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"An operator overriding a built-in model ID while a runtime row with that ID exists can unknowingly run the configured unrelated backend because startup no longer reports the collision."}]}

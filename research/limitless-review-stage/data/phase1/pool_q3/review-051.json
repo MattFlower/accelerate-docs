@@ -1,0 +1,19 @@
+{
+ "items": [
+  {
+   "id": "C1",
+   "verdict": "explicit",
+   "quote": "When a run resumes and its worktree is a linked worktree with no record, record it once (`recordWorktree`)."
+  },
+  {
+   "id": "C2",
+   "verdict": "explicit",
+   "quote": "Alternatively, record every existing worktree from a migration step at daemon start."
+  },
+  {
+   "id": "C3",
+   "verdict": "explicit",
+   "quote": "So a missing record means the worktree predates the upgrade."
+  }
+ ]
+}

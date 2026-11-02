@@ -1,0 +1,80 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P2",
+    "P3",
+    "P4",
+    "P5",
+    "P6",
+    "P8",
+    "P11",
+    "P12",
+    "P21",
+    "P22",
+    "P23",
+    "P24",
+    "P25",
+    "P26",
+    "P28",
+    "P30",
+    "P31",
+    "P36"
+   ],
+   "mechanism": "Truncation overlap dropped after a runner cut uses literal credential lengths, but JSON-escaped variants are longer, so a suffix of a cut escaped credential survives redaction."
+  },
+  {
+   "members": [
+    "P7",
+    "P27",
+    "P29"
+   ],
+   "mechanism": "runProcess's line splitter drops blank lines, so multiline credentials containing blank lines are altered before reassembly and no longer match redaction in failure excerpts."
+  },
+  {
+   "members": [
+    "P9"
+   ],
+   "mechanism": "Removing the per-line 8,000-character slice leaves retained diagnostic lines unbounded in memory."
+  },
+  {
+   "members": [
+    "P10"
+   ],
+   "mechanism": "Per-line redaction replaces a shorter registered credential inside a longer multiline credential, so the assembled text no longer matches the longer credential and its other lines leak."
+  },
+  {
+   "members": [
+    "P13",
+    "P16",
+    "P32",
+    "P34"
+   ],
+   "mechanism": "loadOutputPrivacy withholds any text containing the literal \"[redacted]\", hiding already-redacted or benign text in MCP and digest output."
+  },
+  {
+   "members": [
+    "P15"
+   ],
+   "mechanism": "confinementError is now always written as false and treated as authoritative, reversing the documented compatibility choice for older readers and strict schemas."
+  },
+  {
+   "members": [
+    "P14",
+    "P17",
+    "P19",
+    "P20",
+    "P33",
+    "P35"
+   ],
+   "mechanism": "redactGateData is applied globally to API responses, SSE messages, artifacts, run state, prompts and reports, which strips control characters from non-gate data, adds confinementError to unrelated objects, and exceeds the requested single redaction point."
+  },
+  {
+   "members": [
+    "P18"
+   ],
+   "mechanism": "The artifact endpoint parses and re-serializes JSON artifacts without indentation, so pretty-printed artifacts are served minified."
+  }
+ ]
+}

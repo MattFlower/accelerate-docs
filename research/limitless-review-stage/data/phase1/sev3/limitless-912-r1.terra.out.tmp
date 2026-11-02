@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"compat","trigger":"unusual","reason":"If the daemon stops during rejection rollback and the previous release is restored, that release ignores the recorded rejection and can report success after repeating the merge and gates."}]}

@@ -1,0 +1,54 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P5",
+    "P7",
+    "P10",
+    "P12",
+    "P16",
+    "P20",
+    "P23"
+   ],
+   "mechanism": "INERT_MEDIA_PATH and the validator omit many requested inert-media extensions (PDF, MP4, BMP, AVIF, 3D formats and others), so those files wrongly require Allow: binary."
+  },
+  {
+   "members": [
+    "P3",
+    "P8",
+    "P11",
+    "P13",
+    "P17"
+   ],
+   "mechanism": "The PNG parser's fixed chunk allowlist rejects ordinary ancillary metadata chunks such as tEXt, so valid PNGs with normal metadata lose the exemption."
+  },
+  {
+   "members": [
+    "P2",
+    "P6",
+    "P14",
+    "P18",
+    "P21",
+    "P24"
+   ],
+   "mechanism": "clean() rejects short magic signatures such as MZ anywhere in media bytes, so valid PCM or compressed data that contains them by coincidence is blocked."
+  },
+  {
+   "members": [
+    "P4",
+    "P9",
+    "P22"
+   ],
+   "mechanism": "The 32 MiB size or decompression cap (MEDIA_LIMIT) removes the exemption from valid large media, which then lands in binaryPaths and is blocked."
+  },
+  {
+   "members": [
+    "P15",
+    "P19",
+    "P25"
+   ],
+   "mechanism": "The new 1,941-line media parser module far exceeds the requested 40-source-line budget for what should be an extension-list change."
+  }
+ ]
+}

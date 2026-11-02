@@ -1,0 +1,35 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P2",
+    "P3",
+    "P5",
+    "P9",
+    "P11"
+   ],
+   "mechanism": "passed() rejects a whole gate check if any unrelated file was skipped, so a fully passing loopback file cannot supply evidence (e.g. under LIMITLESS_CONFINED skips)."
+  },
+  {
+   "members": [
+    "P4",
+    "P6"
+   ],
+   "mechanism": "covers() accepts matching command arguments without checking passedFiles, but Bun treats bare test arguments as substring filters, so the requested file may never have run yet evidence is accepted."
+  },
+  {
+   "members": [
+    "P7",
+    "P10"
+   ],
+   "mechanism": "gateClaim treats any standalone mention of 'gate/gates' (including in verify.notes) as a factory citation, so independently observed evidence is downgraded from met to blocked."
+  },
+  {
+   "members": [
+    "P8"
+   ],
+   "mechanism": "Unchanged HEAD is treated as proof that gates tested the committed tree, though gate setup or earlier checks may have modified tracked files before tests ran and were then reset."
+  }
+ ]
+}

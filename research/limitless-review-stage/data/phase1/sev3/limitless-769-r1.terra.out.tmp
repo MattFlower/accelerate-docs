@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"secret","trigger":"plausible","reason":"A buggy or modified authenticated worker can send private account details as a CLI version, which the coordinator persists and exposes in worker listings."}]}

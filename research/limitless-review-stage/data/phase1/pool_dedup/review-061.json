@@ -1,0 +1,25 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "On Darwin, process ownership is decided by matching working directory and start time, so unrelated orphaned processes in the same cwd get claimed and killed."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The gate-timeout rerun path in the engine calls cleanup without the retry and recovery handling used on other paths, so a temporary cleanup failure aborts the whole run."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": "G4",
+   "root_cause": "Darwin descendant discovery depends on an inherited environment marker, so a descendant that replaces its environment is no longer found and keeps running after cleanup reports success."
+  }
+ ]
+}

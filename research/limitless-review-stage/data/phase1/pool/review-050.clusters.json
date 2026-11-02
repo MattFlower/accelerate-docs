@@ -1,0 +1,23 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P4"
+   ],
+   "mechanism": "Recovery only checks the persisted ctx.state.worktreePath, so a legacy worktree created in prepare before the path was saved is skipped and createWorktree's reuse branch fails with 'Missing trusted Git paths'."
+  },
+  {
+   "members": [
+    "P3"
+   ],
+   "mechanism": "The legacy-worktree recording block runs after the needsHumanReason throw, so resumed needs_human runs reach deliver without a .git-paths record and delivery fails."
+  },
+  {
+   "members": [
+    "P2"
+   ],
+   "mechanism": "The new test only covers resuming in the loop phase with a worktree built under the new code, leaving the delivery/needsHumanReason and pre-upgrade cases untested."
+  }
+ ]
+}

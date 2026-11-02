@@ -1,0 +1,23 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P2",
+    "P3"
+   ],
+   "mechanism": "textAt classifies any blob containing the literal \"%PDF-\" anywhere as binary, so text files mentioning the PDF magic number are wrongly reported as having NUL/binary bytes."
+  },
+  {
+   "members": [
+    "P1"
+   ],
+   "mechanism": "A pre-existing config-cache test assertion fails on both base and head (expects one config listing but gets two), unrelated to this patch."
+  },
+  {
+   "members": [
+    "P4"
+   ],
+   "mechanism": "The new INERT_MEDIA_PATH guard lets a mode change with an identical blob (regular file to symlink, 100644 to 120000) pass unflagged, dropping the incidental check that base provided."
+  }
+ ]
+}

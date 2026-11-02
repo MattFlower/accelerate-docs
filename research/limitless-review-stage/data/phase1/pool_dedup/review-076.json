@@ -1,0 +1,53 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": "G3",
+   "root_cause": "When exclusions remove every chat candidate, the chat failure path drops the origin-exclusion reason and reports a generic unavailability error."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "Queued calls are dispatched without rechecking whether the selected model's current origin is excluded, so a catalog change made while the call waits is ignored."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": "G2",
+   "root_cause": "Panel verifier selection does not filter out excluded verifiers before picking a target, so it can choose an excluded entry over an eligible independent model."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "Eval resume does not check stored escalation chains against origin exclusions up front, so a run can spend its first round before failing on a prohibited model."
+  },
+  {
+   "members": [
+    "C6"
+   ],
+   "same_as": null,
+   "root_cause": "The private-output exhaustion error repeats the same origin-exclusion reason for every excluded model instead of deduplicating it."
+  },
+  {
+   "members": [
+    "C7"
+   ],
+   "same_as": null,
+   "root_cause": "A paragraph in docs/EVALS.md has an awkward manual line break."
+  },
+  {
+   "members": [
+    "C8"
+   ],
+   "same_as": null,
+   "root_cause": "Startup validation does not reject review roster finder pins that point to models with excluded origins."
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "The retry picker has no error handling for a failed routing load, so it stays in the loading state with submission disabled."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": "G3",
+   "root_cause": "When default effort is cleared, the PATCH payload leaves the field out instead of sending an explicit clear, so the old value stays stored."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": "G4",
+   "root_cause": "Catalog history is kept only in component-local state, not loaded from the server, so it is lost when Setup unmounts and never shows changes made by other clients."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "An out-of-scope Playwright dependency was added along with a postinstall script that downloads Chromium on every install."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": null,
+   "root_cause": "Every provider SSE event triggers a full page refetch with one preview request per cell, with no debouncing and no cancellation of overlapping batches."
+  },
+  {
+   "members": [
+    "C6"
+   ],
+   "same_as": null,
+   "root_cause": "The retry panel shows role-specific validation errors in two separate alert regions, so the same error appears twice."
+  }
+ ]
+}

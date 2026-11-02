@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"nuisance","trigger":"unusual","reason":"Schema-invalid workload data can prevent the Providers page from rendering its workload figures, but the documented missing-field cases work and actual daemons do not produce the reproduced malformed shapes."}]}

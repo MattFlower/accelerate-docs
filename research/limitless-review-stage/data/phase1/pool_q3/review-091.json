@@ -1,0 +1,14 @@
+{
+ "items": [
+  {
+   "id": "C2",
+   "verdict": "explicit",
+   "quote": "An identical call counts toward the loop only if its result is identical (compare a hash of the result text, after the output truncation the parsers already apply) to the result of the previous identical call. When the result differs, that call does not count"
+  },
+  {
+   "id": "C3",
+   "verdict": "not_explicit",
+   "quote": ""
+  }
+ ]
+}

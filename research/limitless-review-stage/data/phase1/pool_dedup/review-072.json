@@ -1,0 +1,82 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "The MCP status code uses the saved PR observation and ignores the run's confirmed merge flag, so a PR the factory has confirmed as merged is reported as needing review or as unknown."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "The MCP status code lets a past blocked landing attempt take priority over the PR's current closed state."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The digest's acknowledgement cursor hides PRs that need review again after their approval was acknowledged, even when new commits arrive and CI passes."
+  },
+  {
+   "members": [
+    "C3",
+    "C10"
+   ],
+   "same_as": null,
+   "root_cause": "The digest's awaiting-review filter does not exclude PRs whose run is still active (fixing, delivering or waiting to merge)."
+  },
+  {
+   "members": [
+    "C8"
+   ],
+   "same_as": null,
+   "root_cause": "The digest treats a missing saved PR snapshot as a missing approval, so a PR that is already approved is listed as awaiting review."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": null,
+   "root_cause": "When the privacy policy file cannot be read, mutation tools still run but their MCP responses drop the result fields, including the identifier."
+  },
+  {
+   "members": [
+    "C6"
+   ],
+   "same_as": null,
+   "root_cause": "When the privacy policy is unavailable, limitless_status returns only the land summary and question count, leaving out the state and the next action."
+  },
+  {
+   "members": [
+    "C7"
+   ],
+   "same_as": null,
+   "root_cause": "The digest's quoting of PR titles does not escape bidi-control or zero-width characters."
+  },
+  {
+   "members": [
+    "C11"
+   ],
+   "same_as": null,
+   "root_cause": "GET /api/land returns 400 instead of 404 when the run does not exist."
+  },
+  {
+   "members": [
+    "C12"
+   ],
+   "same_as": null,
+   "root_cause": "The Codex skill file tells Codex to use the Claude consumer name, so it reads Claude's cursor instead of its own."
+  },
+  {
+   "members": [
+    "C13"
+   ],
+   "same_as": null,
+   "root_cause": "The MCP review and land handlers pass the backend's mutation result through without checking it against a schema."
+  }
+ ]
+}

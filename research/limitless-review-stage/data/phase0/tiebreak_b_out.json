@@ -1,0 +1,191 @@
+[
+ {
+  "tid": "T29",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold src/util/proc.ts@133e274:146-151 is the give-up path after the 10 s deadline: process group -pid still answers kill(0), code SIGKILLs once more, destroys stdio and resolves descendantsStopped, so close/scope cleanup proceeds with group members alive. F3 (line 129) is about descendants that call setsid/start_new_session and leave the process group entirely, so kill(-pid) never reaches them. Cross-check: review-060's own G1 (proc.ts:112-124, 'Detached descendants survive invocation cleanup') is F3's defect, and the follow-up fdef8e70 fixed the two separately, adding env-marker discovery and a ProcessTerminationError when termination can't be confirmed.",
+  "reason": "The gold is the deadline fallback abandoning still-alive group members; F3 is group escape by detached sessions, a different mechanism with the same consequence."
+ },
+ {
+  "tid": "T30",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold src/harness/scratch.ts@77fa7a0:184-187 adds every invocation's scratch dir to the run-wide processScope.scratchDirs, and proc.ts:287-289 feeds [opts.cwd, ...scope.scratchDirs] to orphan cwd matching, so invocation A's cleanup claims orphans living in invocation B's scratch. F2 (processes-darwin.ts:66) argues cwd+birth-time+orphan matching in general is not ownership, demonstrated with an unrelated orphan sharing the same working directory (opts.cwd), not another invocation's scratch root. Cross-check: the landed fix 3cb5594b (proc.ts:304-308) replaced scope.scratchDirs with the per-invocation invocationScratch but kept opts.cwd matching, so F2's shared-cwd scenario was left as a separate issue.",
+  "reason": "F2 attacks the cwd heuristic via a shared cwd and never identifies the run-wide scratch-root set that the gold names."
+ },
+ {
+  "tid": "T31",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold src/pipeline/gate-evidence.ts@9206127:43-50: whether a row is blocked (and thus becomes eligible for factory gate substitution) is decided by regex over model-written evidence/notes, so model wording steers substitution (security). F2 (line 45) reports false positives: honest evidence mentioning 'gate' or notes like 'Did not rerun gates' gets downgraded to blocked and stays blocked (needs_human).",
+  "reason": "F2 is an over-blocking availability problem, not the model-controlled steering of gate substitution the gold describes."
+ },
+ {
+  "tid": "T32",
+  "verdict": "SAME",
+  "finding": "F2",
+  "evidence": "src/pipeline/gate-evidence.ts@73b9a9c:59-65: when requested files equal the selected bun test args, covers() returns based only on skippedFiles and incompleteTestOutput, never consulting coverage.passedFiles (checked only at 66-72). F2 cites line 65 and shows bun's substring filter running a different file while the requested one never ran.",
+  "reason": "Both describe the exact-command shortcut accepting targeted Bun evidence without proof the requested tests ran."
+ },
+ {
+  "tid": "T33",
+  "verdict": "SAME",
+  "finding": "F2",
+  "evidence": "src/pipeline/gate-evidence.ts@73b9a9c:59-65 returns true without checking passedFiles; F2 shows test/loopback.test.tsx satisfying a criterion for missing test/loopback.test.ts.",
+  "reason": "Same shortcut, same missing proof that the requested tests ran."
+ },
+ {
+  "tid": "T34",
+  "verdict": "SAME",
+  "finding": "F2",
+  "evidence": "src/integrations/github-poller.ts@3fd1377:292-296,314-325: ciPending is set only when the PR's own CI key changes and classifyCi success clears it; the main-recovery trigger (line 314) requires ciChanged && snap.ci==='SUCCESS', so an unchanged failing PR is never re-inspected when main turns green.",
+  "reason": "F2 describes exactly that a suppressed PR is never re-classified when only main recovers."
+ },
+ {
+  "tid": "T35",
+  "verdict": "SAME",
+  "finding": "F3",
+  "evidence": "Same code, github-poller.ts@3fd1377:292-296,314-325; F3 says main-red classification clears ciPending and polls re-inspect only when the PR's CI observation changes.",
+  "reason": "Identical mechanism and scenario to the gold."
+ },
+ {
+  "tid": "T36",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold scripts/land-pr.sh@927486c:74-76: check_private (the publication scan) was moved to after `bun run check` and runs with GIT_DIR/GIT_COMMON_DIR exported to the clone, so its git calls read config the checks could have rewritten. F1 (line 98) is the new isolated push-repo `status` recursing into a submodule whose gitfile points back to the clone admin dir, executing a clone filter.",
+  "reason": "Different command and mechanism (submodule recursion in the isolated status vs the publication scanner running against the clone's mutable config)."
+ },
+ {
+  "tid": "T37",
+  "verdict": "SAME",
+  "finding": "F2",
+  "evidence": "src/util/proc.ts@d00d50d:453-458: pending = redactCredentials(pending + chunk) runs before the overlap is retained, so a shorter credential that prefixes a longer one is replaced and the longer one's suffix is emitted by later chunks.",
+  "reason": "F2 describes exactly that early redaction of the carry and the leaked suffix."
+ },
+ {
+  "tid": "T38",
+  "verdict": "SAME",
+  "finding": "F2",
+  "evidence": "src/router/router.ts@73b2fea:256-262: `edited` reads this.changedCells, which is only ever added to (line 86) and never cleared, so any prefer outside the edited cell's groups is dropped forever, including targets chosen by escalation after the edit.",
+  "reason": "F2 describes exactly the permanent changedCells invalidating post-edit selections."
+ },
+ {
+  "tid": "T39",
+  "verdict": "SAME",
+  "finding": "F1",
+  "evidence": "Gold src/gates/failures.ts@b3f7621:49-53 tries to catch multiline credentials by redacting the reassembled excerpt, but what it reassembles has already been changed line by line: run.ts:74 and failures.ts:21 redact each line (redactGateOutput), proc.ts lineSplitter:281 drops empty lines, and failures.ts:32-33 resets on pass/header rows. F1 cites line 21: per-line redaction swaps a registered component for the marker, so the assembled text no longer matches the longer multiline credential and its other line leaks. The cure is the same for both (redact the raw stream before line framing, which d00d50d's redactOutput:true moves toward), and this is a different code path from review-105 G1's chunk carry in proc.ts.",
+  "reason": "F1 names a lossy per-line step ahead of the assembled-text match at 49-53, which is the gold's root cause (moderate confidence; it is decided the same way as T50, the same gold)."
+ },
+ {
+  "tid": "T40",
+  "verdict": "SAME",
+  "finding": "F2",
+  "evidence": "src/util/proc.ts@d00d50d:453-458 redacts pending+chunk before keeping the overlap; F2's prefix-token / prefix-token-...-suffix split reproduces the gold's suffix leak.",
+  "reason": "Same early-redaction mechanism and same leaked suffix."
+ },
+ {
+  "tid": "T41",
+  "verdict": "SAME",
+  "finding": "F2",
+  "evidence": "src/router/router.ts@73b2fea:256-262 with changedCells never cleared (only added at :86).",
+  "reason": "F2 states that a past edit permanently discards later escalated preferences, which is the gold."
+ },
+ {
+  "tid": "T42",
+  "verdict": "SAME",
+  "finding": "F2",
+  "evidence": "src/router/router.ts@73b2fea:256-262; changedCells is add-only (:86). F2 (and F4 likewise) shows an implementer escalated after an edit losing stickiness.",
+  "reason": "Same permanent changedCells mechanism; F2 picked, F4 is a duplicate."
+ },
+ {
+  "tid": "T43",
+  "verdict": "SAME",
+  "finding": "F3",
+  "evidence": "src/util/proc.ts@d00d50d:453-458: redaction of pending+chunk before retaining the overlap. F3 is the exact prefix case where the suffix leaks; F2 is the same mechanism with the shorter credential embedded mid-string.",
+  "reason": "Both candidates name the gold's mechanism; F3 matches its suffix-leak scenario exactly."
+ },
+ {
+  "tid": "T44",
+  "verdict": "SAME",
+  "finding": "F1",
+  "evidence": "src/concierge.ts@207d7b4:249-251 picks the target, then awaits tracker.acquire (267) and tracker.preflight (282) and calls harness with the same target (290-295) without rechecking routing or catalog origin eligibility.",
+  "reason": "F1 describes exactly the queued chat dispatch to a target whose origin became excluded while it waited."
+ },
+ {
+  "tid": "T45",
+  "verdict": "SAME",
+  "finding": "F1",
+  "evidence": "src/concierge.ts@207d7b4:249-295, the same retained target across acquire/preflight.",
+  "reason": "Same mechanism and scenario as the gold."
+ },
+ {
+  "tid": "T46",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold src/gates/failures.ts@59e2f5e:15-17: the failure regex /^(?:\\(fail\\)|not ok)/ (and pass regex at 27) miss Bun's forced-color ✗/✓ markers. F1 is about excerpts keeping and clipping raw credentials before redaction.",
+  "reason": "An unrelated privacy issue, not unrecognized result markers."
+ },
+ {
+  "tid": "T47",
+  "verdict": "SAME",
+  "finding": "F1",
+  "evidence": "src/router/runtime-policy.ts@5a57b03:25-31: the constructor validates persisted routingCells through groups() (throws on unknown models, 56-67) and routingPrefer through validatePrefer (throws on unknown/retired IDs, prefer.ts), with no recovery, so a removed built-in aborts startup.",
+  "reason": "F1 names the same constructor validation of persisted overrides failing after the removal."
+ },
+ {
+  "tid": "T48",
+  "verdict": "SAME",
+  "finding": "F1",
+  "evidence": "src/router/runtime-policy.ts@5a57b03:25-28 runs groups()->validatePolicy, which throws on the removed model, during construction.",
+  "reason": "Same persisted routing cell failing to load at startup."
+ },
+ {
+  "tid": "T49",
+  "verdict": "SAME",
+  "finding": "F1",
+  "evidence": "src/gates/failures.ts@ec94c20:17-18 redacts each callback line individually (also run.ts:71-76), so a credential containing '\\n' never matches and its pieces are stored in failures.",
+  "reason": "F1 describes exactly how per-line callbacks store multiline credential pieces in excerpts."
+ },
+ {
+  "tid": "T50",
+  "verdict": "SAME",
+  "finding": "F2",
+  "evidence": "Gold src/gates/failures.ts@b3f7621:49-53 redacts the assembled excerpt, but the excerpt's line framing has already lost lines: :32-33 clears this.lines on pass/skip/header rows, so a credential containing such a row is cut before assembly and can't match. F2 cites exactly that (line 32).",
+  "reason": "F2 identifies a lossy step in the excerpt's line framing that defeats the assembled multiline match the gold describes (moderate confidence: the gold may have meant dropped blank lines specifically, which is the same class)."
+ },
+ {
+  "tid": "T51",
+  "verdict": "SAME",
+  "finding": "F1",
+  "evidence": "Gold src/gates/run.ts@d00d50d:71-74: ANSI stripping (redactGateOutput = stripVTControlCharacters + redact, output.ts:22-23) runs only after line framing and, via redactGateStreams (run.ts:87), after the runner's tail cut. The runner's own redaction (proc.ts:453) does no ANSI stripping, so an ANSI-split credential whose prefix is cut off leaks its suffix.",
+  "reason": "F1 is the tail-cut half of the gold's mechanism, ANSI normalization after the cut."
+ },
+ {
+  "tid": "T52",
+  "verdict": "SAME",
+  "finding": "F1",
+  "evidence": "Same: proc.ts@d00d50d:453 redacts without ANSI normalization; run.ts:87 and output.ts:22 normalize only after appendTail truncation.",
+  "reason": "Same ANSI-after-tail-cut mechanism as the gold."
+ },
+ {
+  "tid": "T53",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold: 20261009T223115-owner-diagnostics.sql@c7e65bb:4-5 declares ON DELETE CASCADE FKs on invocation_id/event_id with only an index on (run_id,id) (line 9), so cascades scan the table. F1 is rollback readability, F2 is clipping of thinking events, F3 is INTEGER PRIMARY KEY id reuse breaking follow cursors.",
+  "reason": "No candidate mentions the missing FK index or cascade-scan performance."
+ },
+ {
+  "tid": "T54",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "Gold src/pipeline/engine.ts@261559d:1790-1795 calls validateMerge(worktree, expected, base), requiring the reviewed SHA as first parent, so a legitimate second merge whose first parent is the earlier factory merge is wrongly refused. F1 says the same check is too permissive: an amended merge keeping both parents is accepted.",
+  "reason": "Opposite failure (false acceptance of an amendment vs false refusal of a valid re-merge)."
+ },
+ {
+  "tid": "T55",
+  "verdict": "DIFFERENT",
+  "finding": null,
+  "evidence": "engine.ts@261559d:1790-1795; F1 is about accepting an amended merge commit from parent ancestry alone, not about refusing the valid factory-merge-on-merge case.",
+  "reason": "Over-acceptance, whereas the gold is over-refusal."
+ }
+]

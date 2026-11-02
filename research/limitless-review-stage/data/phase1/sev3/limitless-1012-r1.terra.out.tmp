@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"A browser runtime failure can be misclassified as an implementation problem, skipping the environment retry and wasting feedback rounds on changes that cannot fix the infrastructure."}]}

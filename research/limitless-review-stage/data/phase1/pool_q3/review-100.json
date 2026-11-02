@@ -1,0 +1,24 @@
+{
+ "items": [
+  {
+   "id": "C3",
+   "verdict": "explicit",
+   "quote": "Records written before the change still render and resume. Runs, invocations, eval results and runtime provider state can reference the removed provider or model id. Handle unknown ids generically"
+  },
+  {
+   "id": "C4",
+   "verdict": "explicit",
+   "quote": "Records written before the change still render and resume. Runs, invocations, eval results and runtime provider state can reference the removed provider or model id."
+  },
+  {
+   "id": "C8",
+   "verdict": "explicit",
+   "quote": "`limitless local status` with and without `[local].remote_host`."
+  },
+  {
+   "id": "C3b",
+   "verdict": "explicit",
+   "quote": "Check `limitless eval report`, run pages, provider listings and routing resolution against a database that contains the old ids."
+  }
+ ]
+}

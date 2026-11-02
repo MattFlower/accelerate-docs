@@ -1,0 +1,25 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "The script writes info/exclude without first creating the info/ directory, so it fails when the git template didn't create that directory."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The isolated dirty check rebuilds a fresh index and re-hashes the working tree without the global clean filters, so files that depend on those filters (such as LFS files) show up as modified."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "The late-injection test writes the poisoned config to the isolated private repository instead of the land clone, so it never tests the attack it claims to cover."
+  }
+ ]
+}

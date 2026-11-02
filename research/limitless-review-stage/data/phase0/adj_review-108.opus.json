@@ -1,0 +1,25 @@
+{
+ "verdicts": [
+  {
+   "claim": "C6",
+   "verdict": "REAL",
+   "severity": "medium",
+   "evidence": "Head .limitless.toml test gate is now `bun test --parallel=$(bun scripts/test-workers.ts)` (base: `bun test`), and package.json test script is the same. src/pipeline/gate-evidence.ts (unchanged by the diff) accepts only /^bun test(?: [\\w./-]+)*$/ in gateTestCommand and covers() also rejects any '-' argument and requires command === \"bun test\" for whole-suite coverage. Ran in the head checkout: gateTestCommand(\"bun test --parallel=$(bun scripts/test-workers.ts)\", scripts) -> null; gateTestCommand(\"bun run test\", headScripts) -> null; gateTestCommand(\"bun test\", {test:\"bun test\"}) -> \"bun test\". engine.ts:1160 stores testCommand: gateTestCommand(check.result.command, testScripts), so every candidate gate on this repo now records testCommand null and applyGateEvidence refuses with 'candidate gate checks do not cover every required verification step'.",
+   "reason": "The change to the repository's own gate command silently disables factory gate substitution for sandbox-blocked verification criteria on this repo (worked at base), leaving such criteria blocked; the implementer neither adapted gate-evidence nor flagged the conflict."
+  },
+  {
+   "claim": "C13",
+   "verdict": "LOW",
+   "severity": "low",
+   "evidence": "Ran `bun -e 'import {gateEnvDigest} from \"./src/gates/cache.ts\"; console.log(gateEnvDigest({LIMITLESS_TEST_WORKERS:\"1\"}) === gateEnvDigest({LIMITLESS_TEST_WORKERS:\"8\"}))'` -> true. gateEnv() at head now forwards LIMITLESS_TEST_WORKERS, but the baseline cache key ignores it; the gate command string itself is the literal `$(bun scripts/test-workers.ts)` so it does not vary either.",
+   "reason": "True that the worker override is not in the baseline key, but worker count does not change which tests pass on a correct base; the only effect is on load-sensitive flakes, which machine load (also not keyed) affects equally and which the retry/flaky path handles. Below medium."
+  },
+  {
+   "claim": "C14",
+   "verdict": "REAL",
+   "severity": "medium",
+   "evidence": "The diff contains no measurements (they belong in the PR description per the request's 'Measure (in the PR description)' section); the review case's input.implementerReport for review-108 is empty, and the commit that landed this work on main (febaff9b) states 'Measurements and the test-count check are added by the review', i.e. the submitted change did not supply the 4/6/8 comparison, serial-vs-parallel wall/user/sys, post-split top-10 or three clean parallel runs. Partial mitigation I checked: test titles at base (185 test( calls in test/pipeline.test.ts) vs head (187 across pipeline*.test.ts) show no test removed, only two added (panel-cleanup and redaction tests). (The one base-only title string, the ops-lens template literal, is present at head in test/pipeline-panel.test.ts:167, reformatted onto one line.)",
+   "reason": "An explicit acceptance requirement (pick the worker count by measurement and report it with three failure-free parallel runs) was not delivered by this change, so the default of 4 and the ~2-minute-per-file bound are unsupported; the code itself is otherwise reasonable."
+  }
+ ]
+}

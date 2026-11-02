@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"outage","trigger":"plausible","reason":"Interrupting an in-flight drain can leave the daemon indefinitely paused after cleanup, stopping new runs until the operator resumes it."}]}

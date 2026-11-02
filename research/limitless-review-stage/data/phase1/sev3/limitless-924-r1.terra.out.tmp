@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"diag","trigger":"unusual","reason":"The documentation omits execution-thread and stall guidance, but no current runtime behavior changes; a stall depends on a future implementation choosing synchronous execution."}]}

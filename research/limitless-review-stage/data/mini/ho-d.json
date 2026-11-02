@@ -1,0 +1,1230 @@
+[
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-040",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Configuration errors and encoded feed diagnostics can disclose registered secrets.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-040",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "A failure after configuration replacement leaves initialization partially applied.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-040",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "Doctor omits health probes for implicit providers and presets lacking an explicit health URL.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Check configured providers that lack an explicit health URL",
+   "severity": "major",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-040",
+  "gold": "G5",
+  "goldSeverity": "major",
+  "goldSummary": "The command fake permits mutating operations during read-only diagnosis.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-040",
+  "gold": "G6",
+  "goldSeverity": "major",
+  "goldSummary": "The registration test does not exercise preservation of existing vendor settings.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-040",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Configuration errors and encoded feed diagnostics can disclose registered secrets.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-040",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "A failure after configuration replacement leaves initialization partially applied.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-040",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "Doctor omits health probes for implicit providers and presets lacking an explicit health URL.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Check connectivity for providers without an explicit health URL",
+   "severity": "major",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-040",
+  "gold": "G5",
+  "goldSeverity": "major",
+  "goldSummary": "The command fake permits mutating operations during read-only diagnosis.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-040",
+  "gold": "G6",
+  "goldSeverity": "major",
+  "goldSummary": "The registration test does not exercise preservation of existing vendor settings.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-042",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Nesting Seatbelt around internally sandboxed CLIs prevents tool-enabled invocations from starting.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-042",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Scanning ordinary agent output for sandbox diagnostics can discard successful invocations.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Treating arbitrary agent output as a sandbox startup failure aborts valid runs",
+   "severity": "major",
+   "category": "reliability"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-042",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Ordinary gate output mentioning sandbox failures can turn a successful check into a confinement error.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-042",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "The live confinement smoke accepts refusal even when enforcement should work.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-042",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Nesting Seatbelt around internally sandboxed CLIs prevents tool-enabled invocations from starting.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": {
+   "title": "The outer profile prevents Codex from persisting its session",
+   "severity": "major",
+   "category": "compatibility"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-042",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Scanning ordinary agent output for sandbox diagnostics can discard successful invocations.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-042",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Ordinary gate output mentioning sandbox failures can turn a successful check into a confinement error.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-042",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "The live confinement smoke accepts refusal even when enforcement should work.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-047",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "LFS pointer exemptions skip inspection of unavailable or executable payloads.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-047",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "A passive PDF converted from text to binary is rejected despite the requested allowance.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-047",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "LFS pointer exemptions skip inspection of unavailable or executable payloads.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-047",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "A passive PDF converted from text to binary is rejected despite the requested allowance.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-048",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "LFS exemptions permit missing payloads and pointer replacements containing archives.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-048",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "The limited text sample exempts a TAR whose first binary byte lies beyond the sample.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-048",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "The WebP inspector rejects valid lossy VP8 images.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-048",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "LFS exemptions permit missing payloads and pointer replacements containing archives.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-048",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "The limited text sample exempts a TAR whose first binary byte lies beyond the sample.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-048",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "The WebP inspector rejects valid lossy VP8 images.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-049",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-049",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A bare executable magic match rejects valid image bytes with an incidental signature.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Do not classify visible text from incidental signature substrings",
+   "severity": "major",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-060",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Detached descendants survive invocation cleanup and keep modifying the worktree.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Process-group termination still leaves detached descendants alive",
+   "severity": "blocker",
+   "category": "concurrency"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-060",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Process cleanup returns while owned descendants are still alive.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": {
+   "title": "Process-group termination still leaves detached descendants alive",
+   "severity": "blocker",
+   "category": "concurrency"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-060",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Discarding changes replaces the cleanup error that should trigger round recovery.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Final cleanup can bypass the new round-failure recovery",
+   "severity": "blocker",
+   "category": "reliability"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-060",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Detached descendants survive invocation cleanup and keep modifying the worktree.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Process-group cleanup still leaves detached descendants alive",
+   "severity": "major",
+   "category": "cleanup"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-060",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Process cleanup returns while owned descendants are still alive.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": {
+   "title": "Process-group cleanup still leaves detached descendants alive",
+   "severity": "major",
+   "category": "cleanup"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-060",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Discarding changes replaces the cleanup error that should trigger round recovery.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Final cleanup can mask the recoverable cleanup error",
+   "severity": "blocker",
+   "category": "reliability"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-061",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Shutdown drops an already claimed descendant when its parent exits.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-061",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Holdout snapshot deletion proceeds despite unconfirmed descendant termination.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-061",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Production scratch directories are never registered as process ownership roots.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-061",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "Replacing a descendant environment removes it from invocation discovery.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Preserve process-group membership when descendants replace their environment",
+   "severity": "blocker",
+   "category": "reliability"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-061",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Shutdown drops an already claimed descendant when its parent exits.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-061",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Holdout snapshot deletion proceeds despite unconfirmed descendant termination.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-061",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Production scratch directories are never registered as process ownership roots.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Production scratch directories are absent from process discovery",
+   "severity": "blocker",
+   "category": "cleanup"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-061",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "Replacing a descendant environment removes it from invocation discovery.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Children with replacement environments survive invocation cleanup",
+   "severity": "blocker",
+   "category": "reliability"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-062",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Run-wide scratch roots let one invocation cleanup kill another invocation writer.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-062",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "A recycled leader PID claims unrelated processes through reused group or session identifiers.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-062",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Run-wide scratch roots let one invocation cleanup kill another invocation writer.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-062",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "A recycled leader PID claims unrelated processes through reused group or session identifiers.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-063",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Pre-aborted shutdown with failed leader inspection references timer cleanup before initialization and never settles.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-063",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Pre-aborted shutdown with failed leader inspection references timer cleanup before initialization and never settles.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-064",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "The reader loopback policy cannot match the intended socket access.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-064",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "An allow-default reader policy weakens the established confinement boundary.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-064",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "The reader loopback policy cannot match the intended socket access.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": {
+   "title": "Restrict loopback binding to ephemeral ports",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-064",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "An allow-default reader policy weakens the established confinement boundary.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-065",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A single extracted test command is treated as proof of a multi-step criterion.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Do not substitute an entire criterion from one embedded command",
+   "severity": "major",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-065",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A single extracted test command is treated as proof of a multi-step criterion.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "A matching test command does not cover additional verification steps",
+   "severity": "blocker",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-066",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Free-text claim detection still lets model wording steer gate-evidence substitution.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Gate-word filtering invalidates independently observed evidence",
+   "severity": "major",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-066",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Free-text claim detection still lets model wording steer gate-evidence substitution.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Ordinary mentions of gates invalidate independently observed evidence",
+   "severity": "major",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-067",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Matching a successful command does not establish the observation required by the criterion.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": {
+   "title": "Exact command equality does not prove the requested file ran",
+   "severity": "major",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-067",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Targeted Bun evidence can satisfy a criterion without proof that any tests ran.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": {
+   "title": "Exact command equality does not prove the requested file ran",
+   "severity": "major",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-067",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Matching a successful command does not establish the observation required by the criterion.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-067",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Targeted Bun evidence can satisfy a criterion without proof that any tests ran.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": {
+   "title": "Exact command text does not prove Bun ran the requested file",
+   "severity": "major",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-068",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Gate substitution refuses a candidate gate whenever any file in it was skipped, so the repository's normal confined suite, which intentionally skips real-Seatbelt tests, can never supply evidence for a sandbox-blocked loopback test, and the reported needs_human failure remains.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Unrelated skipped tests disable the verification fix",
+   "severity": "major",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-068",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "The coverage parser treats any test-printed line that names a test file followed by a colon as a runner file header, so output from the change under test can make a file that never ran count as passed and turn a blocked criterion into met factory evidence.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Test-written output can forge authoritative coverage",
+   "severity": "blocker",
+   "category": "security"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-068",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Gate substitution refuses a candidate gate whenever any file in it was skipped, so the repository's normal confined suite, which intentionally skips real-Seatbelt tests, can never supply evidence for a sandbox-blocked loopback test, and the reported needs_human failure remains.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Unrelated skipped tests disable the fix in confined factory gates",
+   "severity": "major",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-068",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "The coverage parser treats any test-printed line that names a test file followed by a colon as a runner file header, so output from the change under test can make a file that never ran count as passed and turn a blocked criterion into met factory evidence.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Untrusted test output can forge factory coverage evidence",
+   "severity": "blocker",
+   "category": "security"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-083",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "An inherited Git configuration selector redirects trusted SSH lookup into the checkout.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-083",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Trusted remote-dependent credential and SSH settings no longer apply during push.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Isolation drops trusted credentials selected by remote URL",
+   "severity": "major",
+   "category": "compatibility"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-083",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Manual landing publishes a fork branch to the upstream repository.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-083",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "Forcing HTTPS during manual push bypasses working SSH authentication.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Forcing HTTPS breaks existing SSH-only landing credentials",
+   "severity": "major",
+   "category": "compatibility"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-083",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "An inherited Git configuration selector redirects trusted SSH lookup into the checkout.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-083",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Trusted remote-dependent credential and SSH settings no longer apply during push.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Preserve trusted credentials selected by hasconfig includes",
+   "severity": "major",
+   "category": "compatibility"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-083",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Manual landing publishes a fork branch to the upstream repository.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-083",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "Forcing HTTPS during manual push bypasses working SSH authentication.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-084",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Manual push reloads mutable clone configuration after its final validation snapshot.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "A config snapshot does not isolate the subsequent push",
+   "severity": "blocker",
+   "category": "security"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-084",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "Inherited Git configuration causes validation and push to inspect different settings.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-084",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "An exact upstream URL requirement rejects supported forks and alternate origin spellings.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-084",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Manual push reloads mutable clone configuration after its final validation snapshot.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Config snapshots leave the final push vulnerable to concurrent mutation",
+   "severity": "blocker",
+   "category": "security"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-084",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "Inherited Git configuration causes validation and push to inspect different settings.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-084",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "An exact upstream URL requirement rejects supported forks and alternate origin spellings.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-089",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The loop detector aborts before the threshold call can return evidence of progress.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "The sixth call is stopped before its changed result can arrive",
+   "severity": "blocker",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-089",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The loop detector aborts before the threshold call can return evidence of progress.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "The sixth call aborts before its changed result can clear the count",
+   "severity": "blocker",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-090",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Unresolved tool calls accumulate without a bound during a live invocation.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": {
+   "title": "Preserve loop counting for calls whose results never arrive",
+   "severity": "blocker",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-090",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Unresolved tool calls accumulate without a bound during a live invocation.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-091",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A completed parallel call is classified as repetitive before unresolved predecessors establish progress.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Out-of-order results can stop calls whose outputs all differ",
+   "severity": "major",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-091",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A completed parallel call is classified as repetitive before unresolved predecessors establish progress.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Wait for pending predecessors before declaring completed results identical",
+   "severity": "major",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-092",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "When a call's result changes, the loop detector resets its count but keeps the earlier same-key entries in the window, which the request says must be dropped, so a command failing with identical output between progressing polls is never stopped before the tool-call budget.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-092",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "When a call's result changes, the loop detector resets its count but keeps the earlier same-key entries in the window, which the request says must be dropped, so a command failing with identical output between progressing polls is never stopped before the tool-call budget.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Changed results reset counts but do not drop earlier occurrences",
+   "severity": "major",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-107",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Increasing panel test deadlines leaves the underlying parallel Git race undiagnosed.",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-107",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Factory gate environment construction discards the configured test worker override.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Factory gates strip the worker override",
+   "severity": "major",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-107",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Increasing panel test deadlines leaves the underlying parallel Git race undiagnosed.",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-107",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Factory gate environment construction discards the configured test worker override.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Factory gates discard the worker-count override",
+   "severity": "major",
+   "category": "correctness"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-108",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The change runs the repository's test gate as a parallel `bun test` command with a worker-count substitution, which gate-evidence's command recogniser rejects, so every candidate gate on this repository records no test command and sandbox-blocked verification criteria can no longer be satisfied by gate evidence.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Parallel test command disables factory gate evidence",
+   "severity": "major",
+   "category": "compatibility"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-108",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The change runs the repository's test gate as a parallel `bun test` command with a worker-count substitution, which gate-evidence's command recogniser rejects, so every candidate gate on this repository records no test command and sandbox-blocked verification criteria can no longer be satisfied by gate evidence.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Preserve gate-evidence recognition for the parallel test command",
+   "severity": "major",
+   "category": "compatibility"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-129",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Against an older daemon that ignores the new repo parameter, limitless_list_runs returns other repositories' runs as matches, because the proxy never checks that the filter was applied.",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Repository filtering silently fails against the previous daemon",
+   "severity": "major",
+   "category": "compatibility"
+  }
+ },
+ {
+  "system": "D-adversarial-union2",
+  "caseId": "review-129",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Against an older daemon that ignores the new repo parameter, limitless_list_runs returns other repositories' runs as matches, because the proxy never checks that the filter was applied.",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Repository filtering silently fails against the previous daemon",
+   "severity": "major",
+   "category": "compatibility"
+  }
+ }
+]

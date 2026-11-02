@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"boundary","trigger":"plausible","reason":"A failed shutdown can leave an abandoned descendant running, and same-daemon recovery skips it, allowing subsequent work to proceed alongside a process that should have been stopped."}]}

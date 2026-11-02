@@ -1,0 +1,64 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P5",
+    "P8",
+    "P12",
+    "P15",
+    "P18",
+    "P22",
+    "P27"
+   ],
+   "mechanism": "Service installation/restart is skipped when the preflight daemon check passes, so config written by init (new providers, merge policy) never reaches the already-running daemon."
+  },
+  {
+   "members": [
+    "P2",
+    "P7",
+    "P10",
+    "P14",
+    "P16",
+    "P19",
+    "P23",
+    "P28"
+   ],
+   "mechanism": "The smoke adapter calls scripts/smoke.ts main with static PROVIDERS/MODELS and always schedules both native CLIs, ignoring the effective configured/detected providers and endpoint overrides."
+  },
+  {
+   "members": [
+    "P3",
+    "P6",
+    "P9",
+    "P13",
+    "P24",
+    "P29"
+   ],
+   "mechanism": "Doctor's repository access/SSO check runs before init collects --repo or prompted repositories and only reads the old config, so newly requested repositories are never access-checked before being persisted."
+  },
+  {
+   "members": [
+    "P4",
+    "P11",
+    "P17",
+    "P21",
+    "P26",
+    "P30"
+   ],
+   "mechanism": "Discreet mode is replaced by a hard-coded 'not available yet' skipped message, so init never asks for or persists the requested discreet-mode choice."
+  },
+  {
+   "members": [
+    "P20"
+   ],
+   "mechanism": "Provider diagnosis only performs a health request when healthUrl exists, so presets without one (e.g. OpenRouter) are never checked for reachability."
+  },
+  {
+   "members": [
+    "P25"
+   ],
+   "mechanism": "Candidate deduplication treats entry.preset === id as the native provider already configured, so an aliased entry with a different id suppresses adding the native preset."
+  }
+ ]
+}

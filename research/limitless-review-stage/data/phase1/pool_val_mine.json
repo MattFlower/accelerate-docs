@@ -1,0 +1,82 @@
+{
+ "pool-review-053/C2": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-044/C1": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-069/C9": {
+  "sev": "minor",
+  "why": "diag: wrong next-action text, self-correcting (land refuses with clear 'CLOSED')"
+ },
+ "pool-review-070/C2": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-054/C2": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-053/C8": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-054/C17": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-090/C2": {
+  "sev": "minor",
+  "why": "unusual: needs tool results that never arrive"
+ },
+ "pool-review-053/C14": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-056/C2": {
+  "sev": "minor",
+  "why": "API ergonomics, workaround exists"
+ },
+ "pool-review-071/C2": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-099/C5": {
+  "sev": "minor",
+  "why": "unusual: eval in flight with the removed model at the removal deploy"
+ },
+ "pool-review-106/C5": {
+  "sev": "minor",
+  "why": "cosmetic for normal content; harmful only for patches with raw ESC bytes"
+ },
+ "pool-review-051/C2": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-104/C4": {
+  "sev": "major",
+  "why": "Q5: secret leak, unusual trigger"
+ },
+ "pool-review-072/C3": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-054/C11": {
+  "sev": "major",
+  "why": ""
+ },
+ "pool-review-106/C4": {
+  "sev": "minor",
+  "why": "extra field consumers ignore"
+ },
+ "pool-review-042/C4": {
+  "sev": "blocker",
+  "why": ""
+ },
+ "pool-review-044/C4": {
+  "sev": "minor",
+  "why": "queue reorder, work requeued not lost"
+ }
+}

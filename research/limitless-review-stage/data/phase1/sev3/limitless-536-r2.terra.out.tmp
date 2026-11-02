@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"A setup script that modifies a tracked file and leaves an encoding-changing attributes file can cause a successful reset to give the reviewer different bytes, skewing the evaluation result."}]}

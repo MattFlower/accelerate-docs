@@ -1,0 +1,33 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "The audit's list of exempt inert media extensions leaves out requested types such as PDF and MP4, so these files need a binary allowance."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The PNG inspector treats ordinary ancillary metadata chunks, such as title or author text, as disqualifying and drops the exemption."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "The media gate scans raw sample bytes for executable signatures such as MZ, so ordinary media data that happens to contain them is flagged."
+  },
+  {
+   "members": [
+    "C4",
+    "C4b"
+   ],
+   "same_as": null,
+   "root_cause": "The media gate adds an unrequested size cutoff based on decoded or header-declared size, which blocks valid large images and audio."
+  }
+ ]
+}

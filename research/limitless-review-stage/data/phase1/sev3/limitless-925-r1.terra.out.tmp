@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"A retry template with a compact or quoted name filter can cause an unrelated passing test to satisfy a criterion for a nonexistent test, leading the factory to accept unverified behavior."}]}

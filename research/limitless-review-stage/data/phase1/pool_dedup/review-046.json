@@ -1,0 +1,48 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "After escalation, the engine drops the exclusion for the exhausted implementer, so when the next implementer becomes unavailable, routing falls back to the exhausted one."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "Environment-blocked verify retries do not keep the blocked verifier excluded, so the pinned chain picks the same verifier again instead of the available alternative."
+  },
+  {
+   "members": [
+    "C3",
+    "C3b"
+   ],
+   "same_as": null,
+   "root_cause": "The pinned-verify independence warning always names the implementer, even when the excluded model was a previous verifier or a finder."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "In panel review mode, a single-entry review chain lets the finders run but leaves no allowed verifier once a finding is raised, so the run stops at needs_human after the finders have been paid for."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": null,
+   "root_cause": "Pinned-chain handling throws away a decision model's low-confidence last-resort result instead of accepting it the way policy selection does."
+  },
+  {
+   "members": [
+    "C6",
+    "C6b"
+   ],
+   "same_as": null,
+   "root_cause": "Chain-mode routing ignores vendor independence as a tie-break between `|` alternatives, so it can pick the implementer's vendor and then wrongly log that no other vendor was available."
+  }
+ ]
+}

@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"nuisance","trigger":"unusual","reason":"The exposed health-check window requires an artificially delayed listener shutdown, while the real Bun reproduction closes the listener immediately and no usable token has been published or agent started."}]}

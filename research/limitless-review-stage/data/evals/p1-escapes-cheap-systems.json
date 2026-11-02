@@ -1,0 +1,70 @@
+{
+  "systems": [
+    {
+      "name": "claude/haiku-5.5@high",
+      "mode": "single",
+      "finders": [
+        {
+          "target": "claude/haiku-5.5@high",
+          "prompt": "standard"
+        }
+      ],
+      "implementerReport": "include"
+    },
+    {
+      "name": "haiku-5.5-high-adversarial",
+      "mode": "single",
+      "finders": [
+        {
+          "target": "claude/haiku-5.5@high",
+          "prompt": "adversarial"
+        }
+      ],
+      "implementerReport": "include"
+    },
+    {
+      "name": "codex/luna@medium",
+      "mode": "single",
+      "finders": [
+        {
+          "target": "codex/luna@medium",
+          "prompt": "standard"
+        }
+      ],
+      "implementerReport": "include"
+    },
+    {
+      "name": "luna-medium-adversarial",
+      "mode": "single",
+      "finders": [
+        {
+          "target": "codex/luna@medium",
+          "prompt": "adversarial"
+        }
+      ],
+      "implementerReport": "include"
+    },
+    {
+      "name": "codex/terra-6.1@medium",
+      "mode": "single",
+      "finders": [
+        {
+          "target": "codex/terra-6.1@medium",
+          "prompt": "standard"
+        }
+      ],
+      "implementerReport": "include"
+    },
+    {
+      "name": "terra-6.1-medium-adversarial",
+      "mode": "single",
+      "finders": [
+        {
+          "target": "codex/terra-6.1@medium",
+          "prompt": "adversarial"
+        }
+      ],
+      "implementerReport": "include"
+    }
+  ]
+}

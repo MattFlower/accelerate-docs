@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"secret","trigger":"plausible","reason":"A change near the end of a multiline credential in a file without a trailing newline can expose a credential fragment to the change-view consumer."}]}

@@ -1,0 +1,69 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P4",
+    "P7",
+    "P8",
+    "P10",
+    "P13",
+    "P20",
+    "P21",
+    "P22",
+    "P23",
+    "P25",
+    "P26"
+   ],
+   "mechanism": "The tried-implementer exclusion is applied only on the escalation round, so later rounds pass only a preference for the current implementer and routing can return to an earlier exhausted implementer when the current one becomes unavailable."
+  },
+  {
+   "members": [
+    "P2",
+    "P3",
+    "P5",
+    "P6",
+    "P9",
+    "P11",
+    "P12",
+    "P16",
+    "P18",
+    "P19",
+    "P24",
+    "P27",
+    "P28",
+    "P33"
+   ],
+   "mechanism": "Pinned verify chains clear every excludeModels constraint, which also removes the environment-blocked retry's exclusion of the first verifier, so the retry reruns the same verifier instead of the next chain entry."
+  },
+  {
+   "members": [
+    "P15",
+    "P31"
+   ],
+   "mechanism": "The pinned-chain warning hardcodes the implementer's vendor/checkpoint as the reason, so it misattributes the cause when the avoided model or vendor is a previous verifier or a panel finder."
+  },
+  {
+   "members": [
+    "P14",
+    "P17",
+    "P30",
+    "P32"
+   ],
+   "mechanism": "In panel review mode with a one-entry review chain, every finder routes to that model and the verifier's hard excludeModels removes it, leaving no eligible verifier and sending the run to needs_human."
+  },
+  {
+   "members": [
+    "P29",
+    "P34"
+   ],
+   "mechanism": "The `!chain` condition disables the last-resort decline result for pinned chains, so a pinned decision model's usable last-resort answer is discarded and the run goes to needs_human."
+  },
+  {
+   "members": [
+    "P35"
+   ],
+   "mechanism": "Chain mode gives every candidate rank 0, so independence is not used to break ties between `|` alternatives."
+  }
+ ]
+}

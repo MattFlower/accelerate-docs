@@ -1,0 +1,18 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "Replacing HOME in the reader environment drops the default Rust toolchain location (~/.cargo, ~/.rustup), so the confined verifier can't find the installed compiler."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "The loopback network rule lets confined commands bind any local port instead of only ephemeral ports, so they can reserve ports other services need."
+  }
+ ]
+}

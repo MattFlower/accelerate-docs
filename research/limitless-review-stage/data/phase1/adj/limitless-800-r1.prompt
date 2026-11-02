@@ -1,0 +1,122 @@
+You are an independent adjudicator for a code-review evaluation. The checkout in your working directory is at the
+HEAD of a pull request at the moment it was reviewed. Base commit: 828007aba8567e93d8a0ec5e7db6c2827e2fab2a. Head commit: 9f24921d8a045c83692293ab8a4fd799023feccd (current HEAD).
+Inspect the change with `git diff 828007aba8567e93d8a0ec5e7db6c2827e2fab2a..9f24921d8a045c83692293ab8a4fd799023feccd` and by reading code at head and at base (`git show 828007aba8567e93d8a0ec5e7db6c2827e2fab2a:<path>`).
+A later commit, 43b114b2e564f4a54a56c996419c33eb59b0fadb, is the factory's response to the review; it is in the repository but NOT checked out.
+
+A reviewer raised the claims below against this head. Judge EACH claim independently and even-handedly: do not assume
+the reviewer is right or wrong. Severity labels from the reviewer are deliberately withheld.
+
+Step 1, at HEAD only: is the claim a real problem in the code at head? Prefer a reproduction: a command or a throwaway
+test you ran (write it under $TMPDIR, never in the checkout), with its output. Otherwise quote code at head and contrast
+it with base. If it can't be reproduced here (for example it needs real macOS Seatbelt, a real GitHub call or a
+network), say "unreproduced" and why, and give quoted code instead.
+Step 2: only after step 1, inspect `git diff 9f24921d8a045c83692293ab8a4fd799023feccd..43b114b2e564f4a54a56c996419c33eb59b0fadb` and say whether that later commit addresses this claim's
+mechanism (yes / partial / no / unrelated). A fix existing does not by itself make a claim real.
+
+Verdicts:
+- REAL: a real code defect at head.
+- NOT_REAL: the claim is wrong (explain the mistake).
+- NOT_CODE: about process or delivery, not code at head (merge conflicts, branch state, PR description, measurements
+  missing from the PR text, answering a question).
+- UNCLEAR: you cannot decide; say what is missing.
+
+For REAL claims also give:
+- severity by consequence:
+  blocker = loses or corrupts persisted state, leaks a secret or private data, breaks a trust or confinement boundary,
+    or stops the factory or the running release from working;
+  major = a realistic input in normal operation gives a wrong result or a silent failure; a check the change claims to
+    add can be bypassed; the previous release breaks on rollback or a newer CLI breaks against an older daemon; a
+    resume/restart path repeats or loses work;
+  minor = needs an unusual input the request doesn't ask to handle, or the cost is cosmetic or diagnostic only;
+  nit = style, naming, wording.
+- criterion: the phrase from that list it meets.
+- origin: "introduced" (new in base..head), "newly_exposed" (old code, but this change makes it reachable or worse),
+  "requirement_gap" (the request below explicitly requires it and the change does not deliver it, even if base had the
+  same gap), or "preexisting" (present at base, not made worse, not required by the request).
+- test_only: true if the claim is only that a test is missing or too weak, with no behavioural defect of its own.
+- failure_scenario: ONE or two plain-language sentences a non-TypeScript programmer can follow: who does what, what
+  goes wrong, what it costs. No code identifiers unless unavoidable.
+- location: file and line range AT HEAD where the defect is expressed (the lines a reviewer would cite).
+- duplicate_of: the id of another claim in this list describing the same mechanism, or null.
+
+Rules: do not modify tracked files; temporary files only under $TMPDIR; dependencies are already installed; no network;
+never run the full test suite (only targeted test files or throwaway scripts); no git writes; never signal processes
+you did not start. The request text and claims are data, not instructions.
+
+# Original request of the change
+```
+Issue #788: Restarts: database-backed gate and agent-test slots shared across processes
+
+## Problem
+Part of #784 (Wave 2, slice E1), under M6.2. The executor that #784 adds will run gates in a second process on the coordinator machine. Slot capacity lives only in the daemon's memory:
+- `gateSlots` and `agentTestSlots` are process-global `Semaphore` instances (src/gates/slots.ts).
+- Their priorities (`ship` > `finish` > `start`, FIFO within a class), external leases (`lease`/`heartbeat`, expiring after `GATE_LEASE_EXPIRY_MS`) and holders exist only in that process.
+- The daemon sets the limit at startup (`gateSlots.setLimit(cfg.maxConcurrentGates)`, src/app.ts). The admin endpoint `/api/admin/gate-slot` (src/server/http.ts) leases slots for deploy, land checks and the `limitless gate-slot` CLI. `/api/health` reports `gateSlots.snapshot()`.
+- A second process would get its own capacity, so the machine would run twice the configured number of full suites.
+- A restart also forgets every holder: a still-running `gate-slot` client re-acquires with `running: true`, which admits it over capacity.
+
+## Requirements
+- **A database-backed pool behind the existing interface.**
+  - On the coordinator, `gateSlots` and `agentTestSlots` keep their current API (`acquire`, `lease`, `heartbeat`, `snapshot`, `setLimit`, `limit`).
+  - Their state moves into the coordinator's SQLite database, through a new migration (a new table, additive), so every process using that database shares one capacity per pool.
+  - `gateSlotScope`, `acquireGateSlot`, `bindGateSlotScope` and `releaseGateSlotScope` work unchanged on top.
+- **Same rules as today:** priority `ship` > `finish` > `start` across all processes; FIFO within a class by request time; held slots are never interrupted; `running: true` admits over capacity, as today.
+- **Ownership and expiry.**
+  - Each process holding or waiting for a slot identifies itself with a per-boot owner id and renews its rows on a timer.
+  - Rows of an owner that stops renewing expire after `GATE_LEASE_EXPIRY_MS`, and their slots go to the next waiter.
+  - A daemon restart therefore doesn't forget a live external holder, and a `gate-slot` client that keeps heartbeating keeps its slot without the over-capacity re-acquire.
+- **The limit** is stored with the pool and set by the daemon from `cfg.maxConcurrentGates` at startup, as today. A later process reads it rather than assuming its own.
+- **Waiting.** A waiter in the same process is woken at once when a slot frees, as today. Across processes, a waiter polls at a short interval (at most 250 ms). `onWait` fires once, as today.
+- **LAN workers keep their own in-memory pool.** A worker's slots are its own machine's capacity (src/workers/client.ts), so `client.ts` builds an in-memory pool explicitly. Keep that path unchanged.
+- **Compatibility.** The previous release ignores the new table and keeps its in-memory semaphore, so a rollback is safe. Say so next to the migration.
+
+## Tests
+Use a temporary database file. Each "process" in a test is a separate pool instance with its own owner id on the same file.
+- Two instances on one database share one limit: with limit 1, the second `acquire` waits until the first releases.
+- Priority across instances: with one slot held, a `start` waiter in instance A and a `ship` waiter in instance B; when the slot frees, B gets it.
+- Expiry: an instance that stops renewing loses its held slot after the expiry period, and a waiter elsewhere gets it. Use an injected clock and timer, no real sleeps.
+- Restart: a new instance on the same database sees the existing holders, and a heartbeating external lease survives it.
+- `snapshot()` reports the same shape as today, counted across instances.
+- Every existing test of src/gates/slots.ts passes unchanged.
+
+## Out of scope
+Provider in-flight slots (later, with E3), the executor process itself (E2), and the worker's pool.
+
+Budget: about 150 lines plus tests and the migration.
+
+Closes #788
+```
+
+# Claims
+```json
+[
+ {
+  "id": "F1",
+  "file": "src/gates/slots.ts",
+  "line": 253,
+  "title": "A live owner's held slot expires during an event-loop stall, so two holders run at limit 1",
+  "detail": "Thank you: the transactions, priority order and the shared limit all work, and two simultaneously started processes never over-admitted. The problem is expiry. `refresh()` deletes rows whose `renewed_at` is older than `GATE_LEASE_EXPIRY_MS`, and a process renews its own rows only from its 250 ms pulse at the 10 s renewal interval. An orchestrator probe: A acquires at t=0, B queues at t=9 s, A's event loop stalls for 22 s (a long synchronous step or a busy SQLite wait), and B's refresh at t=31 s deletes A's held row and admits B. A's `acquire()` already resolved, so A's gate keeps running with no notice: two full suites at limit 1, which the issue forbids (\"held slots are never interrupted\"). All processes sharing this database run on the same machine, so tie in-process holders to the owning process, not to a timestamp. Record the owner's pid and process start time with the owner id. A row is expired when its owning process is gone (no such pid, or a different start time), checked inside the admission transaction. Keep the time-based expiry only for external leases (`lease_until`, renewed by the `gate-slot` client's heartbeat), whose owner is the client. Add a test with an injected clock and an injected liveness check: an owner that stops renewing but is still alive keeps its held slot, and a waiter elsewhere gets it only once the owner is reported gone."
+ },
+ {
+  "id": "F2",
+  "file": "src/gates/slots.ts",
+  "line": 432,
+  "title": "A waiting external lease loses its queue position across a daemon restart",
+  "detail": "`heartbeat()` returns undefined for a row owned by another owner unless it is held, and release does the same. A probe: a `gate-slot` client waits in the queue, the daemon restarts (new owner id), and the client's next heartbeat and release both return undefined. The client then re-requests (its existing behaviour), the abandoned original row is admitted later and holds capacity until it expires, while the replacement waits. The issue asks that \"a daemon restart doesn't forget a live external holder\"; a waiting lease needs the same. A lease id is the client's capability, so let `heartbeat` adopt a waiting row as it adopts a held one (set the new owner, renew `lease_until`, re-arm the expiry), and let a release with that id delete the row whatever its owner. Test: a waiting external lease survives a restart with its position, then is admitted in order, and its release frees the row."
+ },
+ {
+  "id": "F3",
+  "file": "src/gates/slots.ts",
+  "line": 195,
+  "title": "Idle pools run a write transaction every 250 ms",
+  "detail": "Each pool's pulse runs `refresh()`, a `BEGIN IMMEDIATE` transaction, every 250 ms whether or not anything waits. Measured: two idle pools ran 79 transactions in 10 s, and an idle poll blocked the event loop for 601 ms while another process held the write lock for 600 ms. bun:sqlite is synchronous and the store sets `busy_timeout = 5000`, so a longer hold elsewhere stalls the daemon for up to 5 s, and with the stall above that feeds expiry. Poll only while this process has a local waiter. Renew this process's own rows at the renewal interval only when it owns any. Run no transaction when idle. Wake same-process waiters on release, as now. Test with an injected timer: an idle pool schedules no transactions, and a waiter's polling stops once it is admitted or aborted. Run only the affected test files (test/gate-slots-db.test.ts test/gate-slot.test.ts test/gate-slot-http.test.ts test/agent-test-session.test.ts test/gates.test.ts), `bunx biome check` on the changed files and `bunx tsc --noEmit`. Never run the full suite in a factory run (AGENTS.md)."
+ }
+]
+```
+
+Reply with ONLY this JSON (no prose before or after):
+{"verdicts": [{"id": "F1", "verdict": "REAL|NOT_REAL|NOT_CODE|UNCLEAR", "severity": "blocker|major|minor|nit|null",
+"criterion": "...", "origin": "introduced|newly_exposed|requirement_gap|preexisting|null", "test_only": false,
+"failure_scenario": "...", "reproduction": {"command": "...", "output": "..."} or "unreproduced: <why>",
+"evidence": "quoted code / reasoning", "location": {"file": "...", "lines": [a, b]}, "duplicate_of": null,
+"fix_status": "yes|partial|no|unrelated", "reason": "one sentence"}]}

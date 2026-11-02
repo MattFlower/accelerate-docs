@@ -1,0 +1,47 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "Setup does not reload or restart an already-healthy daemon after writing new configuration, so the daemon keeps running on its old settings."
+  },
+  {
+   "members": [
+    "C2",
+    "C2b"
+   ],
+   "same_as": null,
+   "root_cause": "Smoke checks run against a hardcoded set of built-in providers instead of the providers actually configured and available."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "Setup saves newly selected repositories without first checking that they can be accessed."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": "G7",
+   "root_cause": "Interactive initialization never asks for or saves the discreet-mode preference."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": "G4",
+   "root_cause": "Doctor only probes providers that have an explicit health URL, so it never checks credentials for the others."
+  },
+  {
+   "members": [
+    "C6"
+   ],
+   "same_as": null,
+   "root_cause": "Init's already-configured check matches on the preset an entry uses, not its provider name, so an alias like work-claude counts as the native claude entry."
+  }
+ ]
+}

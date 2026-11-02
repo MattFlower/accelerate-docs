@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"A human resolution accepted during rollback is overwritten, leaving the run needing attention despite its recorded decision."}]}

@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"After an uncommon initial process-discovery failure, a restart deletes retained job directories while a descendant remains alive, potentially losing work and consuming quota alongside a retry."}]}

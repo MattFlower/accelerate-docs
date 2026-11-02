@@ -1,0 +1,88 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "Status derivation ignores the run's confirmed-merge flag, so merged PRs are still reported as needing review."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The digest treats an acknowledged approval as final and never checks for later PR head updates that make the approval stale."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "The digest does not exclude PRs whose requested-changes repair round is still queued or running."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "When the private-strings policy fails to load, limitless_status falls back to a response that drops the state and nextAction fields."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": null,
+   "root_cause": "Status checks for a historical landing block before checking closed or resolved states, so a stale block wins over the current state."
+  },
+  {
+   "members": [
+    "C6"
+   ],
+   "same_as": null,
+   "root_cause": "The digest treats a missing PR head snapshot as a mismatch with the approval, so an approved PR shows up again as awaiting review."
+  },
+  {
+   "members": [
+    "C7"
+   ],
+   "same_as": null,
+   "root_cause": "Digest lines are not truncated, so untrusted run text of any length gets injected into agent context."
+  },
+  {
+   "members": [
+    "C10"
+   ],
+   "same_as": null,
+   "root_cause": "A new test assertion is not formatted, which fails the required format check."
+  },
+  {
+   "members": [
+    "C11"
+   ],
+   "same_as": null,
+   "root_cause": "In status derivation, an approval takes priority over an active review or repair round and hides the ongoing work."
+  },
+  {
+   "members": [
+    "C12"
+   ],
+   "same_as": null,
+   "root_cause": "The Codex skill documentation tells Codex to run the digest command with the 'claude' feed consumer instead of its own."
+  },
+  {
+   "members": [
+    "C13"
+   ],
+   "same_as": null,
+   "root_cause": "getRunDetail runs the latest-approval query twice when one query would do."
+  },
+  {
+   "members": [
+    "C14"
+   ],
+   "same_as": null,
+   "root_cause": "MCP review verdicts use a hardcoded reviewer value of \"human\" instead of identifying the agent."
+  }
+ ]
+}

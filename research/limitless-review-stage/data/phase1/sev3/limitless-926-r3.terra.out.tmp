@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"Reference-style links or autolinks can make the advisory feed falsely report acceptance readiness or miss a valid reference, potentially prompting a wasted review or delaying attention."}]}

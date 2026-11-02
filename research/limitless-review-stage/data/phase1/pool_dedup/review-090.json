@@ -1,0 +1,25 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": "G1",
+   "root_cause": "While the invocation is running, tool calls that never get a result are left out of the repetition count, so repeated unresolved calls go on with no limit."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "One call that never returns blocks the in-order processing at line 206, so later identical calls that did complete are never counted as a loop."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The bounded window at line 180 can drop unresolved calls before they are counted, so the session-end check misses the loop too."
+  }
+ ]
+}

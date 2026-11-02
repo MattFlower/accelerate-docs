@@ -1,0 +1,32 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": "G1",
+   "root_cause": "Credential redaction runs only after the process runner has already truncated raw output, so a secret that crosses the truncation boundary gets cut and escapes redaction."
+  },
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "Redaction checks one line at a time, so it never matches a credential that spans two lines, and the full secret reappears when the failure excerpt rebuilds the lines."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "The verify-prompt redaction tests make assertions that pass whether or not redaction happens, so they can't catch a regression."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "The baseline cache key or version wasn't changed when redaction was added, so unredacted results cached before the upgrade are still reused and copied into new artifacts."
+  }
+ ]
+}

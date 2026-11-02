@@ -1,0 +1,32 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": "G1",
+   "root_cause": "Gate-evidence substitution depends on detecting free-text claims in the model's wording, so passing observations that merely mention gates get misclassified and downgraded to environment blocks."
+  },
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "The loopback workaround rejects gate evidence whenever any test was skipped, rather than checking only whether the required test was skipped."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "Verification matches commands exactly and ignores the recorded file coverage, so Bun's suffix-based filename filter can run a different file and the requested test still gets marked verified."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "The engine treats an unchanged HEAD as proof that gates tested the committed tree, even though setup commands or earlier checks can change the working tree and those changes are later discarded."
+  }
+ ]
+}

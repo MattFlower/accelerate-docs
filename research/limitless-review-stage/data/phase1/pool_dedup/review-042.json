@@ -1,0 +1,32 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "The shell quote/heredoc stripping removes command substitutions inside double-quoted strings and unquoted heredocs, even though the shell runs them, so the signal commands inside are never checked."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "The JavaScript string stripping deletes template literal interpolations, which run as code, so signal calls inside them are never checked."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "Inline eval detection only recognizes the space-separated option form and misses the standard equals form (--eval=...)."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": "G1",
+   "root_cause": "Wrapping the Codex CLI in an outer Seatbelt sandbox blocks the runtime it needs, including writes to its state directory, so tool-enabled agents can't initialize or start."
+  }
+ ]
+}

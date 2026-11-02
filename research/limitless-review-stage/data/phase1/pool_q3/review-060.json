@@ -1,0 +1,9 @@
+{
+ "items": [
+  {
+   "id": "C1",
+   "verdict": "explicit",
+   "quote": "Treat a cleanup failure after a stuck/failed implement round as a round failure (retry the round, or escalate), not a run failure; retry the clean once after the kill."
+  }
+ ]
+}

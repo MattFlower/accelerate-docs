@@ -1,0 +1,29 @@
+{
+ "items": [
+  {
+   "id": "C2",
+   "verdict": "not_explicit",
+   "quote": ""
+  },
+  {
+   "id": "C6",
+   "verdict": "explicit",
+   "quote": "or a test hit its own timeout (\"timed out after\"). Rerun the failed jobs once at the same SHA."
+  },
+  {
+   "id": "C8",
+   "verdict": "explicit",
+   "quote": "Fetch the failing check runs and jobs by REST, only when the GraphQL state changed."
+  },
+  {
+   "id": "C12",
+   "verdict": "explicit",
+   "quote": "emit one `ci.main_red` item for the repository."
+  },
+  {
+   "id": "C14",
+   "verdict": "explicit",
+   "quote": "Classify each `pr.ci_failed` on a factory PR."
+  }
+ ]
+}

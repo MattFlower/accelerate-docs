@@ -1,0 +1,29 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P2",
+    "P5"
+   ],
+   "mechanism": "Owner diagnostic copy is built from the already-clipped (2,000-char) thinking message, so the full original text is lost before being stored."
+  },
+  {
+   "members": [
+    "P1"
+   ],
+   "mechanism": "After rollback to the base release, raw diagnostics persisted in the shared SQLite database are readable by agents because read protection exists only in the new harness code."
+  },
+  {
+   "members": [
+    "P3"
+   ],
+   "mechanism": "INTEGER PRIMARY KEY without AUTOINCREMENT lets SQLite reuse deleted max IDs, so new diagnostics can get already-consumed IDs and be skipped by the id > cursor follow logic."
+  },
+  {
+   "members": [
+    "P4"
+   ],
+   "mechanism": "Preview build/seed/server processes run unconfined checkout code that can query the owner-only table and leak its contents through published preview error output."
+  }
+ ]
+}

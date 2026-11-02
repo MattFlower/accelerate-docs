@@ -1,0 +1,39 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": "G1",
+   "root_cause": "Executable/archive signatures such as MZ or ustar are matched anywhere in the content instead of only at the proper offset, so ordinary bytes get flagged as binary or executable."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "The PNG validation is too strict about metadata chunks, so a valid image with an ordinary comment loses its exemption."
+  },
+  {
+   "members": [
+    "C1"
+   ],
+   "same_as": null,
+   "root_cause": "The audit's list of inert-media extensions leaves out the requested PDF, font and audio types."
+  },
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "Binary classification in repos.ts counts the executable file mode as binary content, so readable shell scripts need a binary allowance."
+  },
+  {
+   "members": [
+    "C5"
+   ],
+   "same_as": null,
+   "root_cause": "Classification reads the whole blob instead of a bounded sample, so large text files hit the output-size limit."
+  }
+ ]
+}

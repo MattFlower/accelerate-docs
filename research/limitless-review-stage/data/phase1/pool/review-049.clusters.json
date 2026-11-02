@@ -1,0 +1,53 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1",
+    "P4",
+    "P6",
+    "P9",
+    "P11",
+    "P15",
+    "P18",
+    "P21"
+   ],
+   "mechanism": "INERT_MEDIA_PATH whitelist only includes five image extensions, so other required inert media (PDF, fonts, audio, video, 3D) are treated as binary and blocked."
+  },
+  {
+   "members": [
+    "P2",
+    "P5",
+    "P7",
+    "P10",
+    "P12",
+    "P17",
+    "P19",
+    "P24"
+   ],
+   "mechanism": "modeRequiresAllowance unconditionally flags every changed 100755 file (and exec-bit removal) as binary regardless of content, blocking readable executable text scripts."
+  },
+  {
+   "members": [
+    "P3",
+    "P8",
+    "P13",
+    "P20",
+    "P23"
+   ],
+   "mechanism": "PNG parser's fixed chunk whitelist rejects valid ancillary chunks such as tEXt/iTXt/iCCP, so ordinary PNGs with metadata are classified as binary."
+  },
+  {
+   "members": [
+    "P16",
+    "P22"
+   ],
+   "mechanism": "Unanchored magic-signature searches (e.g. 'MZ', 'ustar') anywhere in content misclassify readable text as binary."
+  },
+  {
+   "members": [
+    "P14"
+   ],
+   "mechanism": "Classification reads a single large text blob via cat-file --batch without bounding it, exceeding the subprocess output limit and failing."
+  }
+ ]
+}

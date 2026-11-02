@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"diag","trigger":"plausible","reason":"A worker setup failure can leave a persistent, misleading warning even when local setup also fails or the worker later recovers, but it does not affect worker availability or gate results."}]}

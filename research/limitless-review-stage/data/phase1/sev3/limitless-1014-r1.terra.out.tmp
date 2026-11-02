@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"secret","trigger":"plausible","reason":"A publication transport error can place a configured private string in daemon logs, leaking private data under a realistic error condition."}]}

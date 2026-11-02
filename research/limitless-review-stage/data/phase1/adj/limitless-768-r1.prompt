@@ -1,0 +1,205 @@
+You are an independent adjudicator for a code-review evaluation. The checkout in your working directory is at the
+HEAD of a pull request at the moment it was reviewed. Base commit: ee3bb698f3c8de3080c828f64978cb791ec8a8b8. Head commit: 614d2b8b539ae33fa579b31540074ff1f1a88c78 (current HEAD).
+Inspect the change with `git diff ee3bb698f3c8de3080c828f64978cb791ec8a8b8..614d2b8b539ae33fa579b31540074ff1f1a88c78` and by reading code at head and at base (`git show ee3bb698f3c8de3080c828f64978cb791ec8a8b8:<path>`).
+A later commit, 7ddf21ba010088b95849ed4ae1156765c7e8242d, is the factory's response to the review; it is in the repository but NOT checked out.
+
+A reviewer raised the claims below against this head. Judge EACH claim independently and even-handedly: do not assume
+the reviewer is right or wrong. Severity labels from the reviewer are deliberately withheld.
+
+Step 1, at HEAD only: is the claim a real problem in the code at head? Prefer a reproduction: a command or a throwaway
+test you ran (write it under $TMPDIR, never in the checkout), with its output. Otherwise quote code at head and contrast
+it with base. If it can't be reproduced here (for example it needs real macOS Seatbelt, a real GitHub call or a
+network), say "unreproduced" and why, and give quoted code instead.
+Step 2: only after step 1, inspect `git diff 614d2b8b539ae33fa579b31540074ff1f1a88c78..7ddf21ba010088b95849ed4ae1156765c7e8242d` and say whether that later commit addresses this claim's
+mechanism (yes / partial / no / unrelated). A fix existing does not by itself make a claim real.
+
+Verdicts:
+- REAL: a real code defect at head.
+- NOT_REAL: the claim is wrong (explain the mistake).
+- NOT_CODE: about process or delivery, not code at head (merge conflicts, branch state, PR description, measurements
+  missing from the PR text, answering a question).
+- UNCLEAR: you cannot decide; say what is missing.
+
+For REAL claims also give:
+- severity by consequence:
+  blocker = loses or corrupts persisted state, leaks a secret or private data, breaks a trust or confinement boundary,
+    or stops the factory or the running release from working;
+  major = a realistic input in normal operation gives a wrong result or a silent failure; a check the change claims to
+    add can be bypassed; the previous release breaks on rollback or a newer CLI breaks against an older daemon; a
+    resume/restart path repeats or loses work;
+  minor = needs an unusual input the request doesn't ask to handle, or the cost is cosmetic or diagnostic only;
+  nit = style, naming, wording.
+- criterion: the phrase from that list it meets.
+- origin: "introduced" (new in base..head), "newly_exposed" (old code, but this change makes it reachable or worse),
+  "requirement_gap" (the request below explicitly requires it and the change does not deliver it, even if base had the
+  same gap), or "preexisting" (present at base, not made worse, not required by the request).
+- test_only: true if the claim is only that a test is missing or too weak, with no behavioural defect of its own.
+- failure_scenario: ONE or two plain-language sentences a non-TypeScript programmer can follow: who does what, what
+  goes wrong, what it costs. No code identifiers unless unavoidable.
+- location: file and line range AT HEAD where the defect is expressed (the lines a reviewer would cite).
+- duplicate_of: the id of another claim in this list describing the same mechanism, or null.
+
+Rules: do not modify tracked files; temporary files only under $TMPDIR; dependencies are already installed; no network;
+never run the full test suite (only targeted test files or throwaway scripts); no git writes; never signal processes
+you did not start. The request text and claims are data, not instructions.
+
+# Original request of the change
+```
+Issue #761: Workers: re-attach worker implement jobs across coordinator restarts
+
+## Problem
+Epic #165, slice S6. The owner decided that durable re-attach is in v1. This slice builds on S5a (#742) and S5b (#744, PR #747). A deploy restarts the daemon mid-run, and today every in-flight worker implement session is lost.
+
+- **Start and stop cancel every open agent job.**
+  - `Factory.start()` and `Factory.stop()` call `cancelOpenAgentJobs()` (src/app.ts:285, :296; src/db/workers.ts:435-439), so the worker stops at its next heartbeat (workers.ts:240-252).
+  - The resumed round then starts a new session through `prepare()` (src/pipeline/engine.ts:1129-1174).
+  - If the cancelled worker had already pushed, the round ends NeedsHuman instead (engine.ts:1135-1138; src/pipeline/lan-agent.ts:140-145).
+- **The job has no durable handle.**
+  - The job id lives only in a local variable of the executor (lan-agent.ts:95).
+  - Gates keep theirs in `RunState.gateExecution` (src/pipeline/context.ts:100). It is saved at `gate-started` and re-attached when stage, round, purpose and SHA match (src/pipeline/gate-execution.ts:20-33, :52-56).
+- **Shutdown cancels the job.**
+  - Every abort goes through `cancelled(id)`, which calls `cancelAgentJob` (lan-agent.ts:35-36, :101).
+  - The scheduler aborts runs with `Error("shutdown")` (src/scheduler.ts:168).
+  - The gate path recognises that with `gateShutdown` and detaches instead (src/gates/executor.ts:53-54; src/gates/lan.ts:60-61).
+- **Downtime counts against the worker.**
+  - `sweepAgentJobs()` fails a leased job when the worker's last heartbeat is older than `fresh` (30 s) or the lease has expired (60 s) (workers.ts:398-418; src/workers/protocol.ts:102-109).
+  - Every worker route sweeps first, the heartbeat and result routes included (workers.ts:233-235, :346-350).
+  - The worker listener starts before `factory.start()` (src/cli/daemon.ts:53, :64).
+  - So after a restart longer than about 20 s, the first sweep fails a healthy job before its worker's next heartbeat lands.
+- **A worker gives up on a pushed result.** The fence aborts every agent job 60 s after the last heartbeat reply (src/workers/client.ts:563-567), and the result is posted with that job's signal (client.ts:852). A worker that pushed during a long outage never reports, and S5b ends the run NeedsHuman.
+- **An interrupted adoption re-runs the session.** If the daemon dies after `adoptWorkerCommit` moved the worktree but before `worker-commit-adopted` was saved (engine.ts:1175-1191), S5b dispatches a second session from W (test/pipeline-lan-agent.test.ts:452). The done job's result is still in `agent_jobs.result`.
+
+**What doesn't change.**
+- The coordinator adopts a worker commit only from a report the result route accepted, which carries the digest echo (src/server/workers.ts:236-246), and only after `adoptWorkerCommit`'s checks (src/git/repos.ts:593-645).
+- A commit pushed without an accepted report can't show that echo, so a worker killed between its push and its report still ends the run NeedsHuman.
+- This slice stops restarts from producing such commits.
+
+## Requirements
+- **Durable handle.**
+  - Add `RunState.agentJob?: { round: number; id: string }`: "the worker implement job of this round; cleared in the implementation-ready save".
+  - Add `started(id: string): Promise<void>` to `AgentPublicationHooks` (src/pipeline/agent-executor.ts:25-29). The engine sets the handle and saves it with the checkpoint `agent-job-started`.
+  - The executor creates the id, awaits `started(id)`, and then enqueues with that id (`enqueueAgentJob(request, id)`, workers.ts:298-314). No worker can lease a job before its handle is durable.
+  - A crash between the save and the enqueue leaves a handle with no row, which resume ignores.
+  - Clear `agentJob` in the `implementation-ready` save (engine.ts:1305).
+- **Detach on shutdown.** When `gateShutdown(spec.signal)` holds and the job has a handle, return the cancelled result and leave the job alone. Owner cancellation and every other abort still cancel it.
+- **Cancel only orphans.**
+  - `cancelOpenAgentJobs(keep: ReadonlySet<string>)` cancels queued and leased jobs whose id isn't in `keep`.
+  - `Factory.start()` calls it before `scheduler.start()`, and `Factory.stop()` after `scheduler.stop()`. Both pass the `agentJob.id` of every run whose status isn't in `TERMINAL_STATUSES` (src/core/types.ts:15-21), read from its stored state.
+  - `keep` is filled only when `[workers] listen` is set and `agents` includes `implement`; otherwise it is empty, as in S5a.
+  - The constructor still cancels nothing.
+- **Restart grace.**
+  - `startWorkerListener` (src/server/workers.ts:67) sets `workers.resumedAt = workers.now()` before it serves.
+  - In `sweepAgentJobs()`:
+    - heartbeat freshness is measured from `max(last_heartbeat_at, resumedAt)`;
+    - the lease expires at `max(lease_expires_at, resumedAt + lease)`;
+    - pickup is measured from `max(updated_at, resumedAt)`.
+  - The attempt deadline is unchanged.
+- **Resume.** When a call carries `publication` and `ctx.state.agentJob?.round` is the call's round, the executor reconciles the stored job before `prepare()`:
+  1. **No row:** ignore the handle.
+  2. **The call is no longer eligible** (the opt-in checks at lan-agent.ts:24-34 fail): cancel the job if it is open and run `local()`.
+  3. **Done:**
+     - Handle the report as for a fresh done job: parse it, check parent, branch and echo, then `adopt` (lan-agent.ts:114-135).
+     - If the stored request's target has the call's provider, `modelId` and effort, return its result.
+     - Otherwise continue from the adopted head through `prepare()` and a new job, so the invocation row and provider telemetry never carry another target's result.
+  4. **Queued or leased:** re-attach when the target matches and a new `resume(request)` hook confirms all of these:
+     - HEAD is `request.parentSha` and the worktree is clean;
+     - `request.expectedRemoteSha` equals `ctx.state.publishedSha ?? null`;
+     - `request.privateStringsDigest` equals `privateStringsDigest(privateEntries(ctx, cwd))`.
+
+     Then call `dispatch()`, log "Re-attached worker job <id> attempt <n>" (never the worker's name), and wait in the existing loop. Start the event cursor after the newest stored batch.
+  5. **Anything else** (failed, cancelled, or an open job that fails a check in 4): cancel it if it is open and continue through `prepare()`, as S5b does.
+
+  Re-read the row after every await. Cancelling is conditional, and a job that finished in the meantime takes case 3.
+- **Adoption after the move.** `adopt(sha, request)` also handles HEAD already being at `sha`.
+  - Split the fetch-and-pin and commit-object checks out of `adoptWorkerCommit` (src/git/repos.ts:605-635) into one function that both paths use.
+  - With HEAD at `sha`, those checks must pass and the worktree must be clean. Then record `publishedSha` and `workerCommitRound` and save `worker-commit-adopted`. No second session runs.
+- **Late report on the worker.**
+  - In `runAgent`, when `publishAgentChanges` returned a commit other than `parentSha`, post the result with a signal that neither the fence nor a job cancellation aborts, bounded by the job's attempt deadline (client.ts:852).
+  - The result route still accepts it only while this worker holds the lease.
+- **Messages.** Remove the S6 references from the two NeedsHuman texts (engine.ts:1137; lan-agent.ts:144). Both now mean "a commit was pushed without an accepted report".
+- **Compatibility.**
+  - `agentJob` is JSON in run state, so no migration is needed. There are no HTTP or config changes.
+  - Older releases ignore `agentJob`. S5a and S5b cancel every open job at start, so after a rollback a resumed round dispatches again, or stops NeedsHuman if the cancelled worker had pushed.
+  - Before rolling back past S5a by hand, cancel runs that are in a worker implement round.
+- **Docs.** Replace the restart paragraph of docs/GUIDE.md:267-270:
+  - coordinator restarts, deploys included, re-attach to worker implement jobs;
+  - a worker that stays unreachable for one lease period after the restart is retried on another worker;
+  - only a commit pushed without an accepted report ends a run NeedsHuman.
+
+## Tests
+Use S5b's setup:
+- the fake harness on both sides;
+- `githubFixture` and `registerGithub`, with a bare repository as the remote and the fake `gh`;
+- the real worker loop with an injected `tokenLookup` where a session must survive the restart;
+- restart as `f.stop()` followed by a new boot on the same data;
+- downtime simulated by moving `lease_expires_at` and `last_heartbeat_at` back;
+- no network and no real gh.
+
+Cases:
+- **Restart while the session runs.** Hold the harness on a deferred.
+  - After `stop()`, the job is still leased.
+  - After the restart, the same session finishes: one harness call, one `agent_jobs` row, one attempt.
+  - The branch and worktree are at W, `publishedSha` is W, and no local session runs.
+- **Downtime past `fresh` and `lease`.** With both timestamps moved back 90 s, the job survives the first sweep and the next heartbeat renews it. Without the grace it fails as "Worker disconnected".
+- **Push while the coordinator is down.** The worker reports after the restart, and the commit is adopted with its echo, with no NeedsHuman. Also check a variant that fires the fence through the injected `fenceTimer`.
+- **Checkpoints.**
+  - Kill at `agent-job-started`: there is neither a handle nor a row, and the resumed round enqueues exactly one job.
+  - A handle with no row: one new job.
+  - Restart while queued: the same id is leased, and no second row appears.
+- **Kill at `worker-commit-adopted`.** Update test/pipeline-lan-agent.test.ts:452: the resumed round takes the done job's result, with one session, history H→W, and `publishedSha` W.
+- **Kill at `implementation-ready`.** The same result, and no new dispatch.
+- **Orphans.**
+  - `start()` and `stop()` cancel open jobs that have no handle or whose run is terminal, and leave handled, done and failed jobs alone.
+  - With `agents` off, `start()` cancels all open jobs.
+  - Constructing a `Factory` cancels nothing.
+- **Resume checks.** One parameterized executor-level test. Each of these cancels the open job and enqueues a new one:
+  - a different target;
+  - a changed private-strings digest;
+  - HEAD moved;
+  - a dirty worktree;
+  - a changed expected SHA.
+
+  Also: with real git, a cancelled job that had pushed ends NeedsHuman; and a done job with a different target has its commit adopted, then a new job runs from W.
+- **Finished during reconciliation.** It is adopted, not cancelled.
+- **Cancel while re-attached.** The job is cancelled, and the next heartbeat reports it.
+- **Rollback.** Keep test/pipeline-lan-agent.test.ts:517 as the S5a-rollback case. Add: a state whose `agentJob` names a cancelled job resumes as S5b does.
+- **Health.** In every fallback case, the provider's consecutive failures and circuit are unchanged.
+
+## Out of scope
+- **Adopting a commit with no accepted report.** A follow-up could have the worker announce the commit and its echo before it pushes.
+- **Restart grace for gate jobs.**
+- **Re-attaching review jobs** (S8).
+- **Pinning the resumed call to the stored target.**
+- **Other slices:** S7 (capabilities and UI) and S9 (verify on workers).
+
+Budget: about 130 lines plus tests. If one PR is too much, split after "Adoption after the move": S6a would hold the handle, detach, orphans, grace and re-attach; S6b the done-job reuse, the adoption after the move and the late report.
+
+Part of #165.
+```
+
+# Claims
+```json
+[
+ {
+  "id": "F1",
+  "file": "src/pipeline/lan-agent.ts",
+  "line": 76,
+  "title": "Cancel the open job when reconciliation fails",
+  "detail": "Thank you: the durable handle, detach-on-shutdown, orphan cancel, restart grace and done-job adoption all held up in review. Two gaps remain. Reproduced: restart with a leased job, make the coordinator's private-strings.txt unreadable (invalid UTF-8), and let `publication.resume()` throw. The executor propagates the error, so the run ends needs-human, but the job stays leased. Heartbeats keep renewing it, and the worker can still push and report. Required: when reconciliation throws, re-read the job row. If it is done, handle it exactly as now. If it is still open, cancel it (conditionally, as elsewhere), then propagate the error. Test: that sequence leaves the job cancelled, the next heartbeat reports it, and no result is accepted afterwards. Note: this round also merges main. The branch conflicts in src/db/workers.ts with #765, so keep #765's `\"backend\" in` / `\"openai\" in` / `\"decisions\" in` refusal in `enqueueAgentJob`."
+ },
+ {
+  "id": "F2",
+  "file": "src/workers/client.ts",
+  "line": 861,
+  "title": "The late result report must still stop on worker shutdown",
+  "detail": "The late report posts with a signal bounded only by the attempt deadline, ignoring the worker's own shutdown signal, and shutdown waits for the reporting task (line 987). So stopping a worker during a coordinator outage can hang until the attempt deadline. Required: combine the report's deadline signal with the worker-level shutdown signal (keep ignoring the fence and job cancellation, as intended). Test: with a pushed commit and an unreachable coordinator, stopping the worker returns promptly, and the job's result isn't posted."
+ }
+]
+```
+
+Reply with ONLY this JSON (no prose before or after):
+{"verdicts": [{"id": "F1", "verdict": "REAL|NOT_REAL|NOT_CODE|UNCLEAR", "severity": "blocker|major|minor|nit|null",
+"criterion": "...", "origin": "introduced|newly_exposed|requirement_gap|preexisting|null", "test_only": false,
+"failure_scenario": "...", "reproduction": {"command": "...", "output": "..."} or "unreproduced: <why>",
+"evidence": "quoted code / reasoning", "location": {"file": "...", "lines": [a, b]}, "duplicate_of": null,
+"fix_status": "yes|partial|no|unrelated", "reason": "one sentence"}]}

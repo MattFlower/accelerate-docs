@@ -1,0 +1,28 @@
+{
+  "systems": [
+    {
+      "name": "sol-6.1-medium-standard-setup",
+      "mode": "single",
+      "finders": [
+        {
+          "target": "codex/sol-6.1@medium",
+          "prompt": "standard"
+        }
+      ],
+      "implementerReport": "include",
+      "setup": true
+    },
+    {
+      "name": "sol-6.1-medium-probe-setup",
+      "mode": "single",
+      "finders": [
+        {
+          "target": "codex/sol-6.1@medium",
+          "prompt": "probe"
+        }
+      ],
+      "implementerReport": "include",
+      "setup": true
+    }
+  ]
+}

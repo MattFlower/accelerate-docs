@@ -1,0 +1,25 @@
+{
+ "groups": [
+  {
+   "members": [
+    "C2"
+   ],
+   "same_as": null,
+   "root_cause": "When the remaining verifiers can't verify, the verifier-panel error in engine.ts leaves out the origin-exclusion reasons that removed the usable independent verifier."
+  },
+  {
+   "members": [
+    "C3"
+   ],
+   "same_as": null,
+   "root_cause": "The smoke test's fixed readiness deadline is too short when the Python child starts slowly on a loaded machine."
+  },
+  {
+   "members": [
+    "C4"
+   ],
+   "same_as": null,
+   "root_cause": "The private-output NoCapacityError in context.ts doesn't deduplicate per-model exclusion reasons that share the same origin."
+  }
+ ]
+}

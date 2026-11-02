@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"A fenced example can cause the factory to claim and update an unrelated issue, potentially blocking work on it."},{"id":"F2","consequence":"wrong","trigger":"plausible","reason":"Pasted Unicode whitespace can silently prevent an intended issue claim, allowing duplicate runs and wasted work."}]}

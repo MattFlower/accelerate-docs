@@ -1,0 +1,14 @@
+{
+ "items": [
+  {
+   "id": "C2",
+   "verdict": "explicit",
+   "quote": "Before any push (review-round delivery, existing-branch delivery and new-PR delivery), require HEAD to equal the commit recorded by the last passing gates and review for this round.\n- If it differs, refuse without pushing and end the run needs_human with a reason naming both SHAs."
+  },
+  {
+   "id": "C3",
+   "verdict": "explicit",
+   "quote": "Before any push (review-round delivery, existing-branch delivery and new-PR delivery), require HEAD to equal the commit recorded by the last passing gates and review for this round."
+  }
+ ]
+}

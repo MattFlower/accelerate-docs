@@ -1,0 +1,1 @@
+{"ratings":[{"id":"F1","consequence":"wrong","trigger":"plausible","reason":"A malformed or unreadable configuration prevents CLI, MCP, and default lease-client operations from reaching an otherwise healthy daemon until the configuration is fixed."}]}

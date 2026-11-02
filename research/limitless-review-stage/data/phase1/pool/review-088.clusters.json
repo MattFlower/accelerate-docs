@@ -1,0 +1,44 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P4",
+    "P6",
+    "P9"
+   ],
+   "mechanism": "Writing info/exclude in the new push repo fails under set -e when git init's template dir doesn't create info/ (custom or empty init.templateDir)."
+  },
+  {
+   "members": [
+    "P3",
+    "P10"
+   ],
+   "mechanism": "Fresh private index from read-tree has no stat data, and safe_git disables filter.* keys, so status re-hashes files and smudged LFS files appear modified, causing the land to be refused."
+  },
+  {
+   "members": [
+    "P5",
+    "P8"
+   ],
+   "mechanism": "The checks:pager test runs without a TTY and doesn't assert --no-pager/GIT_PAGER, so it can't detect removal of pager isolation."
+  },
+  {
+   "members": [
+    "P1"
+   ],
+   "mechanism": "Inherited GIT_COMMON_DIR makes the test's late config injection hit the isolated repo rather than the clone, so the test doesn't exercise clone-config injection."
+  },
+  {
+   "members": [
+    "P2"
+   ],
+   "mechanism": "The no-private-strings test intermittently fails under load, with the land stopping before the push (cause unknown)."
+  },
+  {
+   "members": [
+    "P7"
+   ],
+   "mechanism": "The source change exceeds the requested ~40-line size budget."
+  }
+ ]
+}

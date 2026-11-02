@@ -1,0 +1,23 @@
+{
+ "clusters": [
+  {
+   "members": [
+    "P1"
+   ],
+   "mechanism": "The new delivery guard wrongly refuses a resumable run when an interruption leaves the gate stage's recorded status non-succeeded, even though the cached gate evidence is valid and HEAD is unchanged."
+  },
+  {
+   "members": [
+    "P2"
+   ],
+   "mechanism": "If the resumed-delivery GitHub lookup throws before the guard runs, the draft-fallback path pushes lastVerifiedSha without the shared HEAD guard, so an amended HEAD can still be pushed."
+  },
+  {
+   "members": [
+    "P3",
+    "P4"
+   ],
+   "mechanism": "The pending-merge exception trusts a merge commit based only on its parent SHAs (validateMerge), so an amended merge with the same parents but different content is accepted and delivered without audit or review."
+  }
+ ]
+}
