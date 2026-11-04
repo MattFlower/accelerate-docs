@@ -4,6 +4,7 @@
 *It follows the layout in that repo's README (`research/<topic>/report.md` + `notes/` + optional `BACKLOG.md`)
 and the style of `research/automated-code-review/BACKLOG.md`. Findings and sources are in
 [`research/code-understanding/notes/first-sweep-2026-11-01.md`](notes/first-sweep-2026-11-01.md)
+and [`notes/2026-11-04-daily-sweep.md`](notes/2026-11-04-daily-sweep.md)
 until a `report.md` is written.*
 
 **Baseline.** `accelerate/skills/human-review` (v0.6.2, 2026-10-30) is ground truth. Everything here is ranked by
@@ -107,6 +108,10 @@ reading Matt Pocock's `teach`.*
     [repo](https://github.com/Egonex-AI/Understand-Anything/), 89,517 stars per the API), DeepWiki, Google Code Wiki,
     CodeTour, and [Busjahn et al.](https://researchonline.gcu.ac.uk/ws/portalfiles/portal/24953094/ICPC2015_authors_version.pdf)
     (execution-order reading).
+  - IronBee Code Wiki ([product](https://ironbee.ai/code-wiki)). Launch post by @serkan_ozal
+    ([X](https://x.com/serkan_ozal/status/2117633673461674225): like_count 5, bookmark_count 0, reply_count 2,
+    retweet_count 1, impression_count 9185, X API on 2026-11-04). Same niche as DeepWiki and Google Code Wiki
+    above, but merge-triggered and citation-checked. Evidence: `vendor` + `engagement` (weak).
   - The onboarding-skill pattern "build and test first, then trace **one** real flow end to end with file:line, then
     stop": ECC's `codebase-onboarding`
     ([SKILL.md](https://github.com/affaan-m/ECC/blob/main/skills/codebase-onboarding/SKILL.md); ECC repo 294,392 stars
@@ -194,6 +199,8 @@ reading Matt Pocock's `teach`.*
   (101 likes, 109 bookmarks) and [@prasenx](https://x.com/prasenx/status/2058119202712723632) (227 likes, 484 bookmarks;
   the tool isn't named in the text). Practitioner need: "the diff reads fine and you still have no idea what it wired
   itself into" ([X](https://x.com/aiupdatelog/status/2111502507633701033), 0 likes). Evidence: `vendor` + `engagement`.
+  IronBee Code Wiki's area map (imports solid, HTTP dashed) is another vendor graph overlay for understanding
+  impact ([product](https://ironbee.ai/code-wiki), same launch post as #3). Still `vendor`, low engagement.
 - **Why it helps:** HR's blast radius is honest but text-only, covers 5 languages, and says "mentioned", never
   "called" (`HR/SKILL.md` "Blast radius"). A resolved graph answers "what else does this touch" faster.
 - **Test:** on 5 PRs, compare the grep and graph outputs by hand: false mentions removed, real callers missed. Time to
@@ -306,6 +313,8 @@ reading Matt Pocock's `teach`.*
   ([docs](https://docs.coderabbit.ai/pr-reviews/walkthroughs)).
 - Practitioner loop: Claude writes the code, then "codex to review uncommitted changes"
   ([X @dejavucoder](https://x.com/dejavucoder/status/2035238484261445807): 573 likes, 88 bookmarks).
+- **IronBee Code Review**: same launch post as Code Wiki. The post's note_tweet claims 67.4 F2 and 75.3 Recall
+  on the Martian Code Review Benchmark ([X](https://x.com/serkan_ozal/status/2117633673461674225)).
 
 ## Merged
 
@@ -324,6 +333,12 @@ reading Matt Pocock's `teach`.*
 
 ## Rejected
 
-_(none yet)_
+- **stack-diagram** ([caru-ini/stack-diagram](https://github.com/caru-ini/stack-diagram)): created 2026-11-01.
+  GitHub API on 2026-11-04 reported 1707 stargazers and 74 forks. In-window X example
+  ([X](https://x.com/0xbobaaa/status/2117288829270819013): like_count 53, bookmark_count 39, reply_count 18,
+  retweet_count 2, impression_count 1485) and
+  [X](https://x.com/arsene_btc/status/2117723494762844600). Rejected because it draws a logo-rich stack diagram
+  from a one-sentence description, not from reading the repo. README candy, not code understanding of existing
+  structure.
 
 
