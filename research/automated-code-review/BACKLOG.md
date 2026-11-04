@@ -160,6 +160,20 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
 7. **Feed findings into the human-review page** as annotations — `proposed`, M. **our own idea**
 8. **Pre-existing channel** (🟣) for bugs not introduced by the change — `proposed`, S. Anthropic Code Review.
 9. **External smoke check on ReviewBench test set (25 tasks, has Codex CLI example)** — `proposed`, S.
+10. **CR-Bench-Verified smoke check (defect-centric; KDDR + usefulness split)** — `proposed`, cost S–M.
+    Flag for limitless: yes — external generalization + metric design (KDDR vs usefulness).
+    - **Idea:** Optionally run quality-review (or limitless reviewer arms) on CR-Bench-Verified (174)
+      as an external defect-centric smoke check; score with KDDR-style known-defect hit plus a
+      usefulness/noise split. Prefer the Verified subset. Does not replace the limitless escapes eval.
+    - **Source:** https://arxiv.org/abs/2611.02566 (daily sweep 2026-11-04). See [report.md](report.md) §2.4.
+    - **Why:** Existing external options (ReviewBench, Martian) are comment-gold or pooled; CR-Bench
+      grounds each task in a known SWE-Bench defect + fix. Gemini Code Assist on this bench is KDDR
+      8.1% at Usefulness Rate 78.0%, so a high usefulness rate is not known-defect recall. Reflexion
+      raised KDDR vs single-shot for every backbone (weak evidence to try a cheap self-critique pass
+      as a finder variant, not a reproduce-or-drop filter).
+    - **Test:** Port or script a small runner on ≤174 verified tasks; compare KDDR and comment
+      usefulness for production vs adversarial×2; report Wilson CIs; do not contaminate escapes-heldout.
+    - **Cost:** S for a 25–50 task slice; M for full verified.
 
 ---
 
@@ -190,3 +204,6 @@ Each with the evidence so it isn't retried without new reason.
 - **luna@medium** (2.5% / 4.4%) and **haiku-5.5@high** (17/32 over 20 min) as reviewers. [Escapes-dev]
 - **±5-line location grading as the primary metric** — ~20% accidental credits, ~4% missed SAME. Kept only
   as a secondary score. [Notes credited audit; #1059]
+- **Usefulness Rate as a substitute for known-defect recall** — CR-Bench-v2 Gemini Code Assist is
+  KDDR 8.1% at Usefulness Rate 78.0% ([2611.02566](https://arxiv.org/abs/2611.02566), daily sweep
+  2026-11-04). Keep a known-defect hit (KDDR or judged recall) as the detection score.
