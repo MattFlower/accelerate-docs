@@ -1,11 +1,12 @@
 # Code understanding: backlog
 
-*Draft 4, 2026-11-03 (draft 3 plus the 2026-11-03 sweep; see "Changes in draft 4" below). Repo path: `agentic-dev-research/research/code-understanding/BACKLOG.md`.*
+*Draft 5, 2026-11-05 (draft 4 plus the 2026-11-05 sweep; see "Changes in draft 5" below). Repo path: `agentic-dev-research/research/code-understanding/BACKLOG.md`.*
 *It follows the layout in that repo's README (`research/<topic>/report.md` + `notes/` + optional `BACKLOG.md`)
 and the style of `research/automated-code-review/BACKLOG.md`. Findings and sources are in
 [`research/code-understanding/notes/first-sweep-2026-11-01.md`](notes/first-sweep-2026-11-01.md),
 [`research/code-understanding/notes/sweep-2026-11-02.md`](notes/sweep-2026-11-02.md),
-and [`research/code-understanding/notes/sweep-2026-11-03.md`](notes/sweep-2026-11-03.md)
+[`research/code-understanding/notes/sweep-2026-11-03.md`](notes/sweep-2026-11-03.md),
+and [`research/code-understanding/notes/sweep-2026-11-05.md`](notes/sweep-2026-11-05.md)
 until a `report.md` is written.*
 
 **Baseline.** `accelerate/skills/human-review` (v0.6.2, 2026-10-30) is ground truth. Everything here is ranked by
@@ -22,7 +23,7 @@ same rule as the code-review backlog's "fix the eval first".
 **Evidence labels.** `measured-RCT` (randomized or controlled study) · `measured-obs` (observational or field data) ·
 `practitioner` (someone describes their own use) · `vendor` (launch post or docs) · `engagement` (X numbers only, as
 returned by the X API on the date written next to the number: 2026-11-01 in draft 2, 2026-11-02 in draft 3,
-2026-11-03 in draft 4) · `our own idea`.
+2026-11-03 in draft 4, 2026-11-05 in draft 5) · `our own idea`.
 
 **Statuses.** `proposed` · `testing` · `shipped` (in human-review, path cited) · `rejected` (with the reason).
 
@@ -74,6 +75,15 @@ factory's deliver/review stages.
   Evidence: `vendor`. For 1–2 reading-order stops, withhold that stop's annotation until the reader answers one or
   two such questions, then reveal it. The multiple-choice block at the end stays. That slice is cost S–M. The
   end-of-page quiz stays cost S.
+  **perspica's Learn tab** is a smaller quiz on the concepts behind one change. It is one to three questions, or the
+  words "nothing to learn" when the change needs no background. The lessons are model-written and checked against
+  the code. Noted here, not a second quiz. See #3 and #15.
+  [README](https://github.com/sshah03/perspica),
+  [examples](https://sshah03.github.io/perspica/). Evidence: `vendor`. The rest of the tool is #8.
+  **Learning Opportunities** (Cat Hicks) offers an optional 10 to 15 minute exercise after architectural work,
+  using prediction, generation, and retrieval on the reader's own project
+  ([repo](https://github.com/DrCatHicks/learning-opportunities), 2,540 stars per the GitHub API on 2026-11-05).
+  The same repo's `orient` skill is noted on #3. Evidence: `practitioner` + `engagement` (stars).
 - **Why it helps:** today the page shows what changed but never checks that it landed in your head. A quiz turns
   passive reading into retrieval, and it shows you which part you didn't get. It also gives us a **comprehension
   metric**, which the earlier report said human-review lacks.
@@ -123,7 +133,7 @@ reading Matt Pocock's `teach`.*
     what do you already know here? Open from a screen or an endpoint the reader already knows, then the stops go
     behind it (the parts, the requests, the files). Then a short lesson about one slice at head, built from HR
     blocks: background, terms, a 3–6 stop reading order into real `code` blocks pulled from git, one diagram, a
-    worked example (#4), and the quiz (#1). Name one "read this yourself next" file or doc, and say who to ask (#12).
+    worked example (#4), and the quiz (#1). Name one "read this yourself next" file or doc, and say who to ask (#13).
     Apply HR's `build --check` and its "look at it" render step. That opening is Floorplan's "start from a screen"
     entry, kept inside this skill: it is how the lesson starts.
   - **v2 (L): a course.** Numbered lessons in execution order (entry point → one traced flow → edges); durable
@@ -174,11 +184,18 @@ reading Matt Pocock's `teach`.*
   - **Code Stories**, PR Explainer's always-on daemon: the repo narrates its own history (what changed last week,
     onboarding) without a pull request to open ([site](https://prexplainer.com/)). Noted here, not a separate item.
     The sample entries on the page are product copy. Evidence: `vendor`.
+  - **perspica Learn** writes at most three concept lessons for one change, or says there is nothing to learn.
+    A lesson can include a figure. The quiz on the lesson is #1. The figure, when one is drawn, is #15. Not a
+    second course. [README](https://github.com/sshah03/perspica). Evidence: `vendor`. The rest of the tool is #8.
+  - **Learning Opportunities** is the exercise after the work, not the lesson before it. Its `orient` skill
+    writes an `orientation.md` for a new repo
+    ([repo](https://github.com/DrCatHicks/learning-opportunities), 2,540 stars per the GitHub API on 2026-11-05).
+    Evidence: `practitioner`. See #1.
   - Evidence: `practitioner` + `engagement`, plus `measured-RCT` for retrieval and spacing (see #1) and for the
     extend-by-hand task.
 - **Why a standalone skill, not part of HR:** different input (no diff), state across sessions, and invoked by the
   user before work starts, not after. It shares HR's renderer, block schema, quiz component, and git-truth rules, so
-  it's cheap. HR, in turn, reads the learner records for #8.
+  it's cheap. HR, in turn, reads the learner records for #9.
 - **What `teach` does that we should *not* copy:** a free-form HTML lesson for each run (its issues show lessons that
   missed their own script tags ([#1058](https://github.com/mattpocock/skills/issues/1058)), weren't rendered before
   hand-off ([#1109](https://github.com/mattpocock/skills/issues/1109)), and carried few citations
@@ -229,13 +246,18 @@ reading Matt Pocock's `teach`.*
   **DiffNotes** is the same premise, built: the agent that wrote the PR annotates it with a summary, a deploy card
   (migrations, flags, rollback), a risk list, and one why-not-what note per changed block. A browser extension
   overlays the notes on GitHub's Files changed tab. Nothing is posted to the PR. Notes expire. Per-repo rules live
-  in `.diffnotes.yml` (the rules file is #9)
+  in `.diffnotes.yml` (the rules file is #10)
   ([DEV, 2026-11-01](https://dev.to/igorkasyanchuk/i-made-my-coding-agent-explain-its-own-pull-requests-j67),
   [repo](https://github.com/igorkasyanchuk/diffnotes), 3 stars per the GitHub API on 2026-11-02). Evidence:
   `practitioner` (low engagement).
   **Flatbread** is a handoff that keeps the dead ends from a Claude Code, Codex, or Cursor session, so the next
   agent can pull an execution brief
   ([X](https://x.com/bulentongun/status/2116366373920391218): 7 likes). Evidence: `engagement` (low).
+  **perspica**, for the author's own change, can read the local Claude Code or Codex session and show those
+  prompts. With the optional model pass, a group is marked *asked* (a short quote checked word for word against
+  the prompts) or *agent's call*. It does not read sessions for someone else's pull request
+  ([README](https://github.com/sshah03/perspica)). Evidence: `vendor`. The noise tags, reading order, and test
+  reach are #8.
   The earlier report recommended "label each why by source; write *why: not stated*" (`report.md`, row "Brief and
   summary drawn from…"). It hasn't shipped: HR tags signals and `risk.why`, not the brief or rationale. Evidence
   for the item: `practitioner` + `vendor`.
@@ -253,6 +275,9 @@ reading Matt Pocock's `teach`.*
   ([Graphite](https://graphite.com/)). GILT, an in-IDE LLM helper, raised task completion (+0.47 sub-tasks, p<.01)
   but **not** quiz scores ([Nam et al., ICSE 2024](https://arxiv.org/html/2307.08177v3)). Evidence: `vendor` +
   `measured-RCT` (mixed).
+  **DiffGuardian** answers a spoken or typed question while the lines it is talking about scroll
+  ([site](https://diffguardian.ai/)). The voice tour and Trace It are #15. The dependency graph is #7.
+  Evidence: `vendor`.
 - **Why it helps:** a static page can't answer the reader's own question, and that is usually the one that blocks
   understanding. The cost is small because the feedback loop already exists (`HR/SKILL.md` "When feedback comes back").
 - **Test:** count the questions per review and how many answers turned into page edits. Also check whether question
@@ -295,12 +320,49 @@ reading Matt Pocock's `teach`.*
   **OPVS v1.14.0** (2026-11-01) answers who calls a function, and labels each hit exact or heuristic. Python is
   indexed. Unknown is not reported as zero
   ([changelog](https://www.opvs.ai/changelog/opvs-v1140-ask-the-code-index-who-calls-a-function)). Evidence: `vendor`.
+  **DiffGuardian** draws a dependency graph from the diff alone and calls the graph heuristic, not a model
+  ([site](https://diffguardian.ai/)). Voice and Trace It are #15. Ask is #6. Evidence: `vendor`.
+  **PR Lens** draws which parts of the app the change touches, including parts the diff does not, as an animated
+  architecture diagram ([site](https://prlens.dev/), [repo](https://github.com/coldteadotai/pr-lens), 2,352 stars
+  per the GitHub API on 2026-11-05). The data-flow animation is also #11 and #15. Findings and autofix are handed
+  off. X: [dopamine_crypto](https://x.com/dopamine_crypto/status/2117047788911624698) (26 likes, 27 bookmarks,
+  1,716 impressions; the post's text says 2,237 stars, older than today's API count) and the tooling list
+  [vibeleaderboard](https://x.com/vibeleaderboard/status/2117626768110596353) (1 like, 26 impressions). Both
+  counts are the X API on 2026-11-05. Evidence: `vendor` + `engagement`.
 - **Why it helps:** HR's blast radius is honest but text-only, covers 5 languages, and says "mentioned", never
   "called" (`HR/SKILL.md` "Blast radius"). A resolved graph answers "what else does this touch" faster.
 - **Test:** on 5 PRs, compare the grep and graph outputs by hand: false mentions removed, real callers missed. Time to
   answer "who calls this?" A diagram used as blast radius fails the check when a missing box is described as unused.
 
-### 8. Two-depth background (newcomer vs. owner) — `proposed`, cost S, target HR
+### 8. Semantic "lines to read", call-graph order, and test reach — `proposed`, cost M, target HR
+- **Idea:** before the model's prose, and beside it, run a local tree-sitter semantic diff. Collapse moves,
+  formatting, rename-only lines, and generated or vendored files. Report how many lines are left ("N of M lines
+  to read"). Walk changed symbols from entry points down the call graph. Show which changed tests reach which
+  changed functions, with the call path.
+- **Sources:** [perspica](https://github.com/sshah03/perspica) (MIT, Rust, beta). GitHub API on 2026-11-05:
+  `stargazers_count` 41. The crates.io keyword `semantic-diff` lists the crate. Worked examples on the
+  [homepage](https://sshah03.github.io/perspica/). pmndrs/react-three-fiber#4008 is "152 of 545".
+  apache/spark#59118 is "87 of 633", and that card also says tests reach 30 of the 31 changed functions.
+  jhy/jsoup#2618 says tests reach all 20 changed functions. pallets/flask#5818 is one of the twelve examples.
+  The README says the noise tags, the reading order, and test reach do not need a model. The homepage says those three come from perspica itself.
+  Summaries, notes, and Learn lessons are the model's, and each lesson is checked against the code. The only X
+  post in this sweep that names it is
+  [vibeleaderboard](https://x.com/vibeleaderboard/status/2117626768110596353): 1 like, 26 impressions (X API,
+  2026-11-05). Evidence: `vendor`, plus `engagement` that is tiny. "What you asked for" is cited on #5. Learn is
+  cited on #1, #3, and #15.
+- **Why it helps:** agent pull requests are often majority mechanical. HR's mechanical tier is path-based, so a
+  move or a rename inside a file still looks like logic. The `focus` order is not taken from the call graph.
+  "Tests cover / don't cover" does not say which changed test reaches which changed function.
+- **Why it sits here:** same cost as blast radius (#7), and the same kind of local parser. The evidence is one
+  beta tool, 41 stars, and one post with 1 like, so it stays below #1–#6. It is its own row, next to #7.
+  #7 answers what else the change touches. This one answers which lines are the logic, which order to read
+  them, and which tests reach which changed functions. It stays above the rules file and the claims footer,
+  which apply more narrowly.
+- **Test:** on 5–8 real PRs (limitless, plus public PRs like the perspica examples), compare HR's mechanical tags
+  with perspica's noise tags by hand. Time the questions "what is the real logic delta?" and "do the tests hit
+  the risky functions?" Check false move collapses.
+
+### 9. Two-depth background (newcomer vs. owner) — `proposed`, cost S, target HR
 - **Idea:** split `background` into a *deep background* (collapsed when the git signals say the reader has history in
   these files) and a *narrow background* that is always open.
 - **Sources:** Litt's prompt: "include a deep background for beginners (note that it can be skipped if the reader is
@@ -324,7 +386,7 @@ reading Matt Pocock's `teach`.*
 - **Test:** time on top-of-page for owned vs. unfamiliar areas, with quiz score held constant. Quiz score is the
   guard: a faster top of the page with a lower quiz score fails.
 
-### 9. Per-repo explanation rules file — `proposed`, cost S, target HR
+### 10. Per-repo explanation rules file — `proposed`, cost S, target HR
 - **Idea:** a repo-owned rules file the page must satisfy. Example: a migration must get a deploy note and a
   rollback note. `build --check` fails when a required note is missing.
 - **Sources:** DiffNotes reads a `.diffnotes.yml` on the base branch before the agent writes notes. The post's
@@ -337,11 +399,11 @@ reading Matt Pocock's `teach`.*
   build failure on the changes that need one.
 - **Why it sits here:** effort is S because `build --check` already exists. The gain shows up on the PRs a rule
   names (migrations, config) and is absent otherwise, and the only evidence is one low-engagement tool. That puts
-  it under the always-on items #6–#8 and above the split advisor.
+  it under #6–#9 and above the split advisor (#12).
 - **Test:** on limitless PRs that touch migrations or config, a missing required note fails `build --check`, and a
   present note passes.
 
-### 10. Grounded claims footer, and diagram steps that open the code — `proposed`, cost S–M, target HR
+### 11. Grounded claims footer, and diagram steps that open the code — `proposed`, cost S–M, target HR
 - **Idea:** on the explanation, show a footer that counts claims tied to a specific place in the code and claims
   that are not ("N grounded · M ungrounded"). Each diagram step opens the real `path:line`: the code at the
   explained commit, and what this pull request changed there. A step that does not resolve fails `build --check`.
@@ -353,14 +415,16 @@ reading Matt Pocock's `teach`.*
 - **Sources:** aictrl's explanation card, which keeps reviewer notes last and counts grounded against ungrounded
   claims ([blog, 2026-10-22](https://aictrl.dev/blog/understand-a-pull-request-before-you-review-it),
   [docs](https://aictrl.dev/docs/pr-explanations)). Evidence: `vendor`.
+  **PR Lens** opens the diff from a step in an animated architecture or data-flow diagram
+  ([site](https://prlens.dev/)). The star count and the posts are on #7. Evidence: `vendor`.
 - **Why it helps:** the precision check already rejects a claim that does not match the diff. It does not show the
   reader how many claims were left untied. A diagram the reader cannot open at a line cannot be checked.
 - **Why it sits here:** the footer and the step links apply to every page, and both sit on checks HR already runs.
-  The only evidence is the vendor's own docs, so it stays under #6–#9 and above the split advisor.
+  The only evidence is the vendor's own docs, so it stays under #6–#10 and above the split advisor (#12).
 - **Test:** on 5 PRs, the footer counts match a hand count of claims, and every diagram step opens a line
   `build --check` can resolve. A step with no line fails the check.
 
-### 11. Split and size advisor — `proposed`, cost S–M, target HR
+### 12. Split and size advisor — `proposed`, cost S–M, target HR
 - **Idea:** when the concerns show more than one independent cluster, or the estimated reading time is more than one
   sitting, say so at the top and propose the split. Flag it when the concerns cover more than the brief claims.
 - **Sources:** the earlier report's #8 (Barnett, Baum 2019, Paul). It hasn't shipped: no split or size advice in
@@ -372,7 +436,7 @@ reading Matt Pocock's `teach`.*
   half is noted on #7. Evidence for Dyff: `vendor`.
 - **Test:** on 10 past limitless PRs, does the advisor's split match what Matt would split?
 
-### 12. "Who to ask" for the area — `proposed`, cost S, target HR + #3
+### 13. "Who to ask" for the area — `proposed`, cost S, target HR + #3
 - **Idea:** one visible line naming the two or three people with the most recent commits to the slice or changed files,
   computed by `collect` from git (HR already computes ownership for its signals). It sits beside "What I need from
   you" or at the end of a lesson. It's a fact, never a judgment.
@@ -384,7 +448,7 @@ reading Matt Pocock's `teach`.*
   "Security and privacy").
 - **Test:** for 10 pages, ask Matt whether the named people are the ones he would ask.
 
-### 13. Explain the core change from two or three angles — `proposed`, cost S, target HR + #3
+### 14. Explain the core change from two or three angles — `proposed`, cost S, target HR + #3
 - **Idea:** for the core of a change, give two or three short explanations, each from one angle: what it does,
   which concept it relies on, and why it exists.
 - **Sources:** Bernstein et al. randomized 971 first-year students to three diverse LLM explanations (each
@@ -404,10 +468,10 @@ reading Matt Pocock's `teach`.*
   addition to the background block and to a #3 lesson. The non-goals line says what a later reader must not treat
   as an oversight.
 - **Why it sits here:** the effect did not clear a multiple-comparison correction, and the setting is an intro
-  programming course. Cheap to try, and below "Who to ask" (#12), which has a clearer mechanism.
+  programming course. Cheap to try, and below "Who to ask" (#13), which has a clearer mechanism.
 - **Test:** alternate PRs with and without the extra angles and compare quiz score.
 
-### 14. Interactive or animated explainer for the algorithmic core — `proposed`, cost M, target HR (gated)
+### 15. Interactive or animated explainer for the algorithmic core — `proposed`, cost M, target HR (gated)
 - **Idea:** for a change whose core is an algorithm or state machine, allow one `interactive` block (a sandboxed
   inline script, still no network) that steps through it. A second modality, not limited to algorithms: a narrated
   listen-along, a voice over the change while the lines light up, exportable as an MP4, a PDF, or a `.prtour`
@@ -425,20 +489,28 @@ reading Matt Pocock's `teach`.*
   ([X](https://x.com/siderakis2/status/2115624999478309109)): 2 likes, 101 impressions, 4 replies. Evidence:
   `vendor` + weak `engagement`. Severity-graded findings from PR Explainer are handed off. The listen-along stays
   on this item because it is another explainer surface, not a separate job.
+  **DiffGuardian** speaks a walkthrough while the lines highlight. Trace It is the same tour as text you read at
+  your own pace ([site](https://diffguardian.ai/)). Ask is #6. The graph is #7. Evidence: `vendor`.
+  **PR Lens** animates architecture and data flow inside the pull request, and a step opens the diff
+  ([site](https://prlens.dev/)). Stars and posts are on #7. Findings are handed off. Evidence: `vendor`.
+  perspica's Learn figure, when the model draws one, is the concept-lesson case of this block. See #1 and #3.
 - **Test:** only on PRs tagged algorithmic. Compare quiz and time with and without the block. The narrated
   modality is a separate pass: on 3 PRs, does the reader still open the page for a line the voice mentioned?
 
-### 15. Attach the page to every limitless PR — `proposed`, cost M, target limitless
+### 16. Attach the page to every limitless PR — `proposed`, cost M, target limitless
 - **Idea:** limitless's deliver stage runs human-review's `collect`/`build` and attaches `review.html` (or a link) to
   the PR's evidence report.
 - **Sources:** Latitude added "a CI step to every PR… that generates an interactive HTML review artifact"
   ([X](https://x.com/geclos/status/2073028203329810437): 5 likes). lucidiff does PR → one HTML explainer, with
   citations checked ([repo](https://github.com/Rishabjs03/pr-karpathy)). Evidence: `practitioner` (low engagement).
+  DiffGuardian's Plans view (a summary, a diagram, and a data model of an agent plan) and its live Worktrees view
+  (the graph updates while the agent writes) are a possible later limitless spike. They are not part of this item,
+  and they are not ranked now. [site](https://diffguardian.ai/). Evidence: `vendor`.
 - **Note:** HR's privacy rules say not to publish the page unless asked (`HR/SKILL.md` "Security and privacy"), so
   keep it as a local or private artifact.
 - **Test:** 10 limitless runs. Does Matt open the page before the diff, and does review latency change?
 
-### 16. "Since you last looked" interdiff — `proposed`, cost M, target HR
+### 17. "Since you last looked" interdiff — `proposed`, cost M, target HR
 - **Idea:** when a page is rebuilt after feedback, show the delta from the last version the reviewer saw (changed
   hunks, and which notes changed) and keep the old comments attached to unchanged lines. Today the new page "starts
   clean" (`HR/SKILL.md` "When feedback comes back").
@@ -452,19 +524,19 @@ reading Matt Pocock's `teach`.*
 
 | Idea | Where | Notes |
 |---|---|---|
-| Diff → one self-contained HTML page; branch, PR, range, **uncommitted** work | `HR/SKILL.md` "Decide the scope"; `HR/scripts/human-review.mjs` | Covers PRs and uncommitted changes. Not whole-repo onboarding (item 3). Peer products that already do this job: Saga (ordered chapters, one HTML file, comments pushed to GitHub; [post](https://jakeberesford.com/blog/saga), 20 stars, created 2026-07-11) and Guided Review (units from the parsed diff; the model does not invent the lines; [docs](https://guidedreview.dev/docs)). |
+| Diff → one self-contained HTML page; branch, PR, range, **uncommitted** work | `HR/SKILL.md` "Decide the scope"; `HR/scripts/human-review.mjs` | Covers PRs and uncommitted changes. Not whole-repo onboarding (item 3). Peer products that already do this job: Saga (ordered chapters, one HTML file, comments pushed to GitHub; [post](https://jakeberesford.com/blog/saga), 20 stars, created 2026-07-11) and Guided Review (units from the parsed diff; the model does not invent the lines; [docs](https://guidedreview.dev/docs)). Also peers of this page, GitHub API on 2026-11-05: Trail of Bits Review Walkthrough (the HTML steps; findings are handed off; [page](https://trailofbits.com/skills/review-walkthrough/)), [qiushiyan/explain-diff](https://github.com/qiushiyan/explain-diff) (0 stars), [malav2110/explain-diff-html](https://github.com/malav2110/explain-diff-html) (19 stars), f-labs `html-code-review` (the explainer half; [skill](https://github.com/f-labs-io/agent-html-skills/blob/main/plugins/html-skills/skills/html-code-review/SKILL.md); the repo has 68 stars), and [th0rz05/claude-pr-review-html](https://github.com/th0rz05/claude-pr-review-html) (2 stars; the reading-order half). |
 | Code on the page comes from git; annotations checked against real lines | `HR/SKILL.md` "Honesty", build `--check` | Same idea as Showboat's exec-pulled snippets. A box with no arrows in a drawn diagram is not evidence that a file is unused. Check a parsed graph (item 7). |
-| Reading order (`focus`, 3–6 stops, riskiest first) | `HR/SKILL.md` "fields that carry the most weight" | Matches the "literate diff" and tour-mode ideas (Litt, Tembo Tour Mode, constellagent code tour). Replicas Review's guided tour (2026-10-21) puts a plain-English explanation above each file's diff, starts with the most important file, and collapses tests, lockfiles, and generated files at the end ([post](https://replicas.dev/blog/replicas-review)). That matches this row and the mechanical tier below. Saga's chapters and Guided Review's units (schema, then logic, call sites, and tests) are the same job. See the HTML-page row. |
+| Reading order (`focus`, 3–6 stops, riskiest first) | `HR/SKILL.md` "fields that carry the most weight" | Matches the "literate diff" and tour-mode ideas (Litt, Tembo Tour Mode, constellagent code tour). Replicas Review's guided tour (2026-10-21) puts a plain-English explanation above each file's diff, starts with the most important file, and collapses tests, lockfiles, and generated files at the end ([post](https://replicas.dev/blog/replicas-review)). That matches this row and the mechanical tier below. Saga's chapters and Guided Review's units (schema, then logic, call sites, and tests) are the same job. Item 8 walks changed symbols from entry points down the call graph. Trail of Bits and th0rz05 also pick a reading order. See the HTML-page row. |
 | Group by concern, tests next to their code, callees first | `HR/SKILL.md` `concerns` | Earlier report #1. |
 | Written for a newcomer: `background` ("Before this change"), `terms` with hover underlines, readability warnings | `HR/SKILL.md` "Write for someone new to this code"; `HR/references/format.md` | Like Litt's "Background" and codebase-to-course's glossary tooltips. |
 | Annotated diffs (note / decision / risk / question), 2–5 per file | `HR/SKILL.md` "Annotations" | |
 | Visuals: wireframes, data model, API, states matrix, Mermaid, diagrams, `code` of any file at head | `HR/references/{format,wireframes,diagrams}.md` | Like CodeRabbit sequence diagrams and lucidiff's flow diagram. |
-| Findings held back until the reviewer's own pass | `HR/SKILL.md` "The reviewer reads before they see your conclusions" | Earlier report #3. The same order as aictrl's teach-the-change, then reviewer notes. Item 10 adds the claims footer and diagram steps. It does not redo this row. |
-| Proven mechanical / generated tier | `HR/SKILL.md` `files` | Earlier report #2. |
+| Findings held back until the reviewer's own pass | `HR/SKILL.md` "The reviewer reads before they see your conclusions" | Earlier report #3. The same order as aictrl's teach-the-change, then reviewer notes. Item 11 adds the claims footer and diagram steps. It does not redo this row. |
+| Proven mechanical / generated tier | `HR/SKILL.md` `files` | Earlier report #2. Item 8 collapses same-file moves, renames, and generated or vendored noise, which path tags miss. |
 | Git signals with provenance tags (verified / author text / inference) | `HR/SKILL.md` "Signals" | Earlier report #4. |
 | Text blast radius (JS/TS/Py/Go/Ruby) | `HR/SKILL.md` "Blast radius" | Item 7 upgrades it. |
-| "What I need from you" + tests cover / don't cover | `HR/SKILL.md` `ask`, `tests` | Earlier report #6. |
-| Precision check on every claim | `HR/SKILL.md` "Precision check" | Earlier report #7. Item 10 adds a visible count of claims that could not be tied to code. |
+| "What I need from you" + tests cover / don't cover | `HR/SKILL.md` `ask`, `tests` | Earlier report #6. Item 8 names which changed tests reach which changed functions, with the call path. |
+| Precision check on every claim | `HR/SKILL.md` "Precision check" | Earlier report #7. Item 11 adds a visible count of claims that could not be tied to code. |
 | Comment, verdict, and **Copy feedback for the agent** loop | `HR/README.md`; `HR/assets/app.js` | Like hunk-review-changes / constellagent "submit to agent". |
 
 ## Hand off to Code Review Research Bot (review quality and bug finding, out of scope here)
@@ -499,13 +571,29 @@ reading Matt Pocock's `teach`.*
   ([post](https://openai.com/index/qodo-codex-plugin/)). A plain GET returned HTTP 403 on 2026-11-03; the page was
   read through a reader fetch the same day.
 - **PR Explainer's severity findings** (critical, warning, good practice) shown in the editor
-  ([site](https://prexplainer.com/)). The narrated tour stays on #14.
+  ([site](https://prexplainer.com/)). The narrated tour stays on #15.
 - **CodeRabbit, code explainability for AI-generated PRs** (Brandon Gubitosa, 2026-08-13): check intent against the
   diff, read a walkthrough, trace blast radius, then read adversarially. The guide cites a 470-PR report for higher
   issue rates in AI-authored pull requests (10.83 issues per PR versus 6.45, readability more than 3×, logic and
   correctness 75% more common, error-handling nearly 2×, security up to 2.74×). Those figures are the guide's, and
   were not re-measured here
   ([guide](https://www.coderabbit.ai/guides/code-explainability-for-ai-generated-prs-a-reviewers-guide)).
+- **PR Lens findings and autofix.** Bugs, security holes, and design notes on the diagram, with a one-click fix or a
+  prompt for the coding agent ([site](https://prlens.dev/)). The animated diagrams stay on #7, #11, and #15.
+- **Trail of Bits Review Walkthrough, findings half.** Each step can list bugs, security, validation, API design, or
+  performance, with a severity, anchored to a diff line
+  ([page](https://trailofbits.com/skills/review-walkthrough/)). The HTML walkthrough is a shipped peer.
+- **f-labs html-code-review.** Severity-coded findings in the HTML artifact
+  ([skill](https://github.com/f-labs-io/agent-html-skills/blob/main/plugins/html-skills/skills/html-code-review/SKILL.md)).
+  The explainer half is a shipped peer.
+- **th0rz05 pr-review-html.** Severity-rated findings the README says are tagged confirmed or plausible
+  ([repo](https://github.com/th0rz05/claude-pr-review-html)). The reading-order report is a shipped peer.
+- **GitWarren / prx.** Named on a tooling list. Not reviewed as products here
+  ([X](https://x.com/vibeleaderboard/status/2117626768110596353): 1 like, 26 impressions, X API 2026-11-05).
+- **Clipboard, evidence before the diff.** The post says an agent runs the change on a preview build and posts an
+  evidence bundle (scenarios, what happened, screenshots, and what it could not cover) before a person opens the
+  diff ([X](https://x.com/ClipboardEng/status/2117624478213537983): 1 like, 116 impressions, X API 2026-11-05).
+  Those results are the post's. They were not re-measured here.
 
 ## Merged
 
@@ -566,8 +654,32 @@ reading Matt Pocock's `teach`.*
   "unused."
 - Hand-off: Qodo's Codex plugin, PR Explainer's severity findings, and CodeRabbit's explainability guide.
 
+## Changes in draft 5 (2026-11-05)
+
+- New #8 "Semantic lines to read, call-graph order, and test reach", from perspica. Cost M, target HR, proposed.
+  Evidence is `vendor`, plus tiny `engagement` (41 stars; one X post, 1 like and 26 impressions). Placed after
+  blast radius (#7) and before two-depth background. It does not jump #1–#6. The homepage ratios are the vendor's
+  examples, not a measurement of our reviewers.
+- #5 cites perspica's optional *asked* versus *agent's call* (local Claude Code or Codex prompts, quote checked).
+  Not a new row.
+- perspica Learn (at most three concept lessons, a quiz, or "nothing to learn") is cited on #1, #3, and #15. Not
+  on the worked-example item. A traced input with a captured command is a different block from a concept figure.
+- DiffGuardian's voice and Trace It fold into #15. Ask folds into #6. The heuristic dependency graph folds into
+  #7. Plans and live Worktrees are a possible later limitless spike, noted on #16, not ranked.
+- PR Lens (2,352 stars, GitHub API 2026-11-05) folds into #7, #11, and #15. Findings and autofix are handed off.
+  The 2026-11-02 X post's "2,237 stars" is older than the API count.
+- Draft 4's #8–#16 are now #9–#17. Two-depth #9, rules file #10, grounded claims #11, split advisor #12, "Who to
+  ask" #13, two or three angles #14, interactive explainer #15, limitless attach #16, interdiff #17.
+- Shipped peers of the HTML page: Trail of Bits Review Walkthrough, qiushiyan/explain-diff (0 stars),
+  malav2110/explain-diff-html (19 stars), f-labs html-code-review, th0rz05 pr-review-html (2 stars). Findings
+  halves are handed off. Cat Hicks's Learning Opportunities (2,540 stars) is cited on #1 and #3 only.
+- Rejected: mind-expander, 103 stars. An agent canvas, not a human repo, diff, or PR explainer.
+- Open PR #9 (IronBee, branched from main) is out of scope. It is not in this draft.
+
 ## Rejected
 
-_(none yet)_
+- **mind-expander** ([repo](https://github.com/mbbill/mind-expander), 103 stars per the GitHub API on 2026-11-05).
+  An infinite-canvas workspace for coding with agents. The job is an agent workspace, not a person understanding
+  a repo, a diff, or a pull request.
 
 
