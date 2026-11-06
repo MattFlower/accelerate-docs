@@ -1,11 +1,12 @@
 # Code understanding: backlog
 
-*Draft 5, 2026-11-05 (draft 4 plus the 2026-11-05 sweep; see "Changes in draft 5" below). Repo path: `agentic-dev-research/research/code-understanding/BACKLOG.md`.*
+*Draft 5, 2026-11-05 (draft 4 plus the 2026-11-05 sweep; the 2026-11-04 IronBee sweep is folded in; see "Changes in draft 5" below). Repo path: `agentic-dev-research/research/code-understanding/BACKLOG.md`.*
 *It follows the layout in that repo's README (`research/<topic>/report.md` + `notes/` + optional `BACKLOG.md`)
 and the style of `research/automated-code-review/BACKLOG.md`. Findings and sources are in
 [`research/code-understanding/notes/first-sweep-2026-11-01.md`](notes/first-sweep-2026-11-01.md),
 [`research/code-understanding/notes/sweep-2026-11-02.md`](notes/sweep-2026-11-02.md),
 [`research/code-understanding/notes/sweep-2026-11-03.md`](notes/sweep-2026-11-03.md),
+[`research/code-understanding/notes/2026-11-04-daily-sweep.md`](notes/2026-11-04-daily-sweep.md),
 and [`research/code-understanding/notes/sweep-2026-11-05.md`](notes/sweep-2026-11-05.md)
 until a `report.md` is written.*
 
@@ -23,7 +24,7 @@ same rule as the code-review backlog's "fix the eval first".
 **Evidence labels.** `measured-RCT` (randomized or controlled study) · `measured-obs` (observational or field data) ·
 `practitioner` (someone describes their own use) · `vendor` (launch post or docs) · `engagement` (X numbers only, as
 returned by the X API on the date written next to the number: 2026-11-01 in draft 2, 2026-11-02 in draft 3,
-2026-11-03 in draft 4, 2026-11-05 in draft 5) · `our own idea`.
+2026-11-03 in draft 4, 2026-11-04 in the 2026-11-04 sweep note, 2026-11-05 in draft 5) · `our own idea`.
 
 **Statuses.** `proposed` · `testing` · `shipped` (in human-review, path cited) · `rejected` (with the reason).
 
@@ -158,6 +159,10 @@ reading Matt Pocock's `teach`.*
     [repo](https://github.com/Egonex-AI/Understand-Anything/), 89,517 stars per the API), DeepWiki, Google Code Wiki,
     CodeTour, and [Busjahn et al.](https://researchonline.gcu.ac.uk/ws/portalfiles/portal/24953094/ICPC2015_authors_version.pdf)
     (execution-order reading).
+  - IronBee Code Wiki ([product](https://ironbee.ai/code-wiki)). Launch post by @serkan_ozal
+    ([X](https://x.com/serkan_ozal/status/2117633673461674225): like_count 5, bookmark_count 0, reply_count 2,
+    retweet_count 1, impression_count 9185, X API on 2026-11-04). Same niche as DeepWiki and Google Code Wiki
+    above, but merge-triggered and citation-checked. Evidence: `vendor` + `engagement` (weak).
   - The onboarding-skill pattern "build and test first, then trace **one** real flow end to end with file:line, then
     stop": ECC's `codebase-onboarding`
     ([SKILL.md](https://github.com/affaan-m/ECC/blob/main/skills/codebase-onboarding/SKILL.md); ECC repo 294,392 stars
@@ -329,6 +334,8 @@ reading Matt Pocock's `teach`.*
   1,716 impressions; the post's text says 2,237 stars, older than today's API count) and the tooling list
   [vibeleaderboard](https://x.com/vibeleaderboard/status/2117626768110596353) (1 like, 26 impressions). Both
   counts are the X API on 2026-11-05. Evidence: `vendor` + `engagement`.
+  IronBee Code Wiki's area map (imports solid, HTTP dashed) is another vendor graph overlay for understanding
+  impact ([product](https://ironbee.ai/code-wiki), same launch post as #3). Still `vendor`, low engagement.
 - **Why it helps:** HR's blast radius is honest but text-only, covers 5 languages, and says "mentioned", never
   "called" (`HR/SKILL.md` "Blast radius"). A resolved graph answers "what else does this touch" faster.
 - **Test:** on 5 PRs, compare the grep and graph outputs by hand: false mentions removed, real callers missed. Time to
@@ -594,6 +601,8 @@ reading Matt Pocock's `teach`.*
   evidence bundle (scenarios, what happened, screenshots, and what it could not cover) before a person opens the
   diff ([X](https://x.com/ClipboardEng/status/2117624478213537983): 1 like, 116 impressions, X API 2026-11-05).
   Those results are the post's. They were not re-measured here.
+- **IronBee Code Review**: same launch post as Code Wiki. The post's note_tweet claims 67.4 F2 and 75.3 Recall
+  on the Martian Code Review Benchmark ([X](https://x.com/serkan_ozal/status/2117633673461674225)).
 
 ## Merged
 
@@ -674,12 +683,21 @@ reading Matt Pocock's `teach`.*
   malav2110/explain-diff-html (19 stars), f-labs html-code-review, th0rz05 pr-review-html (2 stars). Findings
   halves are handed off. Cat Hicks's Learning Opportunities (2,540 stars) is cited on #1 and #3 only.
 - Rejected: mind-expander, 103 stars. An agent canvas, not a human repo, diff, or PR explainer.
-- Open PR #9 (IronBee, branched from main) is out of scope. It is not in this draft.
+- The 2026-11-04 sweep is folded in. IronBee Code Wiki is vendor evidence on #3 `teach-code` and on #7
+  (structural blast radius). IronBee Code Review is handed off. stack-diagram is rejected. Ranking is unchanged.
+  Notes: [`notes/2026-11-04-daily-sweep.md`](notes/2026-11-04-daily-sweep.md).
 
 ## Rejected
 
 - **mind-expander** ([repo](https://github.com/mbbill/mind-expander), 103 stars per the GitHub API on 2026-11-05).
   An infinite-canvas workspace for coding with agents. The job is an agent workspace, not a person understanding
   a repo, a diff, or a pull request.
+- **stack-diagram** ([caru-ini/stack-diagram](https://github.com/caru-ini/stack-diagram)): created 2026-11-01.
+  GitHub API on 2026-11-04 reported 1707 stargazers and 74 forks. In-window X example
+  ([X](https://x.com/0xbobaaa/status/2117288829270819013): like_count 53, bookmark_count 39, reply_count 18,
+  retweet_count 2, impression_count 1485) and
+  [X](https://x.com/arsene_btc/status/2117723494762844600). Rejected because it draws a logo-rich stack diagram
+  from a one-sentence description, not from reading the repo. README candy, not code understanding of existing
+  structure.
 
 
