@@ -159,7 +159,27 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
    `proposed`, S. Anthropic Code Review reads REVIEW.md from base; limitless reads lenses from base (GUIDE.md).
 7. **Feed findings into the human-review page** as annotations — `proposed`, M. **our own idea**
 8. **Pre-existing channel** (🟣) for bugs not introduced by the change — `proposed`, S. Anthropic Code Review.
-9. **External smoke check on ReviewBench test set (25 tasks, has Codex CLI example)** — `proposed`, S.
+9. **CR-Bench-Verified smoke + Reflexion second pass** — `proposed`, M. Also helps limitless.
+   - **Idea:** Add CR-Bench-Verified (or a small TS/JS-filtered slice if/when available) as an external
+     smoke + measure Reflexion-style second pass vs single-shot and vs adversarial×2; track Usefulness
+     Rate separately from blocking recall so helpful comments can't fake defect recall.
+   - **Source:** [CR-Bench-v2](https://arxiv.org/abs/2611.02566) (*CR-Bench-v2: Evaluating the Real-World
+     Utility of AI Code Review Agents*; submitted 2026-11-02, v2 2026-11-03). [report.md](report.md) §2.4.
+   - **Why:** Matches quality-review's blocking-recall + clean must-fix framing; KDDR≈33% ceiling warns
+     against merge-gating; usefulness≠defect catch.
+   - **Test:** Run quality-review arms on the Verified split; score with the two-judge SAME matcher (or
+     the paper's KDDR judge) + usefulness; A/B single-shot vs one Reflexion iteration vs adversarial×2.
+10. **External smoke check on ReviewBench test set (25 tasks, has Codex CLI example)** — `proposed`, S.
+11. **Same-agent review as a measured anti-pattern** — `proposed`, M. Also helps limitless.
+    - **Idea:** Treat "author agent then same-agent review" as a measured anti-pattern; prefer independent
+      review samples (already in adversarial×2); optionally test a foresight-style pack (unstated edge
+      cases / silent-wrong-result) as a lens, not same-session self-review.
+    - **Source:** [Foresight-SWE](https://arxiv.org/abs/2611.01181) (*Do Coding Agents Catch Their Own Bugs?
+      (They Don't.)*; submitted 2026-10-31). [report.md](report.md) §2.7.
+    - **Why:** Reinforces independence over self-review; quantifies the self-review tradeoff; relevant if
+      quality-review is a post-implement gate in an agent loop.
+    - **Test:** On escapes-dev, independent adversarial×2 vs same-session self-review after implement;
+      blocking recall + clean must-fix (and resolve-rate if used in a factory loop).
 
 ---
 
