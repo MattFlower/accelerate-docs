@@ -159,16 +159,28 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
    `proposed`, S. Anthropic Code Review reads REVIEW.md from base; limitless reads lenses from base (GUIDE.md).
 7. **Feed findings into the human-review page** as annotations — `proposed`, M. **our own idea**
 8. **Pre-existing channel** (🟣) for bugs not introduced by the change — `proposed`, S. Anthropic Code Review.
-9. **CR-Bench-Verified smoke + Reflexion second pass** — `proposed`, M. Also helps limitless.
-   - **Idea:** Add CR-Bench-Verified (or a small TS/JS-filtered slice if/when available) as an external
-     smoke + measure Reflexion-style second pass vs single-shot and vs adversarial×2; track Usefulness
-     Rate separately from blocking recall so helpful comments can't fake defect recall.
+9. **CR-Bench-Verified smoke + Reflexion second pass** — `proposed`, cost S–M. Also helps limitless.
+   - **Idea:** Add CR-Bench-Verified (174), or a small TS/JS-filtered slice if one exists, as an external
+     defect-centric smoke check. Score with a KDDR-style known-defect hit plus a usefulness split, and
+     measure a Reflexion-style second pass against single-shot and against adversarial×2. Track Usefulness
+     Rate separately from blocking recall so helpful comments can't fake defect recall. Prefer the Verified
+     subset. This does not replace the limitless escapes eval.
    - **Source:** [CR-Bench-v2](https://arxiv.org/abs/2611.02566) (*CR-Bench-v2: Evaluating the Real-World
-     Utility of AI Code Review Agents*; submitted 2026-11-02, v2 2026-11-03). [report.md](report.md) §2.4.
-   - **Why:** Matches quality-review's blocking-recall + clean must-fix framing; KDDR≈33% ceiling warns
-     against merge-gating; usefulness≠defect catch.
-   - **Test:** Run quality-review arms on the Verified split; score with the two-judge SAME matcher (or
-     the paper's KDDR judge) + usefulness; A/B single-shot vs one Reflexion iteration vs adversarial×2.
+     Utility of AI Code Review Agents*; submitted 2026-11-02, v2 2026-11-03; opened in the 2026-11-04
+     daily sweep and again on 2026-11-05). [report.md](report.md) §2.4.
+   - **Why:** Existing external options (ReviewBench, Martian) are comment-gold or pooled. CR-Bench
+     grounds each task in a known SWE-Bench defect plus a fix. Gemini Code Assist is KDDR 8.1% at
+     Usefulness Rate 78.0%, so a high usefulness rate is not known-defect recall. Best systems are about
+     33% KDDR, which warns against merge-gating. Reflexion raised KDDR versus single-shot for every
+     backbone. That is weak evidence for a cheap self-critique pass as a finder variant, not as a
+     reproduce-or-drop filter. The split matches quality-review's blocking-recall plus clean must-fix
+     framing.
+   - **Test:** Port or script a runner. Start with a 25–50 task slice, then the full verified set if the
+     slice is informative. Compare KDDR and comment usefulness for production versus adversarial×2, and
+     A/B single-shot versus one Reflexion iteration versus adversarial×2. Score with the two-judge SAME
+     matcher or the paper's KDDR judge, plus usefulness. Report Wilson CIs. Do not contaminate
+     escapes-heldout.
+   - **Cost:** S for a 25–50 task slice; M for full verified.
 10. **External smoke check on ReviewBench test set (25 tasks, has Codex CLI example)** — `proposed`, S.
 11. **Same-agent review as a measured anti-pattern** — `proposed`, M. Also helps limitless.
     - **Idea:** Treat "author agent then same-agent review" as a measured anti-pattern; prefer independent
@@ -210,3 +222,6 @@ Each with the evidence so it isn't retried without new reason.
 - **luna@medium** (2.5% / 4.4%) and **haiku-5.5@high** (17/32 over 20 min) as reviewers. [Escapes-dev]
 - **±5-line location grading as the primary metric** — ~20% accidental credits, ~4% missed SAME. Kept only
   as a secondary score. [Notes credited audit; #1059]
+- **Usefulness Rate as a substitute for known-defect recall** — CR-Bench-v2 Gemini Code Assist is
+  KDDR 8.1% at Usefulness Rate 78.0% ([2611.02566](https://arxiv.org/abs/2611.02566), daily sweep
+  2026-11-04). Keep a known-defect hit (KDDR or judged recall) as the detection score.
