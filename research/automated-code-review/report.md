@@ -4,8 +4,8 @@
 
 Status: first draft, written to be revised once Matt's prior docs are folded in further. Every
 external source below was opened on 2026-10-31, except CR-Bench-v2 (opened in the 2026-11-04
-daily sweep); anything that could not be opened is listed in
-"Not verified". Numbers from different benchmarks are not comparable.
+daily sweep and again on 2026-11-05) and Foresight-SWE (opened 2026-11-05); anything that could
+not be opened is listed in "Not verified". Numbers from different benchmarks are not comparable.
 
 **Precedence for Matt's figures** (as instructed): the 2026-10-31 escapes-dev run beats Phase 0
 `RESULTS.md` (2026-10-29), which beats the working notes on overlapping figures; where the notes
@@ -225,12 +225,10 @@ Only items I opened. Where Matt's docs already cite an item, it's marked "(in Ma
   [repo](https://github.com/review-bench/ReviewBench) (2026-10-05, MIT): 219 PRs, 19 languages, pooled
   gold (humans, LLMs, static analysis), grounded/augmented precision and recall, a 25-task offline test
   set and a judging CLI. Vendor-run; gold mostly machine-made (Report). (in Matt's docs)
-- **Martian Code Review Bench** [repo](https://github.com/withmartian/code-review-benchmark): 50 PRs /
-  173 golden comments offline plus an online set scored against developers' post-review fixes;
-  three judge models. (in Matt's docs)
-- **CR-Bench / CR-Bench-v2** **[arXiv]** [2611.02566](https://arxiv.org/abs/2611.02566)
-  (Pereira, Sinha, Ghosh, Dutta, Nutanix; submitted 2026-11-02; opened in the 2026-11-04 daily
-  sweep): defect-centric benchmark recasting SWE-Bench issues as PR review tasks with full repo
+- **CR-Bench-v2** [arXiv 2611.02566](https://arxiv.org/abs/2611.02566)
+  ([v2 HTML](https://arxiv.org/html/2611.02566v2); Pereira, Sinha, Ghosh, Dutta, Nutanix;
+  submitted 2026-11-02, v2 2026-11-03; opened in the 2026-11-04 daily sweep and again on
+  2026-11-05): defect-centric benchmark recasting SWE-Bench issues as PR review tasks with full repo
   context. CR-Bench: 584 instances; CR-Bench-Verified: 174 instances from SWE-Bench Verified
   (after detectability + single-PR filters). Each instance: PR + known defect + ground-truth fix
   + taxonomy (category / impact / severity). Metrics: Known-Defect Detection Rate (KDDR) = whether
@@ -242,7 +240,10 @@ Only items I opened. Where Matt's docs already cite an item, it's marked "(in Ma
   depending on judge; often significant). ⚠️ Python / SWE-Bench scope (Django heavy in the verified
   set); one labeled defect per instance; LLM-generated reference comments and taxonomy (Claude
   Opus 4.5); eval harnesses in the paper are mostly non-tool/non-execution; absolute judge scores
-  disagree even when direction agrees.
+  disagree even when direction agrees. Not in Matt's 2026-10-31 docs.
+- **Martian Code Review Bench** [repo](https://github.com/withmartian/code-review-benchmark): 50 PRs /
+  173 golden comments offline plus an online set scored against developers' post-review fixes;
+  three judge models. (in Matt's docs)
 - **Statistics:** Miller, *Adding Error Bars to Evals* [arXiv 2411.00640](https://arxiv.org/abs/2411.00640);
   Bowyer et al., *Don't use the CLT with fewer than a few hundred datapoints* [arXiv 2503.01747](https://arxiv.org/abs/2503.01747);
   TREC pooling (Buckley & Voorhees) [NIST](https://www.nist.gov/node/761376). (in Matt's docs)
@@ -286,6 +287,17 @@ scaling agent systems [2512.08296](https://arxiv.org/abs/2512.08296).
 - Not verified: whether Codex exposes a parallel-subagent primitive to skills. Treat "two independent
   samples" in Codex as two `codex exec` processes until checked.
 
+### 2.7 Same-agent review and unstated bugs
+
+- **Foresight-SWE**, *Do Coding Agents Catch Their Own Bugs? (They Don't.)*
+  [arXiv 2611.01181](https://arxiv.org/abs/2611.01181) (opened 2026-11-05; submitted 2026-10-31;
+  missed prior sweeps): on 212 real PR₁→PR₂ pairs, agents ~60.7% resolve on the stated task but
+  only ~14.8% foresight resolve rate (FRR); when the later defect is named they resolve ~91%.
+  Proactive prompting and native self-review (`/self-review`, `/review`) can raise FRR but often
+  cut original-task resolve. Popular code-review skills do not raise FRR. Not in Matt's 2026-10-31
+  docs. Distinct from "gold comes from a procedure" (§1.2): that procedure builds eval gold; this
+  measures whether the author agent, reviewing itself, catches a later bug it was not told about.
+
 ## 3. Genuinely new relative to Matt's docs ("candidates for limitless too")
 
 Short list; most external evidence is already in Matt's docs.
@@ -304,10 +316,13 @@ Short list; most external evidence is already in Matt's docs.
    general-purpose skill (Matt's Report proposes the 60–80 TS/JS slice; the 25-task set is cheaper).
 6. **Codex `agents/openai.yaml` `allow_implicit_invocation: false`** to keep a heavy review skill
    from auto-triggering.
-7. **CR-Bench-v2** ([2611.02566](https://arxiv.org/abs/2611.02566)) as an external defect-centric
-   smoke/eval option (CR-Bench-Verified: 174). KDDR and Usefulness Rate split: Gemini Code Assist
-   is KDDR 8.1% at Usefulness Rate 78.0%, so usefulness alone misleads. Candidate for limitless too.
-   ⚠️ Python / SWE-Bench, one labeled defect, LLM judges.
+7. **CR-Bench-v2** (§2.4) [arXiv 2611.02566](https://arxiv.org/abs/2611.02566): external
+   defect-centric bench (CR-Bench-Verified: 174) that scores known-defect detection separately from
+   usefulness. Gemini Code Assist is KDDR 8.1% at Usefulness Rate 78.0%, so usefulness alone
+   misleads. Candidate for limitless too. ⚠️ Python / SWE-Bench, one labeled defect, LLM judges.
+8. **Foresight-SWE** (§2.7) [arXiv]: stated-task resolve and foresight resolve rate are different
+   outcomes; native self-review can raise foresight while cutting the original task. Candidate for
+   limitless too.
 
 ## 4. Not verified / flagged
 

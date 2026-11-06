@@ -159,21 +159,39 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
    `proposed`, S. Anthropic Code Review reads REVIEW.md from base; limitless reads lenses from base (GUIDE.md).
 7. **Feed findings into the human-review page** as annotations — `proposed`, M. **our own idea**
 8. **Pre-existing channel** (🟣) for bugs not introduced by the change — `proposed`, S. Anthropic Code Review.
-9. **External smoke check on ReviewBench test set (25 tasks, has Codex CLI example)** — `proposed`, S.
-10. **CR-Bench-Verified smoke check (defect-centric; KDDR + usefulness split)** — `proposed`, cost S–M.
-    Flag for limitless: yes — external generalization + metric design (KDDR vs usefulness).
-    - **Idea:** Optionally run quality-review (or limitless reviewer arms) on CR-Bench-Verified (174)
-      as an external defect-centric smoke check; score with KDDR-style known-defect hit plus a
-      usefulness/noise split. Prefer the Verified subset. Does not replace the limitless escapes eval.
-    - **Source:** https://arxiv.org/abs/2611.02566 (daily sweep 2026-11-04). See [report.md](report.md) §2.4.
-    - **Why:** Existing external options (ReviewBench, Martian) are comment-gold or pooled; CR-Bench
-      grounds each task in a known SWE-Bench defect + fix. Gemini Code Assist on this bench is KDDR
-      8.1% at Usefulness Rate 78.0%, so a high usefulness rate is not known-defect recall. Reflexion
-      raised KDDR vs single-shot for every backbone (weak evidence to try a cheap self-critique pass
-      as a finder variant, not a reproduce-or-drop filter).
-    - **Test:** Port or script a small runner on ≤174 verified tasks; compare KDDR and comment
-      usefulness for production vs adversarial×2; report Wilson CIs; do not contaminate escapes-heldout.
-    - **Cost:** S for a 25–50 task slice; M for full verified.
+9. **CR-Bench-Verified smoke + Reflexion second pass** — `proposed`, cost S–M. Also helps limitless.
+   - **Idea:** Add CR-Bench-Verified (174), or a small TS/JS-filtered slice if one exists, as an external
+     defect-centric smoke check. Score with a KDDR-style known-defect hit plus a usefulness split, and
+     measure a Reflexion-style second pass against single-shot and against adversarial×2. Track Usefulness
+     Rate separately from blocking recall so helpful comments can't fake defect recall. Prefer the Verified
+     subset. This does not replace the limitless escapes eval.
+   - **Source:** [CR-Bench-v2](https://arxiv.org/abs/2611.02566) (*CR-Bench-v2: Evaluating the Real-World
+     Utility of AI Code Review Agents*; submitted 2026-11-02, v2 2026-11-03; opened in the 2026-11-04
+     daily sweep and again on 2026-11-05). [report.md](report.md) §2.4.
+   - **Why:** Existing external options (ReviewBench, Martian) are comment-gold or pooled. CR-Bench
+     grounds each task in a known SWE-Bench defect plus a fix. Gemini Code Assist is KDDR 8.1% at
+     Usefulness Rate 78.0%, so a high usefulness rate is not known-defect recall. Best systems are about
+     33% KDDR, which warns against merge-gating. Reflexion raised KDDR versus single-shot for every
+     backbone. That is weak evidence for a cheap self-critique pass as a finder variant, not as a
+     reproduce-or-drop filter. The split matches quality-review's blocking-recall plus clean must-fix
+     framing.
+   - **Test:** Port or script a runner. Start with a 25–50 task slice, then the full verified set if the
+     slice is informative. Compare KDDR and comment usefulness for production versus adversarial×2, and
+     A/B single-shot versus one Reflexion iteration versus adversarial×2. Score with the two-judge SAME
+     matcher or the paper's KDDR judge, plus usefulness. Report Wilson CIs. Do not contaminate
+     escapes-heldout.
+   - **Cost:** S for a 25–50 task slice; M for full verified.
+10. **External smoke check on ReviewBench test set (25 tasks, has Codex CLI example)** — `proposed`, S.
+11. **Same-agent review as a measured anti-pattern** — `proposed`, M. Also helps limitless.
+    - **Idea:** Treat "author agent then same-agent review" as a measured anti-pattern; prefer independent
+      review samples (already in adversarial×2); optionally test a foresight-style pack (unstated edge
+      cases / silent-wrong-result) as a lens, not same-session self-review.
+    - **Source:** [Foresight-SWE](https://arxiv.org/abs/2611.01181) (*Do Coding Agents Catch Their Own Bugs?
+      (They Don't.)*; submitted 2026-10-31). [report.md](report.md) §2.7.
+    - **Why:** Reinforces independence over self-review; quantifies the self-review tradeoff; relevant if
+      quality-review is a post-implement gate in an agent loop.
+    - **Test:** On escapes-dev, independent adversarial×2 vs same-session self-review after implement;
+      blocking recall + clean must-fix (and resolve-rate if used in a factory loop).
 
 ---
 
