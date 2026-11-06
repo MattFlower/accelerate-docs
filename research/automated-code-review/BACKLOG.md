@@ -88,6 +88,11 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
 - = Report **Option F** / Plan **T8**. 13/30 production misses needed files outside the diff
   (`L/docs/research/14-review-strength.md`); CRBugBench: out-of-diff bugs harder. Cheap and short by design
   (SWE-PRBench: dumped context degrades). Distinct from trace finder (arm E, +1.1/+3.4).
+- **Note:** KG-AST's call-graph/change-radius slice is one cheap shape
+  ([2611.06950](https://arxiv.org/abs/2611.06950)): measured +6 pp exact-find overall (26→32) and
+  +14 pp when the fix stays in touched methods, but **no help** on out-of-diff fixes — so A7 must
+  go beyond callers/callees of changed methods for the hard case. ⚠️ thin (single paper, SZZ, AI
+  judges).
 - **Test:** recall on the out-of-diff subset of escapes-dev.
 
 ### 8. Acceptance claims from the request — `proposed`, cost S–M
@@ -192,6 +197,20 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
       quality-review is a post-implement gate in an agent loop.
     - **Test:** On escapes-dev, independent adversarial×2 vs same-session self-review after implement;
       blocking recall + clean must-fix (and resolve-rate if used in a factory loop).
+
+12. **Optional commit-risk prefilter** — low expected gain for the skill itself (orchestration).
+    - **Idea:** Optional commit-risk prefilter before invoking `quality-review` (or the factory review
+      stage): spend review budget on the riskiest fraction of changes using cheap git features, not as a
+      finder inside the skill.
+    - **Source:** KG-AST [arXiv 2611.06950](https://arxiv.org/abs/2611.06950).
+    - **Why:** Factory cost lever; riskiest 20% covers ~49–64% of bug-introducing commits. Does not
+      raise per-review recall; decides *when* to run the skill.
+    - **Test:** On a time-split of escapes / merged PRs, compare recall of bugs among reviewed commits
+      vs reviewing all / biggest-diff-first at the same review budget; report coverage@budget with
+      Wilson/bootstrap. Do not contaminate escapes-heldout.
+    - **Cost:** M (needs historical labels)
+    - **Status:** `proposed` ⚠️ thin evidence
+    - **Flag:** **also relevant to limitless** (Option A / review-stage cost)
 
 ---
 

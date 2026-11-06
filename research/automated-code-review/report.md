@@ -2,10 +2,13 @@
 
 *Draft 1, 2026-10-31.*
 
+*Sweep 2026-11-06: KG-AST (§2.1). Abs opened 2026-11-06.*
+
 Status: first draft, written to be revised once Matt's prior docs are folded in further. Every
 external source below was opened on 2026-10-31, except CR-Bench-v2 (opened in the 2026-11-04
-daily sweep and again on 2026-11-05) and Foresight-SWE (opened 2026-11-05); anything that could
-not be opened is listed in "Not verified". Numbers from different benchmarks are not comparable.
+daily sweep and again on 2026-11-05), Foresight-SWE (opened 2026-11-05), and KG-AST (abs opened
+2026-11-06); anything that could not be opened is listed in "Not verified". Numbers from
+different benchmarks are not comparable.
 
 **Precedence for Matt's figures** (as instructed): the 2026-10-31 escapes-dev run beats Phase 0
 `RESULTS.md` (2026-10-29), which beats the working notes on overlapping figures; where the notes
@@ -169,6 +172,21 @@ Only items I opened. Where Matt's docs already cite an item, it's marked "(in Ma
   biggest gain came from going fully agentic (the model pulls its own context); the agent was then
   *too cautious*, so prompts were made aggressive; bugs/run 0.4 → 0.7, resolution rate 52% → 70%+.
   (in Matt's docs)
+- **KG-AST** [arXiv 2611.06950](https://arxiv.org/abs/2611.06950) (Yeung; submitted 2026-11-03;
+  abs opened 2026-11-06; missed prior sweeps): *KG-AST for Cheaper CI/CD: Budgeted Test Selection
+  and AI Bug Review*. Scores each commit from git history and code-graph features, then hands the
+  reviewer a graph slice around the change. Exact-find of later-fixed defects is **26%** from the
+  diff alone and **32%** with graph context (98 commits). The lift is local: +0.143 when the later
+  fix stays among methods the commit touched (n=42). It does **not** help when the fix is in methods
+  the commit never touched (n=56; 0.23 either way) — the hard out-of-diff case. Riskiest 20% of
+  commits covers 49–64% of bug-introducing commits (155 projects, 11 languages) against 20% random
+  and 40–55% biggest-change-first. Java, 20 projects: 64.6% vs 49.5% (+15.1 pp, 95% CI +11.6 to
+  +18.4); wins 19/20. Poincaré embedding adds nothing measurable (unchanged or worse).
+  **Also relevant to limitless** (review-stage cost / when to spend review budget; impact-pack
+  shape). ⚠️ SZZ/noisy labels; the
+  budget metric assumes heavy work catches the bug; no CI minutes measured; single author (BSc);
+  code not public (request-only); about half of unmatched findings judged real by AI judges
+  (n=36; same family as the reviewer; no human check).
 
 ### 2.2 Find wide, filter separately; union, don't vote
 
