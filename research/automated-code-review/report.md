@@ -2,13 +2,13 @@
 
 *Draft 1, 2026-10-31.*
 
-*Sweep 2026-11-06: KG-AST (§2.1). Abs opened 2026-11-06.*
+*Sweep 2026-11-06: KG-AST (§2.1), CIVER (§2.2), Brokk [VB] (§2.2). Opened 2026-11-06.*
 
 Status: first draft, written to be revised once Matt's prior docs are folded in further. Every
 external source below was opened on 2026-10-31, except CR-Bench-v2 (opened in the 2026-11-04
-daily sweep and again on 2026-11-05), Foresight-SWE (opened 2026-11-05), and KG-AST (abs opened
-2026-11-06); anything that could not be opened is listed in "Not verified". Numbers from
-different benchmarks are not comparable.
+daily sweep and again on 2026-11-05), Foresight-SWE (opened 2026-11-05), and KG-AST, CIVER,
+and the Brokk post (opened 2026-11-06); anything that could not be opened is listed in "Not
+verified". Numbers from different benchmarks are not comparable.
 
 **Precedence for Matt's figures** (as instructed): the 2026-10-31 escapes-dev run beats Phase 0
 `RESULTS.md` (2026-10-29), which beats the working notes on overlapping figures; where the notes
@@ -206,6 +206,34 @@ Only items I opened. Where Matt's docs already cite an item, it's marked "(in Ma
   ([post](https://x.com/_alphashark_/status/2097274562077508040)); another requires a failing test
   before a bug claim ([post](https://x.com/terminalxw/status/2097213279240413198)). Anecdotes;
   note the second conflicts with Matt's "no reproduce-or-drop" finding.
+- ⚠️ **[VB]** Brokk, *You're paying too much for code review*
+  [post](https://blog.brokk.ai/youre-paying-too-much-for-code-review/) (Jonathan Ellis, 2026-11-03):
+  unscientific comparison on Mr. Boxington, a Rust cache (47 PRs, 95 pushes) — Greptile, CodeRabbit,
+  Bugbot (extrapolated), Kodus, Mjolnir. A simple harness plus DeepSeek Flash matched Greptile at
+  about 1/20 the price. Terra was 6× faster and meaningfully less expensive than DeepSeek Flash,
+  for slightly fewer bugs. Parallel passes of the same reviewer recovered unique findings, with
+  diminishing returns. Corroborates multi-sample union (arm D) and the Terra cost lever (T9). Not
+  a new primary number for our eval. ⚠️ one Rust OSS repo; Bugbot extrapolated; author ships Mjolnir.
+- **CIVER** [arXiv 2610.36010](https://arxiv.org/abs/2610.36010) (Song et al.; submitted 2026-10-26;
+  HTML opened 2026-11-06; missed prior sweeps): *CIVER: Causal Intervention Verification for
+  Reliable Code Review*. Keeps a finding when its validity score drops under a targeted repair of
+  the claimed defect and stays stable under unrelated edits and semantics-preserving transforms.
+  Not reproduce-or-drop (execution as a filter). Three modules (review, intervention, verifier)
+  are jointly trained by expert iteration; the pretrained LLM reviewer and encoders stay frozen
+  (~9.04M trainable params). Not a prompt-only drop-in. Lead claim, from the abs: ~77% accuracy
+  distinguishing defective code from its repaired counterpart on matched pairs in SWE-Review-Bench.
+  Body Table 11 also lists PairAcc 0.89 and Pair AUROC 0.92 on that bench (pairwise discrimination;
+  a separate code-change table lists Pair AUROC 0.86 — not the same figure). AACR-Bench Table 8:
+  AUROC 0.60 (frozen reviewer 0.57), precision 0.77, FP/PR 1.65 vs 2.14, comments/PR 6.0 vs 7.6.
+  True reviews raised downstream repair resolve 0.61→0.93 (+0.32) on 121 issues; false reviews
+  cut it by 0.08. Held-out Pair AUROC (Table 4): Django 0.73, SymPy 0.76, scikit-learn 0.67. The
+  intro's transfer AUROC of 0.760 is the SymPy cell, not a pooled score. Related prior only:
+  OpenCodeReview [arXiv 2608.09290](https://arxiv.org/abs/2608.09290) — asymmetric reflector sees
+  only the diff; claims up to 2.17× SEM-F1 versus the same model under Claude Code on AACR, at
+  5–15× fewer tokens (also compared with Codex). SEM-F1 is not known-defect recall. **Also relevant
+  to limitless** (Option B / T4 must-fix gating; witness-style verification without
+  reproduce-or-drop). ⚠️ trained verifier; SWE-Review-Bench dependency; AACR lift over the frozen
+  reviewer is small.
 
 ### 2.3 Severity, caps and what developers act on
 
