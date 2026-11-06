@@ -2,7 +2,7 @@
 
 *Draft 1, 2026-10-31.*
 
-*Sweep 2026-11-02: added ultrareview, ORION, Macroscope Terra note.*
+*Sweep 2026-11-02: ultrareview description (§2.6), ORION, Macroscope Terra note. Eval-baseline arm rejected 2026-11-06.*
 
 Status: first draft, written to be revised once Matt's prior docs are folded in further. External
 sources below were opened on 2026-10-31, except the 2026-11-02 sweep items named above, and
@@ -293,8 +293,11 @@ scaling agent systems [2512.08296](https://arxiv.org/abs/2512.08296).
   prints the raw `bugs.json` payload; progress goes to stderr; `--trust-workspace` for CI. Duration
   roughly 5–10 minutes (docs table). Cost: a few free runs per account, then roughly $5–$25 per
   review in usage credits. Requires claude.ai login; not available on Bedrock/Vertex-equivalent/Foundry,
-  ZDR, HIPAA, CMEK. Behaviour and pricing may change. No published recall/precision numbers (vendor
-  claim only). See §3 for the tension with the rejected reproduce-or-drop filter.
+  ZDR, HIPAA, CMEK. Behaviour and pricing may change. No published recall or precision (vendor
+  claim only). The useful evidence is the reproduce-before-report design: it is a vendor bet the
+  other way from the rejected reproduce-or-drop filter (execution used as a filter cut recall;
+  probe+setup −9.2 judged, §1.2), and it is not evidence against that rejection. It is not an arm
+  to run. See [BACKLOG.md](BACKLOG.md) Rejected, "Claude Code ultrareview as an eval baseline arm".
 - **A local skill with the same name replaces a built-in command** in a terminal session
   ([skills docs](https://code.claude.com/docs/en/skills.md), "Same name in" table). A standalone copy
   of a skill named `code-review` would shadow the bundled one; the plugin namespace
@@ -342,12 +345,9 @@ Short list; most external evidence is already in Matt's docs.
 8. **Foresight-SWE** (§2.7) [arXiv]: stated-task resolve and foresight resolve rate are different
    outcomes; native self-review can raise foresight while cutting the original task. Candidate for
    limitless too.
-9. **Claude Code ultrareview** (`claude ultrareview --json`; facts in §2.6) as a shipped vendor
-   reviewer built on reproduce-and-verify before reporting, and as a ready external baseline arm.
-   Tension with the rejected reproduce-or-drop filter: execution used as a filter was a recall loss
-   (probe+setup −9.2 judged, §1.2). Ultrareview is a vendor bet the other way. It is not evidence
-   against that rejection — no published recall/precision numbers. ⚠️ vendor docs only, research
-   preview.
+
+Claude Code ultrareview (§2.6) is not a candidate on this list. Running it as an eval baseline was
+rejected on cost; see [BACKLOG.md](BACKLOG.md) Rejected, "Claude Code ultrareview as an eval baseline arm".
 
 ## 4. Not verified / flagged
 

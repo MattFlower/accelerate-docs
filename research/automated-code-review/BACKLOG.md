@@ -188,18 +188,6 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
       quality-review is a post-implement gate in an agent loop.
     - **Test:** On escapes-dev, independent adversarial×2 vs same-session self-review after implement;
       blocking recall + clean must-fix (and resolve-rate if used in a factory loop).
-12. **External baseline arm: `claude ultrareview --json` on the eval slice** — `proposed (blocked on item 1)`, cost S
-    - **Source:** https://code.claude.com/docs/en/ultrareview.md and
-      https://code.claude.com/docs/en/code-review-local.md (Escalate to ultrareview).
-    - **Why:** a strong vendor reference point, and a direct test of whether verify-before-report costs
-      recall on our gold, which would either confirm the reproduce-or-drop rejection or reopen it.
-      **also helps limitless** (the same arm answers limitless's reproduce-or-drop question on escapes-dev).
-    - **Test:** run it once (k=1) on the accelerate eval slice (escapes-dev slice + audited clean cases
-      from item 1; keep escapes-heldout untouched). Score with the same two-judge matcher; compare recall
-      and clean must-fix rate to arm D.
-    - **Cost:** S to build once item 1 exists. Money: a few free runs per account, then about $5–$25 per
-      review, so a 67-case run is roughly $335–$1,675 at k=1.
-    - **Evidence:** ⚠️ vendor docs only, research preview.
 
 ---
 
@@ -230,3 +218,6 @@ Each with the evidence so it isn't retried without new reason.
 - **luna@medium** (2.5% / 4.4%) and **haiku-5.5@high** (17/32 over 20 min) as reviewers. [Escapes-dev]
 - **±5-line location grading as the primary metric** — ~20% accidental credits, ~4% missed SAME. Kept only
   as a secondary score. [Notes credited audit; #1059]
+- **Claude Code ultrareview as an eval baseline arm** — source: https://code.claude.com/docs/en/ultrareview.md.
+  Rejected by Matt 2026-11-06 on cost: about $5-$25 per review after free runs, so roughly $335-$1,675
+  for one 67-case pass at k=1, before repeats; no published recall or precision.
