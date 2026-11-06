@@ -4,10 +4,11 @@
 
 *Sweep 2026-11-02: ultrareview description (§2.6), ORION, Macroscope Terra note. Eval-baseline arm rejected 2026-11-06.*
 
-Status: first draft, written to be revised once Matt's prior docs are folded in further. External
-sources below were opened on 2026-10-31, except the 2026-11-02 sweep items named above, and
-except CR-Bench-v2 and Foresight-SWE (opened 2026-11-05); anything that could not be opened is
-listed in "Not verified". Numbers from different benchmarks are not comparable.
+Status: first draft, written to be revised once Matt's prior docs are folded in further. Every
+external source below was opened on 2026-10-31, except the 2026-11-02 sweep items named above,
+CR-Bench-v2 (opened in the 2026-11-04 daily sweep and again on 2026-11-05), and Foresight-SWE
+(opened 2026-11-05); anything that could not be opened is listed in "Not verified". Numbers from
+different benchmarks are not comparable.
 
 **Precedence for Matt's figures** (as instructed): the 2026-10-31 escapes-dev run beats Phase 0
 `RESULTS.md` (2026-10-29), which beats the working notes on overlapping figures; where the notes
@@ -234,11 +235,21 @@ Only items I opened. Where Matt's docs already cite an item, it's marked "(in Ma
   gold (humans, LLMs, static analysis), grounded/augmented precision and recall, a 25-task offline test
   set and a judging CLI. Vendor-run; gold mostly machine-made (Report). (in Matt's docs)
 - **CR-Bench-v2** [arXiv 2611.02566](https://arxiv.org/abs/2611.02566)
-  ([v2 HTML](https://arxiv.org/html/2611.02566v2); opened 2026-11-05; submitted 2026-11-02, v2
-  2026-11-03): defect-centric review bench from SWE-Bench (584 instances / 174 Verified). Metrics
-  are Known-Defect Detection Rate (KDDR) and Usefulness Rate. Best systems ≈33% KDDR. Gemini Code
-  Assist is 8.1% KDDR despite ~78% usefulness. Reflexion self-critique raises KDDR on every
-  backbone. Not in Matt's 2026-10-31 docs.
+  ([v2 HTML](https://arxiv.org/html/2611.02566v2); Pereira, Sinha, Ghosh, Dutta, Nutanix;
+  submitted 2026-11-02, v2 2026-11-03; opened in the 2026-11-04 daily sweep and again on
+  2026-11-05): defect-centric benchmark recasting SWE-Bench issues as PR review tasks with full repo
+  context. CR-Bench: 584 instances; CR-Bench-Verified: 174 instances from SWE-Bench Verified
+  (after detectability + single-PR filters). Each instance: PR + known defect + ground-truth fix
+  + taxonomy (category / impact / severity). Metrics: Known-Defect Detection Rate (KDDR) = whether
+  the agent hits the labeled defect; Usefulness Rate = fraction of comments that are Bug Hit or
+  Valid Suggestion (actionable). Evaluated eight agents over four backbones + Gemini Code Assist;
+  three independent LLM judges. Strongest systems: KDDR ≈ 33% on CR-Bench-Verified. Gemini Code
+  Assist: KDDR 8.1% but Usefulness Rate 78.0% — usefulness alone misleads. Self-reflection
+  (Reflexion) raised KDDR vs single-shot for every backbone (e.g. GPT-5-mini +6.9 to +12.6 pp
+  depending on judge; often significant). ⚠️ Python / SWE-Bench scope (Django heavy in the verified
+  set); one labeled defect per instance; LLM-generated reference comments and taxonomy (Claude
+  Opus 4.5); eval harnesses in the paper are mostly non-tool/non-execution; absolute judge scores
+  disagree even when direction agrees. Not in Matt's 2026-10-31 docs.
 - **Martian Code Review Bench** [repo](https://github.com/withmartian/code-review-benchmark): 50 PRs /
   173 golden comments offline plus an online set scored against developers' post-review fixes;
   three judge models. (in Matt's docs)
@@ -340,8 +351,10 @@ Short list; most external evidence is already in Matt's docs.
    general-purpose skill (Matt's Report proposes the 60–80 TS/JS slice; the 25-task set is cheaper).
 6. **Codex `agents/openai.yaml` `allow_implicit_invocation: false`** to keep a heavy review skill
    from auto-triggering.
-7. **CR-Bench-v2** (§2.4) [arXiv]: external bench that scores known-defect detection separately from
-   usefulness. Candidate for limitless too.
+7. **CR-Bench-v2** (§2.4) [arXiv 2611.02566](https://arxiv.org/abs/2611.02566): external
+   defect-centric bench (CR-Bench-Verified: 174) that scores known-defect detection separately from
+   usefulness. Gemini Code Assist is KDDR 8.1% at Usefulness Rate 78.0%, so usefulness alone
+   misleads. Candidate for limitless too. ⚠️ Python / SWE-Bench, one labeled defect, LLM judges.
 8. **Foresight-SWE** (§2.7) [arXiv]: stated-task resolve and foresight resolve rate are different
    outcomes; native self-review can raise foresight while cutting the original task. Candidate for
    limitless too.
