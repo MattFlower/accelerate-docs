@@ -1,0 +1,15 @@
+{
+ "systems": [
+  {
+   "name": "sol-6.1-medium-thorough",
+   "mode": "single",
+   "finders": [
+    {
+     "target": "codex/sol-6.1@medium",
+     "prompt": "adversarial-thorough"
+    }
+   ],
+   "implementerReport": "include"
+  }
+ ]
+}

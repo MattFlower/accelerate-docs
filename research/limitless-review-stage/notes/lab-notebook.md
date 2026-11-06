@@ -474,3 +474,29 @@ review-082 blocked by every arm incl prod -> suspect label. Next: blind audit of
 - Follow-ups to note: evals/policy.ts:62/140 treat "standard, no samples" as production-shaped (now stale); later-round
   adversarial prompt drops the "new majors become follow-ups" sentence (prompts.ts:626, untested in eval); lastReview/artifact
   model comes from the first sample.
+
+## 2026-11-06: backlog screens (A7, A9, T2)
+
+## (e14) Trust-boundary pass PRE-REGISTRATION 2026-11-06 (Matt: pick a backlog item from accelerate-docs, test locally)
+Item: BACKLOG A9 (+A10). Impact pack A7 rejected on stored data BEFORE building: of 45 escapes-dev defects union D never caught, 3 are in files outside the diff, 36 within 3 lines of changed lines, and only 5 fix commits edited a source file outside the diff (the ~13/30 of research/14 doesn't hold on this corpus). Matched~caught (D matched 60, caught 58 of 160), so severity isn't the loss: detection is. Security pool: 16 of 45 misses; 17/52 trials caught.
+Arm: sol-adversarial-boundary (eval-only `adversarial-boundary`, Sol 6.1@medium, one sample), lab, 51 escapes-dev + 16 dev clean, k=2. CAVEAT: the prompt was written AFTER printing the 45 missed defect summaries, and its attack list (split across lines, path aliases, truncate-before-check) overlaps them and AGENTS.md's rules, so the dev number is dev-influenced; only escapes-heldout can confirm it.
+Scoring: per defect-trial OR with stored D (eval-mvw0y6v31sec2vc1agx2t1, same trial index, same judges sonnet-5.5 + terra-6.1@medium). No union control re-run (Matt: no paid baseline refresh); OR is additive so D's stored trials are the floor. Cost-neutral variant: stored E3 (one adversarial sample) OR boundary, vs D.
+Advance to escapes-heldout only if: D OR boundary >= +5 pts (>= +8 of 160), paired case-bootstrap 95% lower bound > 0, and boundary-alone clean blocks <= 3 of 32 trials outside review-082. Otherwise stop and record rejected. +5 is a screen bar, not the adoption bar.
+  p10 RESULT 2026-11-06 (lab eval-mw51lukc1ww18f40ywsfyp, 36 min, $19.81 API-equiv, p50 68 s; files in p10/): FAILED the pre-registered screen, not advanced; escapes-heldout untouched.
+  Judged recall of 160: D 58 (36.2%), boundary alone 22 (13.8%), D OR boundary 62 (38.8%) = +2.5 pts (bar +5), one-sided lower +0.6. Cost-neutral E3 OR boundary 53 (33.1%) = -3.1 vs D.
+  Security 52: D 17, boundary alone 16, OR 21 (+7.7 within security). Non-security 108: D 41, OR 41. Gained: 145 G1, 179 G2, 181 G1, 214 G2. Clean 0/32 for boundary alone. 1 trial errored (2 defect-trials count as not caught; can't change the verdict).
+  Reading: focus reaches nearly D's security count alone with no clean blocks, but it overlaps D, so it finds the same defects. Status for BACKLOG A9: rejected as a third additive sample at this bar; kept as a screen-grade fact. Not committed or landed; prompt patch in p10/.
+
+(e15) 11-06 p11 T2 COVERAGE PROMPT ON SOL, PRE-REGISTERED before launch.
+Arm: sol-6.1-medium-thorough = stored E3 system verbatim with prompt adversarial-thorough (Sol 6.1@medium, one sample), lab, 51 escapes-dev + 16 dev clean, k=2. No ledger: this tests the existing prompt only.
+Question: does the prompt widen each sample, so that replacing `adversarial` with it in production's union of two helps at the same sample count?
+Estimators: per (case, gold, trial) judged caught, on keys present in both arms. Union of two = OR over the two trials, compared with OR over E3's two stored trials (37.5% of 80; control: real union D per-trial 36.2%).
+Primary A (per sample): thorough minus E3 per-trial, stored E3 28.5%.
+Primary B (union of two, the decision): OR(thorough) >= OR(E3) + 5 pts (>= +4 of 80), paired case-bootstrap one-sided 95% lower bound > 0.
+Clean bar: excluding review-082 (deliberate-rule case), a pair (two trials of one case) blocks on <= 3 of 15 cases. No full stored Sol clean baseline exists and none will be bought; context is Terra adv 6/32, thorough 7/32, D held-out 2/18.
+Secondary, reported, not a pass condition: D OR thorough (additive), category split, per-trial p50/p90 latency and cost vs E3, findings per trial.
+Advance to escapes-heldout only if B and clean both pass, and then only after asking Matt. A pass here is a screen, not adoption.
+CAVEAT: thorough was picked because it beat adversarial on this same escapes-dev set on Terra, so a Sol dev win is selection-influenced. Terra's calibrated variant was null (e10), so it is not run. Stored E3 has 158 of 160 rows.
+Archive: ~/limitless-orch/review-research/p11/.
+  p11 RESULT 11-06 (lab eval-mw5719bw1y4wluw1wpuwk9, 67 min, $25.15 API-equiv, 134/134 ok, score.py in p11/): FAILED Primary B. Union of two OR(thorough) 33/80 (41.2%) vs OR(E3) 30/80 (37.5%), +3.8 pts vs bar +5, one-sided lower -2.8. Primary A per sample 32.3% vs 28.5% of 158, +3.8, lower -0.7. Clean PASSED: 0 of 15 excl review-082 (only 082 blocked, both trials). Non-registered: mixed pair 31/80. Not advanced; held-out unspent.
+  p11 post-hoc controls (not pre-registered): review-161's two defects lack a second E3 trial; on the 78 complete defects B is still +3.8 (31 vs 28). Third-sample comparison on 158 keys: D 56, D+thorough 65, D+E3 64, so thorough beats a plain third adversarial sample by +0.6 (lower -3.2); D+E3 - D is +5.1 (lower +1.9). The additive gain comes from sample count, not the prompt. Latency p50 122 s vs E3 99 s (not same load), cost equal, findings per trial 1.47 vs 1.63: the prompt did not raise finding count. Lead for Matt: a union of three adversarial samples, dev post-hoc, +50% cost, not run live.

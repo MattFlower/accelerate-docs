@@ -1,0 +1,89 @@
+diff --git a/src/core/types.ts b/src/core/types.ts
+index 273b4f2c..10dcad4f 100644
+--- a/src/core/types.ts
++++ b/src/core/types.ts
+@@ -670,6 +670,7 @@ export type FinderPrompt =
+   | "adversarial-checklist"
+   | "adversarial-thorough"
+   | "adversarial-callers"
++  | "adversarial-boundary"
+   | "adversarial-calibrated"
+   | "adversarial-thorough-calibrated";
+ /**
+diff --git a/src/pipeline/prompts.ts b/src/pipeline/prompts.ts
+index 912705a1..044b9188 100644
+--- a/src/pipeline/prompts.ts
++++ b/src/pipeline/prompts.ts
+@@ -472,6 +472,11 @@ const ADVERSARIAL_ADDITIONS = {
+   "adversarial-thorough": THOROUGH,
+   "adversarial-calibrated": CALIBRATION,
+   "adversarial-thorough-calibrated": `${THOROUGH}\n\n${CALIBRATION}`,
++  "adversarial-boundary": `Concentrate on trust boundaries; other reviewers cover general logic. A boundary is any point where data or authority crosses between parties that trust each other differently: untrusted input (request text, repository files, model or test output, network responses, configuration) reaching a privileged action (commands, paths, queries, authentication, isolation decisions), and secrets or private data reaching something more widely readable (logs, errors, events, stored records, comments, commit metadata, prompts sent to a model).
++1. List the boundaries this change adds or touches, including files outside the diff that it calls or that call it. If there are none, say so in your summary and return no findings.
++2. For each boundary, follow the value from its source to its sink and name the check or transform that protects it. Read that protection's implementation, not just its name.
++3. Attack the protection as whoever controls the value would: another spelling of the same value (encoding, escaping, case, a path alias or symlink, a value split across lines or chunks); the order of steps (truncation, normalization or formatting before the check; a change between check and use); another route to the same sink (error, retry, fallback, resume and restart paths, and sibling callers that skip the protection); a protection that fails open, or a secret too weak or predictable for its use.
++4. Report only an attack with a concrete input and a path reachable at HEAD, and say who controls that input. Mark each one security: true. A secret reaching a wider audience on a realistic path is at least major. Do not report general hardening advice or a gap the project documents as accepted.`,
+   "adversarial-callers": `Before applying the rubric, trace the change beyond the diff:
+ 1. For every function, method or exported symbol the diff changes, find its callers and alternate entry points with rg, including files outside the diff, and check each against the new behaviour: a new precondition, a changed return shape, a new error or a new ordering.
+ 2. For every line the diff deletes or replaces, name the invariant it enforced and find where the new code re-establishes it.
+diff --git a/src/pipeline/review-system.ts b/src/pipeline/review-system.ts
+index 70f5ebf5..702a7777 100644
+--- a/src/pipeline/review-system.ts
++++ b/src/pipeline/review-system.ts
+@@ -40,6 +40,7 @@ const FINDER_PROMPTS = [
+   "adversarial-checklist",
+   "adversarial-thorough",
+   "adversarial-callers",
++  "adversarial-boundary",
+   "adversarial-calibrated",
+   "adversarial-thorough-calibrated",
+ ] as const satisfies readonly FinderPrompt[];
+@@ -50,6 +51,7 @@ const EVAL_ONLY_PROMPTS: readonly FinderPrompt[] = [
+   "adversarial-checklist",
+   "adversarial-thorough",
+   "adversarial-callers",
++  "adversarial-boundary",
+   "adversarial-calibrated",
+   "adversarial-thorough-calibrated",
+ ];
+diff --git a/test/review-prompt.test.ts b/test/review-prompt.test.ts
+index 09d67de7..852cbdfc 100644
+--- a/test/review-prompt.test.ts
++++ b/test/review-prompt.test.ts
+@@ -196,6 +196,15 @@ test("production and adversarial openings are unchanged and the eval additions a
+         "name that code by file and line",
+       ],
+     ],
++    [
++      "adversarial-boundary",
++      [
++        "Concentrate on trust boundaries",
++        "follow the value from its source to its sink",
++        "another route to the same sink",
++        "a concrete input and a path reachable at HEAD",
++      ],
++    ],
+     [
+       "adversarial-calibrated",
+       [
+diff --git a/test/review-system.test.ts b/test/review-system.test.ts
+index 15294790..b4b8bcf8 100644
+--- a/test/review-system.test.ts
++++ b/test/review-system.test.ts
+@@ -72,7 +72,7 @@ const invalid: [string, string][] = [
+   [file(panel({ verifier: { targets: ["verifier-c", "x@"] } })), "expected model or model@effort"],
+   [
+     file(system({ finders: [{ target: "candidate-a", prompt: "strict" }] })),
+-    'finder prompt must be "standard", "adversarial", "careful", "probe", "trace", "adversarial-checklist", "adversarial-thorough", "adversarial-callers", "adversarial-calibrated" or "adversarial-thorough-calibrated"',
++    'finder prompt must be "standard", "adversarial", "careful", "probe", "trace", "adversarial-checklist", "adversarial-thorough", "adversarial-callers", "adversarial-boundary", "adversarial-calibrated" or "adversarial-thorough-calibrated"',
+   ],
+   [file(system({ finders: [] })), "exactly one finder"],
+   [file(system({ finders: [system().finders[0], system().finders[0]] })), "exactly one finder"],
+@@ -114,6 +114,7 @@ test("single prompt variants are eval-only and retain the single-mode restrictio
+     "adversarial-checklist",
+     "adversarial-thorough",
+     "adversarial-callers",
++    "adversarial-boundary",
+     "adversarial-calibrated",
+     "adversarial-thorough-calibrated",
+   ] as const) {

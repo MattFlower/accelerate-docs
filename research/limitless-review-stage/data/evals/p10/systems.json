@@ -1,0 +1,15 @@
+{
+ "systems": [
+  {
+   "name": "sol-adversarial-boundary",
+   "mode": "single",
+   "finders": [
+    {
+     "target": "codex/sol-6.1@medium",
+     "prompt": "adversarial-boundary"
+    }
+   ],
+   "implementerReport": "include"
+  }
+ ]
+}
