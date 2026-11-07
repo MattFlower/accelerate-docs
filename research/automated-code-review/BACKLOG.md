@@ -42,6 +42,9 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
 - **Test:** validate the ported judge on ~50 hand-checked pairs (target ≥90% agreement, like limitless's
   93–97%); A/A on production-equivalent arm shows drift < effect sizes we care about.
 - **Note:** keep escapes-heldout (57 / 103) untouched for limitless's decision run.
+- **Note:** RegBench-Py (ORION, arXiv 2610.35223; 154 verified real-world Python PRs) is a possible
+  secondary corpus. ⚠️ Python, while the main slice is TypeScript. ORION is **also relevant to
+  limitless** (Option A / T5); see item 11.
 
 ### 2. Core reviewer: adversarial prompt × 2 independent samples at high effort, unioned — `testing (held-out passed and live in limitless at medium effort; accelerate eval pending)`, cost S
 - **Idea:** v1 default per [design-v1.md](design-v1.md) §3, prompt from [notes/adversarial-prompt.md](notes/adversarial-prompt.md) (`L/src/pipeline/prompts.ts` l.482/561).
@@ -90,7 +93,8 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
 ### 7. Out-of-diff impact pack (deterministic) — `rejected on stored data, not built`, cost M
 - = Report **Option F** / Plan **T8**. 13/30 production misses needed files outside the diff
   (`L/docs/research/14-review-strength.md`); CRBugBench: out-of-diff bugs harder. Cheap and short by design
-  (SWE-PRBench: dumped context degrades). Distinct from trace finder (arm E, +1.1/+3.4).
+  (SWE-PRBench: dumped context degrades). One concrete shape is AST impact analysis feeding oracle
+  synthesis (ORION, arXiv 2610.35223). Distinct from trace finder (arm E, +1.1/+3.4).
 - **Test:** recall on the out-of-diff subset of escapes-dev.
 - **Result 2026-11-06 (no paid run):** the 13/30 figure does not describe what the union of two still misses.
   Of the 45 escapes-dev defects union D never caught, 3 sit in files outside the diff, 36 sit within 3 lines of
@@ -130,6 +134,10 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
 ### 11. PR-specific brief + mutation check (oracle replica) — `proposed`, cost M–L
 - = Report **Option A** / Plan **T5**. "Gold comes from a procedure, not a better model" (Report; Notes).
   Mutation check alone is deterministic and cheap where the PR adds tests.
+- **Source:** ORION, [arXiv 2610.35223](https://arxiv.org/abs/2610.35223) — execution as a finder
+  (PR intent, AST impact, function-level behavioral oracles, differential tests), not a filter.
+  ⚠️ Python-only, single paper, baselines' configuration unknown. **also relevant to limitless**
+  (Option A / T5).
 - **Test:** recall vs core; time budget (<20 min typical, Plan answers).
 
 ---
@@ -246,3 +254,6 @@ Each with the evidence so it isn't retried without new reason.
 - **Usefulness Rate as a substitute for known-defect recall** — CR-Bench-v2 Gemini Code Assist is
   KDDR 8.1% at Usefulness Rate 78.0% ([2611.02566](https://arxiv.org/abs/2611.02566), daily sweep
   2026-11-04). Keep a known-defect hit (KDDR or judged recall) as the detection score.
+- **Claude Code ultrareview as an eval baseline arm** — source: https://code.claude.com/docs/en/ultrareview.md.
+  Rejected by Matt 2026-11-06 on cost: about $5-$25 per review after free runs, so roughly $335-$1,675
+  for one 67-case pass at k=1, before repeats; no published recall or precision.
