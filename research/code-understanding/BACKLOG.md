@@ -1,13 +1,14 @@
 # Code understanding: backlog
 
-*Draft 5, 2026-11-05 (draft 4 plus the 2026-11-05 sweep; the 2026-11-04 IronBee sweep is folded in; see "Changes in draft 5" below). Repo path: `agentic-dev-research/research/code-understanding/BACKLOG.md`.*
+*Draft 6, 2026-11-06 (draft 5 plus the 2026-11-06 sweep; see "Changes in draft 6" below). Repo path: `agentic-dev-research/research/code-understanding/BACKLOG.md`.*
 *It follows the layout in that repo's README (`research/<topic>/report.md` + `notes/` + optional `BACKLOG.md`)
 and the style of `research/automated-code-review/BACKLOG.md`. Findings and sources are in
 [`research/code-understanding/notes/first-sweep-2026-11-01.md`](notes/first-sweep-2026-11-01.md),
 [`research/code-understanding/notes/sweep-2026-11-02.md`](notes/sweep-2026-11-02.md),
 [`research/code-understanding/notes/sweep-2026-11-03.md`](notes/sweep-2026-11-03.md),
 [`research/code-understanding/notes/2026-11-04-daily-sweep.md`](notes/2026-11-04-daily-sweep.md),
-and [`research/code-understanding/notes/sweep-2026-11-05.md`](notes/sweep-2026-11-05.md)
+[`research/code-understanding/notes/sweep-2026-11-05.md`](notes/sweep-2026-11-05.md),
+and [`research/code-understanding/notes/sweep-2026-11-06.md`](notes/sweep-2026-11-06.md)
 until a `report.md` is written.*
 
 **Baseline.** `accelerate/skills/human-review` (v0.6.2, 2026-10-30) is ground truth. Everything here is ranked by
@@ -24,7 +25,8 @@ same rule as the code-review backlog's "fix the eval first".
 **Evidence labels.** `measured-RCT` (randomized or controlled study) · `measured-obs` (observational or field data) ·
 `practitioner` (someone describes their own use) · `vendor` (launch post or docs) · `engagement` (X numbers only, as
 returned by the X API on the date written next to the number: 2026-11-01 in draft 2, 2026-11-02 in draft 3,
-2026-11-03 in draft 4, 2026-11-04 in the 2026-11-04 sweep note, 2026-11-05 in draft 5) · `our own idea`.
+2026-11-03 in draft 4, 2026-11-04 in the 2026-11-04 sweep note, 2026-11-05 in draft 5,
+2026-11-06 in draft 6) · `our own idea`.
 
 **Statuses.** `proposed` · `testing` · `shipped` (in human-review, path cited) · `rejected` (with the reason).
 
@@ -85,6 +87,11 @@ factory's deliver/review stages.
   using prediction, generation, and retrieval on the reader's own project
   ([repo](https://github.com/DrCatHicks/learning-opportunities), 2,540 stars per the GitHub API on 2026-11-05).
   The same repo's `orient` skill is noted on #3. Evidence: `practitioner` + `engagement` (stars).
+  **Cognitive surrender.** Addy Osmani's essay of 5 May 2026 says that approving an agent-written diff
+  without first forming your own view is surrender, and it points back at the quiz gap already cited above
+  ([essay](https://addyosmani.com/blog/cognitive-surrender/)). Evidence: `practitioner`. Replies on an X
+  thread were named in the 2026-11-06 brief and were not opened. See
+  [`notes/sweep-2026-11-06.md`](notes/sweep-2026-11-06.md).
 - **Why it helps:** today the page shows what changed but never checks that it landed in your head. A quiz turns
   passive reading into retrieval, and it shows you which part you didn't get. It also gives us a **comprehension
   metric**, which the earlier report said human-review lacks.
@@ -196,6 +203,31 @@ reading Matt Pocock's `teach`.*
     writes an `orientation.md` for a new repo
     ([repo](https://github.com/DrCatHicks/learning-opportunities), 2,540 stars per the GitHub API on 2026-11-05).
     Evidence: `practitioner`. See #1.
+  - **Graphify codebase wiki** ([post, 2026-10-14](https://graphify.com/blog/auto-generated-codebase-wiki)).
+    The hosted product writes a wiki for each indexed repository, links each article to the source files, and
+    rebuilds the wiki with each index. A "How we know" panel shows where a claim came from. That panel is also
+    #11. The local graph is #7. Same class of orientation baseline as DeepWiki and IronBee Code Wiki above.
+    This pass did not look up engagement for the blog post. GitHub API at 2026-11-06T13:57:28Z, and the same
+    fields at 2026-11-06T13:55:10Z: `stargazers_count` 143301 (the sweep brief said 143299), `forks_count` 13705,
+    Apache-2.0, `default_branch` `v8`, created 2026-04-03.
+    [repo](https://github.com/Graphify-Labs/graphify). [product](https://graphify.com/).
+    X `public_metrics` in the brief for 2026-11-06, not re-read this session because `get_posts_by_ids` returned
+    `client-not-enrolled`: [stewy0x](https://x.com/stewy0x/status/2118329037852479886) 10 likes, 7 bookmarks,
+    383 impressions, 0 replies (created 2026-11-05T13:06:13Z);
+    [Kuzoxbt](https://x.com/Kuzoxbt/status/2118439070703730858) 22 likes, 15 bookmarks, 934 impressions,
+    3 replies, 2 reposts (created 2026-11-05T20:23:27Z);
+    [BangDropID](https://x.com/BangDropID/status/2118380320114552923) 6 likes, 3 bookmarks, 216 impressions;
+    [mchulet](https://x.com/mchulet/status/2118347490596712702) 3 likes, 4 bookmarks, 352 impressions;
+    [dextune](https://x.com/dextune/status/2118694891685331436) 1 like, 0 bookmarks, 84 impressions
+    (created 2026-11-06T13:20:00Z). Evidence: `vendor` + `engagement`.
+  - **Words versus names.** A Voxyz prompt has the agent build a clickable `docs/codemap/` and flag places
+    where the words people use do not match names in the code. Parent
+    [Voxyz_ai](https://x.com/Voxyz_ai/status/2118418074508710296). Follow-up prompt
+    [Voxyz_ai](https://x.com/Voxyz_ai/status/2118418076022755684). Brief X API `public_metrics` for 2026-11-06,
+    same unread condition as Graphify: parent 131 likes, 215 bookmarks, 9620 impressions, 9 replies, 9 reposts;
+    follow-up 12 likes, 32 bookmarks, 1248 impressions. Evidence: `engagement` + `practitioner`. A prompt
+    recipe, with no product page opened for these two posts. The mismatch sits on the lesson's `terms` block.
+    The map itself is the #7 family.
   - Evidence: `practitioner` + `engagement`, plus `measured-RCT` for retrieval and spacing (see #1) and for the
     extend-by-hand task.
 - **Why a standalone skill, not part of HR:** different input (no diff), state across sessions, and invoked by the
@@ -336,6 +368,38 @@ reading Matt Pocock's `teach`.*
   counts are the X API on 2026-11-05. Evidence: `vendor` + `engagement`.
   IronBee Code Wiki's area map (imports solid, HTTP dashed) is another vendor graph overlay for understanding
   impact ([product](https://ironbee.ai/code-wiki), same launch post as #3). Still `vendor`, low engagement.
+  **Graphify** parses code locally with tree-sitter into a queryable knowledge graph. The code parse does not call a model.
+  Docs, PDFs, images, and video can take a semantic pass that does. There is no vector store. Each edge is
+  tagged `EXTRACTED` when the source states it, or `INFERRED` when Graphify resolved it. That is the same
+  trust split as OPVS, which labels a hit exact or heuristic, and as the repowise rule above, which keeps a
+  parsed graph apart from a drawn picture. A run writes `graph.html`, `GRAPH_REPORT.md`, and `graph.json`.
+  `graph.html` is the interactive view. The README on `v8` registers a `/graphify` skill for Claude Code,
+  Cursor, Codex, Gemini CLI, and others. Codex invokes it as `$graphify`. The product page and the README
+  install the CLI with `uv tool install graphifyy`. The PyPI name has two y's. The product tagline is
+  "shared codebase understanding for agents and developers." GitHub API at 2026-11-06T13:57:28Z, and the same
+  fields at 2026-11-06T13:55:10Z: `stargazers_count` 143301, `forks_count` 13705, license Apache-2.0,
+  `default_branch` `v8`, created 2026-04-03. The sweep brief said 143299 stars. This line uses 143301.
+  [repo](https://github.com/Graphify-Labs/graphify). [product](https://graphify.com/). The hosted wiki
+  and its "How we know" panel, rebuilt with each index, are #3 and #11
+  ([post, 2026-10-14](https://graphify.com/blog/auto-generated-codebase-wiki)). The 2026-11-01 sweep named
+  Graphify from one post and did not open the repo. X `public_metrics`
+  below are the 2026-11-06 brief's figures. This session's `get_posts_by_ids` returned `client-not-enrolled`
+  and did not re-read them. [stewy0x](https://x.com/stewy0x/status/2118329037852479886) (created
+  2026-11-05T13:06:13Z; the brief says the note tweet names the repo and `EXTRACTED` and `INFERRED`): 10 likes,
+  7 bookmarks, 383 impressions, 0 replies.
+  [Kuzoxbt](https://x.com/Kuzoxbt/status/2118439070703730858) (created 2026-11-05T20:23:27Z): 22 likes,
+  15 bookmarks, 934 impressions, 3 replies, 2 reposts.
+  [BangDropID](https://x.com/BangDropID/status/2118380320114552923): 6 likes, 3 bookmarks, 216 impressions.
+  [mchulet](https://x.com/mchulet/status/2118347490596712702): 3 likes, 4 bookmarks, 352 impressions.
+  [dextune](https://x.com/dextune/status/2118694891685331436) (created 2026-11-06T13:20:00Z): 1 like,
+  0 bookmarks, 84 impressions. The star count is large. It is engagement. It does not measure whether a person
+  understood the code, so this item stays below the quiz and the measurement items. Evidence: `vendor` +
+  `engagement`.
+  **Words versus names.** The Voxyz prompt on #3 also asks for a clickable `docs/codemap/` and a flag where
+  the words people use do not match names in the code. Brief `public_metrics` for 2026-11-06, same unread
+  condition as the Graphify posts: parent 131 likes, 215 bookmarks, 9620 impressions, 9 replies, 9 reposts;
+  follow-up 12 likes, 32 bookmarks, 1248 impressions. The post links are on #3. Evidence: `engagement` +
+  `practitioner`.
 - **Why it helps:** HR's blast radius is honest but text-only, covers 5 languages, and says "mentioned", never
   "called" (`HR/SKILL.md` "Blast radius"). A resolved graph answers "what else does this touch" faster.
 - **Test:** on 5 PRs, compare the grep and graph outputs by hand: false mentions removed, real callers missed. Time to
@@ -424,10 +488,23 @@ reading Matt Pocock's `teach`.*
   [docs](https://aictrl.dev/docs/pr-explanations)). Evidence: `vendor`.
   **PR Lens** opens the diff from a step in an animated architecture or data-flow diagram
   ([site](https://prlens.dev/)). The star count and the posts are on #7. Evidence: `vendor`.
+  **Graphify** tags each edge `EXTRACTED` or `INFERRED`, and the hosted wiki has a "How we know" panel that
+  links a claim to the source files it was written from. The wiki is rebuilt with each index
+  ([post, 2026-10-14](https://graphify.com/blog/auto-generated-codebase-wiki)). GitHub API at
+  2026-11-06T13:57:28Z: `stargazers_count` 143301 (brief said 143299), `forks_count` 13705
+  ([repo](https://github.com/Graphify-Labs/graphify)). X `public_metrics`
+  from the 2026-11-06 brief, not re-read this session:
+  [stewy0x](https://x.com/stewy0x/status/2118329037852479886) 10 likes, 7 bookmarks, 383 impressions, 0 replies;
+  [Kuzoxbt](https://x.com/Kuzoxbt/status/2118439070703730858) 22 likes, 15 bookmarks, 934 impressions, 3 replies,
+  2 reposts; [BangDropID](https://x.com/BangDropID/status/2118380320114552923) 6 likes, 3 bookmarks,
+  216 impressions; [mchulet](https://x.com/mchulet/status/2118347490596712702) 3 likes, 4 bookmarks,
+  352 impressions; [dextune](https://x.com/dextune/status/2118694891685331436) 1 like, 0 bookmarks,
+  84 impressions. Evidence: `vendor` + `engagement`.
 - **Why it helps:** the precision check already rejects a claim that does not match the diff. It does not show the
   reader how many claims were left untied. A diagram the reader cannot open at a line cannot be checked.
 - **Why it sits here:** the footer and the step links apply to every page, and both sit on checks HR already runs.
-  The only evidence is the vendor's own docs, so it stays under #6–#10 and above the split advisor (#12).
+  The evidence is still vendor material (aictrl's docs, PR Lens, and Graphify's edge labels and "How we know"
+  panel), so it stays under #6 through #10 and above the split advisor (#12).
 - **Test:** on 5 PRs, the footer counts match a hand count of claims, and every diagram step opens a line
   `build --check` can resolve. A step with no line fails the check.
 
@@ -533,7 +610,7 @@ reading Matt Pocock's `teach`.*
 |---|---|---|
 | Diff → one self-contained HTML page; branch, PR, range, **uncommitted** work | `HR/SKILL.md` "Decide the scope"; `HR/scripts/human-review.mjs` | Covers PRs and uncommitted changes. Not whole-repo onboarding (item 3). Peer products that already do this job: Saga (ordered chapters, one HTML file, comments pushed to GitHub; [post](https://jakeberesford.com/blog/saga), 20 stars, created 2026-07-11) and Guided Review (units from the parsed diff; the model does not invent the lines; [docs](https://guidedreview.dev/docs)). Also peers of this page, GitHub API on 2026-11-05: Trail of Bits Review Walkthrough (the HTML steps; findings are handed off; [page](https://trailofbits.com/skills/review-walkthrough/)), [qiushiyan/explain-diff](https://github.com/qiushiyan/explain-diff) (0 stars), [malav2110/explain-diff-html](https://github.com/malav2110/explain-diff-html) (19 stars), f-labs `html-code-review` (the explainer half; [skill](https://github.com/f-labs-io/agent-html-skills/blob/main/plugins/html-skills/skills/html-code-review/SKILL.md); the repo has 68 stars), and [th0rz05/claude-pr-review-html](https://github.com/th0rz05/claude-pr-review-html) (2 stars; the reading-order half). |
 | Code on the page comes from git; annotations checked against real lines | `HR/SKILL.md` "Honesty", build `--check` | Same idea as Showboat's exec-pulled snippets. A box with no arrows in a drawn diagram is not evidence that a file is unused. Check a parsed graph (item 7). |
-| Reading order (`focus`, 3–6 stops, riskiest first) | `HR/SKILL.md` "fields that carry the most weight" | Matches the "literate diff" and tour-mode ideas (Litt, Tembo Tour Mode, constellagent code tour). Replicas Review's guided tour (2026-10-21) puts a plain-English explanation above each file's diff, starts with the most important file, and collapses tests, lockfiles, and generated files at the end ([post](https://replicas.dev/blog/replicas-review)). That matches this row and the mechanical tier below. Saga's chapters and Guided Review's units (schema, then logic, call sites, and tests) are the same job. Item 8 walks changed symbols from entry points down the call graph. Trail of Bits and th0rz05 also pick a reading order. See the HTML-page row. |
+| Reading order (`focus`, 3–6 stops, riskiest first) | `HR/SKILL.md` "fields that carry the most weight" | Matches the "literate diff" and tour-mode ideas (Litt, Tembo Tour Mode, constellagent code tour). Replicas Review's guided tour (2026-10-21) puts a plain-English explanation above each file's diff, starts with the most important file, and collapses tests, lockfiles, and generated files at the end ([post](https://replicas.dev/blog/replicas-review)). That matches this row and the mechanical tier below. Saga's chapters and Guided Review's units (schema, then logic, call sites, and tests) are the same job. Item 8 walks changed symbols from entry points down the call graph. Trail of Bits and th0rz05 also pick a reading order. See the HTML-page row. Origin Code Tours walk a pull request in review order, group related changes, and explain each group next to the code, on the Changes tab ([docs](https://cursor.com/docs/origin/code-tours), read 2026-11-06). |
 | Group by concern, tests next to their code, callees first | `HR/SKILL.md` `concerns` | Earlier report #1. |
 | Written for a newcomer: `background` ("Before this change"), `terms` with hover underlines, readability warnings | `HR/SKILL.md` "Write for someone new to this code"; `HR/references/format.md` | Like Litt's "Background" and codebase-to-course's glossary tooltips. |
 | Annotated diffs (note / decision / risk / question), 2–5 per file | `HR/SKILL.md` "Annotations" | |
@@ -603,6 +680,10 @@ reading Matt Pocock's `teach`.*
   Those results are the post's. They were not re-measured here.
 - **IronBee Code Review**: same launch post as Code Wiki. The post's note_tweet claims 67.4 F2 and 75.3 Recall
   on the Martian Code Review Benchmark ([X](https://x.com/serkan_ozal/status/2117633673461674225)).
+- **Repowise v0.60 PR bot.** A reply on a review thread becomes a decision that later reviews apply, and the
+  review names the decision it applied
+  ([changelog](https://repowise.dev/changelog/v0-60-0), read 2026-11-06). The parsed-versus-drawn diagram rule
+  stays on #7.
 
 ## Merged
 
@@ -686,6 +767,30 @@ reading Matt Pocock's `teach`.*
 - The 2026-11-04 sweep is folded in. IronBee Code Wiki is vendor evidence on #3 `teach-code` and on #7
   (structural blast radius). IronBee Code Review is handed off. stack-diagram is rejected. Ranking is unchanged.
   Notes: [`notes/2026-11-04-daily-sweep.md`](notes/2026-11-04-daily-sweep.md).
+
+## Changes in draft 6 (2026-11-06)
+
+- Graphify is a source on #7, #11, and #3. GitHub API at 2026-11-06T13:57:28Z, confirmed by a read at
+  2026-11-06T13:55:10Z: `stargazers_count` 143301, `forks_count` 13705, Apache-2.0, `default_branch` `v8`,
+  created 2026-04-03. The sweep brief said 143299 stars. The backlog uses 143301. `EXTRACTED` versus
+  `INFERRED` is the trust split, next to OPVS and the repowise parsed-versus-drawn rule. The hosted wiki's
+  "How we know" panel is the #11 cite. The 14 October 2026 wiki post is the #3 cite. No engagement was
+  fetched for that post. X counts in those items are the brief's `public_metrics` for 2026-11-06. This
+  session's `get_posts_by_ids` returned `client-not-enrolled` and did not re-read them. Ranking is unchanged.
+  The star count does not move #7 above the quiz or the measurement items.
+- Voxyz "words versus names" is a source on #3 and a cross-reference on #7. Brief counts: parent post 131
+  likes, 215 bookmarks, 9620 impressions, 9 replies, 9 reposts; follow-up 12 likes, 32 bookmarks, 1248
+  impressions. A prompt recipe. The ranked list does not gain a row.
+- #1: one practitioner line for Addy Osmani's cognitive-surrender essay (5 May 2026). The named X thread
+  was not opened.
+- Shipped reading order: Origin Code Tours, from the docs page read on 2026-11-06. The HTML-page peer list
+  is unchanged. The tour is on Origin's Changes tab.
+- Hand-off: Repowise v0.60's PR bot, which learns from review replies. Qodo's Codex plugin and PR Lens
+  findings were already in the hand-off list.
+- Left off the backlog: Pyrovue (import map and guided tour, Floorplan's family, brief engagement 5
+  impressions). Repowise v0.60's C4 map and wiki. Graphify Cloud's marketing claims. No second copy of
+  codebase-memory-mcp, Floorplan, IronBee, PR Lens, DiffNotes, perspica, or Qodo.
+- Notes: [`notes/sweep-2026-11-06.md`](notes/sweep-2026-11-06.md).
 
 ## Rejected
 
