@@ -1,0 +1,203 @@
+diff --git a/src/core/types.ts b/src/core/types.ts
+index 273b4f2c..1d554110 100644
+--- a/src/core/types.ts
++++ b/src/core/types.ts
+@@ -670,6 +670,7 @@ export type FinderPrompt =
+   | "adversarial-checklist"
+   | "adversarial-thorough"
+   | "adversarial-callers"
++  | "adversarial-boundary"
+   | "adversarial-calibrated"
+   | "adversarial-thorough-calibrated";
+ /**
+@@ -700,8 +701,8 @@ export interface ReviewSystem {
+   setup?: true;
+   /** Eval only: the source panel system for stored finder replay. */
+   replayFrom?: string;
+-  /** Union two independent single-review samples (the production review, with the adversarial prompt). */
+-  samples?: 2;
++  /** Union independent single-review samples: two in production (adversarial prompt), three in evals only. */
++  samples?: 2 | 3;
+   name: string;
+   mode: "single" | "panel";
+   finders: ReviewFinder[];
+diff --git a/src/evals/runner.ts b/src/evals/runner.ts
+index d5e03542..4f590505 100644
+--- a/src/evals/runner.ts
++++ b/src/evals/runner.ts
+@@ -1223,7 +1223,7 @@ export class EvalRunner {
+                         return sendTo(request, to, `verifier-${++verifications}`);
+                       },
+                     },
+-                    { ...reviewInput, sampleOffset: trial.trial * 2 },
++                    { ...reviewInput, sampleOffset: trial.trial * (system?.samples ?? 2) },
+                   )
+                 ).result
+               : await send();
+diff --git a/src/pipeline/prompts.ts b/src/pipeline/prompts.ts
+index 912705a1..044b9188 100644
+--- a/src/pipeline/prompts.ts
++++ b/src/pipeline/prompts.ts
+@@ -472,6 +472,11 @@ const ADVERSARIAL_ADDITIONS = {
+   "adversarial-thorough": THOROUGH,
+   "adversarial-calibrated": CALIBRATION,
+   "adversarial-thorough-calibrated": `${THOROUGH}\n\n${CALIBRATION}`,
++  "adversarial-boundary": `Concentrate on trust boundaries; other reviewers cover general logic. A boundary is any point where data or authority crosses between parties that trust each other differently: untrusted input (request text, repository files, model or test output, network responses, configuration) reaching a privileged action (commands, paths, queries, authentication, isolation decisions), and secrets or private data reaching something more widely readable (logs, errors, events, stored records, comments, commit metadata, prompts sent to a model).
++1. List the boundaries this change adds or touches, including files outside the diff that it calls or that call it. If there are none, say so in your summary and return no findings.
++2. For each boundary, follow the value from its source to its sink and name the check or transform that protects it. Read that protection's implementation, not just its name.
++3. Attack the protection as whoever controls the value would: another spelling of the same value (encoding, escaping, case, a path alias or symlink, a value split across lines or chunks); the order of steps (truncation, normalization or formatting before the check; a change between check and use); another route to the same sink (error, retry, fallback, resume and restart paths, and sibling callers that skip the protection); a protection that fails open, or a secret too weak or predictable for its use.
++4. Report only an attack with a concrete input and a path reachable at HEAD, and say who controls that input. Mark each one security: true. A secret reaching a wider audience on a realistic path is at least major. Do not report general hardening advice or a gap the project documents as accepted.`,
+   "adversarial-callers": `Before applying the rubric, trace the change beyond the diff:
+ 1. For every function, method or exported symbol the diff changes, find its callers and alternate entry points with rg, including files outside the diff, and check each against the new behaviour: a new precondition, a changed return shape, a new error or a new ordering.
+ 2. For every line the diff deletes or replaces, name the invariant it enforced and find where the new code re-establishes it.
+diff --git a/src/pipeline/review-system.ts b/src/pipeline/review-system.ts
+index 70f5ebf5..32443027 100644
+--- a/src/pipeline/review-system.ts
++++ b/src/pipeline/review-system.ts
+@@ -40,6 +40,7 @@ const FINDER_PROMPTS = [
+   "adversarial-checklist",
+   "adversarial-thorough",
+   "adversarial-callers",
++  "adversarial-boundary",
+   "adversarial-calibrated",
+   "adversarial-thorough-calibrated",
+ ] as const satisfies readonly FinderPrompt[];
+@@ -50,6 +51,7 @@ const EVAL_ONLY_PROMPTS: readonly FinderPrompt[] = [
+   "adversarial-checklist",
+   "adversarial-thorough",
+   "adversarial-callers",
++  "adversarial-boundary",
+   "adversarial-calibrated",
+   "adversarial-thorough-calibrated",
+ ];
+@@ -178,7 +180,8 @@ const RosterReferenceSchema = z.strictObject({
+ export type RosterReference = z.infer<typeof RosterReferenceSchema>;
+ export type EvalReviewSystem = ReviewSystem | RosterReference;
+ export const EvalSystemSchema = ReviewSystemBaseSchema.safeExtend({
+-  samples: z.literal(2, { error: "samples must be 2" }).optional(),
++  // Three samples is an eval-only screen; production stays at two.
++  samples: z.union([z.literal(2), z.literal(3)], { error: "samples must be 2 or 3" }).optional(),
+   setup: z.literal(true).optional(),
+   replayFrom: z.string().trim().min(1).optional(),
+   severityRubric: SeverityRubricSchema.optional(),
+diff --git a/src/pipeline/review.ts b/src/pipeline/review.ts
+index 3657b3e6..e986ed5e 100644
+--- a/src/pipeline/review.ts
++++ b/src/pipeline/review.ts
+@@ -450,14 +450,14 @@ export async function runReview<T extends Invoked>(
+   if (input.system && (input.system.mode === "panel" || input.system.finders.length > 1))
+     return runPanel(deps, input, input.system.finders);
+   const request = reviewRequest(input);
+-  if (input.system?.samples === 2) return runUnion(deps, input, request);
++  if (input.system?.samples) return runUnion(deps, input, request);
+   const invoked = await deps.invoke(request, 0);
+   const output = request.schema.safeParse(invoked.result.structured ?? extractJson(invoked.result.finalText));
+   if (!output.success) return { ...invoked, output };
+   return { ...invoked, output, decision: decide(input, output.data, output.data.verdict) };
+ }
+ 
+-/** Included only in two-sample cache identities; panel and legacy single keys stay unchanged. */
++/** Included only in sampled (union) cache identities; panel and legacy single keys stay unchanged. */
+ export const UNION_POLICY_VERSION = 1;
+ 
+ async function runUnion<T extends Invoked>(
+@@ -466,8 +466,9 @@ async function runUnion<T extends Invoked>(
+   request: ReviewRequest,
+ ): Promise<ReviewOutcome<T>> {
+   let first: T | undefined;
++  const count = input.system?.samples ?? 2;
+   const settled = await Promise.allSettled(
+-    [0, 1].map(async (sample) => {
++    Array.from({ length: count }, (_, i) => i).map(async (sample) => {
+       const index = (input.sampleOffset ?? 0) + sample;
+       const reused = deps.samples?.find((s) => s.index === index);
+       if (reused) return reused;
+@@ -512,7 +513,7 @@ async function runUnion<T extends Invoked>(
+     settled.map((m) => (m.status === "rejected" ? m.reason : undefined)),
+   );
+   if (interruption) throw interruption;
+-  // Checkpoint failures also wait for both invocations to settle.
++  // Checkpoint failures also wait for every invocation to settle.
+   for (const member of settled) if (member.status === "rejected") throw member.reason;
+   const samples = settled.flatMap((s) => (s.status === "fulfilled" ? [s.value] : []));
+   const results = samples.map((s) => s.result);
+diff --git a/test/review-prompt.test.ts b/test/review-prompt.test.ts
+index 09d67de7..852cbdfc 100644
+--- a/test/review-prompt.test.ts
++++ b/test/review-prompt.test.ts
+@@ -196,6 +196,15 @@ test("production and adversarial openings are unchanged and the eval additions a
+         "name that code by file and line",
+       ],
+     ],
++    [
++      "adversarial-boundary",
++      [
++        "Concentrate on trust boundaries",
++        "follow the value from its source to its sink",
++        "another route to the same sink",
++        "a concrete input and a path reachable at HEAD",
++      ],
++    ],
+     [
+       "adversarial-calibrated",
+       [
+diff --git a/test/review-system.test.ts b/test/review-system.test.ts
+index 15294790..f439c337 100644
+--- a/test/review-system.test.ts
++++ b/test/review-system.test.ts
+@@ -72,7 +72,7 @@ const invalid: [string, string][] = [
+   [file(panel({ verifier: { targets: ["verifier-c", "x@"] } })), "expected model or model@effort"],
+   [
+     file(system({ finders: [{ target: "candidate-a", prompt: "strict" }] })),
+-    'finder prompt must be "standard", "adversarial", "careful", "probe", "trace", "adversarial-checklist", "adversarial-thorough", "adversarial-callers", "adversarial-calibrated" or "adversarial-thorough-calibrated"',
++    'finder prompt must be "standard", "adversarial", "careful", "probe", "trace", "adversarial-checklist", "adversarial-thorough", "adversarial-callers", "adversarial-boundary", "adversarial-calibrated" or "adversarial-thorough-calibrated"',
+   ],
+   [file(system({ finders: [] })), "exactly one finder"],
+   [file(system({ finders: [system().finders[0], system().finders[0]] })), "exactly one finder"],
+@@ -114,6 +114,7 @@ test("single prompt variants are eval-only and retain the single-mode restrictio
+     "adversarial-checklist",
+     "adversarial-thorough",
+     "adversarial-callers",
++    "adversarial-boundary",
+     "adversarial-calibrated",
+     "adversarial-thorough-calibrated",
+   ] as const) {
+@@ -822,9 +823,13 @@ test("registered trace experiment pins 35 dev cases, production E1, targets and
+ test("two samples are limited to eval single systems, with unchanged legacy hashes", () => {
+   const sampled = system({ samples: 2, finders: [{ target: "candidate-a@medium", prompt: "adversarial" }] });
+   expect(parseEvalReviewSystems(file(sampled), "systems.json")).toEqual([sampled] as EvalReviewSystem[]);
+-  for (const samples of [1, 3, null, "2"])
++  const three = system({ samples: 3, finders: [{ target: "candidate-a@medium", prompt: "adversarial" }] });
++  expect(parseEvalReviewSystems(file(three), "systems.json")).toEqual([three] as EvalReviewSystem[]);
++  expect(ReviewSystemSchema.safeParse({ ...three, samples: 2 }).success).toBe(true);
++  expect(ReviewSystemSchema.safeParse(three).success).toBe(false);
++  for (const samples of [1, 4, null, "2"])
+     expect(() => parseEvalReviewSystems(file(system({ samples })), "systems.json")).toThrow(
+-      "samples must be 2",
++      "samples must be 2 or 3",
+     );
+   for (const value of [panel({ samples: 2 }), system({ samples: 2, replayFrom: "previous" })])
+     expect(() => parseEvalReviewSystems(file(value), "systems.json")).toThrow(
+diff --git a/test/review.test.ts b/test/review.test.ts
+index da2fdd44..fcbe125e 100644
+--- a/test/review.test.ts
++++ b/test/review.test.ts
+@@ -2299,6 +2299,18 @@ describe("two-sample single review", () => {
+     expect(calls.map((c) => c.sample)).toEqual([undefined]);
+     expect(single.decision?.review.verdict).toBe(union.decision?.review.verdict);
+   });
++  test("an eval three-sample union runs three calls and keeps the third sample's finding", async () => {
++    const calls: (number | undefined)[] = [];
++    const third = { ...finding("major"), file: "src/third.ts", line: 3 };
++    const invoke = async (_request: ReviewRequest, _finder: number, sample?: number) => {
++      calls.push(sample);
++      return { result: result(output(sample === 2 ? [third] : [finding("minor")])) };
++    };
++    const union = await runReview({ invoke }, { ...input, system: { ...input.system, samples: 3 } });
++    expect(calls).toEqual([0, 1, 2]);
++    expect(union.decision?.review.findings.map((f) => f.file)).toContain("src/third.ts");
++    expect(union.decision?.review.verdict).toBe("request_changes");
++  });
+   test("union keeps severity, agreement and alias locations under single-mode verdict rules", async () => {
+     const shared = { ...finding("major"), file: "src/a.ts", line: 10 };
+     const samples = [

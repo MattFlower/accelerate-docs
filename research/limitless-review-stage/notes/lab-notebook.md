@@ -500,3 +500,16 @@ CAVEAT: thorough was picked because it beat adversarial on this same escapes-dev
 Archive: ~/limitless-orch/review-research/p11/.
   p11 RESULT 11-06 (lab eval-mw5719bw1y4wluw1wpuwk9, 67 min, $25.15 API-equiv, 134/134 ok, score.py in p11/): FAILED Primary B. Union of two OR(thorough) 33/80 (41.2%) vs OR(E3) 30/80 (37.5%), +3.8 pts vs bar +5, one-sided lower -2.8. Primary A per sample 32.3% vs 28.5% of 158, +3.8, lower -0.7. Clean PASSED: 0 of 15 excl review-082 (only 082 blocked, both trials). Non-registered: mixed pair 31/80. Not advanced; held-out unspent.
   p11 post-hoc controls (not pre-registered): review-161's two defects lack a second E3 trial; on the 78 complete defects B is still +3.8 (31 vs 28). Third-sample comparison on 158 keys: D 56, D+thorough 65, D+E3 64, so thorough beats a plain third adversarial sample by +0.6 (lower -3.2); D+E3 - D is +5.1 (lower +1.9). The additive gain comes from sample count, not the prompt. Latency p50 122 s vs E3 99 s (not same load), cost equal, findings per trial 1.47 vs 1.63: the prompt did not raise finding count. Lead for Matt: a union of three adversarial samples, dev post-hoc, +50% cost, not run live.
+
+## 2026-11-07: union of three
+
+(e16) 11-07 p12 UNION OF THREE, PRE-REGISTERED before launch (Matt: "test union of three").
+Arm: D3-adversarial-union3 = stored D system with samples 3 (eval-only change: samples 2|3 in evals, production schema still 2; patch p12/union3.patch). Lab, 51 escapes-dev + 16 dev clean, k=2, Sol 6.1@medium.
+Primary: judged per-trial recall (both judges) vs stored D per-trial 36.2% (58/160), keys matched. Pass: >= +5 pts (>= +8 of 160) and paired case-bootstrap one-sided 95% lower bound > 0.
+Clean: trial blocks excluding review-082 <= 3 of 30 (D held-out was 2/18; F and thorough were 0/30 on these cases).
+Reported, not pass conditions: p50/p90 latency and cost per trial vs stored D (190 s / 281 s, $0.39 under that day's load), findings per trial, category split.
+Expectation: the post-hoc estimate was +5.1 (lower +1.9), right at the bar, so a miss is likely even if the effect is real.
+Caveat: D is stored from 10-31, not a same-day control (no paid baseline per Matt's rule); model/provider drift is uncontrolled. Advance to escapes-heldout only after asking Matt.
+  p12 RESULT 11-07 (lab eval-mw6pot0q10ccyhk102q6yc, 143 min, $69.11 API-equiv, 134/134 ok): FAILED recall bar. Union of three 61/160 (38.1%) vs stored D 58/160 (36.2%), +1.9, one-sided lower -2.5 (bar +5, lower > 0). Clean PASSED: 0/30 excl review-082 (082 blocked both trials). Categories: correctness 39 vs 36, security 18 vs 17, availability 2 vs 3.
+  Drift check (location grade, same metric both runs): per-sample 21.5% (103/480) now vs 21.9% (70/320) in the stored D run, so samples are as good as on 10-31; union location recall 33.1% vs D 29.4% (+3.8). The post-hoc +5.1 (stored D OR stored E3) overstated the gain: separately judged outputs get extra chances to match, and the live union merges findings first.
+  Cost per trial: p50 324 s vs D 190 s, p90 462 s vs 281 s (load 13-16 now); API-equiv p50 $0.505 vs $0.391; findings per trial 3.68 vs 3.17. Not advanced; held-out unspent. Eval-only samples=3 support is uncommitted (patch p12/union3.patch).
