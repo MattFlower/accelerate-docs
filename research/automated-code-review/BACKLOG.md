@@ -47,7 +47,9 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
 - **Idea:** v1 default per [design-v1.md](design-v1.md) §3, prompt from [notes/adversarial-prompt.md](notes/adversarial-prompt.md) (`L/src/pipeline/prompts.ts` l.482/561).
 - **Source:** [Matt] Escapes-dev: arm D 36.2% vs prod 16.9% (+19.4), p50 3.2 min, $0.39; Phase 0 dev +15.8,
   held-out +14.4 (33.0 vs 18.6); pool-gold combined +15.7. External: Bugbot (aggressive agentic prompt),
-  SWR-Bench (aggregation).
+  SWR-Bench (aggregation). [VB] Brokk's parallel same-reviewer passes are external corroboration of
+  multi-sample union and the Terra cost lever, not a new measurement
+  ([post](https://blog.brokk.ai/youre-paying-too-much-for-code-review/), 2026-11-03).
 - **Why:** largest replicated gain of anything tried.
 - **Cost of it:** doubles true held-out clean blocks (4/20 vs 2/20, RESULTS 0b) → must-fix gate (item 4) is
   part of this choice, not optional.
@@ -71,6 +73,9 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
   mixed models).
 - **Source:** [Matt] RESULTS 0c: agreement gating replayed at ~0–1% recall because the ±5 merge never records
   agreement — not rejected, blocked on dedupe; Report (Beyond Consensus, CMU witness study).
+- **Note:** CIVER ([2610.36010](https://arxiv.org/abs/2610.36010)) is an external witness-shaped
+  verification idea (targeted repair flips the score; unrelated edits do not). Not a replacement for
+  semantic dedupe. See item 13.
 - **Why:** the only proposal that targets D's false-block cost directly.
 - **Test:** dedupe accuracy vs hand pairs; recall of must-fix tier vs arm D's any-blocker rule; clean must-fix
   rate (target ≤ production's).
@@ -91,6 +96,11 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
 - = Report **Option F** / Plan **T8**. 13/30 production misses needed files outside the diff
   (`L/docs/research/14-review-strength.md`); CRBugBench: out-of-diff bugs harder. Cheap and short by design
   (SWE-PRBench: dumped context degrades). Distinct from trace finder (arm E, +1.1/+3.4).
+- **Note:** KG-AST's call-graph/change-radius slice is one cheap shape
+  ([2611.06950](https://arxiv.org/abs/2611.06950)): measured +6 pp exact-find overall (26→32) and
+  +14 pp when the fix stays in touched methods, but **no help** on out-of-diff fixes — so A7 must
+  go beyond callers/callees of changed methods for the hard case. ⚠️ thin (single paper, SZZ, AI
+  judges).
 - **Test:** recall on the out-of-diff subset of escapes-dev.
 - **Result 2026-11-06 (no paid run):** the 13/30 figure does not describe what the union of two still misses.
   Of the 45 escapes-dev defects union D never caught, 3 sit in files outside the diff, 36 sit within 3 lines of
@@ -209,6 +219,39 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
       quality-review is a post-implement gate in an agent loop.
     - **Test:** On escapes-dev, independent adversarial×2 vs same-session self-review after implement;
       blocking recall + clean must-fix (and resolve-rate if used in a factory loop).
+
+13. **Causal / intervention check for must-fix** — ranks above item 12 (must-fix gate, not orchestration).
+    - **Idea:** Causal / intervention-style verification of candidate findings: keep a finding for the
+      must-fix tier only if a targeted repair would flip its score and unrelated edits would not.
+      Prototype as a prompt+edit check first; treat the trained ~9M-param CIVER stack as a later option
+      if the prompt shape wins.
+    - **Source:** CIVER [arXiv 2610.36010](https://arxiv.org/abs/2610.36010). [report.md](report.md) §2.2.
+    - **Why:** Closest external shape to Option B / A4 witness gating that is not reproduce-or-drop
+      (already rejected). Downstream evidence that true reviews help and false reviews hurt.
+    - **Test:** On escapes-dev (or a small hand set), compare must-fix clean-block rate and blocking
+      recall for adversarial×2 alone vs adversarial×2 + intervention check (prompted targeted-repair
+      flip). Do not contaminate escapes-heldout. If building the trained modules, treat as a separate
+      M–L experiment.
+    - **Cost:** S for prompt prototype; M–L for trained modules
+    - **Status:** `proposed` ⚠️ not prompt-only; trained verifier; new SWE-Review-Bench dependency
+    - **Related prior (not a separate item):** OpenCodeReview
+      [2608.09290](https://arxiv.org/abs/2608.09290) — asymmetric reflector sees only the diff; claims
+      up to 2.17× SEM-F1 vs Claude Code on AACR at 5–15× fewer tokens. ⚠️ thin; 2026-08 preprint;
+      SEM-F1 ≠ known-defect recall.
+
+12. **Optional commit-risk prefilter** — low expected gain for the skill itself (orchestration); below item 13.
+    - **Idea:** Optional commit-risk prefilter before invoking `quality-review` (or the factory review
+      stage): spend review budget on the riskiest fraction of changes using cheap git features, not as a
+      finder inside the skill.
+    - **Source:** KG-AST [arXiv 2611.06950](https://arxiv.org/abs/2611.06950).
+    - **Why:** Factory cost lever; riskiest 20% covers ~49–64% of bug-introducing commits. Does not
+      raise per-review recall; decides *when* to run the skill.
+    - **Test:** On a time-split of escapes / merged PRs, compare recall of bugs among reviewed commits
+      vs reviewing all / biggest-diff-first at the same review budget; report coverage@budget with
+      Wilson/bootstrap. Do not contaminate escapes-heldout.
+    - **Cost:** M (needs historical labels)
+    - **Status:** `proposed` ⚠️ thin evidence
+    - **Flag:** **also relevant to limitless** (Option A / review-stage cost)
 
 ---
 
