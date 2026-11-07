@@ -1,0 +1,1832 @@
+[
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-134",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A resolution that drops the PR's whole change passes the audit and is pushed",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-134",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "The resolution review can't see PR hunks that the resolution dropped",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-134",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Migration rebuilds review_rounds: CI is red, it isn't additive, and rollback numbering collides",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-134",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "Cached snapshots decide eligibility, and refusals are final",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-134",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A resolution that drops the PR's whole change passes the audit and is pushed",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-134",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "The resolution review can't see PR hunks that the resolution dropped",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-134",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Migration rebuilds review_rounds: CI is red, it isn't additive, and rollback numbering collides",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-134",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "Cached snapshots decide eligibility, and refusals are final",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-138",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A restart during a pending retry replays it without the setup it depends on",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-138",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Redacted display data is executed and matched as if it were the real request",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-138",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A restart during a pending retry replays it without the setup it depends on",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-138",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Redacted display data is executed and matched as if it were the real request",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-144",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Under the new gate profile, this repository's own test suite fails, so every gate would fail after deploy",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-144",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "The gate allowance for the Cargo home exposes Cargo's registry credentials",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Cargo home allowance leaves registry credentials readable",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-144",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Editors can still read credential stores at relocated paths",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-144",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Under the new gate profile, this repository's own test suite fails, so every gate would fail after deploy",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-144",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "The gate allowance for the Cargo home exposes Cargo's registry credentials",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Cargo-home allowance exposes registry credentials to gates",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-144",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Editors can still read credential stores at relocated paths",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-145",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Restore main's load-time redaction of run state that this round removed",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-145",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Restore main's load-time redaction of run state that this round removed",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Preserve sanitization of historical diagnostic state on resume",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-146",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Inside a gate, a missing optional toolchain path makes the read policy refuse, so this repository's own suite fails under the new profile",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-146",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Inside a gate, a missing optional toolchain path makes the read policy refuse, so this repository's own suite fails under the new profile",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-150",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Unterminated serve output can exhaust daemon memory",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Bound candidate output before buffering complete lines",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-150",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Case-sensitive denial matcher fails on Bun's expected EPERM",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-150",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Unterminated serve output can exhaust daemon memory",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Candidate stderr can exhaust daemon memory despite tailLimit",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-150",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Case-sensitive denial matcher fails on Bun's expected EPERM",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-151",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A holdout quotation wrapped across report lines stays visible",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-151",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A holdout quotation wrapped across report lines stays visible",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-152",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Marking the owner merged can resolve the landed round as superseded",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-152",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Marking the owner merged can resolve the landed round as superseded",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-153",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Landing publishes before its outer transaction commits, and never drains the feed",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-153",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Landing publishes before its outer transaction commits, and never drains the feed",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-154",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Replace the hunk span heuristic with whole-file withholding for multiline private values",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-154",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Replace the hunk span heuristic with whole-file withholding for multiline private values",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Truncated hunk annotations disclose credential material",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-155",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Setup edits to tracked files reach the reviewer",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-155",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "A setup arm counts as production routing evidence and makes policy selection order-dependent",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-155",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Finder replay ignores setup, so a setup system can reuse findings made without dependencies",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-155",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Setup edits to tracked files reach the reviewer",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-155",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "A setup arm counts as production routing evidence and makes policy selection order-dependent",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-155",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Finder replay ignores setup, so a setup system can reuse findings made without dependencies",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-156",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A directory replaced by a file leaks its deleted children's multiline credentials",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-156",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A directory replaced by a file leaks its deleted children's multiline credentials",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-160",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The targeted retry runs files without the per-file isolation the full check has",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-160",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "The baseline cache stores the new failure-file fields before redaction",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-160",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The targeted retry runs files without the per-file isolation the full check has",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-160",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "The baseline cache stores the new failure-file fields before redaction",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-161",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Pairing can't detect a relay between worker and coordinator",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Bind pairing approval to the coordinator certificate",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-161",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "The coordinator key and worker credentials are read-denied only while a listener or worker process holds them",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Protect persisted worker credentials in every agent-launching process",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-163",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A 40-bit pairing code built from a relay-chosen nonce can be matched offline",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-163",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "A claim after a coordinator restart doesn't re-register the claim secret for redaction",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-163",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A 40-bit pairing code built from a relay-chosen nonce can be matched offline",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-163",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "A claim after a coordinator restart doesn't re-register the claim secret for redaction",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-166",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "One attempt can stay leased forever while its requests retry",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-166",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "A gate that leaves an unreadable directory stops the worker loop",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-166",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "One attempt can stay leased forever while its requests retry",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-166",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "A gate that leaves an unreadable directory stops the worker loop",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-167",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A land retry must require complete failure attribution; otherwise it can land a suite that also failed elsewhere",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-167",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Normalize the flaky diagnostic before redacting",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-167",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A land retry must require complete failure attribution; otherwise it can land a suite that also failed elsewhere",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-167",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Normalize the flaky diagnostic before redacting",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-168",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The new symlink test fails on macOS when TMPDIR is spelled through /var",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-168",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The new symlink test fails on macOS when TMPDIR is spelled through /var",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-169",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Round-comment text is truncated before local paths are rewritten",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-169",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Absolute paths in link labels and link titles are not rewritten",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Local paths in link labels bypass sanitization",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-169",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "file:// URLs and the canonical spelling of each root are not rewritten",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "File URI destinations retain absolute local paths",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-169",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Round-comment text is truncated before local paths are rewritten",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-169",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Absolute paths in link labels and link titles are not rewritten",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Paths in Markdown labels and titles bypass sanitization",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-169",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "file:// URLs and the canonical spelling of each root are not rewritten",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "File URLs retain absolute private paths",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-171",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A worker that lost its claim can still merge",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Recheck claim ownership inside helpers before remote mutations",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-171",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "A worker that lost its claim can still push",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-171",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Claim-loss cleanup can delete the replacement worker's checkout",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-171",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "A worker that lost its claim can still merge",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Claim validation does not reach the actual merge and push commands",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-171",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "A worker that lost its claim can still push",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-171",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Claim-loss cleanup can delete the replacement worker's checkout",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-172",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The push guard still runs before the retried push, not at it",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Recheck claim ownership on every push retry",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-172",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The push guard still runs before the retried push, not at it",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Recheck ownership inside every push attempt",
+   "severity": "major",
+   "category": "concurrency"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-173",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The digest drops blocked lands of PRs that no run owns",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-173",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The digest drops blocked lands of PRs that no run owns",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-174",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Recovery waits on zombies and kills one member at a time",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-174",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Matching records by command directory blocks unrelated runs",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-174",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Recovery waits on zombies and kills one member at a time",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": {
+   "title": "Recovery clears ownership without checking for newly forked descendants",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-174",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Matching records by command directory blocks unrelated runs",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-178",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The marker test fails on macOS outside the sandbox, so `bun run check` fails there",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-178",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "The marker test fails on macOS outside the sandbox, so `bun run check` fails there",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-179",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Encoded credentials survive the new diagnostic's redaction",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-179",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Audit filenames are checked for private strings before they are normalized",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Check filename privacy after stripping terminal escapes",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-179",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Encoded credentials survive the new diagnostic's redaction",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-179",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Audit filenames are checked for private strings before they are normalized",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Normalize filenames before checking for private strings",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-181",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Decoding is split across separate paths, so combined encodings still escape",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Base64 matching discards layers requiring further decoding",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-181",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Decoding is split across separate paths, so combined encodings still escape",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-186",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Compound eval trials credit every model's usage to the trial's first model",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-186",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Compound eval trials credit every model's usage to the trial's first model",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-189",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Window redaction drops the exact-field match for short credentials",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-189",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Window redaction drops the exact-field match for short credentials",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-195",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Path masking misses /tmp aliases and JSON-escaped forms of the worker's paths",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-195",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Path masking misses /tmp aliases and JSON-escaped forms of the worker's paths",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-200",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Cancel the open job when reconciliation fails",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-200",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Cancel the open job when reconciliation fails",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-201",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Keep local panel finders local when the run pins review models",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-201",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Keep local panel finders local when the run pins review models",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-204",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Accepted cases can't be prepared by the runner: validate through the runner's own preparation",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-204",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Accepted cases can't be prepared by the runner: validate through the runner's own preparation",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-207",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Check a batch's cases against each other before writing them",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-207",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Check a batch's cases against each other before writing them",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-210",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Gate mode must work with the LAN gate executor, which this installation uses",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-210",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Gate mode must work with the LAN gate executor, which this installation uses",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-214",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Match process records by canonical path when confirming a worktree's job stopped",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-214",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "Use the daemon's current port for each job's confinement, not the executor's startup config",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Invalidate the executor's confinement when the daemon port changes",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-214",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Every wait for an in-place job to stop must end",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-214",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "Retries through the executor must see the setup's scratch, as in-process retries do",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-214",
+  "gold": "G5",
+  "goldSeverity": "major",
+  "goldSummary": "Restore committed bytes before an in-process fallback after an executor failure",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-214",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Match process records by canonical path when confirming a worktree's job stopped",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-214",
+  "gold": "G2",
+  "goldSeverity": "blocker",
+  "goldSummary": "Use the daemon's current port for each job's confinement, not the executor's startup config",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-214",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Every wait for an in-place job to stop must end",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-214",
+  "gold": "G4",
+  "goldSeverity": "major",
+  "goldSummary": "Retries through the executor must see the setup's scratch, as in-process retries do",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-214",
+  "gold": "G5",
+  "goldSeverity": "major",
+  "goldSummary": "Restore committed bytes before an in-process fallback after an executor failure",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-215",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Protect the App private key from agent and gate reads, at the daemon's startup",
+  "trial": 0,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "Protect the configured App key from agent reads",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-215",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Protect the App private key from agent and gate reads, at the daemon's startup",
+  "trial": 1,
+  "caught": true,
+  "matched": true,
+  "finding": {
+   "title": "External App key paths are not protected from agent reads",
+   "severity": "major",
+   "category": "security"
+  }
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-216",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Protect a reloaded App key path as soon as it is validated, not only at startup",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-216",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Protect a reloaded App key path as soon as it is validated, not only at startup",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-217",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Retire the finished worker job before an authentication fallback runs locally",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-217",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Retire the finished worker job before an authentication fallback runs locally",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-218",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Publish only fixed lifecycle text, never run.error, and check the exact body that is posted",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-218",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Re-approval after failure: a currently present priority label, applied after the failure, in timeline order",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-218",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Publish only fixed lifecycle text, never run.error, and check the exact body that is posted",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-218",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Re-approval after failure: a currently present priority label, applied after the failure, in timeline order",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-219",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Tie re-approval to the latest failure episode, judged only by timeline order",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-219",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Tie re-approval to the latest failure episode, judged only by timeline order",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-224",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Apply the workflow guard in scripts/land-pr.sh before it pushes",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-224",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Apply the workflow guard in scripts/land-pr.sh before it pushes",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-226",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Don't let the rollback's final status writes overwrite a resolution recorded meanwhile",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-226",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Don't let the rollback's final status writes overwrite a resolution recorded meanwhile",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-227",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Keep pull request comments on today's webhook path",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-227",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Take the enable boundary from GitHub's clock at enable time, not from issue activity",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-227",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Keep pull request comments on today's webhook path",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-227",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Take the enable boundary from GitHub's clock at enable time, not from issue activity",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-232",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Redact the worker identity before persisting it",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-232",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Redact the worker identity before persisting it",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-234",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "An unknown inspection after a drain must still resume the scheduler",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-234",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "An unknown inspection after a drain must still resume the scheduler",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-235",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Keep the configured repository spelling: lowercasing it makes the queue create a duplicate repository record",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-235",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Keep the configured repository spelling: lowercasing it makes the queue create a duplicate repository record",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-237",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Recovery: check that the tip is still `before` before accepting an equivalent record",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-237",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Replay: classify a `moved` tip before calling the lease lost",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-237",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Recovery: check that the tip is still `before` before accepting an equivalent record",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-237",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Replay: classify a `moved` tip before calling the lease lost",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-238",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Land retries: derive the comparison verdict from the effective retry result, so confinement wins",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-238",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Land retries: derive the comparison verdict from the effective retry result, so confinement wins",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-239",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Relinquishing ownership must close the local write window until authority is re-established",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-239",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Register recovered and recovery-confirmed leases for renewal",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-239",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Reconcile a pending never-confirmed acquisition before deciding another run's acquisition",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-239",
+  "gold": "G1",
+  "goldSeverity": "blocker",
+  "goldSummary": "Relinquishing ownership must close the local write window until authority is re-established",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-239",
+  "gold": "G2",
+  "goldSeverity": "major",
+  "goldSummary": "Register recovered and recovery-confirmed leases for renewal",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-239",
+  "gold": "G3",
+  "goldSeverity": "major",
+  "goldSummary": "Reconcile a pending never-confirmed acquisition before deciding another run's acquisition",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-240",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Convert blocked to unclear only on positive evidence that this invocation's browser worked",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-240",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Convert blocked to unclear only on positive evidence that this invocation's browser worked",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-241",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Recover before closing uncertain posts; fixed codes on transport errors; test the recovery selector",
+  "trial": 0,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ },
+ {
+  "system": "sol-adversarial-boundary",
+  "caseId": "review-241",
+  "gold": "G1",
+  "goldSeverity": "major",
+  "goldSummary": "Recover before closing uncertain posts; fixed codes on transport errors; test the recovery selector",
+  "trial": 1,
+  "caught": false,
+  "matched": false,
+  "finding": null
+ }
+]

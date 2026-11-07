@@ -43,7 +43,7 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
   93–97%); A/A on production-equivalent arm shows drift < effect sizes we care about.
 - **Note:** keep escapes-heldout (57 / 103) untouched for limitless's decision run.
 
-### 2. Core reviewer: adversarial prompt × 2 independent samples at high effort, unioned — `testing (replicated on dev, held-out pending)`, cost S
+### 2. Core reviewer: adversarial prompt × 2 independent samples at high effort, unioned — `testing (held-out passed and live in limitless at medium effort; accelerate eval pending)`, cost S
 - **Idea:** v1 default per [design-v1.md](design-v1.md) §3, prompt from [notes/adversarial-prompt.md](notes/adversarial-prompt.md) (`L/src/pipeline/prompts.ts` l.482/561).
 - **Source:** [Matt] Escapes-dev: arm D 36.2% vs prod 16.9% (+19.4), p50 3.2 min, $0.39; Phase 0 dev +15.8,
   held-out +14.4 (33.0 vs 18.6); pool-gold combined +15.7. External: Bugbot (aggressive agentic prompt),
@@ -51,7 +51,10 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
 - **Why:** largest replicated gain of anything tried.
 - **Cost of it:** doubles true held-out clean blocks (4/20 vs 2/20, RESULTS 0b) → must-fix gate (item 4) is
   part of this choice, not optional.
-- **Test:** accelerate eval in both runtimes; held-out pending in limitless.
+- **Update 2026-11-06:** limitless adopted this on 11-01 with Sol 6.1@medium: paired held-out +11.7 pts
+  (one-sided 95% lower bound +5.3), 2/18 clean false blocks. In production (49 reviews) p50 went from 63 s to
+  77 s and median cost about doubled; request-changes rate held at about 30%.
+- **Test:** accelerate eval in both runtimes.
 
 ### 3. Rule-guided severity (consequence × trigger → deterministic mapping) — `proposed`, cost S
 - **Idea:** finder emits `consequence` + `trigger` + scenario; script maps to severity using the Rubric line
@@ -84,11 +87,16 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
   detection"; l.640 gate rules), `L/docs/research/08-code-review.md`; CRBugBench (misleading PR descriptions).
 - **Test:** A/B on the eval with PR description included vs summarised to requirements only.
 
-### 7. Out-of-diff impact pack (deterministic) — `proposed`, cost M
+### 7. Out-of-diff impact pack (deterministic) — `rejected on stored data, not built`, cost M
 - = Report **Option F** / Plan **T8**. 13/30 production misses needed files outside the diff
   (`L/docs/research/14-review-strength.md`); CRBugBench: out-of-diff bugs harder. Cheap and short by design
   (SWE-PRBench: dumped context degrades). Distinct from trace finder (arm E, +1.1/+3.4).
 - **Test:** recall on the out-of-diff subset of escapes-dev.
+- **Result 2026-11-06 (no paid run):** the 13/30 figure does not describe what the union of two still misses.
+  Of the 45 escapes-dev defects union D never caught, 3 sit in files outside the diff, 36 sit within 3 lines of
+  a changed line, and only 5 fix commits edited a source file outside the diff. Limits: this shows where the
+  defect and fix live, not which files a reviewer had to read to see it, and it covers one repo's dev split.
+  Reopen if a corpus shows misses that depend on unread files.
 
 ### 8. Acceptance claims from the request — `proposed`, cost S–M
 - = Report **Option E** / Plan **T7**. Spec-mismatch 0/6 (research/14); Rubric Q3 makes unmet explicit
@@ -96,12 +104,20 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
   overcorrection (2603.00539) and Notes e10 (Out-of-scope misread).
 - **Test:** recall on spec-mismatch defects; clean must-fix rate (overcorrection risk).
 
-### 9. Trust-boundary attack pass — `proposed`, cost M
+### 9. Trust-boundary attack pass — `rejected as a third added sample (limitless dev screen)`, cost M
 - = Report **Option D** / Plan **T6**. Security 0/12 (research/14); redaction gaps 5 of 47 pilot findings
   (Rubric Q5). SecPRBench (68% of missed security bugs = right file, wrong mechanism; union of 8 agents),
   Defending Code harness, AIxCC SoK, CyberGym (repeated attempts) — per Report.
 - **Test:** recall on security/redaction subset; must not filter other findings.
 - The security lens (item 10) is this pass inside `quality-review`, not a second copy of the evidence above.
+- **Result 2026-11-06 (lab screen p10, Sol 6.1@medium, one sample, 51 escapes-dev + 16 dev clean, k=2):** union D
+  plus the pass reached 62/160 vs D 58/160, +2.5 pts against a pre-registered +5 bar (one-sided lower +0.6).
+  Alone it found 22/160 overall, 16/52 security against D's 17, with 0/32 clean blocks. D plus the pass found
+  21/52 security and no new non-security defects. A security focus finds much the same security defects as
+  the union, so it adds little on top. Item 10's single lens is untested as a replacement for a sample: the
+  same screen scored one adversarial sample plus the pass at 53/160, 3.1 pts below D. Caveat: the prompt was
+  written after reading the missed defects, so even this gain is dev-influenced. Held-out not spent. A third plain
+  adversarial sample gained +5.1 post hoc, so this focused sample did worse than simply sampling again.
 
 ### 10. Security lens inside quality-review — `proposed`, cost M
 - **Idea:** security review is a second lens of the one `quality-review` skill, built on the trust-boundary
@@ -125,17 +141,18 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
 | T0 | production sol@medium, standard prompt | escapes-dev 16.9%; Phase 0 dev 31.6, held-out 18.6; clean 2/32 dev | baseline arm |
 | T1 | sol-6.1@high, standard prompt | escapes-dev 30.6% (+13.8), $0.35, 3.7 min; Phase 0 +10.2; pool +10.6; clean 3/8 (Phase 0) | `testing (replicated on dev, held-out pending)` — runtime-neutral form = "highest effort" |
 | T3 / arm E3 | adversarial prompt, single sample | escapes-dev 28.5% (+11.6), $0.20; Phase 0 +17.4; held-out +7.0; pool +11.4 | `testing (replicated on dev, held-out pending)` — in v1 core |
-| arm D | union of 2 adversarial samples | escapes-dev 36.2% (+19.4); held-out +14.4; true clean 4/20 vs 2/20 | `testing (replicated on dev, held-out pending)` — v1 core, needs item 4 |
+| arm D | union of 2 adversarial samples | escapes-dev 36.2% (+19.4); held-out +14.4; paired held-out at adoption +11.7, 2/18 clean; true clean 4/20 vs 2/20 | `testing (live in limitless since 2026-11-01; accelerate eval pending)` — v1 core, needs item 4 |
 | T9 | cheap Terra-6.1 adversarial | 28.7% (+11.9), $0.03, 0.5 min; ×2 union 36.9%; clean 6/32, union 8/32 (Notes e7) | `testing (replicated on dev, held-out pending)` — Codex-only model; cost lever |
+| — | third adversarial sample | post-hoc on stored runs, 158 defect-trials: 64 vs union 56, +5.1, one-sided lower +1.9, +50% cost; not pre-registered, not run as a live system, no clean data | `proposed` — more samples beat every prompt variant screened on 2026-11-06 |
 | T9 | luna@medium | 2.5% / 4.4% | `rejected` — not viable |
 | T9 | haiku-5.5@high | partial 6/26, 4/23; 17/32 over 20 min; 5 errors | `rejected` for now — latency/reliability |
-| T2 / Option C | coverage prompt + per-file ledger | arm V2 "thorough": 33.8%, clean 7/32 (Notes e7); CRBugBench +5–6 top-5 recall for GPT family | `proposed` — clean cost similar to union |
+| T2 / Option C | coverage prompt + per-file ledger | Terra arm V2 "thorough": 33.8%, clean 7/32 (Notes e7); CRBugBench +5–6 top-5 recall for GPT family; Sol lab screen p11 (2026-11-06): union of two 33/80 vs adversarial 30/80, +3.8 vs a +5 bar, one-sided lower −2.8, 0/15 clean pairs outside review-082, 1.47 vs 1.63 findings per trial | prompt `rejected` on Sol at this bar; ledger never built — the prompt did not raise finding count |
 | V3 | caller + deleted-invariant tracing prompt | 30.6%, clean 7/32 (Notes e7) | `proposed`, low priority |
 | T4 / Option B | mixed-model union + two-tier block | two-tier blocked on dedupe (RESULTS 0c); Sol ∪ Opus +5–9 | split: two-tier = item A4; mixed union = item C2 |
 | T5 / Option A | oracle replica | Report | item A11 |
-| T6 / Option D | attack pass | Report | item A9; security lens = item A10 |
+| T6 / Option D | attack pass | p10 dev screen +2.5 on top of union, 0/32 clean | item A9, `rejected` as a third sample; security lens = item A10 |
 | T7 / Option E | acceptance tests | Report | item A8 |
-| T8 / Option F | impact pack | Report | item A7 |
+| T8 / Option F | impact pack | 5 of 45 union misses had fixes outside the diff | item A7, `rejected` on stored data |
 | G | deterministic severity, stop parking majors | Rubric; Notes e2/e8/e10 | item A3 |
 | arm F | AGENTS.md per-item checklist | +14.6 on its own 33-case cohort (19/48 vs 12/48); #553 +6.3 on ±5, not adopted | `proposed — tension flagged for Matt`: conflicts with the "no long checklists" Don't; unresolved |
 | — | specialist panel (Sol@medium verifier) | ~41.6% partial, clean 13/32 (Notes e7) | `proposed`, low — highest recall, worst clean |
@@ -211,6 +228,10 @@ Each with the evidence so it isn't retried without new reason.
 - **Long pattern checklists** — "goal plus context" beats long checklists (Report: Defending Code harness).
   ⚠️ Conflicts with arm F's +14.6 on its own cohort; flagged for Matt, not settled.
 - **Extreme effort alone** — big cost for the gain (Report: Luna 36→57% at 23×).
+- **Out-of-diff impact pack (item 7)** — not built: 3 of 45 union misses sit outside the diff and 5 of 45 fixes
+  touched a source file outside it. See item 7 for the limits of that measure.
+- **Trust-boundary pass as a third sample (item 9)** — +2.5 pts vs a +5 bar; it re-finds the union's security
+  defects. See item 9.
 - **Trace finder (arm E)** — +1.1 judged / +3.4 pool gold; #552 −3.1 on ±5. [RESULTS; `L/evals/review/TRACE.md`]
 - **Opus as sole reviewer** — −21 / −17 (opus, opus@high) judged dev; −9.3 / −6.9 pool; #522 12.8% vs 35.1%
   ("panel with Opus not worth pursuing"). Kept only as extra union finder (C2). [RESULTS; issue #522]
