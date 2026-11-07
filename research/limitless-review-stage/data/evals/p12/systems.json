@@ -1,0 +1,16 @@
+{
+ "systems": [
+  {
+   "name": "D3-adversarial-union3",
+   "mode": "single",
+   "finders": [
+    {
+     "target": "codex/sol-6.1@medium",
+     "prompt": "adversarial"
+    }
+   ],
+   "implementerReport": "include",
+   "samples": 3
+  }
+ ]
+}
