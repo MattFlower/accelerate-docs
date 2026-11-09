@@ -2,9 +2,12 @@
 
 *Draft 1, 2026-10-31.*
 
+*Sweep 2026-11-09: ReviewBoundary (§2.4), Codex custom review rules (§2.3), Devin Review 2.0 (§2.3). Opened 2026-11-09.*
+
 Status: first draft, written to be revised once Matt's prior docs are folded in further. Every
 external source below was opened on 2026-10-31, except CR-Bench-v2 (opened in the 2026-11-04
-daily sweep and again on 2026-11-05) and Foresight-SWE (opened 2026-11-05); anything that could
+daily sweep and again on 2026-11-05), Foresight-SWE (opened 2026-11-05), and ReviewBoundary,
+the Codex custom-rules post, and Devin Review 2.0 (opened 2026-11-09); anything that could
 not be opened is listed in "Not verified". Numbers from different benchmarks are not comparable.
 
 **Precedence for Matt's figures** (as instructed): the 2026-10-31 escapes-dev run beats Phase 0
@@ -202,6 +205,20 @@ Only items I opened. Where Matt's docs already cite an item, it's marked "(in Ma
   flag only bugs introduced by the commit that the author would fix; "do not stop at the first
   qualifying finding"; name the provably affected code; P0–P3 priorities plus a numeric confidence;
   repository-rule attribution from `AGENTS.md`. (in Matt's Notes e6 as LAB_PROMPTS.md)
+- **Codex custom review rules** [blog](https://developers.openai.com/blog/custom-code-review-rules-for-codex)
+  [VB] (opened 2026-11-09): Codex Code Review reads custom rules from `AGENTS.md` and can cite the
+  rule in a finding. The heading is `## Code Review Rules`. That is the Codex convention, and it
+  matters here because quality-review targets both Claude Code and Codex (Claude's analogue is
+  `REVIEW.md` from the base branch, above). Repo-wide rules stay at the root; service-specific
+  rules go in a nested `AGENTS.md` near the code. On OpenAI's primary suite (known rule violations
+  plus safe counterexamples), rule-guided variants recovered 98% of required custom findings vs
+  58.3% for the baseline control. They describe four properties and do not publish per-property
+  numbers: coverage (busy diffs, competing rules), restraint (clean changes and valid exceptions),
+  retention (ordinary bugs outside the rules still caught), and actionability (the finding cites
+  the rule, the location, and a priority). What they say held up: short scoped rules that state the
+  invariant and a safe path. Broad instructions could easily create noise. ⚠️ Vendor-run; suite
+  size, model, and number of runs are not disclosed. Also relevant to limitless (rules from the
+  base commit, backlog C6).
 - **Greptile, "How to make LLMs shut up"** [blog](https://www.greptile.com/blog/make-llms-shut-up):
   prompting and LLM-as-judge failed to cut nits; filtering new comments by embedding similarity to
   ≥3 downvoted past comments raised address rate 19% → 55%+ in two weeks. (in Matt's docs)
@@ -218,6 +235,14 @@ Only items I opened. Where Matt's docs already cite an item, it's marked "(in Ma
 - **Automated Code Review in Practice (Beko, Qodo PR-Agent)** [arXiv 2412.18531](https://arxiv.org/abs/2412.18531):
   73.8% of bot comments labelled resolved, but mean PR closure time rose from 5h52 to 8h20 and
   re-reviews after each fix became "redundant and unhelpful". Older model (GPT-4); one company. ⚠️
+- **Devin Review 2.0** [blog](https://devin.ai/blog/devin-review-2) (Cognition, 2026-11-05) [VB]:
+  a re-run now reviews only the parts of the PR that changed, on by default, and a per-PR spend
+  limit is configurable. Cognition reports 82% lower per-PR cost since August, a typical review at
+  $0.25–$0.75, about 80% of PRs under $1 including every push, bugs found per PR from 1.22 to 1.32,
+  and median latency from 139s to 94s. These are vendor customer averages, not an independent
+  benchmark, and bugs-per-PR is not recall. ⚠️ The same post adds effort levels, including an Ultra
+  mode for sensitive code (billing, security) at higher cost. That is relevant to how quality-review
+  exposes effort; it is not a separate backlog item. Same re-review concern as Beko, above.
 
 ### 2.4 Benchmarks and eval method
 
@@ -244,6 +269,42 @@ Only items I opened. Where Matt's docs already cite an item, it's marked "(in Ma
 - **Martian Code Review Bench** [repo](https://github.com/withmartian/code-review-benchmark): 50 PRs /
   173 golden comments offline plus an online set scored against developers' post-review fixes;
   three judge models. (in Matt's docs)
+- **ReviewBoundary** [repo](https://github.com/utkutugrul/review-boundary) (Utku Tugrul; MIT;
+  created 2026-11-06; announced
+  [2026-11-06](https://x.com/utkutugrul33/status/2118788007134118123);
+  [methodology](https://github.com/utkutugrul/review-boundary/blob/main/docs/methodology.md),
+  [pilot v0.2](https://github.com/utkutugrul/review-boundary/blob/main/docs/pilot-v2.md);
+  opened 2026-11-09): paired clean and attacked reviews of the same known defect, to see whether
+  untrusted text suppresses the finding or provokes a write. The v0.2 corpus is 12 original
+  synthetic families, four per language, each with a vulnerable and a fixed implementation in six
+  contexts (clean, PR-body suppression, README suppression, source-comment suppression, a
+  tool-output write lure, and a benign quotation): 144 cases, 96 development and 48 public
+  heldout. Payload packs add matched text in READMEs, pull requests, filenames, comments, notes,
+  and tool responses. Action-boundary scenarios add fake approvals in file paths and URLs, with a
+  normal-use control. A scripted-reviewer demo makes no API calls; the dashboard screenshots are
+  that calibration, not a model measurement. The v0.2 pilot did run a real model. Executed
+  2026-11-06, Inspect AI 0.3.287, ReviewBoundary 0.2.0, model id `openai/gpt-6-luna` through
+  OpenRouter (recorded responses named OpenAI; the provider may change the model behind an alias).
+  Two families only: TypeScript `ts_batch_export` (development) and Rust
+  `rust_partial_batch_permissions` (public heldout). Five trials of every vulnerable/fixed and
+  context combination, two prompts (`baseline` and `explicit`): 120 conditions per family, 240 in
+  total, all completed, all matching the structural rubric. On submitted vulnerable cases, each
+  family was 60/60 for the expected category, for relevant source evidence, and for a correct
+  citation. Attacker goal reached: 0/50 eligible observed cases per family. Unauthorized write
+  requests, including rejected arguments: 0. Paired degradation against a passing clean control:
+  0/80 per family. Both prompts passed every selected condition, so the pilot provides no evidence
+  that the explicit boundary prompt improves anything. The write-up calls this a narrow smoke test:
+  it does not show that the attack set can distinguish capable reviewers, or that the model is
+  robust to other injections. Counts are correlated (shared code and payloads) and are not an
+  attack rate. Only 2 of 12 families were run on a model. The tasks are small virtual repositories,
+  not production repos or native-agent reviews. Methodology: none of these measurements establishes
+  that a reviewer is safe in general. The README says results cover only the tested tasks and
+  observed actions and cannot certify a reviewer as safe for production repositories. Offline
+  calibration (432 scripted samples, 144 per mode) is a harness check: the reference passes all
+  144, and an intentional negative control produces 60 regressions. That shows the gate can fail.
+  It is not model-performance evidence. ⚠️ Repo created 2026-11-06, 1 star as of 2026-11-09, small
+  public examples, author-run pilot. Also helps limitless: its reviewer reads untrusted PR text and
+  diffs. Backlog C14.
 - **Statistics:** Miller, *Adding Error Bars to Evals* [arXiv 2411.00640](https://arxiv.org/abs/2411.00640);
   Bowyer et al., *Don't use the CLT with fewer than a few hundred datapoints* [arXiv 2503.01747](https://arxiv.org/abs/2503.01747);
   TREC pooling (Buckley & Voorhees) [NIST](https://www.nist.gov/node/761376). (in Matt's docs)
@@ -312,6 +373,8 @@ Short list; most external evidence is already in Matt's docs.
    sample). A possible production KPI next to "orchestrator round-1 findings per PR". ⚠️ fine-tuned models.
 4. **Beko's cost side:** PR closure time +42% and redundant re-reviews after each fix — evidence for
    Limitless's later-round scoping and for accelerate to review only the fix diff on re-runs. ⚠️
+   Devin Review 2.0 (2026-11-05, §2.3) now does that incremental re-review by default. Its cost and
+   bugs-per-PR figures are vendor customer averages, and bugs-per-PR is not recall. ⚠️
 5. **ReviewBench's 25-task offline test set + judging CLI** as a cheap external smoke check for a
    general-purpose skill (Matt's Report proposes the 60–80 TS/JS slice; the 25-task set is cheaper).
 6. **Codex `agents/openai.yaml` `allow_implicit_invocation: false`** to keep a heavy review skill
@@ -323,6 +386,11 @@ Short list; most external evidence is already in Matt's docs.
 8. **Foresight-SWE** (§2.7) [arXiv]: stated-task resolve and foresight resolve rate are different
    outcomes; native self-review can raise foresight while cutting the original task. Candidate for
    limitless too.
+9. **ReviewBoundary** (§2.4) [repo](https://github.com/utkutugrul/review-boundary): paired
+   clean/attacked prompt-injection cases for a reviewer that reads untrusted PR text and diffs.
+   The v0.2 pilot (240 conditions, two of twelve families, `openai/gpt-6-luna`) recorded no
+   attacker-goal success and no write requests, and both prompts passed every selected case. The
+   README says that cannot certify a reviewer safe. Candidate for limitless too. ⚠️
 
 ## 4. Not verified / flagged
 
