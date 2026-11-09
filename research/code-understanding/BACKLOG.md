@@ -76,6 +76,30 @@ factory's deliver/review stages.
   Evidence: `vendor`. For 1–2 reading-order stops, withhold that stop's annotation until the reader answers one or
   two such questions, then reveal it. The multiple-choice block at the end stays. That slice is cost S–M. The
   end-of-page quiz stays cost S.
+  **Predict before the ask.** Addy Osmani's article "Critical thinking when agents do the work"
+  ([X](https://x.com/addyosmani/status/2117512471930167377), posted 2026-11-03; the text was read at
+  [nitter](https://nitter.gq/addyosmani/article/2117512471930167377)) says to form an expected answer
+  before asking an agent on a non-trivial task, on paper or only in your head, and describes a quiz
+  at the bottom of a change report with the rule of merging only after a perfect score. The article
+  names a spectrum: offloading, where you still own the result; deferral, where the model's output
+  becomes the next input; and surrender, where that output becomes your own view. This session's
+  X API `get_posts_by_ids` returned `client-not-enrolled`. api.fxtwitter.com at 2026-11-09T13:25:34Z:
+  likes 20751, bookmarks 50612, reposts 3233, replies 598, quotes 988, views 5492821. Quote posts from
+  the same day's mirror read: [mylifcc](https://x.com/mylifcc/status/2117534221283606608) likes 816,
+  bookmarks 1021, views 114090;
+  [DataChaz](https://x.com/DataChaz/status/2117568522469666982) likes 4926, bookmarks 7030, views 774453.
+  Those are the largest X-post like count and view count in this backlog. The rank stays with the
+  measured quiz results above. Open PR #13 adds the May 2026 cognitive-surrender essay on this item.
+  This paragraph is the November article. Evidence: `practitioner` + `engagement` (mirror fields,
+  dated above).
+  **Learn with Claude**, a peer of this quiz. A Claude Code plugin, MIT. npm `learn-with-claude` 0.1.0,
+  published 2026-11-08. GitHub API on 2026-11-09: `stargazers_count` 0
+  ([repo](https://github.com/babakhalid/learn-with-claude)). The README says the dashboard asks
+  predict-first questions and questions on the diff while the agent builds, and "The session is never
+  blocked waiting for a quiz answer." Posts, same mirror read:
+  [BabaKhaliid](https://x.com/BabaKhaliid/status/2119430173972107301) likes 0, views 9;
+  [Khaled865412521](https://x.com/Khaled865412521/status/2119711655726576089) likes 0, views 26.
+  Evidence: `vendor`, plus `engagement` that is tiny. No study.
   **perspica's Learn tab** is a smaller quiz on the concepts behind one change. It is one to three questions, or the
   words "nothing to learn" when the change needs no background. The lessons are model-written and checked against
   the code. Noted here, not a second quiz. See #3 and #15.
@@ -154,11 +178,32 @@ reading Matt Pocock's `teach`.*
   - The slice explainer evidence from the old #3: the Claude Code team's article
     ([X](https://x.com/addyosmani/status/2114604912520921136): 13,390 likes) and Simon Willison's
     [linear walkthroughs](https://simonwillison.net/guides/agentic-engineering-patterns/linear-walkthroughs/).
+  - **Slice on demand, same article as #1.** The 2026-11-03 article says the Claude Code team rebuilds
+    understanding of one slice by asking the model to explain that slice, and states "You just need to
+    know what you don't have." Counts are on #1. This is the slice-explainer job already in this item.
+    The like count leaves the item under the measurement items (#1 and #2). Evidence: `practitioner` +
+    `engagement`.
   - The course evidence from the old #10: codebase-to-course ([repo](https://github.com/zarazhangrui/codebase-to-course),
     5,750 stars per the GitHub API on 2026-11-01), Understand-Anything (`tour[]`,
     [repo](https://github.com/Egonex-AI/Understand-Anything/), 89,517 stars per the API), DeepWiki, Google Code Wiki,
     CodeTour, and [Busjahn et al.](https://researchonline.gcu.ac.uk/ws/portalfiles/portal/24953094/ICPC2015_authors_version.pdf)
     (execution-order reading).
+  - **LACY, CodeMap, and Cognitive Tours.** LACY
+    ([arXiv 2603.25391](https://arxiv.org/abs/2603.25391), FSE 2026 companion) is expert-curated code
+    tours plus comprehension questions. Within-subjects, five learners on one legacy codebase:
+    guided-tour quiz 83%, AI-only tour quiz 57%. Evidence: `measured-RCT` (small, one system). CodeMap
+    ([arXiv 2504.04553](https://arxiv.org/abs/2504.04553), ICPC 2026) draws hierarchical maps of an
+    unfamiliar codebase. A user study of nine experienced developers and six novices. The paper states
+    79% less time reading model replies (1.15 vs 5.48 minutes) than a chatbot, and 90% more time on the
+    map (8.55 vs 4.50 minutes, t=3.67, p=.011) than a static visualization tool. No comprehension quiz
+    was in the sections read. Cognitive Tours
+    ([arXiv 2611.08456](https://arxiv.org/abs/2611.08456); the arXiv comment says a shorter version is
+    submitted to the ICSE 2027 demo track and is under review;
+    [demo](https://cognitive-tours-demo.vercel.app/), HTTP 200 on 2026-11-09) is a human-written tour
+    of waypoints: user needs, design decisions, code, tests, and open questions, with notes between
+    stops. The author reports her own use over six months. The paper calls that a design proposition,
+    and the evaluation is proposed future work. The ask-the-author capture is on #5. Evidence for
+    Cognitive Tours: `practitioner`.
   - IronBee Code Wiki ([product](https://ironbee.ai/code-wiki)). Launch post by @serkan_ozal
     ([X](https://x.com/serkan_ozal/status/2117633673461674225): like_count 5, bookmark_count 0, reply_count 2,
     retweet_count 1, impression_count 9185, X API on 2026-11-04). Same niche as DeepWiki and Google Code Wiki
@@ -239,7 +284,11 @@ reading Matt Pocock's `teach`.*
 - **Idea:** a visible `decisions` block: what was asked, what was assumed, alternatives tried and dropped, and why.
   Each entry is tagged by source (*user prompt*, *agent transcript*, *commit message*, *not stated*). HR could read
   the session transcript when it runs in the same conversation. In limitless, the source is the spec plus the
-  implement log.
+  implement log. The why in an entry is the author's own words. After the session, rank the decisions
+  the diff made, flag any that contradict an ADR or the rules file (#10), and ask the author to explain
+  each one. The model may list the facts. The author writes the explanation. That entry can be a stop
+  in a #3 lesson. When an agent wrote the line, the source unit is the planning prompts that changed no
+  files, up to five, plus the build prompt and the replies.
 - **Sources:** Addy Osmani's *Agentic Code Review*: agent reasoning "is usually discarded the moment the diff is
   produced… review shifts from checking reasoning… to reconstructing intent"
   ([X](https://x.com/addyosmani/status/2066595308629594363): 1,714 likes, 3,249 bookmarks). Entire records sessions,
@@ -263,13 +312,37 @@ reading Matt Pocock's `teach`.*
   the prompts) or *agent's call*. It does not read sessions for someone else's pull request
   ([README](https://github.com/sshah03/perspica)). Evidence: `vendor`. The noise tags, reading order, and test
   reach are #8.
+  **Author explains it.** Cognitive Tours' `suggest-waypoint` skill ranks unrecorded work since a date,
+  ranks decisions first, flags any that contradict an existing ADR, and asks the author what was
+  decided, in their words. The skills do not write the map. A draft comes only after that question, and only if
+  the author asks for one. In the paper's example, one evening produced more than 20 commits, and the
+  skill's first item contradicted ADR 007, which was still Accepted. The author reports using the tool
+  across six months. The evaluation is future work.
+  [arXiv 2611.08456](https://arxiv.org/abs/2611.08456). Evidence: `practitioner`. The capture rule in
+  the idea (rank the diff's decisions, flag an ADR or the #10 rules file, ask the human) is
+  `our own idea`, adapted from that skill. The article on #1 also says to have the agent list the
+  decisions it made, then quiz yourself. That list is the agent's. The entry stored here is the author's.
+  **Tracybot** maps each agent-written line to a Tasklet: up to five preceding prompts that changed no
+  files, the build prompt, and the replies. OpenCode is read through its SDK. Claude Code and Codex
+  are recorded through hooks. Snapshots
+  sit on hidden git refs, and a commit is linked with a git note. The editor view is AI Blame. A
+  Tasklet can be exported as a MADR record; the developer writes the reasons and the consequences. The
+  paper's Table I sets that unit beside a whole session (Git AI, Cursor Blame) and a single prompt
+  (PromptTrace). Evaluation: a focus group of 7, and a survey of 24 people judging screenshots. The
+  paper says those people did not use the tool, and the measures are usability.
+  [arXiv 2611.09395](https://arxiv.org/abs/2611.09395),
+  [repo](https://github.com/TracyTeam/tracybot). GitHub API on 2026-11-09, in the call that started at
+  the clock read 2026-11-09T13:23:42Z: `stargazers_count` 10, `forks_count` 0, GPL-3.0. Evidence:
+  `vendor` for the tool. The study measured usability. It did not measure comprehension.
   The earlier report recommended "label each why by source; write *why: not stated*" (`report.md`, row "Brief and
   summary drawn from…"). It hasn't shipped: HR tags signals and `risk.why`, not the brief or rationale. Evidence
   for the item: `practitioner` + `vendor`.
 - **Why it helps:** "what instigated the change" is reviewers' biggest information need (Bacchelli & Bird, cited in
   the earlier report). The agent already has that information, and HR throws it away.
 - **Test:** on 5 agent-built changes, have Matt rate each entry as accurate, useful, or neither, and count the
-  `not stated` gaps. Make sure no decision entry leaks a held-back finding.
+  `not stated` gaps. Make sure no decision entry leaks a held-back finding. On one real limitless or
+  accelerate session diff, check whether the author's explanation names a mismatch with an ADR or a
+  rules file, and score a second reader on the quiz with that entry and without it.
 
 ### 6. "Ask about this" from any line or block, answered in the agent session — `proposed`, cost S, target HR
 - **Idea:** next to **Comment**, add **Ask** (a question tagged `?`). The feedback export puts questions first. The
@@ -283,6 +356,10 @@ reading Matt Pocock's `teach`.*
   **DiffGuardian** answers a spoken or typed question while the lines it is talking about scroll
   ([site](https://diffguardian.ai/)). The voice tour and Trace It are #15. The dependency graph is #7.
   Evidence: `vendor`.
+  **Tracybot** answers a click on an agent-written line with the Tasklet behind it: up to five planning
+  prompts that changed no files, the build prompt, and the replies, plus earlier Tasklets for that line.
+  The paper's table sets that unit beside a whole session and beside one prompt. The stars, the sample,
+  and the paper are on #5. Evidence: `vendor`. Ask stays one button. The unit is this design point.
 - **Why it helps:** a static page can't answer the reader's own question, and that is usually the one that blocks
   understanding. The cost is small because the feedback loop already exists (`HR/SKILL.md` "When feedback comes back").
 - **Test:** count the questions per review and how many answers turned into page edits. Also check whether question
@@ -357,11 +434,20 @@ reading Matt Pocock's `teach`.*
   [vibeleaderboard](https://x.com/vibeleaderboard/status/2117626768110596353): 1 like, 26 impressions (X API,
   2026-11-05). Evidence: `vendor`, plus `engagement` that is tiny. "What you asked for" is cited on #5. Learn is
   cited on #1, #3, and #15.
+  **Structured code reveal** ([arXiv 2609.24616](https://arxiv.org/abs/2609.24616), submitted
+  2026-09-21, revised 2026-10-29). A within-subjects eye-tracking study of three Java snippets. 53
+  participants were recruited. Gaze analysis used 44. Structured reveal, syntax before the details,
+  produced longer fixations than a character-by-character reveal. Mean comprehension scores were 4.886
+  static, 5.000 structured, and 4.932 character (Table 4, N=44). The scores sit together. The study is
+  about how a short snippet appears on screen. Evidence: `measured-RCT` (lab snippets). The item stays
+  at this rank.
 - **Why it helps:** agent pull requests are often majority mechanical. HR's mechanical tier is path-based, so a
   move or a rename inside a file still looks like logic. The `focus` order is not taken from the call graph.
   "Tests cover / don't cover" does not say which changed test reaches which changed function.
-- **Why it sits here:** same cost as blast radius (#7), and the same kind of local parser. The evidence is one
-  beta tool, 41 stars, and one post with 1 like, so it stays below #1–#6. It is its own row, next to #7.
+- **Why it sits here:** same cost as blast radius (#7), and the same kind of local parser. The evidence for
+  the parser is one beta tool, 41 stars, and one post with 1 like, so it stays below #1–#6. The
+  eye-tracking study above is lab snippets, and its quiz scores sat together, so it does not lift the
+  item. It is its own row, next to #7.
   #7 answers what else the change touches. This one answers which lines are the logic, which order to read
   them, and which tests reach which changed functions. It stays above the rules file and the claims footer,
   which apply more narrowly.
@@ -561,6 +647,10 @@ reading Matt Pocock's `teach`.*
   ([X](https://x.com/addyosmani/status/2114604912520921136)).
 - **Steinberger claim** (second-hand): auto-review in a separate session after the PR loses judgment
   ([X](https://x.com/4to1planner/status/2075105831230800376)). Unverified paraphrase of an interview.
+- **LiveReview** (Hexmos, page dated 2026-11-07): a risk score, then automatic approval of a low-risk
+  share of pull requests. The subtitle says 40–50%. The body says the lowest-risk 30–50%. Those figures
+  are the page's. The same page describes summary decks and a short quiz on the diff. Both stay in this
+  list. [post](https://journal.hexmos.com/introducing-livereview/).
 - **lucidiff "Risks"**: severity plus failure mechanism, citations checked against the diff
   ([repo](https://github.com/Rishabjs03/pr-karpathy)).
 - **Tembo automated review** that runs tests and builds before posting ([Tembo](https://www.tembo.io/blog/tembo-vs-boat));
@@ -699,5 +789,35 @@ reading Matt Pocock's `teach`.*
   [X](https://x.com/arsene_btc/status/2117723494762844600). Rejected because it draws a logo-rich stack diagram
   from a one-sentence description, not from reading the repo. README candy, not code understanding of existing
   structure.
+
+## Changes (2026-11-09 sweep)
+
+The ranked list is still 17 items, in the same order. No row was added, shipped, or rejected. Notes:
+[`notes/sweep-2026-11-09.md`](notes/sweep-2026-11-09.md). The draft header on this branch is unchanged,
+so it can merge with open PR #13, which rewrites that header for the 2026-11-06 sweep.
+
+- #1: the 2026-11-03 Osmani article (form an expected answer before asking; a perfect-score quiz before
+  merge) and Learn with Claude (a quiz peer, 0 stars, posts at 0 likes). The article's mirror counts are
+  the largest X-post like count and view count in this backlog. The rank stays with the measured quiz
+  results. X API `get_posts_by_ids` returned `client-not-enrolled`. The counts are api.fxtwitter.com at
+  2026-11-09T13:25:34Z for the article, and the same day's mirror read for the other posts.
+- #3: the same article's slice-on-demand line. LACY (five learners, guided-tour quiz 83%, AI-only 57%,
+  `measured-RCT`, small) and CodeMap (user study of time and ratings, no comprehension quiz in the
+  sections read). Cognitive Tours is the human-written waypoint tour. Its evidence is the author's own
+  six-month use.
+- #5: the author writes the why. Rank the diff's decisions, flag an ADR or the rules file, ask in the
+  author's words. That capture is `our own idea`, from Cognitive Tours' `suggest-waypoint`. Tracybot's
+  Tasklet (up to five planning prompts plus the build prompt) is the unit for an agent-written line.
+  GitHub API, call started at the 2026-11-09T13:23:42Z clock read: 10 stars. The Tracybot study is
+  usability (focus group of 7, survey of 24 on screenshots).
+- #6: the same Tasklet is what Ask returns for an agent-written line.
+- #8: one caution from arXiv 2609.24616. Structured reveal changed fixations. Comprehension scores for
+  static, structured, and character reveal sat together (Table 4, N=44). The item stays here.
+- Hand-off: LiveReview's risk-scored auto-approve. The page states both 40–50% and 30–50%. Its quiz
+  stays in the hand-off list.
+- Considered as a new row, and folded into #5 and #3: "author explains it." One author's use, and the
+  job is a rule on the decision log plus a lesson stop. A new number would shift the items PR #13 cites.
+- Left off the ranked list: Kiln's codebase-onboard line (0 likes, 25 views on the same mirror read).
+  Already covered by the onboarding skills on #3.
 
 
