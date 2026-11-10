@@ -679,7 +679,8 @@ The ranked list is still 17 items, in the same order. No row was added, shipped,
 [`notes/sweep-2026-11-10.md`](notes/sweep-2026-11-10.md). The draft header on this branch is unchanged,
 so it can merge with open PR #13, which rewrites that header. This section sits before the draft 2
 changelog. Appending after Rejected shares an insertion point with open PR #17, and inserting before
-Rejected shares one with #13. A trial merge of both branches into this one is in the note.
+Rejected shares one with #13. Trial merges of both branches, and of the two together, applied cleanly
+and were not kept. The note has the commands.
 
 - #2: White et al., arXiv 2611.12019, published 2026-11-09T07:56:58Z. Within-subjects, N=20 (22 completed,
   2 excluded). tDRT +11.2% with AI (chi-square 17.37, p<.001); quiz phase +6.9% in the results section
