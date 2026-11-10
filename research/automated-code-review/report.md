@@ -4,8 +4,9 @@
 
 Status: first draft, written to be revised once Matt's prior docs are folded in further. Every
 external source below was opened on 2026-10-31, except CR-Bench-v2 (opened in the 2026-11-04
-daily sweep and again on 2026-11-05) and Foresight-SWE (opened 2026-11-05); anything that could
-not be opened is listed in "Not verified". Numbers from different benchmarks are not comparable.
+daily sweep and again on 2026-11-05), Foresight-SWE (opened 2026-11-05), and Alibaba Open Code
+Review (opened in the 2026-11-10 daily sweep); anything that could not be opened is listed in
+"Not verified". Numbers from different benchmarks are not comparable.
 
 **Precedence for Matt's figures** (as instructed): the 2026-10-31 escapes-dev run beats Phase 0
 `RESULTS.md` (2026-10-29), which beats the working notes on overlapping figures; where the notes
@@ -218,6 +219,19 @@ Only items I opened. Where Matt's docs already cite an item, it's marked "(in Ma
 - **Automated Code Review in Practice (Beko, Qodo PR-Agent)** [arXiv 2412.18531](https://arxiv.org/abs/2412.18531):
   73.8% of bot comments labelled resolved, but mean PR closure time rose from 5h52 to 8h20 and
   re-reviews after each fix became "redundant and unhelpful". Older model (GPT-4); one company. ⚠️
+- **Alibaba Open Code Review** [repo](https://github.com/alibaba/open-code-review) (Apache-2.0; created
+  2026-05-18; ~49.7k stars on 2026-11-10; seen via
+  [X](https://x.com/blob16exe/status/2119789161180000597), 2026-11-09; 2026-11-10 daily sweep) **[VB]**:
+  README says it was Alibaba Group's internal assistant for two years, serving tens of thousands of
+  developers. Hybrid of deterministic file selection and bundling (related files as one isolated
+  sub-agent), template-engine rule matching per file type (repo description: NPE, thread-safety, XSS,
+  SQL injection), and separate comment-positioning and comment-reflection modules, plus an LLM agent
+  for dynamic context. CLI plus Claude Code / Codex / Cursor skills, including delegate mode on the
+  host model. On larger changesets, agents with Skills "cut corners"; locations drift; quality
+  fluctuates with small prompt changes. Built on AACR-Bench (already §2.4): versus Claude Code, same
+  model, higher precision and F1, ~1/9 the tokens, faster, lower recall (precision over noise); exact
+  figures are image-only (`imgs/benchmark-en.png`). ⚠️ Vendor self-benchmark, no independent
+  replication. Backlog **C15**.
 
 ### 2.4 Benchmarks and eval method
 
