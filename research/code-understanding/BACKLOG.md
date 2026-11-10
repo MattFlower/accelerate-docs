@@ -104,6 +104,14 @@ factory's deliver/review stages.
   `build --check` should warn on unequal option lengths. Matt Pocock's own claim: "The /teach tests knowledge retrieval as well as just teaching"
   ([X](https://x.com/mattpocockuk/status/2076545046204071987), 3 likes).
 - **Risk:** questions can leak held-back findings. Keep them after the pass, and phrase them about behavior, not bugs.
+- **Quiz shape from the 2026-11-10 paper and from `socratic-tutor`.** White et al. asked four multiple-choice
+  questions after the reader's pass, with the AI closed: maintenance, summarization, mental execution, and
+  structure (Wyrich et al.). Means were 3.22 and 3.23 of 4, and a perfect four was about half of tasks, so
+  the mental-execution questions need to be harder than that ceiling. The study is on #2.
+  `socratic-tutor` (on #3) adds two rules for this block: a wrong answer gets a narrower question that
+  exposes the contradiction, and credit for a higher level waits for two or more independent checks, at
+  least one of them unprompted recall. The skill is a generic tutor. The rules still fit the quiz.
+  See "Changes (2026-11-10 sweep)".
 
 ### 2. Measure it: time per file and stop, reveal events, quiz score in the export — `proposed`, cost S, target HR
 - **Idea:** add timestamps per `focus` stop and per file, the reveal time, and quiz answers to the **Copy feedback**
@@ -119,6 +127,19 @@ factory's deliver/review stages.
   edits stay small ([arXiv 2610.10610](https://arxiv.org/abs/2610.10610)). Evidence: `measured-obs`. It is not a
   human study, and it is not a reason to add an agent-eval skill. It is a reason to keep a comprehension measure
   next to time-to-approve. See #1.
+  **White et al.** ([arXiv 2611.12019](https://arxiv.org/abs/2611.12019), published 2026-11-09T07:56:58Z)
+  is the same warning on self-report. 3×2 within-subjects, N=20 after two exclusions from 22. Java snippets
+  of about 30, 45, and 70 lines. Gemini's web chat on a second monitor, then a four-question quiz with the
+  AI closed. tDRT reaction times were 11.2% higher with AI (chi-square 17.37, p<.001) and, in the results
+  section, still 6.9% higher in the quiz phase (p=0.007). The introduction and the discussion print 6.93%
+  for that quiz-phase comparison. NASA-TLX and SEQ did not differ (p=0.180, p=0.161). Quiz means were 3.22
+  and 3.23 of 4 (p=.982), with a ceiling. Self-reported ease is not the comprehension signal, and
+  time-to-approve is not one either. The quiz and the extend task stay the guard. A quiz used as that
+  guard has to be able to move, which this one could not. Evidence: a within-subjects measurement on a
+  small student sample. People were not assigned to separate groups, so this result is not tagged
+  `measured-RCT`. The arXiv comment says "Accepted to ICSE 2027." Themes and the hold-back cite are in
+  the 2026-11-10 changes section. Notes:
+  [`notes/sweep-2026-11-10.md`](notes/sweep-2026-11-10.md).
 - **Why it helps:** every other item here is a guess without it. It tells us whether a block saves minutes or only
   moves them. The extend task tells us whether the reader can still work once the page is closed.
 - **Test:** 10 reviews with the export on. Check the timings add up to wall-clock time, and that viewed-but-skipped
@@ -215,6 +236,20 @@ reading Matt Pocock's `teach`.*
   Also check that the lesson's first stops are the code behind a screen or endpoint the reader named. v2 only if v1 beats both the baseline and
   reading cold. For v2: onboard to an unfamiliar public repo (for example `ky`) with the course vs. DeepWiki vs.
   Floorplan vs. cold, then make the same small change. Floorplan is the second baseline arm, beside DeepWiki.
+- **Jane Street `socratic-tutor`** ([SKILL.md](https://github.com/janestreet/agent_skills/blob/master/socratic-tutor/SKILL.md),
+  MIT, in [janestreet/agent_skills](https://github.com/janestreet/agent_skills)). GitHub API at
+  2026-11-10T13:24:25Z: `stargazers_count` 3140 (3136 at 2026-11-10T13:20:56Z the same session; the backlog
+  uses 3140). It will not start a tutoring session on a one-off "explain X". It asks 3–5 diagnostic
+  questions before teaching, then keeps 4–10 subskills on a 0–5 map rendered after each level change.
+  A level rises only after two or more independent checks, one of them unprompted recall, and a spaced
+  re-test can drop a level. `teach`, cited above, interviews for the mission and stores what a quiz
+  shows. This skill adds the placement diagnostic and the map the learner sees. It is a generic tutor
+  (teach, tutor, quiz, drill, master, on any topic). One exercise line is "predict what this code prints."
+  It is not a lesson about a repo or a diff. The X post is a promo by @0xRicker, not Jane Street's account
+  ([X](https://x.com/0xRicker/status/2119838664767254976)). fxtwitter at 2026-11-10T13:24:25Z: likes 84,
+  bookmarks 42, replies 31, reposts 7, quotes 2, views 3737. The brief's impression figure was 3732.
+  X API `get_posts_by_id` returned `client-not-enrolled`. Evidence: `practitioner` + `engagement`.
+  The narrower-question rule is on #1. The map is on #9. No new row.
 
 ### 4. Worked example with real values ("intuition with toy data") — `proposed`, cost M, target HR + item 3
 - **Idea:** an `example` block that traces one concrete input through the changed path: input → each stop (file:line)
@@ -291,6 +326,12 @@ reading Matt Pocock's `teach`.*
   in the chat window" ([issue #519](https://github.com/mattpocock/skills/issues/519)). HR's export makes in-place notes
   cheap without a server, so the cost argument against it doesn't apply here. The lesson to take is to keep it one
   button, with no new UI mode.
+- **Atlas Review, ask from a hunk (2026-11-10).** The marketing page says hover a finding or a diff hunk
+  and ask what changed, what the impact is, and how to test it. The walkthrough UI opens Ask Atlas on a
+  selected line range. GitHub API at 2026-11-10T13:24:25Z: 0 stars.
+  [site](https://loomtide.ai/atlasreview), [repo](https://github.com/Loomtide/atlas-review).
+  Evidence: `vendor`. The walkthrough is a shipped peer. The policy file is #10. Step-read marks are #17.
+  Findings and the verdict are handed off.
 
 ### 7. Structural blast radius and "what it's wired into" map — `proposed`, cost M, target HR
 - **Idea:** replace or extend HR's `git grep -w` blast radius with a tree-sitter import/call graph that is 1 hop from
@@ -390,6 +431,10 @@ reading Matt Pocock's `teach`.*
   are against the scale midpoint in the TARS condition. Adapting depth may save time. It has not been shown to
   improve understanding. Keep this item at cost S, and keep quiz score as the guard. Evidence: `measured-RCT`
   (small, null on correctness).
+- **Earned levels from `socratic-tutor` (2026-11-10).** The skill on #3 places each of 4–10 subskills at
+  0–5 and raises a level only after demonstrated checks, including one unprompted recall. That is a level
+  check with earned levels. The one optional "new to this area?" question stays the fallback when no map
+  exists. White et al. (on #2) do not vary explanation depth, so they are not a source here.
 - **Test:** time on top-of-page for owned vs. unfamiliar areas, with quiz score held constant. Quiz score is the
   guard: a faster top of the page with a lower quiz score fails.
 
@@ -402,6 +447,10 @@ reading Matt Pocock's `teach`.*
   [repo](https://github.com/igorkasyanchuk/diffnotes), 3 stars per the GitHub API on 2026-11-02). The fail-closed
   `build --check` is ours; DiffNotes describes the agent reading the rules. See #5 for the rest of the tool.
   Evidence: `practitioner` (low engagement).
+  **Atlas Review** reads a repo-owned `.atlas/review-policy.json` (the code also accepts `atlas-review.yml`).
+  The file sets review depth per path (deep, structural, shallow, collapsed, skip). That is a cousin of
+  this item's explanation rules, aimed at how hard a path is reviewed. 0 stars on 2026-11-10. The rest of
+  the tool is on #6. Evidence: `vendor`.
 - **Why it helps:** HR already checks that claims match the diff. A rule makes a missing deploy or rollback note a
   build failure on the changes that need one.
 - **Why it sits here:** effort is S because `build --check` already exists. The gain shows up on the PRs a rule
@@ -523,6 +572,10 @@ reading Matt Pocock's `teach`.*
   clean" (`HR/SKILL.md` "When feedback comes back").
 - **Sources:** `our own idea`. A related review-quality idea is the code-review backlog's C3 "re-review only the fix
   diff".
+  **Atlas Review** stores which walkthrough steps the reader marked read, in localStorage, per review.
+  The 2026-11-10 launch post calls that reading progress. The peer is those saved step-read marks on a
+  large review. This item remains the interdiff of hunks and notes since the last page. See #6 for the
+  repo. Evidence: `vendor`.
 - **Test:** count re-read minutes on the second round across 5 feedback loops.
 
 ---
@@ -538,7 +591,7 @@ reading Matt Pocock's `teach`.*
 | Written for a newcomer: `background` ("Before this change"), `terms` with hover underlines, readability warnings | `HR/SKILL.md` "Write for someone new to this code"; `HR/references/format.md` | Like Litt's "Background" and codebase-to-course's glossary tooltips. |
 | Annotated diffs (note / decision / risk / question), 2–5 per file | `HR/SKILL.md` "Annotations" | |
 | Visuals: wireframes, data model, API, states matrix, Mermaid, diagrams, `code` of any file at head | `HR/references/{format,wireframes,diagrams}.md` | Like CodeRabbit sequence diagrams and lucidiff's flow diagram. |
-| Findings held back until the reviewer's own pass | `HR/SKILL.md` "The reviewer reads before they see your conclusions" | Earlier report #3. The same order as aictrl's teach-the-change, then reviewer notes. Item 11 adds the claims footer and diagram steps. It does not redo this row. |
+| Findings held back until the reviewer's own pass | `HR/SKILL.md` "The reviewer reads before they see your conclusions" | Earlier report #3. The same order as aictrl's teach-the-change, then reviewer notes. Item 11 adds the claims footer and diagram steps. It does not redo this row. White et al. (2026-11-10, on #2) name Displacement: roughly a quarter let the explanation stand in for reading the code ("I then almost exclusively read the LLM output instead of the code"). That is the failure this row holds findings back to prevent. |
 | Proven mechanical / generated tier | `HR/SKILL.md` `files` | Earlier report #2. Item 8 collapses same-file moves, renames, and generated or vendored noise, which path tags miss. |
 | Git signals with provenance tags (verified / author text / inference) | `HR/SKILL.md` "Signals" | Earlier report #4. |
 | Text blast radius (JS/TS/Py/Go/Ruby) | `HR/SKILL.md` "Blast radius" | Item 7 upgrades it. |
@@ -601,6 +654,16 @@ reading Matt Pocock's `teach`.*
   evidence bundle (scenarios, what happened, screenshots, and what it could not cover) before a person opens the
   diff ([X](https://x.com/ClipboardEng/status/2117624478213537983): 1 like, 116 impressions, X API 2026-11-05).
   Those results are the post's. They were not re-measured here.
+- **Atlas Review, findings and verdict** (Loomtide, launch post 2026-11-10). Structured findings with file
+  paths, severity, and suggested fixes. The app labels open high-severity findings as blocking approval.
+  The marketing page says Atlas does not configure GitHub required checks or branch protection, and that
+  the team decides when to merge. `reviewVerifier.js` describes two-pass verification for high and medium
+  recommendations. An unsupported finding can be hidden or demoted. No measured false-positive rate was
+  read. The walkthrough, the hunk question, the policy file, and the step-read marks stay on the
+  understanding items. [site](https://loomtide.ai/atlasreview),
+  [repo](https://github.com/Loomtide/atlas-review) (0 stars, GitHub API 2026-11-10T13:24:25Z).
+  [X](https://x.com/avinashpdy/status/2119996488168231062): 3 likes, 0 bookmarks, 4 replies, 170 views,
+  fxtwitter at that same clock read. X API `get_posts_by_id` returned `client-not-enrolled`.
 - **IronBee Code Review**: same launch post as Code Wiki. The post's note_tweet claims 67.4 F2 and 75.3 Recall
   on the Martian Code Review Benchmark ([X](https://x.com/serkan_ozal/status/2117633673461674225)).
 
@@ -609,6 +672,47 @@ reading Matt Pocock's `teach`.*
 - **Old #3 slice explainer, old #10 repo onboarding course, old #14 learner profile → #3 `teach-code`** (2026-11-01).
   They are the same skill at three sizes: one lesson, a course, and the state that connects them. `teach` shows the
   state layer is what makes a multi-session course work (mission, learning records, zone of proximal development).
+
+## Changes (2026-11-10 sweep)
+
+The ranked list is still 17 items, in the same order. No row was added, shipped, or rejected. Notes:
+[`notes/sweep-2026-11-10.md`](notes/sweep-2026-11-10.md). The draft header on this branch is unchanged,
+so it can merge with open PR #13, which rewrites that header. This section sits before the draft 2
+changelog. Appending after Rejected shares an insertion point with open PR #17, and inserting before
+Rejected shares one with #13. Trial merges of both branches, and of the two together, applied cleanly
+and were not kept. The note has the commands.
+
+- #2: White et al., arXiv 2611.12019, published 2026-11-09T07:56:58Z. Within-subjects, N=20 (22 completed,
+  2 excluded). tDRT +11.2% with AI (chi-square 17.37, p<.001); quiz phase +6.9% in the results section
+  (p=0.007; the introduction and the discussion print 6.93%). NASA-TLX p=0.180, SEQ p=0.161. Quiz 3.22
+  vs 3.23 of 4 (p=.982), ceiling. Evidence is a within-subjects measurement on a small student sample,
+  not `measured-RCT`. Self-reported ease and time-to-approve stay off the comprehension signal. The quiz
+  and the extend task stay the guard.
+- #1: the same paper's four-question quiz, after the reader's pass, with the AI closed. Ask harder
+  mental-execution questions than a ceiling at about half perfect. `socratic-tutor`: a narrower question
+  on a wrong answer, and unprompted recall before a level rises.
+- Shipped hold-back: the paper's Displacement theme. Roughly a quarter, the paper's own phrase, read the
+  explanation instead of the code. One quoted line is in the note.
+- #3: Jane Street `socratic-tutor`. Diagnostic of 3–5 questions, a 0–5 map rendered after each change,
+  earned levels, spaced review that can drop a level, then a final assessment. GitHub API at
+  2026-11-10T13:24:25Z: 3140 stars. Compared with `teach`, already cited on this item: `teach` does not
+  place the learner with that diagnostic or render this map. The skill is a generic tutor. X is a promo
+  post by @0xRicker (fxtwitter views 3737 at the same clock read; the brief said 3732). Evidence:
+  `practitioner` + `engagement`.
+- #9: the 0–5 map is the level check, with earned levels. The paper does not vary explanation depth, so
+  it is not cited on #9. #13 ("Who to ask") is unchanged: the skill never names a person.
+- Shipped reading order: Atlas Review's step-by-step walkthrough, explanation beside the diff, for a
+  local branch and for a pull request. [repo](https://github.com/Loomtide/atlas-review), 0 stars at
+  2026-11-10T13:24:25Z, MIT, macOS and Windows. The README says Linux packages are not published. The
+  launch post is 2026-11-10. `docs.atlasengine.dev` did not resolve (NXDOMAIN), so it is not cited.
+- #6: Ask Atlas from a finding or a selected diff hunk. #10: versioned `.atlas/review-policy.json`.
+  #17: walkthrough steps marked read, kept in the browser. The review target that was verified is a
+  local branch's commits before push. A test in the repo says an uncommitted edit does not move the
+  branch review's head SHA.
+- Hand-off: Atlas findings, severity, the in-app "blocks approval" label, and two-pass verification.
+  The marketing page says Atlas does not set GitHub branch protection.
+- Ranking is unchanged. The paper tightens #1 and #2. 3140 stars and a promo post do not move #3 above
+  them. Atlas is a peer of a shipped row, at 0 stars and 3 likes, so it does not enter the ranked list.
 
 ## Changes in draft 2 (2026-11-01)
 
