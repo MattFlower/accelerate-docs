@@ -209,6 +209,31 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
       quality-review is a post-implement gate in an agent loop.
     - **Test:** On escapes-dev, independent adversarial×2 vs same-session self-review after implement;
       blocking recall + clean must-fix (and resolve-rate if used in a factory loop).
+15. **Deterministic coverage enforcement for large diffs** — `proposed`, cost S–M. Also helps limitless
+    (the same skipped-file failure mode applies to its reviewer on large factory diffs).
+    - **Idea:** Script-side file selection, plus bundling of related changed files into review units.
+      Each unit is reviewed by an isolated sub-agent sample. A checked ledger records that every
+      in-scope changed file was covered. This is the code-enforced version of T2's never-built
+      per-file ledger (table B). Out of scope: OCR's precision-first tuning and long per-file rule
+      lists. Long pattern checklists are in Rejected. OCR's README reports lower recall than a
+      general agent, and quality-review optimizes blocking recall with a clean must-fix bar.
+    - **Source:** [Alibaba Open Code Review](https://github.com/alibaba/open-code-review) (Apache-2.0;
+      created 2026-05-18; ~49.7k stars on 2026-11-10). README: two years as Alibaba Group's internal
+      assistant, tens of thousands of developers; deterministic file selection and bundling, each
+      bundle an isolated sub-agent; template-engine rule matching; comment-positioning and
+      comment-reflection. Repo description lists built-in rules such as NPE, thread-safety, XSS, and
+      SQL injection. Seen via [X](https://x.com/blob16exe/status/2119789161180000597) (2026-11-09).
+      Opened in the 2026-11-10 daily sweep. [report.md](report.md) §2.3.
+    - **Why:** Names a concrete failure mode — skipped files on large changesets — that a prompt alone
+      may not fix. T2's prompt-only coverage version missed the +5 bar on Sol (table B, lab screen
+      p11). Evidence is thin: a vendor self-benchmark, recall went down, the exact figures are
+      image-only (`imgs/benchmark-en.png`), and there is no independent replication.
+    - **Test:** First measure whether the failure exists for us. On escapes-dev, for multi-file diffs,
+      log which changed files each union-of-two adversarial sample actually opened or cited, and
+      whether misses concentrate in unread files. Only if they do, A/B bundled fan-out versus the
+      current union of two at matched cost. Score blocking recall, clean must-fix, and cost, with the
+      same +5 bar as other screens. Do not touch escapes-heldout.
+    - **Cost:** S for the coverage measurement, M for the fan-out arm.
 
 ---
 
