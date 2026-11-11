@@ -4,8 +4,9 @@
 
 Status: first draft, written to be revised once Matt's prior docs are folded in further. Every
 external source below was opened on 2026-10-31, except CR-Bench-v2 (opened in the 2026-11-04
-daily sweep and again on 2026-11-05) and Foresight-SWE (opened 2026-11-05); anything that could
-not be opened is listed in "Not verified". Numbers from different benchmarks are not comparable.
+daily sweep and again on 2026-11-05), Foresight-SWE (opened 2026-11-05), and CodeReviewBench plus
+Sam (@samarmstrongx) on verification layers (opened in the 2026-11-11 daily sweep); anything that
+could not be opened is listed in "Not verified". Numbers from different benchmarks are not comparable.
 
 **Precedence for Matt's figures** (as instructed): the 2026-10-31 escapes-dev run beats Phase 0
 `RESULTS.md` (2026-10-29), which beats the working notes on overlapping figures; where the notes
@@ -244,6 +245,23 @@ Only items I opened. Where Matt's docs already cite an item, it's marked "(in Ma
 - **Martian Code Review Bench** [repo](https://github.com/withmartian/code-review-benchmark): 50 PRs /
   173 golden comments offline plus an online set scored against developers' post-review fixes;
   three judge models. (in Matt's docs)
+- **CodeReviewBench (Kodus)** [site](https://www.codereviewbench.com/),
+  [leaderboard](https://www.codereviewbench.com/leaderboard),
+  [repo](https://github.com/kodustech/codereviewbench)
+  ([methodology v3](https://github.com/kodustech/codereviewbench/blob/main/docs/methodology-v3.md);
+  `data-v3/{scorecards,submissions}/{light,heavy}/`, light = balanced; no license file).
+  Announced 2026-11-11
+  ([X](https://x.com/Ed_dfreitas/status/2120315251790942632)). **[VB]** 30 merged PRs from 5 OSS
+  repos. A re-labelled subset of the Martian PRs above, so not independent of Martian. Kodus
+  re-labelled the real problems (Opus plus a second reviewer, disagreements debated) into 121 valid
+  true positives; methodology v3 lists Martian's goldens for those PRs as 95 human-reported bugs.
+  Judge: Claude Haiku 5.5; same problem at the same place; a second comment on a bug is a false
+  positive; Haiku and Opus agreed on 249 of 252 comments. Ranked by F2. Balanced = one generalist
+  agent; heavy = that generalist plus 9 specialist lens agents in parallel, then the same
+  verify/dedup. Site claim, not recomputed here: across the 13 models measured in both modes, heavy
+  finds 9.9 points more recall, precision down 7.0 points, at 2.5× the cost per PR. Best balanced
+  recall 68.6% (Kimi K3.1 Pro; recall 95% CI 59.0–78.0). One run per model and mode, at vendor
+  defaults. ⚠️ Vendor-run, vendor-labelled, single harness. Backlog **C16**. Opened 2026-11-11.
 - **Statistics:** Miller, *Adding Error Bars to Evals* [arXiv 2411.00640](https://arxiv.org/abs/2411.00640);
   Bowyer et al., *Don't use the CLT with fewer than a few hundred datapoints* [arXiv 2503.01747](https://arxiv.org/abs/2503.01747);
   TREC pooling (Buckley & Voorhees) [NIST](https://www.nist.gov/node/761376). (in Matt's docs)
@@ -267,6 +285,11 @@ Meta JIT catching tests [2601.22832](https://arxiv.org/abs/2601.22832), VulTrial
 AnyPoC [2604.11950](https://arxiv.org/abs/2604.11950), Verify Before You Fix [2604.10800](https://arxiv.org/abs/2604.10800),
 repair loops [2607.05197](https://arxiv.org/abs/2607.05197), defect-focused review (ICML 2025) [2505.17928](https://arxiv.org/abs/2505.17928),
 scaling agent systems [2512.08296](https://arxiv.org/abs/2512.08296).
+
+- **Sam (@samarmstrongx), "I paid 52% more for code review and it did nothing"** ([X](https://x.com/samarmstrongx/status/2120137521447239966), 2026-11-10; [configs/traces](https://github.com/samarmstrong/verification-layers)). SlopCodeBench, Claude Sonnet 5.5 medium in Claude Code, 20 problems / 101 checkpoints, about $185.
+  Table: Plain $0.29/checkpoint, 92.0% hidden tests, erosion 0.853; Conveyor rules $0.30, 90.3%, 0.843; + reviewer (can send back up to twice) $0.44, 91.4%, 0.850; tests first $0.31, 90.3%, 0.770.
+  Author: +52% cost, no measurable gain, because the specs are detailed with worked I/O examples and the plain agent ran the program on its own in 89% of checkpoints; this does not transfer to rough specs.
+  ⚠️ Thin: factory-loop outcome, not reviewer recall; single run; small n. **Also relevant to limitless** (factory loop; backlog item 8, acceptance claims from the request).
 
 ### 2.6 Runtime facts for a Claude Code + Codex skill [doc]
 

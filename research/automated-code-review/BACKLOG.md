@@ -209,6 +209,33 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
       quality-review is a post-implement gate in an agent loop.
     - **Test:** On escapes-dev, independent adversarial×2 vs same-session self-review after implement;
       blocking recall + clean must-fix (and resolve-rate if used in a factory loop).
+16. **Specialist-lens fan-out vs. independent-sample union at matched cost** — `proposed`, cost M.
+    Also helps limitless.
+    - **Idea:** quality-review plans several lenses. Measure whether N parallel specialist lens agents,
+      plus verify/dedup, beat the current core (item 2: adversarial prompt × 2 independent samples,
+      unioned) at matched token cost, and separately whether lenses add anything on top of that core.
+      Optionally use CodeReviewBench gold v3 (30 PRs, re-labelled) as a cheap external smoke next to
+      item 10 (ReviewBench). The repo has no license file, so local use only, and Kodus labelled the gold.
+    - **Source:** [CodeReviewBench](https://www.codereviewbench.com/)
+      ([leaderboard](https://www.codereviewbench.com/leaderboard),
+      [repo](https://github.com/kodustech/codereviewbench),
+      [methodology v3](https://github.com/kodustech/codereviewbench/blob/main/docs/methodology-v3.md);
+      scorecards and submissions under `data-v3/{scorecards,submissions}/{light,heavy}/`, light = balanced).
+      Announced [2026-11-11](https://x.com/Ed_dfreitas/status/2120315251790942632).
+      [report.md](report.md) §2.4.
+    - **Why:** First public multi-model point (13 models, both modes) on lens fan-out versus one
+      generalist in the same harness. The site's aggregate — not recomputed here — is 9.9 points more
+      recall, precision down 7.0 points, at 2.5× the cost per PR. That is the same recall-for-cost
+      shape as extra samples, and it is unclear whether lenses add diversity beyond a second
+      independent sample. Bears on rejected items: long pattern checklists (conflicts with arm F's
+      +14.6, not settled) and the trust-boundary pass as a third sample (+2.5 pts vs the +5 bar).
+      Evidence is thin: vendor-run, one run per model and mode, Kodus's harness and Kodus's labels.
+    - **Test:** On escapes-dev (not heldout). Arms: adversarial×2 union; generalist + k lens agents
+      (k chosen so tokens ≈ adversarial×2); adversarial×2 plus lenses. Metrics: blocking recall,
+      clean must-fix, cost per review, Wilson CIs. Ship lenses only if they beat adversarial×2 at
+      matched cost by the existing +5 bar.
+    - **Rank:** Below the cheap S items, near C9 and C11. The likely gain is a recall-for-cost trade
+      extra samples may already buy, so this is an M comparison that may miss +5.
 
 ---
 
