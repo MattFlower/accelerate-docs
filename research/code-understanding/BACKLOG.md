@@ -103,6 +103,12 @@ factory's deliver/review stages.
   related open issue [#985](https://github.com/mattpocock/skills/issues/985), and [#611](https://github.com/mattpocock/skills/issues/611)). So HR's renderer should shuffle answers with a seed, and
   `build --check` should warn on unequal option lengths. Matt Pocock's own claim: "The /teach tests knowledge retrieval as well as just teaching"
   ([X](https://x.com/mattpocockuk/status/2076545046204071987), 3 likes).
+  **One check question per chapter (2026-11-11).** Co-Review's `/co-review:audit` ends each of four
+  guide chapters with one Check. The reader comments a prediction, and the agent says how that answer
+  matches the code
+  ([workflows](https://sdsvn.github.io/co-review/docs/guides/workflows/)). The multiple-choice block at
+  the end of the page stays. Evidence: `vendor`. The guide is #3. Coverage is #2. See "Changes
+  (2026-11-11 sweep)".
 - **Risk:** questions can leak held-back findings. Keep them after the pass, and phrase them about behavior, not bugs.
 
 ### 2. Measure it: time per file and stop, reveal events, quiz score in the export — `proposed`, cost S, target HR
@@ -111,6 +117,12 @@ factory's deliver/review stages.
 - **Sources:** carried over from `agentic-dev-research/research/making-prs-easier-to-review/report.md`, the sections
   "Claims to validate" and "Self-instrumentation". It has not shipped: `HR/assets/app.js` stores viewed state and
   comments in `localStorage`, but no timing. Evidence: `our own idea` (from the earlier report).
+  **Co-Review coverage (2026-11-11).** `get_review` returns how many files the reviewer marked viewed
+  in each area, and that area's next unviewed file. A file changed since it was marked viewed counts
+  as unread
+  ([agent contract](https://sdsvn.github.io/co-review/docs/reference/agent-contract/)). That is a
+  reading signal, next to the quiz. It is not itself a comprehension score. Evidence: `vendor`. The
+  guide is #3. See "Changes (2026-11-11 sweep)".
   Supporting evidence for the second measure below: (Im)Paired Programming found that a completion metric missed the
   harm, and an "extend the code without the agent" task showed it
   ([arXiv 2607.26375](https://arxiv.org/abs/2607.26375)). Evidence for that result: `measured-RCT` (student sample).
@@ -189,6 +201,18 @@ reading Matt Pocock's `teach`.*
   - **Code Stories**, PR Explainer's always-on daemon: the repo narrates its own history (what changed last week,
     onboarding) without a pull request to open ([site](https://prexplainer.com/)). Noted here, not a separate item.
     The sample entries on the page are product copy. Evidence: `vendor`.
+  - **Co-Review `/co-review:audit` (2026-11-11).** An Eclipse Theia app, MIT, and a Claude Code plugin.
+    The audit writes a whole-repo guide in four chapters: lay of the land; how it works; patterns,
+    naming, and why; where it hurts. Every claim links to code. A claim that could not be verified is
+    tagged inferred or unknown. Each chapter ends with one check question. The workflows page states
+    the goal: afterwards, without the agent, you can say where things live, use the vocabulary, trace
+    the main flows, and place a change and predict what it affects
+    ([workflows](https://sdsvn.github.io/co-review/docs/guides/workflows/)). GitHub API at
+    2026-11-11T13:20:30Z: 9 stars, 1 fork, created 2026-09-25. fxtwitter at that read: 7 likes,
+    0 bookmarks, 15 replies, 139 views. X API `get_posts_by_ids` returned client-forbidden. The check
+    question is #1. Coverage per area is #2. The tags are #11. `/co-review:review` is a shipped peer.
+    Evidence: `vendor`, plus `engagement` that is tiny. If Graphify is installed, the repository
+    overview can be built from that graph. Graphify itself is not re-added here.
   - **perspica Learn** writes at most three concept lessons for one change, or says there is nothing to learn.
     A lesson can include a figure. The quiz on the lesson is #1. The figure, when one is drawn, is #15. Not a
     second course. [README](https://github.com/sshah03/perspica). Evidence: `vendor`. The rest of the tool is #8.
@@ -280,6 +304,10 @@ reading Matt Pocock's `teach`.*
   ([Graphite](https://graphite.com/)). GILT, an in-IDE LLM helper, raised task completion (+0.47 sub-tasks, p<.01)
   but **not** quiz scores ([Nam et al., ICSE 2024](https://arxiv.org/html/2307.08177v3)). Evidence: `vendor` +
   `measured-RCT` (mixed).
+  **Greptile, ask from selected code (2026-11-11).** The same post as the Tour tab says the reader can
+  select code or a finding and ask, including a walkthrough of what changed
+  ([blog, 2026-11-09](https://www.greptile.com/blog/code-review-is-evolving), Daksh Gupta). The Tour tab
+  is a shipped reading-order peer. Evidence: `vendor`. Merge status and bulk approve are handed off.
   **DiffGuardian** answers a spoken or typed question while the lines it is talking about scroll
   ([site](https://diffguardian.ai/)). The voice tour and Trace It are #15. The dependency graph is #7.
   Evidence: `vendor`.
@@ -327,6 +355,14 @@ reading Matt Pocock's `teach`.*
   ([changelog](https://www.opvs.ai/changelog/opvs-v1140-ask-the-code-index-who-calls-a-function)). Evidence: `vendor`.
   **DiffGuardian** draws a dependency graph from the diff alone and calls the graph heuristic, not a model
   ([site](https://diffguardian.ai/)). Voice and Trace It are #15. Ask is #6. Evidence: `vendor`.
+  **CodeLens (2026-11-11).** A pull request or a local branch opens one change at a time. Each step
+  shows that change's diff, who calls it, with callers outside the change marked, and which databases
+  and APIs it touches. The model writes the explanations. The checks come from the call graph.
+  Tree-sitter covers 15 languages. TypeScript and JavaScript also use the TypeScript compiler. Other
+  languages resolve calls by name, and a missed call is drawn as inferred or left out
+  ([README](https://github.com/blong8334/codeLens)). GitHub API at 2026-11-11T13:20:30Z: 1 star,
+  created 2026-11-03, Apache-2.0. npm `@blong8334/codelens` 0.1.2. Routes, CLIs, and jobs are #8. The
+  content-keyed cache is #17. Evidence: `vendor`, plus `engagement` that is about zero.
   **PR Lens** draws which parts of the app the change touches, including parts the diff does not, as an animated
   architecture diagram ([site](https://prlens.dev/), [repo](https://github.com/coldteadotai/pr-lens), 2,352 stars
   per the GitHub API on 2026-11-05). The data-flow animation is also #11 and #15. Findings and autofix are handed
@@ -351,6 +387,9 @@ reading Matt Pocock's `teach`.*
   [homepage](https://sshah03.github.io/perspica/). pmndrs/react-three-fiber#4008 is "152 of 545".
   apache/spark#59118 is "87 of 633", and that card also says tests reach 30 of the 31 changed functions.
   jhy/jsoup#2618 says tests reach all 20 changed functions. pallets/flask#5818 is one of the twelve examples.
+  **CodeLens, what reaches the change (2026-11-11).** The README on #7 also lists which routes, CLIs,
+  and jobs reach a change, and the queue starts from a suggested place to read. Callers and external
+  systems are on #7. The cache is on #17. Evidence: `vendor`. 1 star at 2026-11-11T13:20:30Z.
   The README says the noise tags, the reading order, and test reach do not need a model. The homepage says those three come from perspica itself.
   Summaries, notes, and Learn lessons are the model's, and each lesson is checked against the code. The only X
   post in this sweep that names it is
@@ -383,6 +422,15 @@ reading Matt Pocock's `teach`.*
   signals, (b) the learner records from #3, or (c) when neither exists, one optional question at the top ("new to this
   area?"). The community "teach pr" skill asks for a teaching level 1–4 up front
   ([#727](https://github.com/mattpocock/skills/issues/727)).
+- **Tiered on demand, SAFE (2026-11-11).** Johnson et al.
+  ([arXiv 2611.13041](https://arxiv.org/abs/2611.13041), published 2026-11-09T11:40:08Z) open a
+  security finding with a one-sentence summary, then what, why, where, and how to fix, and put the
+  deep dive behind a disclosure the reader opens. The predecessor rewrote the whole explanation at a
+  chosen beginner, intermediate, or advanced depth. Within-subjects crossover, 24 participants, both
+  builds. System Usability Scale 77.3 to 85.0 (p=.011). Trust moved +0.04. The interface and the agent
+  changed together, so the gain is the bundle. The domain is security findings. Quiz score stays the
+  guard. The grounding result is #11. Evidence: a within-subjects measurement. Not tagged
+  `measured-RCT`. See "Changes (2026-11-11 sweep)".
 - **Caution from TARS** ([arXiv 2607.15948](https://arxiv.org/html/2607.15948v1)): an in-IDE agent profiles
   expertise and role and adapts explanation depth. Within-subjects, n=18, on Java snippets: 26% faster (mean 224.0s
   vs 304.08s; Mann-Whitney p=0.085, not significant) and no correctness difference (cosine similarity to a
@@ -419,6 +467,17 @@ reading Matt Pocock's `teach`.*
   are new or changed in this pull request. Trace and Walk, numbering the steps to an ending and stepping through
   them, are optional controls on that diagram. Teaching the change before the findings is already shipped. This
   item does not redo it.
+  **Co-Review inferred and unknown (2026-11-11).** The audit guide on #3 links each claim to code and
+  tags a claim the agent could not verify as inferred or unknown
+  ([workflows](https://sdsvn.github.io/co-review/docs/guides/workflows/)). Evidence: `vendor`. 9 stars.
+  **SAFE must read the repo and the fired rule (2026-11-11).** The explanation is tied to the data
+  flow the analyser reported. The same study as #9 left trust flat (+0.04). The abstract says
+  grounding made the findings easier to understand rather than easier to believe. Triage accuracy was
+  0.46 against 0.53 (p=.59). Time per finding, 5.1 against 4.7 minutes, was also indistinguishable
+  (p=.21). The results section prints a 2.6 odds ratio for a better-quality remediation (95 percent CI
+  0.93 to 7.09, p=.069). Correct proposals were 19 percent and 41 percent. The abstract prints the
+  2.6 figure as the odds of a correct remediation. Evidence: within-subjects, security findings. Not
+  tagged `measured-RCT`. The domain and that p-value keep the item where it is.
 - **Sources:** aictrl's explanation card, which keeps reviewer notes last and counts grounded against ungrounded
   claims ([blog, 2026-10-22](https://aictrl.dev/blog/understand-a-pull-request-before-you-review-it),
   [docs](https://aictrl.dev/docs/pr-explanations)). Evidence: `vendor`.
@@ -501,6 +560,18 @@ reading Matt Pocock's `teach`.*
   **PR Lens** animates architecture and data flow inside the pull request, and a step opens the diff
   ([site](https://prlens.dev/)). Stars and posts are on #7. Findings are handed off. Evidence: `vendor`.
   perspica's Learn figure, when the model draws one, is the concept-lesson case of this block. See #1 and #3.
+  **Anatomy (2026-11-11).** A skill that explains an idea by inventing a physical machine whose working
+  is the concept. The README's example is a cache key as a pin-tumbler lock. The quick-start prompt is
+  a token-bucket rate limiter. The figure is an interactive isometric SVG, with WebGL for effects lines
+  cannot draw. Every number comes from the same small model that moves the parts. The skill checks the
+  figure by zooming in on every joint. It runs in Claude Code and in Codex
+  ([README](https://github.com/wheresryan22/anatomy)). GitHub API at 2026-11-11T13:20:30Z: 26648 stars
+  (26647 at 2026-11-11T13:17:42Z the same session), 2245 forks, created 2026-10-08, MIT. The article
+  post ([X](https://x.com/Richix01/status/2119798155608752166)) had 12 likes, 4 bookmarks, and 78429
+  views on api.fxtwitter.com at that 13:20:30Z read. X API `get_posts_by_ids` returned client-forbidden.
+  Evidence: `vendor` + `engagement`. The README says Anatomy invents the object, so the metaphor is
+  not taken from the repository's code and can mislead. A use in HR stays gated, the figure stays tied
+  to the real code, and the quiz (#1) is the guard. Not a new row.
 - **Test:** only on PRs tagged algorithmic. Compare quiz and time with and without the block. The narrated
   modality is a separate pass: on 3 PRs, does the reader still open the page for a line the voice mentioned?
 
@@ -524,6 +595,11 @@ reading Matt Pocock's `teach`.*
 - **Sources:** `our own idea`. A related review-quality idea is the code-review backlog's C3 "re-review only the fix
   diff".
 - **Test:** count re-read minutes on the second round across 5 feedback loops.
+- **CodeLens cache (2026-11-11).** Parses and descriptions are stored by content hash, so a later
+  review pays for content that changed. The explore page also lists what is new or changed since the
+  last look, from the snapshot's commit id. The per-change risk pass is not cached yet, and a cached
+  "why" can go stale when only callers change. The README is on #7. Evidence: `vendor`. This item
+  stays the interdiff of hunks and notes since the last page.
 
 ---
 
@@ -531,7 +607,7 @@ reading Matt Pocock's `teach`.*
 
 | Idea | Where | Notes |
 |---|---|---|
-| Diff → one self-contained HTML page; branch, PR, range, **uncommitted** work | `HR/SKILL.md` "Decide the scope"; `HR/scripts/human-review.mjs` | Covers PRs and uncommitted changes. Not whole-repo onboarding (item 3). Peer products that already do this job: Saga (ordered chapters, one HTML file, comments pushed to GitHub; [post](https://jakeberesford.com/blog/saga), 20 stars, created 2026-07-11) and Guided Review (units from the parsed diff; the model does not invent the lines; [docs](https://guidedreview.dev/docs)). Also peers of this page, GitHub API on 2026-11-05: Trail of Bits Review Walkthrough (the HTML steps; findings are handed off; [page](https://trailofbits.com/skills/review-walkthrough/)), [qiushiyan/explain-diff](https://github.com/qiushiyan/explain-diff) (0 stars), [malav2110/explain-diff-html](https://github.com/malav2110/explain-diff-html) (19 stars), f-labs `html-code-review` (the explainer half; [skill](https://github.com/f-labs-io/agent-html-skills/blob/main/plugins/html-skills/skills/html-code-review/SKILL.md); the repo has 68 stars), and [th0rz05/claude-pr-review-html](https://github.com/th0rz05/claude-pr-review-html) (2 stars; the reading-order half). |
+| Diff → one self-contained HTML page; branch, PR, range, **uncommitted** work | `HR/SKILL.md` "Decide the scope"; `HR/scripts/human-review.mjs` | Covers PRs and uncommitted changes. Not whole-repo onboarding (item 3). Peer products that already do this job: Saga (ordered chapters, one HTML file, comments pushed to GitHub; [post](https://jakeberesford.com/blog/saga), 20 stars, created 2026-07-11) and Guided Review (units from the parsed diff; the model does not invent the lines; [docs](https://guidedreview.dev/docs)). Also peers of this page, GitHub API on 2026-11-05: Trail of Bits Review Walkthrough (the HTML steps; findings are handed off; [page](https://trailofbits.com/skills/review-walkthrough/)), [qiushiyan/explain-diff](https://github.com/qiushiyan/explain-diff) (0 stars), [malav2110/explain-diff-html](https://github.com/malav2110/explain-diff-html) (19 stars), f-labs `html-code-review` (the explainer half; [skill](https://github.com/f-labs-io/agent-html-skills/blob/main/plugins/html-skills/skills/html-code-review/SKILL.md); the repo has 68 stars), and [th0rz05/claude-pr-review-html](https://github.com/th0rz05/claude-pr-review-html) (2 stars; the reading-order half). Co-Review's `/co-review:review` opens a change as a pull-request page in the app or a browser tab, not as one HTML file (9 stars, GitHub API 2026-11-11T13:20:30Z; findings and the GitHub post are handed off). |
 | Code on the page comes from git; annotations checked against real lines | `HR/SKILL.md` "Honesty", build `--check` | Same idea as Showboat's exec-pulled snippets. A box with no arrows in a drawn diagram is not evidence that a file is unused. Check a parsed graph (item 7). |
 | Reading order (`focus`, 3–6 stops, riskiest first) | `HR/SKILL.md` "fields that carry the most weight" | Matches the "literate diff" and tour-mode ideas (Litt, Tembo Tour Mode, constellagent code tour). Replicas Review's guided tour (2026-10-21) puts a plain-English explanation above each file's diff, starts with the most important file, and collapses tests, lockfiles, and generated files at the end ([post](https://replicas.dev/blog/replicas-review)). That matches this row and the mechanical tier below. Saga's chapters and Guided Review's units (schema, then logic, call sites, and tests) are the same job. Item 8 walks changed symbols from entry points down the call graph. Trail of Bits and th0rz05 also pick a reading order. See the HTML-page row. |
 | Group by concern, tests next to their code, callees first | `HR/SKILL.md` `concerns` | Earlier report #1. |
@@ -548,6 +624,9 @@ reading Matt Pocock's `teach`.*
 
 ## Hand off to Code Review Research Bot (review quality and bug finding, out of scope here)
 
+- **Co-Review findings, verdict, and GitHub post (2026-11-11).** Proposed findings, a submit verdict, and an optional post of that review to GitHub. The audit guide, the check question, and coverage stay on #3, #1, and #2. [workflows](https://sdsvn.github.io/co-review/docs/guides/workflows/).
+- **Greptile merge status and bulk approve (2026-11-11).** CI, conflicts, required approvals, and the Greptile review, plus sending an issue to a coding agent and approving or merging several pull requests together. The Tour tab and the ask stay on the understanding side. [post](https://www.greptile.com/blog/code-review-is-evolving).
+- **CodeLens review actions (2026-11-11).** Comment, approve, or request changes through `gh`, and `codelens review --fail-on high`. The callers, the reach list, and the cache stay on #7, #8, and #17. [README](https://github.com/blong8334/codeLens).
 - **Macroscope Check Run Agents**: custom agents on every PR as GitHub check runs
   ([X @svpino](https://x.com/svpino/status/2050262803475472687): 47 likes, 39 bookmarks;
   [X @ai_for_success](https://x.com/ai_for_success/status/2050261619939361210): 22 likes).
@@ -662,6 +741,48 @@ reading Matt Pocock's `teach`.*
 - Shipped: Saga and Guided Review on the HTML-page and reading-order rows. Honesty note: a missing box is not
   "unused."
 - Hand-off: Qodo's Codex plugin, PR Explainer's severity findings, and CodeRabbit's explainability guide.
+
+## Changes (2026-11-11 sweep)
+
+The ranked list is still 17 items, in the same order. No row was added, shipped, or rejected. Notes:
+[`notes/sweep-2026-11-11.md`](notes/sweep-2026-11-11.md). The draft header on this branch is unchanged.
+This section sits between the draft 4 and draft 5 changelogs. Open PR #13 inserts before Rejected,
+open PR #17 appends after Rejected, and open PR #19 inserts before the draft 2 changelog.
+
+- #3: Co-Review `/co-review:audit`, a four-chapter whole-repo guide. GitHub API at
+  2026-11-11T13:20:30Z: 9 stars, 1 fork, MIT, created 2026-09-25. fxtwitter at that read: 7 likes,
+  0 bookmarks, 15 replies, 139 views. X API `get_posts_by_ids` returned client-forbidden. Evidence:
+  `vendor`, plus tiny `engagement`. The stated goal is that afterwards, without the agent, you can
+  say where things live, use the vocabulary, trace the main flows, and place a change and predict
+  what it affects.
+- #1: one check question at the end of each chapter, answered as a comment. The multiple-choice
+  block stays. #2: files marked viewed per area, and each area's next unviewed file, as a reading
+  signal beside the quiz. #11: a claim that is not tied to code is tagged inferred or unknown.
+- Shipped HTML page: `/co-review:review` opens a change as a pull-request page in the app or a
+  browser tab. It is not one self-contained HTML file. Findings, the verdict, and the GitHub post
+  are handed off.
+- Shipped reading order: Greptile's Tour tab (Daksh Gupta, 2026-11-09) groups related edits,
+  explains each with the surrounding code, then the reader opens the full diff. #6: select code or
+  a finding and ask. The reading-order table cell is unchanged, because open PR #13 edits that
+  cell. Evidence: `vendor`. Merge status and bulk approve are handed off.
+- #15: Anatomy. An invented machine whose working is the concept. GitHub API at
+  2026-11-11T13:20:30Z: 26648 stars, 2245 forks (26647 stars at 2026-11-11T13:17:42Z). fxtwitter
+  views 78429, likes 12, bookmarks 4. The brief said 26647 stars, 2244 forks, and 78421
+  impressions. The backlog uses the later read. The metaphor is invented, so a use in HR stays
+  gated and the quiz is the guard. Not a new row. Evidence: `vendor` + `engagement`.
+- #7, #8, and #17: CodeLens. Callers outside the change, routes and jobs that reach it, and a
+  content-keyed cache. GitHub API at 2026-11-11T13:20:30Z: 1 star, Apache-2.0, created 2026-11-03.
+  npm `@blong8334/codelens` 0.1.2, published 2026-11-11T12:47:26Z. Evidence: `vendor`, about zero
+  engagement. The risk pass is not cached yet.
+- #9 and #11: SAFE, arXiv 2611.13041, published 2026-11-09T11:40:08Z. Within-subjects crossover,
+  N=24, security findings. SUS 77.3 to 85.0 (p=.011). Trust +0.04. Triage 0.46 against 0.53
+  (p=.59) and time 5.1 against 4.7 minutes (p=.21) are the paper's indistinguishable results.
+  Remediation odds 2.6 (95 percent CI 0.93 to 7.09, p=.069). The abstract's "2.6 times" sentence
+  is in the note. Not tagged `measured-RCT`. The two builds differ together, so the gain is the
+  bundle.
+- Ranking is unchanged. 26648 stars do not move #15 above the quiz. A usability gain on security
+  findings, with a remediation test that does not clear .05, does not move #9 or #11. Co-Review,
+  Greptile, and CodeLens fold into items and shipped rows that already exist.
 
 ## Changes in draft 5 (2026-11-05)
 
