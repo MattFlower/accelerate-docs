@@ -747,7 +747,9 @@ reading Matt Pocock's `teach`.*
 The ranked list is still 17 items, in the same order. No row was added, shipped, or rejected. Notes:
 [`notes/sweep-2026-11-11.md`](notes/sweep-2026-11-11.md). The draft header on this branch is unchanged.
 This section sits between the draft 4 and draft 5 changelogs. Open PR #13 inserts before Rejected,
-open PR #17 appends after Rejected, and open PR #19 inserts before the draft 2 changelog.
+open PR #17 appends after Rejected, and open PR #19 inserts before the draft 2 changelog. Trial
+merges of each branch, and of the three together, applied cleanly and were not kept. The note has
+the commands.
 
 - #3: Co-Review `/co-review:audit`, a four-chapter whole-repo guide. GitHub API at
   2026-11-11T13:20:30Z: 9 stars, 1 fork, MIT, created 2026-09-25. fxtwitter at that read: 7 likes,
