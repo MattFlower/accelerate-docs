@@ -8,7 +8,7 @@ and the style of `research/automated-code-review/BACKLOG.md`. Findings and sourc
 [`research/code-understanding/notes/sweep-2026-11-03.md`](notes/sweep-2026-11-03.md),
 [`research/code-understanding/notes/2026-11-04-daily-sweep.md`](notes/2026-11-04-daily-sweep.md),
 and [`research/code-understanding/notes/sweep-2026-11-05.md`](notes/sweep-2026-11-05.md)
-until a `report.md` is written.*
+until a `report.md` is written. This sweep: [`notes/sweep-2026-11-12.md`](notes/sweep-2026-11-12.md).*
 
 **Baseline.** `accelerate/skills/human-review` (v0.6.2, 2026-10-30) is ground truth. Everything here is ranked by
 what it adds *on top of* that skill. Ideas the skill already does are listed under **Shipped**, with the file path.
@@ -196,6 +196,14 @@ reading Matt Pocock's `teach`.*
     writes an `orientation.md` for a new repo
     ([repo](https://github.com/DrCatHicks/learning-opportunities), 2,540 stars per the GitHub API on 2026-11-05).
     Evidence: `practitioner`. See #1.
+  - **Sóþspell** (2026-11-12) is a narrated walkthrough of a whole repo. Diagrams build with the story. The
+    reader can pause and ask without losing the place, and progress is saved so the tour can resume.
+    GitHub API at 2026-11-12T13:32:13Z: 4 stars, 1 fork, created 2026-10-17, MIT. Release v0.3.1,
+    2026-10-26. Show HN
+    [item](https://news.ycombinator.com/item?id=50245022), 2026-10-26T15:05:31Z, 1 point, no comments.
+    The README says the Claude, Codex, and OpenCode plugins are not published yet. Each loads from a
+    local directory. [repo](https://github.com/anthonyclarka2/sothspell). Evidence: `vendor`. The same
+    counts at 2026-11-12T13:24:51Z. The narrated half is #15. Not a second course.
   - Evidence: `practitioner` + `engagement`, plus `measured-RCT` for retrieval and spacing (see #1) and for the
     extend-by-hand task.
 - **Why a standalone skill, not part of HR:** different input (no diff), state across sessions, and invoked by the
@@ -292,6 +300,60 @@ reading Matt Pocock's `teach`.*
   cheap without a server, so the cost argument against it doesn't apply here. The lesson to take is to keep it one
   button, with no new UI mode.
 
+### 18. Intent map and unexplained files — `proposed`, cost S, target HR
+- **Idea:** Quote, verbatim, each thing the author says the pull request does. Take the words from a spec,
+  the description, linked issues, commit messages, and the title, strongest source first. Tag that source
+  `spec`, `described`, `title only`, or `UNKNOWN`. Map each quote to the files that implement it. A check
+  rejects a quote that is not in the author's text, then lists the changed non-noise files that no quote
+  explains, so the reviewer can ask why those files are in the diff. Run the pass in a fresh session, not
+  the session that wrote the diff.
+- **What human-review already does:** It reads the description and the commit messages, and it writes its
+  own `brief` and `summary` (`HR/SKILL.md` "Read the change", "The fields that carry the most weight").
+  `concerns` groups files by what the change does, in the model's words. `focus` is three to six stops,
+  phrased as what to check. Mechanical and generated files are tiered. `questions` ask the reviewer for a
+  decision. The precision check tests the page's own claims against the diff. Signals are computed from
+  git and paths, never from the title, the description, or the commit messages. That is not a verbatim
+  map from the author's sentences to files, and it does not list the changed files those sentences leave
+  out. A reading order, a noise tier, and a cap of about eight "what to check" pointers are already
+  shipped. They are not part of this item.
+- **Sources:** dmoka/skills `pr-tour`
+  ([SKILL.md](https://github.com/dmoka/skills/blob/main/skills/pr-tour/SKILL.md),
+  [notes](https://github.com/dmoka/skills/blob/main/skills/pr-tour/references/notes.md)).
+  GitHub API at 2026-11-12T13:32:13Z: the repo has 21 stars and 2 forks, MIT, created 2026-09-01.
+  The same counts at 2026-11-12T13:24:51Z. The last commit on `skills/pr-tour/SKILL.md` is
+  2026-10-05T12:41:44Z. The skill says the unexplained list is the most useful thing the tour shows.
+  `scripts/annotate.mjs` rejects a quote that is not verbatim (whitespace normalised, case kept, at least
+  four characters) and then sets `unexplained`. The item text is "Nothing the author wrote explains this
+  change — ask why it is here." Noise never appears on that list. The cap of eight LOOK HERE pointers
+  does not include those files (`references/notes.md`). `scripts/lib.mjs` ranks a spec above the
+  description and linked issues (those two tie), then commit messages, then an informative title.
+  Evidence: `practitioner` + `vendor`. One repo. No X count was fetched. See the sweep note.
+  **MergeAtlas** groups changed files into a frame per outcome. It does not quote the author verbatim,
+  and it does not list files the author's words leave unexplained. That grouping is support here. The
+  unchanged files that behave differently are #7.
+  [repo](https://github.com/ismayilkarimli/MergeAtlas). GitHub API at 2026-11-12T13:32:13Z: 7 stars,
+  0 forks, created 2026-11-01, MIT. Show HN
+  [item](https://news.ycombinator.com/item?id=50429817), 2026-11-09T18:51:12Z, 4 points, no comments.
+  Evidence: `vendor`.
+- **Why it helps:** A reviewer can see where the pull request's story and the diff disagree. That is the
+  drive-by, and the file the description forgot. #5 records why a choice was made. This item records
+  which changed files no stated intent covers.
+- **Why it sits here:** Rank 7 by gain per effort. #1 and #2 stay first: nothing else can be ranked
+  without a measure. #3 is a lesson about a repo, at cost M or L. #4 has a measured result for a traced
+  example. #5 has more sources, and it answers a different question. #6 has a measured study, and
+  measured evidence stays above a practitioner report. This item is cost S and needs no parser, so it
+  sits above blast radius (#7, cost M) and the semantic diff (#8, cost M). The evidence is one skill in
+  a 21-star repo, so it does not jump #1 through #6. The heading is 18, and the section is placed here,
+  so headings #7 through #17 keep the draft 5 numbers. Open PRs #13, #17, #19, and #21 cite those numbers.
+- **Test:** On [excalidraw/excalidraw#8613](https://github.com/excalidraw/excalidraw/pull/8613) and on four
+  more real pull requests (limitless, or accelerate). The #8613 title and body are image cropping. The
+  diff of `packages/math/vector.ts` adds `vectorProjection`, and one commit subject is "normalize before
+  projection to improve rotated crop region drag", so that file should map to a quote. `setupTests.ts`
+  only changes `includes` to `includes?.` on the act() warning, in commit `b0375fe5` ("refactor to
+  simplify tests", 2024-10-09). Check that this file is listed as unexplained, and that a crop file is
+  not. A file flagged unexplained when a quote does explain it fails the test. A quote the author did
+  not write must be rejected.
+
 ### 7. Structural blast radius and "what it's wired into" map — `proposed`, cost M, target HR
 - **Idea:** replace or extend HR's `git grep -w` blast radius with a tree-sitter import/call graph that is 1 hop from
   the changed symbols. Show it as a small diagram of changed and affected nodes, and say "calls" only when the parser
@@ -325,6 +387,17 @@ reading Matt Pocock's `teach`.*
   **OPVS v1.14.0** (2026-11-01) answers who calls a function, and labels each hit exact or heuristic. Python is
   indexed. Unknown is not reported as zero
   ([changelog](https://www.opvs.ai/changelog/opvs-v1140-ask-the-code-index-who-calls-a-function)). Evidence: `vendor`.
+  **MergeAtlas (2026-11-12).** An agent skill plus a Python script. Arrows run from a cause to its
+  effect, including into unchanged files that behave differently, stacked beside the card that reaches
+  them. The site says, of [excalidraw/excalidraw#8613](https://github.com/excalidraw/excalidraw/pull/8613),
+  "Exported images now come out cropped, yet no export code is in that diff." The image caption marks
+  `export.ts` not changed but affected. The pull request's file list, read 2026-11-12, has export
+  snapshots and no `export.ts` source file. GitHub API at 2026-11-12T13:32:13Z: 7 stars, 0 forks,
+  created 2026-11-01, MIT.
+  [repo](https://github.com/ismayilkarimli/MergeAtlas), [site](https://mergeatlas.dev/). Show HN
+  [item](https://news.ycombinator.com/item?id=50429817), 2026-11-09T18:51:12Z, 4 points, no comments.
+  Evidence: `vendor`. Intent frames are #18. Tests beside the card they verify, and noise stacked apart
+  with a reason, are the shipped `concerns` row and the mechanical tier.
   **DiffGuardian** draws a dependency graph from the diff alone and calls the graph heuristic, not a model
   ([site](https://diffguardian.ai/)). Voice and Trace It are #15. Ask is #6. Evidence: `vendor`.
   **PR Lens** draws which parts of the app the change touches, including parts the diff does not, as an animated
@@ -496,6 +569,9 @@ reading Matt Pocock's `teach`.*
   ([X](https://x.com/siderakis2/status/2115624999478309109)): 2 likes, 101 impressions, 4 replies. Evidence:
   `vendor` + weak `engagement`. Severity-graded findings from PR Explainer are handed off. The listen-along stays
   on this item because it is another explainer surface, not a separate job.
+  **Sóþspell** (2026-11-12) narrates a whole repo while diagrams build with the story. The reader can
+  pause. Stars, the plugin caveat, and the Show HN point are on #3. Evidence: `vendor`. A peer of this
+  listen-along.
   **DiffGuardian** speaks a walkthrough while the lines highlight. Trace It is the same tour as text you read at
   your own pace ([site](https://diffguardian.ai/)). Ask is #6. The graph is #7. Evidence: `vendor`.
   **PR Lens** animates architecture and data flow inside the pull request, and a step opens the diff
@@ -521,6 +597,13 @@ reading Matt Pocock's `teach`.*
 - **Idea:** when a page is rebuilt after feedback, show the delta from the last version the reviewer saw (changed
   hunks, and which notes changed) and keep the old comments attached to unchanged lines. Today the new page "starts
   clean" (`HR/SKILL.md` "When feedback comes back").
+  **SWE-Time** ([arXiv 2611.12083](https://arxiv.org/abs/2611.12083), published and updated
+  2026-11-09T09:01:27Z, v1) is a benchmark of agents, not of people. The abstract: 1,661 cases, 65
+  repositories, 15 coding agents, best SWE-Time average 61.9 (Claude Opus 4.8, inside Claude Code).
+  Task Backward traces a reported regression to the first bad commit. Task Forward predicts how a
+  requested change would affect behavior, given the developer's intent and the repository before the
+  change. This item is the delta of the review page since the reader last looked. The paper does not
+  move it. Evidence: `measured-obs` (agents).
 - **Sources:** `our own idea`. A related review-quality idea is the code-review backlog's C3 "re-review only the fix
   diff".
 - **Test:** count re-read minutes on the second round across 5 feedback loops.
@@ -595,6 +678,10 @@ reading Matt Pocock's `teach`.*
   The explainer half is a shipped peer.
 - **th0rz05 pr-review-html.** Severity-rated findings the README says are tagged confirmed or plausible
   ([repo](https://github.com/th0rz05/claude-pr-review-html)). The reading-order report is a shipped peer.
+- **ai-pr-review, review tips and the GitHub verdict** (2026-11-12). Tips are checked in a worktree and
+  marked verified, concern, or blocked. The viewer can approve, request changes, or comment. The
+  walkthrough was not added to #8. [repo](https://github.com/houshuang/ai-pr-review). GitHub API at
+  2026-11-12T13:32:13Z: 9 stars, 4 forks, created 2026-03-12. The API returned no license.
 - **GitWarren / prx.** Named on a tooling list. Not reviewed as products here
   ([X](https://x.com/vibeleaderboard/status/2117626768110596353): 1 like, 26 impressions, X API 2026-11-05).
 - **Clipboard, evidence before the diff.** The post says an agent runs the change on a preview build and posts an
@@ -638,6 +725,31 @@ reading Matt Pocock's `teach`.*
 - "Who to ask" is now #11. The old #9–#13 are now #10–#11 and #13–#15.
 - Shipped reading-order notes: Replicas Review guided tour.
 - Hand-off: the XAI trust study ([arXiv 2607.24601](https://arxiv.org/abs/2607.24601)).
+
+## Changes (2026-11-12 sweep)
+
+The draft header stays draft 5. Open PR #13 rewrites that line for the 2026-11-06 sweep. The notes
+list still ends at the 2026-11-05 note, because that line is the one #13 edits. The sentence after
+it links [`notes/sweep-2026-11-12.md`](notes/sweep-2026-11-12.md). Headings #1 through #17 are
+unchanged, so open PRs #13, #17, #19, and #21 still cite them. Notes:
+[`notes/sweep-2026-11-12.md`](notes/sweep-2026-11-12.md).
+
+- New #18 "Intent map and unexplained files", from dmoka/skills `pr-tour`. Cost S, target HR,
+  `proposed`. Evidence `practitioner` + `vendor` (the repo has 21 stars and 2 forks, GitHub API
+  2026-11-12T13:32:13Z). Rank 7 by gain per effort: after Ask (#6), before blast radius (#7). It does
+  not jump #1 through #6. The section is placed there and numbered 18 so the later headings stay put.
+  Human-review already reads the description, groups files, orders the reading, tiers noise, and asks
+  the reviewer questions. It does not quote the author verbatim or list the changed files those quotes
+  leave out.
+- #18 also cites MergeAtlas's intent frames. The cause-to-effect arrows into unchanged files are #7.
+  GitHub API at the same clock read: 7 stars, 0 forks. Show HN 2026-11-09T18:51:12Z, 4 points, no
+  comments.
+- #3 and #15: Sóþspell, a narrated repo walkthrough. 4 stars, 1 fork, at the same clock read. Show HN
+  1 point. Not a new row.
+- #17: SWE-Time, arXiv 2611.12083, published 2026-11-09T09:01:27Z. An agent benchmark (1,661 cases, 65
+  repos, best average 61.9). It does not move the item.
+- Hand-off: ai-pr-review's review tips and GitHub verdict. The walkthrough was checked against #8 and
+  not added there. 9 stars, 4 forks, created 2026-03-12.
 
 ## Changes in draft 4 (2026-11-03)
 
