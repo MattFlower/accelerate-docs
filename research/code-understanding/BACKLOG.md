@@ -733,7 +733,9 @@ reading Matt Pocock's `teach`.*
 The draft header stays draft 5. Open PR #13 rewrites that line, and the notes-list line under it,
 for the 2026-11-06 sweep. A separate line under the header links
 [`notes/sweep-2026-11-12.md`](notes/sweep-2026-11-12.md). Headings #1 through #17 are
-unchanged, so open PRs #13, #17, #19, and #21 still cite them. Notes:
+unchanged, so open PRs #13, #17, #19, and #21 still cite them. Trial merges of those
+four branches into this one were clean, and a throwaway merge of all four in date order
+was clean. Those merges were aborted. Nothing from them is in this branch. Notes:
 [`notes/sweep-2026-11-12.md`](notes/sweep-2026-11-12.md).
 
 - New #18 "Intent map and unexplained files", from dmoka/skills `pr-tour`. Cost S, target HR,
