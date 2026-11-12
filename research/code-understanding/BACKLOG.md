@@ -8,7 +8,9 @@ and the style of `research/automated-code-review/BACKLOG.md`. Findings and sourc
 [`research/code-understanding/notes/sweep-2026-11-03.md`](notes/sweep-2026-11-03.md),
 [`research/code-understanding/notes/2026-11-04-daily-sweep.md`](notes/2026-11-04-daily-sweep.md),
 and [`research/code-understanding/notes/sweep-2026-11-05.md`](notes/sweep-2026-11-05.md)
-until a `report.md` is written. This sweep: [`notes/sweep-2026-11-12.md`](notes/sweep-2026-11-12.md).*
+until a `report.md` is written.*
+
+*2026-11-12 sweep: [`notes/sweep-2026-11-12.md`](notes/sweep-2026-11-12.md).*
 
 **Baseline.** `accelerate/skills/human-review` (v0.6.2, 2026-10-30) is ground truth. Everything here is ranked by
 what it adds *on top of* that skill. Ideas the skill already does are listed under **Shipped**, with the file path.
@@ -196,14 +198,6 @@ reading Matt Pocock's `teach`.*
     writes an `orientation.md` for a new repo
     ([repo](https://github.com/DrCatHicks/learning-opportunities), 2,540 stars per the GitHub API on 2026-11-05).
     Evidence: `practitioner`. See #1.
-  - **Sóþspell** (2026-11-12) is a narrated walkthrough of a whole repo. Diagrams build with the story. The
-    reader can pause and ask without losing the place, and progress is saved so the tour can resume.
-    GitHub API at 2026-11-12T13:32:13Z: 4 stars, 1 fork, created 2026-10-17, MIT. Release v0.3.1,
-    2026-10-26. Show HN
-    [item](https://news.ycombinator.com/item?id=50245022), 2026-10-26T15:05:31Z, 1 point, no comments.
-    The README says the Claude, Codex, and OpenCode plugins are not published yet. Each loads from a
-    local directory. [repo](https://github.com/anthonyclarka2/sothspell). Evidence: `vendor`. The same
-    counts at 2026-11-12T13:24:51Z. The narrated half is #15. Not a second course.
   - Evidence: `practitioner` + `engagement`, plus `measured-RCT` for retrieval and spacing (see #1) and for the
     extend-by-hand task.
 - **Why a standalone skill, not part of HR:** different input (no diff), state across sessions, and invoked by the
@@ -215,6 +209,14 @@ reading Matt Pocock's `teach`.*
   ([#960](https://github.com/mattpocock/skills/issues/960))). HR's fixed renderer, build validation, and code pulled
   from git already prevent all three. Also don't copy "knowledge from web resources": for a repo, the primary source is
   the code at head, plus ADRs and docs in the repo.
+- **Sóþspell** (2026-11-12) is a narrated walkthrough of a whole repo. Diagrams build with the story. The
+  reader can pause and ask without losing the place, and progress is saved so the tour can resume.
+  GitHub API at 2026-11-12T13:32:13Z: 4 stars, 1 fork, created 2026-10-17, MIT. Release v0.3.1,
+  2026-10-26. Show HN
+  [item](https://news.ycombinator.com/item?id=50245022), 2026-10-26T15:05:31Z, 1 point, no comments.
+  The README says the Claude, Codex, and OpenCode plugins are not published yet. Each loads from a
+  local directory. [repo](https://github.com/anthonyclarka2/sothspell). Evidence: `vendor`. The same
+  counts at 2026-11-12T13:24:51Z. The narrated half is #15. Not a second course.
 - **Test:** v1 on three limitless areas Matt hasn't touched recently (for example the routing policy and the review
   stage). Run Pocock's `/teach` as-is on the same areas as the **baseline**. Measure quiz score, time to first correct
   edit, factual errors per lesson, and citation count per lesson. After the lesson, a small follow-up change made by
@@ -728,9 +730,9 @@ reading Matt Pocock's `teach`.*
 
 ## Changes (2026-11-12 sweep)
 
-The draft header stays draft 5. Open PR #13 rewrites that line for the 2026-11-06 sweep. The notes
-list still ends at the 2026-11-05 note, because that line is the one #13 edits. The sentence after
-it links [`notes/sweep-2026-11-12.md`](notes/sweep-2026-11-12.md). Headings #1 through #17 are
+The draft header stays draft 5. Open PR #13 rewrites that line, and the notes-list line under it,
+for the 2026-11-06 sweep. A separate line under the header links
+[`notes/sweep-2026-11-12.md`](notes/sweep-2026-11-12.md). Headings #1 through #17 are
 unchanged, so open PRs #13, #17, #19, and #21 still cite them. Notes:
 [`notes/sweep-2026-11-12.md`](notes/sweep-2026-11-12.md).
 
