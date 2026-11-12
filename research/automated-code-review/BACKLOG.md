@@ -199,6 +199,51 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
      escapes-heldout.
    - **Cost:** S for a 25–50 task slice; M for full verified.
 10. **External smoke check on ReviewBench test set (25 tasks, has Codex CLI example)** — `proposed`, S.
+18. **Trap clean fixtures and author-independent precision** — `proposed`, cost S. Also helps limitless.
+    Ranks with the S eval checks (C9–C10), above C17 and C11. The gain is a false-positive measure
+    the current clean set cannot resolve, and limitless's author agent acts on every finding.
+    - **Idea:** (a) Add trap clean cases to the eval: correct changes that use APIs newer than model
+      training data (CodePanel's examples: Convex `ctx.db.get("table", id)`, GitHub
+      `application/vnd.github.raw+json`, Anthropic `refusal` stop reason) and correct code that
+      looks like a bug (reads capped by a named limit). Report FP per clean and FP per trap with
+      resampled intervals. (b) For post-ship monitoring, count precision only from verdicts the
+      author agent cannot give itself (a human rating or an upheld/withdrawn dispute), since an
+      agent that fixes every comment inflates "fixed" rates; plus a fixed weekly stratified
+      human-rated sample.
+    - **Source:** [CodePanel, "Recall is not enough: measuring false positives in code review"](https://codepanel.ai/blog/measuring-false-positives-in-code-review)
+      (2026-11-05). [report.md](report.md) §2.4.
+    - **Why:** The harness has 16 audited clean cases (item A1), the same resolution problem:
+      CodePanel says a dozen clean fixtures cannot resolve small changes. Traps test reciting
+      versus reading. Their numbers (36 bug + 13 clean fixtures, a single Sonnet judge, 2–4
+      repeats): a Haiku orchestrator versus a Sonnet orchestrator kept recall (49% vs 47%) but
+      FP/clean rose from 0.48 to 0.85, paired +0.37 [+0.04, +0.75], sign-flip p≈0.11 (not
+      significant).
+    - **Test:** Build 8–12 trap cases from limitless and accelerate history. Run the production arm
+      at k=2. Check whether FP/trap separates arms that FP/clean does not.
+    - **Cost:** S.
+17. **Code-enforced changed-file coverage closure plus one correction turn** — `proposed`, cost S–M.
+    Also helps limitless.
+    Below the S eval checks (C9, C10, C18) and above C11. The prompt-only per-file ledger (T2 /
+    Option C) measured +3.8 vs a +5 bar; this is that check in the harness, and the outside
+    evidence is thin.
+    - **Idea:** Every changed file must be closed with a cited code line justifying the verdict. The
+      harness, not the prompt, checks this and sends open files back for one more pass. Dismissed
+      doubts ("unlikely", "minor", "out of scope") must be written down as candidates for the
+      verifier rather than dropped.
+    - **Source:** [Unblocked, "Recall first: how we built Unblocked's Deep code review"](https://getunblocked.com/blog/recall-first-deep-code-review/)
+      (Kaihao Zhao, 2026-11-09). [report.md](report.md) §2.2.
+    - **Why:** The existing per-file ledger (T2 / Option C) is a prompt instruction. This is
+      enforcement in the harness. Evidence is thin: a vendor self-report, n and CIs not given. In a
+      paired test, removing the code coverage check cost about 15 points of recall, and one
+      correction turn won it back with precision unchanged. In one 50-PR run, 22 of 32 "found then
+      dismissed" misses left no trace. Deep Review caught 108/158 known bugs on Martian's 50-PR
+      Code Review Bench at about 3.7 issues per PR. Post-hoc filters by confidence, category, or
+      locality removed real bugs, consistent with limitless's rejected filters.
+    - **Test:** On escapes-dev, paired adversarial×2 vs adversarial×2 plus the harness coverage
+      check and one correction turn. Judged blocking recall and clean must-fix rate, k=2. Also
+      count misses where the transcript shows the defect was reasoned about and then dismissed.
+      Do not contaminate escapes-heldout.
+    - **Cost:** S–M.
 11. **Same-agent review as a measured anti-pattern** — `proposed`, M. Also helps limitless.
     - **Idea:** Treat "author agent then same-agent review" as a measured anti-pattern; prefer independent
       review samples (already in adversarial×2); optionally test a foresight-style pack (unstated edge

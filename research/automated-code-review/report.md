@@ -4,8 +4,10 @@
 
 Status: first draft, written to be revised once Matt's prior docs are folded in further. Every
 external source below was opened on 2026-10-31, except CR-Bench-v2 (opened in the 2026-11-04
-daily sweep and again on 2026-11-05) and Foresight-SWE (opened 2026-11-05); anything that could
-not be opened is listed in "Not verified". Numbers from different benchmarks are not comparable.
+daily sweep and again on 2026-11-05), Foresight-SWE (opened 2026-11-05), and Unblocked Deep
+Review, CodePanel's false-positive measurement, and Patchlight's precision-vs-recall comparison
+(opened in the 2026-11-12 daily sweep); anything that could not be opened is listed in "Not
+verified". Numbers from different benchmarks are not comparable.
 
 **Precedence for Matt's figures** (as instructed): the 2026-10-31 escapes-dev run beats Phase 0
 `RESULTS.md` (2026-10-29), which beats the working notes on overlapping figures; where the notes
@@ -188,6 +190,11 @@ Only items I opened. Where Matt's docs already cite an item, it's marked "(in Ma
   ([post](https://x.com/_alphashark_/status/2097274562077508040)); another requires a failing test
   before a bug claim ([post](https://x.com/terminalxw/status/2097213279240413198)). Anecdotes;
   note the second conflicts with Matt's "no reproduce-or-drop" finding.
+- **Unblocked**, *Recall first: how we built Unblocked's Deep code review*
+  ([blog](https://getunblocked.com/blog/recall-first-deep-code-review/), Kaihao Zhao, 2026-11-09)
+  **[VB]** ⚠️ (opened 2026-11-12): harness-enforced changed-file coverage and one correction turn;
+  vendor self-report (n and CIs not given) puts that check at about 15 points of recall, won back
+  by one correction turn with precision unchanged. Backlog **C17**.
 
 ### 2.3 Severity, caps and what developers act on
 
@@ -251,6 +258,21 @@ Only items I opened. Where Matt's docs already cite an item, it's marked "(in Ma
   SecBench.js [repo](https://github.com/cristianstaicu/SecBench.js), Greptile benchmarks
   [page](https://www.greptile.com/benchmarks), agentpatterns review [page](https://agentpatterns.ai/verification/open-code-review-benchmarks/),
   SZZ evaluation (Rosa et al.) [2102.03300](https://arxiv.org/abs/2102.03300).
+- **Patchlight**, *Precision Beats Recall: Why the Cheaper Model Wrote the Better Code Review*
+  ([blog](https://patchlight.dev/blog/precision-beats-recall-ai-code-review), 2026-11-08) **[VB]**
+  (opened 2026-11-12): on Code Review Bench, same pipeline, prompt, and effort, GPT-6 Luna vs
+  GPT-6.1 Terra recall 45.5% vs 43.2%, precision 54.1% vs 27.3%, F1 49.4 vs 33.5. Terra raised
+  about 7 issues per review vs 3.7, at about 7.7× the cost. When Luna went beyond the key, Terra
+  agreed 76% of the time; the reverse, 28%. Cross-model agreement on unlisted findings is a cheap
+  signal for gold-set gaps. This conflicts with limitless's luna@medium result (2.5% / 4.4%
+  recall, §1.2): different pipeline and corpus, unresolved. Relevant to limitless's auto-fix loop,
+  where every comment becomes code.
+- **CodePanel**, *Recall is not enough: measuring false positives in code review*
+  ([blog](https://codepanel.ai/blog/measuring-false-positives-in-code-review), 2026-11-05) **[VB]**
+  (opened 2026-11-12): trap clean fixtures, and precision only from verdicts the author agent
+  cannot give itself. Haiku vs Sonnet orchestrator kept recall (49% vs 47%) while FP/clean rose
+  from 0.48 to 0.85 (paired +0.37 [+0.04, +0.75], sign-flip p≈0.11, not significant). Backlog
+  **C18**.
 
 ### 2.5 Execution, security and spec (sources behind Matt's options A, D, E)
 
@@ -323,6 +345,19 @@ Short list; most external evidence is already in Matt's docs.
 8. **Foresight-SWE** (§2.7) [arXiv]: stated-task resolve and foresight resolve rate are different
    outcomes; native self-review can raise foresight while cutting the original task. Candidate for
    limitless too.
+9. **Unblocked Deep Review** (§2.2)
+   [blog](https://getunblocked.com/blog/recall-first-deep-code-review/): harness-enforced
+   changed-file coverage and one correction turn. Candidate for limitless too. Backlog C17.
+   ⚠️ vendor self-report, no n.
+10. **CodePanel** (§2.4)
+    [blog](https://codepanel.ai/blog/measuring-false-positives-in-code-review): trap clean
+    fixtures, and precision only from verdicts the author agent cannot give itself. Candidate for
+    limitless too. Backlog C18.
+11. **Patchlight** (§2.4)
+    [blog](https://patchlight.dev/blog/precision-beats-recall-ai-code-review): on Code Review
+    Bench the cheaper model had similar recall and higher precision. Conflicts with limitless
+    luna@medium (§1.2); different pipeline and corpus, unresolved. Relevant to limitless's
+    auto-fix loop.
 
 ## 4. Not verified / flagged
 
