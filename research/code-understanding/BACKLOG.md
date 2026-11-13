@@ -33,6 +33,8 @@ factory's deliver/review stages.
 
 ---
 
+*2026-11-13 sweep: [`notes/sweep-2026-11-13.md`](notes/sweep-2026-11-13.md).*
+
 ## A. Ranked
 
 ### 1. Comprehension quiz at the end of the page — `proposed`, cost S, target HR
@@ -59,6 +61,14 @@ factory's deliver/review stages.
   [code](https://github.com/nbalepur/impaired-programming)). Evidence for that result: `measured-RCT` (student sample).
   Retrieval testing beats re-reading for retention
   ([Roediger & Karpicke 2006](https://pubmed.ncbi.nlm.nih.gov/16507066/)).
+  **Output prediction on the quiz (2026-11-13).** A C++ pilot found code-explanation accuracy stayed
+  about 100% across nearly all atoms of confusion, while output prediction fell on some atoms and
+  not on others. The one explanation miss, ChangeOfLiteralEncoding at 90%, was an octal literal read
+  as decimal
+  ([arXiv 2611.15575](https://arxiv.org/abs/2611.15575), published 2026-11-11T14:59:11Z).
+  Evidence: `measured-obs` (pilot, small). **Our own idea:** at least one question should ask for an
+  output, checked against the code or a run. A fluent explanation is weak evidence the model traced
+  the code. See #4 and #11.
   **RepoProbe** is a model benchmark, not a study of people: 500 GitHub Discussions pairs from 50 repositories,
   scored by a checklist of atomic weighted facts and discrete rubrics, rationale written before the score. That
   protocol was more stable than a scalar LLM-as-a-Judge. In the results table, every model's clarity score is
@@ -230,6 +240,11 @@ reading Matt Pocock's `teach`.*
   low-granularity boxes did better than full-state boxes on comprehension tasks
   ([SIGCSE TS 2027](https://2027.sigcse-ts.acm.org/details/sigcse-ts-2027-Papers-1/166/How-Much-Runtime-State-Should-We-Show-Learners-An-EEG-Study-of-Feedback-Granularity-)).
   Evidence: `practitioner` + `measured-RCT` (education setting).
+  **Same pilot, on the traced example (2026-11-13).** Explanation accuracy stayed near 100% while
+  output prediction fell on some atoms
+  ([arXiv 2611.15575](https://arxiv.org/abs/2611.15575)). Evidence: `measured-obs` (pilot, small).
+  **Our own idea:** the example should include at least one predicted output, checked against the
+  code or a run. The captured command on this item is that check. Counts are on #1.
 - **Why it helps:** diffs and prose are abstract. One traced example makes the behavior change visible, and it fits
   HR's "code on the page comes from git" honesty rule if the values are captured too.
 - **Test:** on 5 behavior-changing PRs, compare quiz score and time with and without the block (alternate PRs). Check
@@ -248,6 +263,15 @@ reading Matt Pocock's `teach`.*
   ([X reply](https://x.com/AkshaySubr42403/status/2067331955494912104), 0 likes). Practitioners asking for the same:
   [@UditKhandelwal8](https://x.com/UditKhandelwal8/status/2082542780237352977),
   [@GandhiRohith](https://x.com/GandhiRohith/status/2067630870996103481) (low engagement).
+  **Theseus** (read 2026-11-13) reads a pull request and writes a guide beside the diff. Hooks in
+  Claude Code, Codex, and OpenCode capture the agent transcript. Linear and Jira context go into a
+  Motivation that includes alternatives considered. The homepage example says PBKDF2 was considered
+  and was not memory-hard enough. The guides page says only the code establishes a change. The
+  change list is behavior claims, most important first. The homepage demo is "6 changes · 1 unknown".
+  That list is a peer of the shipped grouping and reading-order rows
+  ([home](https://theseus.dev/), [guides](https://theseus.dev/product/guides),
+  [pricing](https://theseus.dev/pricing)). Starter is $99 a month for 100 guides. GitHub only.
+  No launch date on those pages. Evidence: `vendor`. Unknown entries are #11. The daily digest is #17.
   **DiffNotes** is the same premise, built: the agent that wrote the PR annotates it with a summary, a deploy card
   (migrations, flags, rollback), a risk list, and one why-not-what note per changed block. A browser extension
   overlays the notes on GitHub's Files changed tab. Nothing is posted to the PR. Notes expire. Per-repo rules live
@@ -275,6 +299,14 @@ reading Matt Pocock's `teach`.*
 - **Idea:** next to **Comment**, add **Ask** (a question tagged `?`). The feedback export puts questions first. The
   agent answers in chat and, when the answer belongs on the page, adds it as a `note` and rebuilds. This keeps the
   one-file, no-network design.
+- **code-walkthrough (2026-11-13).** Select text and Ask the agent in place. The answer can add or
+  replace a block. Undo removes it. The edit is local. "Hand to my session" passes a task into the
+  reader's Claude Code session. "Copy gh command" prints the calls that post review comments.
+  Nothing is posted unless the reader does that from the page. The page is a shipped peer of the
+  HTML page: a two-sentence overview with no file names, then files in three to five themes
+  ([README](https://github.com/crisperity/code-walkthrough)). GitHub API at 2026-11-13T13:21:22Z:
+  5 stars, 0 forks, created 2026-09-15T14:33:00Z, last push 2026-11-09T21:28:25Z, MIT.
+  Evidence: `practitioner`, low popularity. The call graph and the reading order are #7 and #8.
 - **Sources:** PR chat is a common feature in review tools: Tembo Review "Ask about selected code… why they changed"
   ([Tembo](https://www.tembo.io/review)) and Graphite Chat "get instant context on code changes"
   ([Graphite](https://graphite.com/)). GILT, an in-IDE LLM helper, raised task completion (+0.47 sub-tasks, p<.01)
@@ -311,6 +343,12 @@ reading Matt Pocock's `teach`.*
   The site did not load on 2026-11-02, and the README does not describe grouping a 34-file PR into 4-5
   dependency-order stages, so that claim stays unchecked. The walkthrough half (what to read first) is noted on
   the split advisor. Evidence: `vendor` + `engagement`.
+  **code-walkthrough** resolves a call graph at package and symbol level. The README's call-graph
+  step says the compiler or a language server does it, and that the graph shows which new function
+  is called from everywhere and which is a leaf. The cost section says the graphs come from parsers.
+  A missing parser skips those sections. Stars are on #6
+  ([README](https://github.com/crisperity/code-walkthrough)). Evidence: `practitioner`, low
+  popularity. Callers before callees are #8.
   **Two families of diagrams.** A vendor guide (the author builds repowise; updated 2026-11-01) splits model-drawn
   pictures, which tell a story, from parsed import graphs, which answer blast radius. On Flask, the post says a
   GitDiagram drawing showed 15 of 24 modules and left out `globals.py` and `helpers.py`, the two most-imported
@@ -368,6 +406,10 @@ reading Matt Pocock's `teach`.*
 - **Test:** on 5–8 real PRs (limitless, plus public PRs like the perspica examples), compare HR's mechanical tags
   with perspica's noise tags by hand. Time the questions "what is the real logic delta?" and "do the tests hit
   the risky functions?" Check false move collapses.
+- **code-walkthrough** orders callers before callees inside a theme. The shipped concerns row says
+  callees first. This item walks entry points, then what they call. The compiler-or-parser caveat
+  and the stars are on #6 and #7
+  ([README](https://github.com/crisperity/code-walkthrough)). Evidence: `practitioner`.
 
 ### 9. Two-depth background (newcomer vs. owner) — `proposed`, cost S, target HR
 - **Idea:** split `background` into a *deep background* (collapsed when the git signals say the reader has history in
@@ -414,6 +456,12 @@ reading Matt Pocock's `teach`.*
 - **Idea:** on the explanation, show a footer that counts claims tied to a specific place in the code and claims
   that are not ("N grounded · M ungrounded"). Each diagram step opens the real `path:line`: the code at the
   explained commit, and what this pull request changed there. A step that does not resolve fails `build --check`.
+  **Theseus** writes an explicit Unknown into the change list. The homepage demo is "6 changes · 1
+  unknown", and one entry is "Unknown: does the production Worker have the new secret bound?" The
+  guides page says anything the check cannot confirm is flagged as an unknown
+  ([home](https://theseus.dev/), [guides](https://theseus.dev/product/guides)). Evidence: `vendor`.
+  **Our own idea,** from the pilot on #1: a confident explanation is weak evidence that a claim is
+  grounded.
   Record, in one line, why this diagram type was chosen from signs in the code (something moves through states,
   work overlaps in time, parties exchange messages, there is a decision, or the schema changes). Mark steps that
   are new or changed in this pull request. Trace and Walk, numbering the steps to an ending and stepping through
@@ -518,6 +566,10 @@ reading Matt Pocock's `teach`.*
 - **Test:** 10 limitless runs. Does Matt open the page before the diff, and does review latency change?
 
 ### 17. "Since you last looked" interdiff — `proposed`, cost M, target HR
+- **Theseus daily digest (2026-11-13).** The homepage says a daily digest highlights the important
+  themes in the codebase. That digest is not the delta of this page, so the item stays put. The
+  guides page keeps every push's guide and marks what is new or updated since the previous one
+  ([home](https://theseus.dev/), [guides](https://theseus.dev/product/guides)). Evidence: `vendor`.
 - **Idea:** when a page is rebuilt after feedback, show the delta from the last version the reviewer saw (changed
   hunks, and which notes changed) and keep the old comments attached to unchanged lines. Today the new page "starts
   clean" (`HR/SKILL.md` "When feedback comes back").
@@ -618,6 +670,47 @@ reading Matt Pocock's `teach`.*
 - #8 two-depth background: added the level check (`teach`'s most reported gap).
 - New #10 "Who to ask" (from `teach`'s "wisdom → community" idea).
 - Old #11–#13 keep their content as #11–#13. Old #10 and #14 removed (merged).
+
+## Changes (2026-11-13 sweep)
+
+The draft header stays draft 5. Headings #1 through #17 are unchanged, so open PRs #13, #17, #19,
+#21, and #23 still cite them. PR #23 adds heading #18 on its own branch. This branch does not.
+The 2026-11-13 changelog sits between the draft 2 and draft 3 sections. PR #23's changelog sits
+between draft 3 and draft 4. A separate line above the ranked list links
+[`notes/sweep-2026-11-13.md`](notes/sweep-2026-11-13.md). It is not under the notes list. PR #13
+rewrites that list, and PR #23 already inserts its link there. The shipped-table rows are
+unchanged. PR #13 edits the reading-order row, PR #21 edits the HTML-page row, and PR #19 edits
+the visuals row. Rank is unchanged. Every finding folds into an item that is already ranked.
+Notes: [`notes/sweep-2026-11-13.md`](notes/sweep-2026-11-13.md).
+
+- #5: Theseus, a paid GitHub guide beside the diff. Starter is $99 a month for 100 guides
+  ([pricing](https://theseus.dev/pricing)). Hooks in Claude Code, Codex, and OpenCode, plus Linear
+  and Jira, feed a Motivation that includes alternatives considered. Evidence: `vendor`. No launch
+  date on the homepage, the guides page, the pricing page, or the quickstart, read 2026-11-13.
+  The change list is a peer of the shipped grouping and reading-order rows. Not a new row.
+- #11: Theseus puts an explicit Unknown in the change list. The homepage demo is "6 changes · 1
+  unknown", including "Unknown: does the production Worker have the new secret bound?"
+  ([home](https://theseus.dev/)).
+- #11, #1, and #4: "Does Confusing Code Confuse LLMs? A Pilot Study on C++"
+  ([arXiv 2611.15575](https://arxiv.org/abs/2611.15575), published 2026-11-11T14:59:11Z).
+  Explanation accuracy stayed about 100% across nearly all atoms. Output prediction fell on some
+  atoms. Evidence: `measured-obs` (pilot, small). **Our own idea:** a fluent explanation is weak
+  evidence the model traced the code. The quiz and the worked example should each include an
+  output check. A confident explanation is not a grounded claim. One line on each item. Rank
+  stays put.
+- #6, #7, and #8: crisperity/code-walkthrough, a Claude Code plugin and a shipped peer of the HTML
+  page. Ask in place can edit the page locally (#6). The call graph names a function called from
+  everywhere versus a leaf (#7). Inside a theme, callers come before callees (#8). GitHub API at
+  2026-11-13T13:21:22Z: 5 stars, 0 forks, created 2026-09-15, last push 2026-11-09, MIT.
+  Evidence: `practitioner`, low popularity.
+  [repo](https://github.com/crisperity/code-walkthrough).
+- #17: Theseus's daily digest of codebase themes. It does not move the item. The guides page also
+  keeps each push's guide and marks what changed.
+- Cline v3.39 Explain Changes, published 2025-12-02, is an old shipped peer. Inline comments on a
+  multi-file diff, including why, from the task conversation. `/explain-changes` covers any git
+  diff. It was not in `notes/` on main. Not a new row
+  ([post](https://cline.bot/blog/cline-v3-39-explain-changes)).
+- Hand-off: nothing new for review quality. PR Explainer's findings half is already handed off.
 
 ## Changes in draft 3 (2026-11-02)
 
