@@ -42,6 +42,10 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
 - **Test:** validate the ported judge on ~50 hand-checked pairs (target ≥90% agreement, like limitless's
   93–97%); A/A on production-equivalent arm shows drift < effect sizes we care about.
 - **Note:** keep escapes-heldout (57 / 103) untouched for limitless's decision run.
+- **Addendum — C19** (section C, ahead of the other S eval checks): plumbing checks that ship with
+  this harness. Merge-base diffs, a per-stage retention ledger, a failed run that is not a clean
+  result, and one seeded red case. Cost S. A silent wrong diff or an empty-on-failure corrupts
+  recall and the clean must-fix rate for every later item.
 
 ### 2. Core reviewer: adversarial prompt × 2 independent samples at high effort, unioned — `testing (held-out passed and live in limitless at medium effort; accelerate eval pending)`, cost S
 - **Idea:** v1 default per [design-v1.md](design-v1.md) §3, prompt from [notes/adversarial-prompt.md](notes/adversarial-prompt.md) (`L/src/pipeline/prompts.ts` l.482/561).
@@ -176,6 +180,60 @@ defects, k=2 (eval-mvw0y6v31sec2vc1agx2t1; cheap arms eval-mvvv3pum0kriw040gi0x2
    `proposed`, S. Anthropic Code Review reads REVIEW.md from base; limitless reads lenses from base (GUIDE.md).
 7. **Feed findings into the human-review page** as annotations — `proposed`, M. **our own idea**
 8. **Pre-existing channel** (🟣) for bugs not introduced by the change — `proposed`, S. Anthropic Code Review.
+19. **Eval-harness plumbing checks (merge-base diffs, per-stage retention ledger, failed-run vs clean-result, red-case canary)** — `proposed`, cost S. **Also relevant to limitless** (its review eval and factory review stage).
+    Addendum to item 1. Ranks with the harness, ahead of the other S eval checks (C9–C10) and the
+    later measurement items: it is cheap, and a silent wrong diff or an empty-on-failure would
+    corrupt recall and the clean must-fix rate for every number below.
+    - **Idea:** Check the harness plumbing before trusting a score. Materialise each snapshot at PR
+      head and build the diff as head vs merge base, then require that file list to equal the
+      provider's file list for the PR. Record which stage kept, merged, or dropped each finding,
+      and the reason. An empty successful result has to be a different outcome from a stage that
+      failed. Keep one seeded case that is known to fail, so the suite has a case that proves it
+      can turn red. Run through the production entry point and the real model route. Measure
+      discovery before verification, then retention at each later stage, then the comments that
+      would be published. For a verifier or filter change, report known bugs retained alongside
+      invalid findings removed, and inspect each lost bug. Keep separate labels for known bugs,
+      newly confirmed bugs outside the reference set, duplicates, and invalid.
+    - **Source:** Gabe (@gamalinosqui), *How to build AI code review that finds real bugs without
+      burning $20 per PR*
+      ([X article](https://x.com/gamalinosqui/status/2120895374097342946), 2026-11-12). Engine
+      investigation [#1821](https://github.com/kodustech/kodus-ai/issues/1821); engine tree
+      [58a58d9](https://github.com/kodustech/kodus-ai/tree/58a58d94cb7ce2d4db3d9560f217868ecb5a86a1).
+      Wrong diff, confirmed on #1821: 6 of the 30 light cases reviewed a different diff from the PR
+      being scored (`git diff base head`, two dots); one case was 127 files against 1 in the PR
+      ([comment](https://github.com/kodustech/kodus-ai/issues/1821#issuecomment-5803893034)).
+      Orphaned worktrees, confirmed on #1821: cleanup was not called, the disk filled, and later
+      cases ran with no repository tools — 48 of 170 candidates
+      ([comment](https://github.com/kodustech/kodus-ai/issues/1821#issuecomment-5777318019)).
+      Six valid findings delivered none: confirmed on
+      [#1599](https://github.com/kodustech/kodus-ai/issues/1599) (dedup mapped 6→0 on malformed
+      indices). That incident is not in #1821's body; the article retells it. Eval rules at the
+      cited commit: production entry point, real model route, repository at PR head, exit 2 when
+      a case is not measured, and a deliberate break must turn the eval red
+      ([`evals/README.md`](https://github.com/kodustech/kodus-ai/blob/58a58d94cb7ce2d4db3d9560f217868ecb5a86a1/evals/README.md)).
+      The per-stage retention order and the four labels are the article's statement of those rules.
+      CodeReviewBench (C16, 2026-11-11 sweep) is the public bench and the lens fan-out. This item
+      is the engine-series harness write-up. [report.md](report.md) §2.4.
+    - **Why:** our harness will materialise snapshot repos from limitless escapes and run multi-stage
+      finder→filter pipelines. Their production reviews used the provider's file list. The corpus
+      materialiser used a two-dot diff, and that is the path a snapshot harness takes. A wrong
+      diff, or a dedup step that turns malformed output into an empty success, would corrupt
+      recall and the clean must-fix rate.
+      The same surface exists in limitless's review eval and factory review stage.
+    - **Test:** unit checks: the diff file list equals the PR's provider file list for every case;
+      a deliberately broken stage yields an infrastructure error, not "no findings"; one seeded
+      known-red case must fail the run; per-stage counts of gold kept/lost are emitted.
+    - **Cost:** S.
+    - **Evidence:** one vendor's own write-up. The mechanics (two-dot vs merge-base, empty result
+      vs a failed stage, a red-case canary) are verifiable in the linked comments and
+      `evals/README.md`. No independent replication.
+    - **Thin note, inside this item:** a smaller finder output contract. The article says cutting
+      Sonnet's required fields recovered additional known bugs and gives no count. The September
+      note on #1821 does: in Claude Code, replacing only the output format with file, line, and
+      description went 51 → 65 goldens; lean output in their loop was +7 (35 → 42) at the same
+      precision; they treat a single-run gap under ~7 goldens on 30 PRs as noise
+      ([comment](https://github.com/kodustech/kodus-ai/issues/1821#issuecomment-5900559934)).
+      One team, one dataset. Try only after these plumbing checks exist, on escapes-dev.
 9. **CR-Bench-Verified smoke + Reflexion second pass** — `proposed`, cost S–M. Also helps limitless.
    - **Idea:** Add CR-Bench-Verified (174), or a small TS/JS-filtered slice if one exists, as an external
      defect-centric smoke check. Score with a KDDR-style known-defect hit plus a usefulness split, and

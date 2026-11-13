@@ -4,8 +4,9 @@
 
 Status: first draft, written to be revised once Matt's prior docs are folded in further. Every
 external source below was opened on 2026-10-31, except CR-Bench-v2 (opened in the 2026-11-04
-daily sweep and again on 2026-11-05) and Foresight-SWE (opened 2026-11-05); anything that could
-not be opened is listed in "Not verified". Numbers from different benchmarks are not comparable.
+daily sweep and again on 2026-11-05), Foresight-SWE (opened 2026-11-05), and the Kodus engine
+eval-plumbing article (opened in the 2026-11-13 daily sweep); anything that could not be opened
+is listed in "Not verified". Numbers from different benchmarks are not comparable.
 
 **Precedence for Matt's figures** (as instructed): the 2026-10-31 escapes-dev run beats Phase 0
 `RESULTS.md` (2026-10-29), which beats the working notes on overlapping figures; where the notes
@@ -251,6 +252,35 @@ Only items I opened. Where Matt's docs already cite an item, it's marked "(in Ma
   SecBench.js [repo](https://github.com/cristianstaicu/SecBench.js), Greptile benchmarks
   [page](https://www.greptile.com/benchmarks), agentpatterns review [page](https://agentpatterns.ai/verification/open-code-review-benchmarks/),
   SZZ evaluation (Rosa et al.) [2102.03300](https://arxiv.org/abs/2102.03300).
+- **Kodus engine eval plumbing**, Gabe (@gamalinosqui), *How to build AI code review that finds
+  real bugs without burning $20 per PR*
+  ([X article](https://x.com/gamalinosqui/status/2120895374097342946), 2026-11-12) **[X]** ⚠️
+  (opened 2026-11-13). One team's write-up of the engine investigation
+  ([#1821](https://github.com/kodustech/kodus-ai/issues/1821)); the pipeline they describe is the
+  engine at [58a58d9](https://github.com/kodustech/kodus-ai/tree/58a58d94cb7ce2d4db3d9560f217868ecb5a86a1).
+  CodeReviewBench (C16, 2026-11-11 sweep) is the public bench and the lens fan-out. This note is
+  the engine-series harness write-up. A benchmark run generated six valid findings and delivered
+  none: dedup turned malformed model output into an empty result
+  ([#1599](https://github.com/kodustech/kodus-ai/issues/1599); the article retells it; the incident
+  is not in #1821's body). Six of the 30 light cases were scored on a different diff from the PR
+  (`git diff base head`, two dots, instead of head vs merge base); one case was 127 files against
+  1 in the PR
+  ([comment](https://github.com/kodustech/kodus-ai/issues/1821#issuecomment-5803893034)).
+  Orphaned worktrees filled the disk, and later cases ran without repository tools
+  ([comment](https://github.com/kodustech/kodus-ai/issues/1821#issuecomment-5777318019)).
+  Eval rules at that commit require the production entry point, the real model route, and the
+  repo at PR head; a case that was not measured exits differently from a quality miss; a
+  deliberate break must turn the eval red
+  ([`evals/README.md`](https://github.com/kodustech/kodus-ai/blob/58a58d94cb7ce2d4db3d9560f217868ecb5a86a1/evals/README.md)).
+  Holdout caution: DeepSeek benchmark precision was 58.4% on the 30-PR dev set and 45.0% on the
+  20-PR holdout, and the two reference sets contain different bugs
+  ([comment](https://github.com/kodustech/kodus-ai/issues/1821#issuecomment-6179119729)).
+  Agentic enrichment for GPT 6.1 Sol raised approved fixes from 56 to 62 while input tokens per item went
+  from about 2,900 to about 10,900; other models gained less or regressed, and they kept one call
+  ([comment](https://github.com/kodustech/kodus-ai/issues/1821#issuecomment-6319284503)).
+  Simultaneously launched specialist calls received no cached input despite a shared cache key
+  ([comment](https://github.com/kodustech/kodus-ai/issues/1821#issuecomment-5919802067)).
+  Backlog **C19**. Also relevant to limitless's review eval and factory review stage.
 
 ### 2.5 Execution, security and spec (sources behind Matt's options A, D, E)
 
